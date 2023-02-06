@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Dashboard</title>
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="" />
+<!-- Custom CSS -->
+<link href="css/datatables.min.css" rel="stylesheet" />
+<link href="css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<div id="main-wrapper" data-layout="vertical">
+  <header class="topbar" data-navbarbg="skin5">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+      <div class="navbar-header" data-logobg="skin5"> <a class="navbar-brand" href="#"> <b class="logo-icon ps-2"> <img src="images/logo-icon.png" alt="homepage" class="light-logo" width="25" /> </b> <span class="logo-text ms-2"> <img src="images/logo-text.png" alt="homepage" class="light-logo" /> </span> </a> <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a> </div>
+      <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+        <ul class="navbar-nav float-start me-auto">
+          <li class="nav-item d-none d-lg-block"> <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"> <i class="mdi mdi-menu font-24"></i> </a> </li>
+          <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"> <i class="mdi mdi-magnify fs-4"></i> </a>
+            <form class="app-search position-absolute">
+              <input type="text" class="form-control" placeholder="Search" />
+              <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
+            </form>
+          </li>
+        </ul>
+        <ul class="navbar-nav float-end">
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i> </a> </li>
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i> </a> </li>
+          <li class="nav-item dropdown"> <a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <img src="images/1.jpg" alt="user" class="rounded-circle" width="31" /> </a> </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="left-sidebar" data-sidebarbg="skin5"> 
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar"> 
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav">
+        <ul id="sidebarnav" class="pt-4">
+          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.html" aria-expanded="false"> <i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a> </li>
+          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Employee Section</span></a>
+            <ul aria-expanded="false" class="collapse first-level">
+              <li class="sidebar-item"> <a href="AddEmployee.html" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Add Employee</span></a> </li>
+              <li class="sidebar-item"> <a href="ViewEmployee.html" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">View All Employee</span></a> </li>
+              <li class="sidebar-item"> <a href="MakeSenior.html" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Make Employee's Senior</span></a> </li>
+            </ul>
+          </li>
+          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-application"></i><span class="hide-menu">ToDo Task</span> </a>
+            <ul aria-expanded="false" class="collapse first-level">
+              <li class="sidebar-item"> <a href="CreateTask.html" class="sidebar-link"> <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Create ToDo Task</span></a> </li>
+              <li class="sidebar-item"> <a href="ViewTask.html" class="sidebar-link"> <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View My ToDo Task</span></a> </li>
+              <li class="sidebar-item"> <a href="AssignTask.html" class="sidebar-link"> <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
+              <li class="sidebar-item"> <a href="EmployeeTask.html" class="sidebar-link"> <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View Employee's Task</span></a> </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- End Sidebar navigation --> 
+    </div>
+    <!-- End Sidebar scroll--> 
+  </aside>
+  <div class="page-wrapper">
+    <div class="page-breadcrumb">
+      <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+          <h4 class="page-title">Dashboard</h4>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row"> 
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card card-hover">
+            <div class="box bg-cyan text-center">
+              <h1 class="font-light text-white"> <i class="mdi mdi-view-dashboard"></i> </h1>
+              <h6 class="text-white">Total Employee</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card card-hover">
+            <div class="box bg-success text-center">
+              <h1 class="font-light text-white"> <i class="mdi mdi-chart-areaspline"></i> </h1>
+              <h6 class="text-white">Total Task</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card card-hover">
+            <div class="box bg-warning text-center">
+              <h1 class="font-light text-white"> <i class="mdi mdi-collage"></i> </h1>
+              <h6 class="text-white">Task Done</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card card-hover">
+            <div class="box bg-danger text-center">
+              <h1 class="font-light text-white"> <i class="mdi mdi-border-outside"></i> </h1>
+              <h6 class="text-white">Task Pending</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Task List</h5>
+            <div class="table-responsive">
+              <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Task Id</th>
+                    <th>Task Name</th>
+                    <th>Time Estimate</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>User Name</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>XYZ</td>
+                    <td>6</td>
+                    <td>abc</td>
+                    <td>8hrs.</td>
+                    <td>11:00AM</td>
+                    <td>07:00PM</td>
+                    <td>DAVE</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td>XYZ</td>
+                    <td>6</td>
+                    <td>abc</td>
+                    <td>8hrs.</td>
+                    <td>11:00AM</td>
+                    <td>07:00PM</td>
+                    <td>DAVE</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td>XYZ</td>
+                    <td>6</td>
+                    <td>abc</td>
+                    <td>8hrs.</td>
+                    <td>11:00AM</td>
+                    <td>07:00PM</td>
+                    <td>DAVE</td>
+                    <td>Active</td>
+                  </tr>
+                  <tr>
+                    <td>XYZ</td>
+                    <td>6</td>
+                    <td>abc</td>
+                    <td>8hrs.</td>
+                    <td>11:00AM</td>
+                    <td>07:00PM</td>
+                    <td>DAVE</td>
+                    <td>Active</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer text-center"> All Rights Reserved </footer>
+  </div>
+</div>
+<script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.bundle.min.js"></script> 
+<script src="js/perfect-scrollbar.jquery.min.js"></script> 
+<script src="js/sparkline.js"></script> 
+<script src="js/waves.js"></script> 
+<script src="js/sidebarmenu.js"></script> 
+<script src="js/custom.min.js"></script> 
+<script src="js/datatables.min.js"></script> 
+<script>
+      /****************************************
+       *       Basic Table                   *
+       ****************************************/
+      $("#zero_config").DataTable();
+    </script>
+</body>
+</html>
