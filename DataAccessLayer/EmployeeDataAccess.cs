@@ -26,7 +26,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into UserDetails(EmployeeCode,UserName,PhoneNumber,Email,RoleId,DesignationId, IsAdmin) values(@EmployeeCode, @EmployeeName,@EmployeePhone,@EmployeeEmail, @Role,@Designation, @IsAdmin)";
+                string dsResult = "insert  into ProjectManagementNew.user(EmployeeCode,UserName,PhoneNumber,Email,RoleId,DesignationId, IsAdmin) values(@EmployeeCode, @EmployeeName,@EmployeePhone,@EmployeeEmail, @Role,@Designation, @IsAdmin)";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@EmployeeCode", addEmployee.EmployeeCode));
                 cmd.Parameters.Add(new MySqlParameter("@EmployeeName", addEmployee.EmployeeName));
@@ -91,10 +91,8 @@ namespace DataAccessLayer
         {
             try
             {
-
                 dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, Designation FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
                 return dsResult;
-
             }
             catch (Exception ex)
             {
@@ -111,10 +109,8 @@ namespace DataAccessLayer
         {
             try
             {
-
                 dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UserId='"+UserId+"'");
                 return dsResult;
-
             }
             catch (Exception ex)
             {

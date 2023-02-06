@@ -47,6 +47,7 @@ namespace ProjectManagement.Admin
             ddlTeamleader.DataTextField = "UserName";
             ddlTeamleader.DataValueField = "UserId";
             ddlTeamleader.DataBind();
+            ddlTeamleader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
         }
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
@@ -59,12 +60,11 @@ namespace ProjectManagement.Admin
             {
                 if (item.Selected)
                 {
-                   
                     ls += item.Value;
                     ls += ",";
-
                 }
             }
+            ls.TrimEnd(',');
             createTeam.Employee = ls;
             respone= createTeamBA.InsertTeam(createTeam);
             if(respone==1)

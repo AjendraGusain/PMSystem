@@ -14,8 +14,8 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagement.TaskList as TL inner join ProjectManagementNew.client CD on TL.ClientId=CD.ClientId " +
-                    "inner join ProjectManagement.ProjectDetails AS PD  on TL.ProjectId = PD.ProjectId inner join ProjectManagementNew.user As UD on TL.UserId = UD.UserId");
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.task as TL inner join ProjectManagementNew.client CD on TL.ClientId=CD.ClientId " +
+                    "inner join ProjectManagementNew.project AS PD  on TL.ProjectId = PD.ProjectId inner join ProjectManagementNew.user As UD on TL.UserId = UD.UserId");
                 return dsResult;
 
             }

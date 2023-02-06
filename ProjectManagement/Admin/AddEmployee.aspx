@@ -3,11 +3,6 @@
     <h4>Add Employee</h4>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
     <div class="card">
         <div class="card-body wizard-content">
             <form runat="server">
@@ -26,7 +21,6 @@
                                 <div class="col-sm-6">
                                     <asp:TextBox runat="server" ID="txtEmployeeName" class="form-control" placeholder="Employee Name...." />
                                     <asp:RequiredFieldValidator ID="rvEmployeeName" runat="server" ControlToValidate="txtEmployeeName" ErrorMessage="*" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
-
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -44,17 +38,13 @@
                                 <label for="PhoneNo" class="col-sm-3 text-center control-label col-form-label">Phone No</label>
                                 <div class="col-sm-6">
                                     <asp:TextBox runat="server" ID="txtPhoneNo" class="form-control" placeholder="Phone No...." />
-
                                     <asp:RequiredFieldValidator ID="rvPhoneNo" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="*" Display="Dynamic" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtEmail" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" />
-
-
+                                    <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="Role" class="col-sm-3 text-center control-label col-form-label">Role</label>
                                 <div class="col-sm-6">
-                                    <!--<input type="text" class="form-control" id="Role" placeholder="Role....">-->
                                     <asp:DropDownList ID="ddlRoleList" runat="server" class="select2 form-select shadow-none">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rvRoleList" runat="server" ControlToValidate="ddlRoleList" InitialValue="0" ErrorMessage="*" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -63,7 +53,6 @@
                             <div class="form-group row">
                                 <label for="Designation" class="col-sm-3 text-center control-label col-form-label">Designation</label>
                                 <div class="col-sm-6">
-                                    <!--<input type="text" class="form-control" id="Designation" placeholder="Designation....">-->
                                     <asp:DropDownList ID="ddlDesignation" runat="server" class="select2 form-select shadow-none">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rvDesignation" runat="server" ControlToValidate="ddlDesignation" InitialValue="0" ErrorMessage="*" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -87,5 +76,4 @@
             </form>
         </div>
     </div>
-
 </asp:Content>
