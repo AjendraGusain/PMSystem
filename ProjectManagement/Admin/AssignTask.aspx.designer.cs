@@ -11,43 +11,43 @@ namespace ProjectManagement.Admin
 {
 
 
-    public partial class Task
+    public partial class AssignTask
     {
 
         /// <summary>
-        /// pnlTaskDetails control.
+        /// pnlDisplayAssignTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlTaskDetails;
+        protected global::System.Web.UI.WebControls.Panel pnlDisplayAssignTask;
 
         /// <summary>
-        /// txtTaskName control.
+        /// grvAssignedTaskDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTaskName;
+        protected global::System.Web.UI.WebControls.GridView grvAssignedTaskDetails;
 
         /// <summary>
-        /// txtTaskDetails control.
+        /// pnlDisplayTaskDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTaskDetails;
+        protected global::System.Web.UI.WebControls.Panel pnlDisplayTaskDetails;
 
         /// <summary>
-        /// btnCreateTask control.
+        /// gvTaskDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreateTask;
+        protected global::System.Web.UI.WebControls.GridView gvTaskDetails;
     }
 }
