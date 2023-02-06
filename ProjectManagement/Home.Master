@@ -152,7 +152,11 @@
 <script type="text/javascript">
     $(function () {
         $('[id*=lsEmpoloyee]').multiselect({
-            includeSelectAllOption: true
+            includeSelectAllOption: true,
+            enableFiltering: true,
+            filterPlaceholder: 'Search',
+            enableCaseInsensitiveFiltering: true,
+            dropRight: true
         });
     });
 
