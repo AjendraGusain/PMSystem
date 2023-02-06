@@ -44,6 +44,8 @@
     <Compile Include="ClientBusinessLogic.cs" />
     <Compile Include="AddDesignationBusinessLogic.cs" />
     <Compile Include="AddRoleBusinessLogic.cs" />
+    <Compile Include="Interface\ITaskBLL.cs" />
+    <Compile Include="TaskBusinessLogic.cs" />
     <Compile Include="TeamBusinessLogic.cs" />
     <Compile Include="DashboardBussinessLogic.cs" />
     <Compile Include="EmployeeBusinessLogic.cs" />
@@ -53,7 +55,6 @@
     <Compile Include="Interface\ITeamBusinessLogic.cs" />
     <Compile Include="Interface\IUserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskBusinesLogicLayer.cs" />
     <Compile Include="UserLoginBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BussinessObjectLayer;
 using DataAccessLayer;
 using BusinessLogicLayer.Interface;
+using System.Data;
+
 namespace BusinessLogicLayer
 {
-    public class TaskBusinessLogicLayer:ITask
+    public class TaskBusinessLogicLayer : ITaskBLL
     {
         TaskDataAccessLayer taskDataAccessLayer = new TaskDataAccessLayer();
 
-        int ITask.InsertTaskDetails(TaskBusinessObjectLayer addTask)
+        int ITaskBLL.InsertTaskDetails(TaskBusinessObjectLayer addTask)
         {
             string sproc = "";
             int dtResult = taskDataAccessLayer.InsertTaskDetails(addTask, sproc);
@@ -36,6 +37,12 @@ namespace BusinessLogicLayer
         public DataSet GetAssignedTask()
         {
             DataSet dtResult = taskDataAccessLayer.GetAssignedTask();
+            return dtResult;
+        }
+
+        public DataSet GetTaskDetails()
+        {
+            DataSet dtResult = taskDataAccessLayer.GetTaskDetails();
             return dtResult;
         }
 
