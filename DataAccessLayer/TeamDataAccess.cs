@@ -38,7 +38,19 @@ namespace DataAccessLayer
 
         public DataSet GetTeam()
         {
-            throw new NotImplementedException();
+            try
+            {
+                dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_new");
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
         }
 
         public DataSet GetTeamByID(int customerId)

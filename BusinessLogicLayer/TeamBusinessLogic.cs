@@ -29,7 +29,8 @@ namespace BusinessLogicLayer
 
         public DataSet GetTeam()
         {
-            throw new NotImplementedException();
+            dtResult = _teamDataAccess.GetTeam();
+            return dtResult;
         }
 
         public DataSet GetTeamByID(int customerId)

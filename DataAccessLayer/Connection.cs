@@ -34,13 +34,34 @@ namespace DataAccessLayer
      
         public DataSet GetDataSetResults(string query)
         {
-           // MySqlConnection connection = new MySqlConnection(PMSConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, GetConnection());
-            //_cmd.ExecuteNonQuery();
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
             return ds;
         }
+
+        public DataSet ExecuteSP(string sproc, int ClientID)
+        {
+            MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ClientID", ClientID);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+
+        public DataSet ExecuteSPWithoutID(string sproc)
+        {
+            MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
     }
 }

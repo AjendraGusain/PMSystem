@@ -102,7 +102,7 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "GetProjectByClient";
-               // dsResult = new Connection().ExecuteSP(spName, ID);
+                dsResult = new Connection().ExecuteSP(spName, ID);
                 return dsResult;
             }
             catch (Exception ex)
@@ -115,6 +115,55 @@ namespace DataAccessLayer
             }
             //return dsResult;
         }
+
+
+        public DataSet GetAssignedTask()
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetAssignedTask";
+                dsResult = new Connection().ExecuteSPWithoutID(spName);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+
+
+        public DataSet GetTaskDetails()
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetAssignedTask";
+                dsResult = new Connection().ExecuteSPWithoutID(spName);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+
 
     }
 }
