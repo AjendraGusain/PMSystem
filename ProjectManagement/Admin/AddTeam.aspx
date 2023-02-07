@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTeam.aspx.cs" Inherits="ProjectManagement.Admin.AddTeam" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>Add Team</h4>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   
  <div class="card">
         <div class="card-body wizard-content">
           <form id="AddTeamForm" runat="server" class="mt-3">
@@ -29,14 +31,9 @@
                            </asp:DropDownList>
                         </div>
                         <div class="form-group mt-3">
-                          <label for="EMname" class="text-center control-label col-form-label">Employee</label>
-                            <asp:ListBox ID="lsEmpoloyee"  runat="server" SelectionMode="Multiple" >
-                            <%--<asp:ListItem Text="Mango" Value="1" />
-                            <asp:ListItem Text="Apple" Value="2" />
-                            <asp:ListItem Text="Banana" Value="3" />
-                            <asp:ListItem Text="Guava" Value="4" />
-                            <asp:ListItem Text="Orange" Value="5" />--%>
-                            </asp:ListBox>
+                          <label for="EMname" class="text-center control-label col-form-label">Employee </label>
+                            <asp:DropDownList ID="ddlEmployeeName" Width="300px" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single"  ToolTip="Select ">
+                           </asp:DropDownList>
                         </div>
                       </div>
                     </div>

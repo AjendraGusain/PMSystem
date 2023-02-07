@@ -30,11 +30,11 @@ namespace ProjectManagement.Admin
 
         private void BindEmployeeList()
         {
-            lsEmpoloyee.Items.Clear();
-            lsEmpoloyee.DataSource = createTeamBA.GetUser();
-            lsEmpoloyee.DataTextField = "UserName";
-            lsEmpoloyee.DataValueField = "UserId";
-            lsEmpoloyee.DataBind();
+            ddlEmployeeName.Items.Clear();
+            ddlEmployeeName.DataSource = createTeamBA.GetUser();
+            ddlEmployeeName.DataTextField = "UserName";
+            ddlEmployeeName.DataValueField = "UserId";
+            ddlEmployeeName.DataBind();
             ddlManager.Items.Clear();
             
             ddlManager.DataSource = createTeamBA.GetManager();
@@ -56,7 +56,7 @@ namespace ProjectManagement.Admin
             createTeam.TeamName = txtTeamName.Text;
             createTeam.Manager = ddlManager.SelectedValue;
             createTeam.TeamLeader = ddlTeamleader.SelectedValue;
-            foreach (ListItem item in lsEmpoloyee.Items)
+            foreach (ListItem item in ddlEmployeeName.Items)
             {
                 if (item.Selected)
                 {
