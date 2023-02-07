@@ -90,7 +90,8 @@
                                             </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnViewAssignedTask" CssClass="link-info" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-info">View</span></asp:LinkButton>
+                                                    <a href="AddEmployee.aspx">Click</a>
+                                                    <asp:LinkButton ID="btnViewAssignedTask"  CssClass="link-info" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-info">View</span></asp:LinkButton>
                                                     <asp:LinkButton ID="btnAssignTask" class="link-success" CommandName="Assign" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-success">Assign</span></asp:LinkButton>
                                                     <asp:LinkButton ID="btnReAssignTask" class="link-danger" CommandName="ReAssign" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-success">Reassign</span></asp:LinkButton>
                                                 </ItemTemplate>

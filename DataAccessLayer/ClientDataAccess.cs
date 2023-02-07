@@ -52,7 +52,6 @@ namespace DataAccessLayer
             {
                 dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client cd inner join country c on cd.countryid=c.id");
                 return dsResult;
-
             }
             catch (Exception ex)
             {
@@ -62,7 +61,6 @@ namespace DataAccessLayer
             {
 
             }
-            return dsResult;
         }
 
         public int InsertClient(ClientBusinessObject addClient)
