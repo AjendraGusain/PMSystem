@@ -32,16 +32,16 @@
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Email">
+                                            <asp:TemplateField HeaderText="Phone Number">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("PhoneNumber") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                    <asp:Label ID="lblPhoneNumber" runat="server" Text='<%# Eval("PhoneNumber") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Phone Number">
+                                            <asp:TemplateField HeaderText="Email">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblPhoneNumber" runat="server" Text='<%# Eval("Email") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                    <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>

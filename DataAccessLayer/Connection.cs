@@ -14,7 +14,6 @@ namespace DataAccessLayer
 {
     public class Connection
     {
-       //AJAYj
         public static string GetPMConnection
         {
             get
