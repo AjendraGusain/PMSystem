@@ -54,8 +54,11 @@ namespace ProjectManagement.Admin
         {
             string ls = "";
             createTeam.TeamName = txtTeamName.Text;
-            createTeam.Manager = ddlManager.SelectedValue;
-            createTeam.TeamLeader = ddlTeamleader.SelectedValue;
+           // if (IsAleardy == true)
+            {
+                createTeam.Manager = ddlManager.SelectedValue;
+            }
+                createTeam.TeamLeader = ddlTeamleader.SelectedValue;
             foreach (ListItem item in lsEmpoloyee.Items)
             {
                 if (item.Selected)

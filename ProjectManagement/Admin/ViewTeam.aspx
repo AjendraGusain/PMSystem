@@ -15,7 +15,7 @@
                     <asp:GridView ID="grvViewTeam" DataKeyNames="" runat="server" class="table table-striped table-bordered"  PageSize="2"
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvViewTeam_RowCommand" EnablePaging="true" AllowPaging="true">
                                 <PagerStyle CssClass="" HorizontalAlign="Right" />
-                                <PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />
+                                <%--<PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />--%>
                                         <Columns>
                                             <asp:TemplateField HeaderText="Creation Date">
                                                 <ItemTemplate>
