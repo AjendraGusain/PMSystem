@@ -126,7 +126,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetAssignedTask";
+                string spName = "sp_GetAllTask";
                 dsResult = new Connection().ExecuteSPWithoutID(spName);
                 return dsResult;
             }

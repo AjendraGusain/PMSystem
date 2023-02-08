@@ -26,7 +26,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.user(EmployeeCode,UserName,PhoneNumber,Email,RoleId,DesignationId, IsAdmin) values(@EmployeeCode, @EmployeeName,@EmployeePhone,@EmployeeEmail, @Role,@Designation, @IsAdmin)";
+                string dsResult = "insert  into ProjectManagementNew.user(EmployeeCode,UserName,Email,PhoneNumber,RoleId,DesignationId, IsAdmin) values(@EmployeeCode, @EmployeeName,@EmployeeEmail,@EmployeePhone, @Role,@Designation, @IsAdmin)";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@EmployeeCode", addEmployee.EmployeeCode));
                 cmd.Parameters.Add(new MySqlParameter("@EmployeeName", addEmployee.EmployeeName));
