@@ -48,36 +48,39 @@
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlDisplayAssignTask" runat="server">
                                
-                                    <asp:GridView ID="grvAssignedTaskDetails" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="40"
-                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvAssignedTaskDetails_RowCommand">
+                                    <asp:GridView ID="grvAssignedTaskDetails" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvAssignedTaskDetails_RowCommand">
                                         <Columns>
-                                            <asp:TemplateField HeaderText="Task ID">
+                                            <%--<asp:TemplateField>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblTaskId" runat="server" Text='<%#Eval("TaskId") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnkbtnTaskID" runat="server" Text='<%#Eval("TaskId") %>' OnClick="lnkbtnTaskID_Click" ></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Client Name">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblClientName" runat="server" Text='<%#Eval("ClientName") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnkbtnClientName" runat="server" Text='<%#Eval("ClientName") %>' OnClick="lnkbtnClientName_Click" ></asp:LinkButton>
+                                                    <%--<asp:Label ID="lblClientName" runat="server" Text='<%#Eval("ClientName") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Project Name">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblProjectName" runat="server" Text='<%#Eval("ProjectName") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnkbtnProjectName" runat="server" Text='<%#Eval("ProjectName") %>' OnClick="lnkbtnProjectName_Click" ></asp:LinkButton>
+                                                    <%--<asp:Label ID="lblProjectName" runat="server" Text='<%#Eval("ProjectName") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Task Name">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblTaskName" runat="server" Text='<%#Eval("TaskName") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnkbtnTaskName" runat="server" Text='<%#Eval("TaskName") %>' OnClick="lnkbtnTaskName_Click" ></asp:LinkButton>
+                                                    <%--<asp:Label ID="lblTaskName" runat="server" Text='<%#Eval("TaskName") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Employee Name">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblEmployeeName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnkbtnEmployeeName" runat="server" Text='<%#Eval("UserName") %>' OnClick="lnkbtnEmployeeName_Click" ></asp:LinkButton>
+                                                    <%--<asp:Label ID="lblEmployeeName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
@@ -90,10 +93,12 @@
                                             </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
-                                                    <a href="AddEmployee.aspx">Click</a>
-                                                    <asp:LinkButton ID="btnViewAssignedTask"  CssClass="link-info" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-info">View</span></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnAssignTask" class="link-success" CommandName="Assign" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-success">Assign</span></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnReAssignTask" class="link-danger" CommandName="ReAssign" runat="server" CommandArgument='<%# Eval("TaskId") %>'><span class="badge bg-success">Reassign</span></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewAssignedTask"  CssClass="link-info" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>' class="badge bg-info" Text="View"></asp:LinkButton>
+                                                    <%--<span class="badge bg-info">View</span>--%>
+                                                    <asp:LinkButton ID="btnAssignTask" class="link-success" CommandName="Assign" runat="server" CommandArgument='<%# Eval("TaskId") %>' Text="Assign" Visible='<%# Eval("UserName").ToString() == "" ? true : false %>'></asp:LinkButton>
+                                                    <%--<span class="badge bg-success">Assign</span>--%>
+                                                    <asp:LinkButton ID="btnReAssignTask" class="link-danger" CommandName="ReAssign" runat="server" CommandArgument='<%# Eval("TaskId") %>' Text="Reassign" Visible='<%# Eval("UserName").ToString() != "" ? true : false %>'></asp:LinkButton>
+                                                    <%--<span class="badge bg-success">Reassign</span>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>

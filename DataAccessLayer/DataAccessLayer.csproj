@@ -91,6 +91,7 @@
     <Compile Include="ClientDataAccess.cs" />
     <Compile Include="AddDesignationDataAccess.cs" />
     <Compile Include="AddRoleDataAccess.cs" />
+    <Compile Include="Interface\ITaskDataAccess.cs" />
     <Compile Include="Interface\ITeamDataAccess.cs" />
     <Compile Include="TeamDataAccess.cs" />
     <Compile Include="DashboardDataAccess.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Interface\IDesignationDataAccess.cs" />
     <Compile Include="Interface\IRoleDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskDataAccessLayer.cs" />
+    <Compile Include="TaskDataAccess.cs" />
     <Compile Include="UserLoginDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
