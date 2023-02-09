@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using BussinessObjectLayer;
 using System.Collections;
-
+using DataAccessLayer.Interface;
 namespace DataAccessLayer
 {
-    public class TaskDataAccessLayer
+    public class TaskDataAccess : ITaskDataAccess
     {
-        DataSet dsResult = new DataSet();
-        int response = 0;
+        TaskBusinessObject addTaskBO = new TaskBusinessObject();
+
         MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
-        public int InsertTaskDetails(TaskBusinessObjectLayer addTask, string sproc)
+        public int InsertTaskDetails(TaskBusinessObject addTask)
         {
             try
             {
@@ -26,7 +26,6 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "sp_CreateTask";
-               // string dsResult = "insert  into TaskList(ClientID,ProjectID,TaskID,TaskName,TaskDetails) values(@ClientID,@ProjectID,@TaskID,@TaskName,@TaskDetails)";
                 MySqlCommand cmd = new MySqlCommand(spName, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("@ClientID", addTask.ClientID));
@@ -34,7 +33,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@TaskID", addTask.TaskID));
                 cmd.Parameters.Add(new MySqlParameter("@TaskName", addTask.TaskName));
                 cmd.Parameters.Add(new MySqlParameter("@TaskDescription", addTask.TaskDescription));
-              response=  cmd.ExecuteNonQuery();
+                addTask.response =  cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -47,38 +46,33 @@ namespace DataAccessLayer
                     conn.Close();
                 }
             }
-            return response;
+            return addTaskBO.response;
         }
 
-        public DataSet GetClient()
-        {
-            try
-            {
+        //public DataSet GetClient()
+        //{
+        //    try
+        //    {
+        //        dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client");
+        //        return dsResult;
 
-                dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client");
-                return dsResult;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
-            //return dsResult;
-        }
-
+        //    }
+        //}
 
         public DataSet GetProject()
         {
             try
             {
-
-                dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.project");
-                return dsResult;
-
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.project");
+                return addTaskBO.dsResult;
             }
             catch (Exception ex)
             {
@@ -86,36 +80,8 @@ namespace DataAccessLayer
             }
             finally
             {
-
             }
-            //return dsResult;
         }
-
-
-        public DataSet GetProjectByClient(int ID)
-        {
-            try
-            {
-                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                string spName = "GetProjectByClient";
-                dsResult = new Connection().ExecuteSP(spName, ID);
-                return dsResult;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
-            //return dsResult;
-        }
-
 
         public DataSet GetAssignedTask()
         {
@@ -127,8 +93,8 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "sp_GetAllTask";
-                dsResult = new Connection().ExecuteSPWithoutID(spName);
-                return dsResult;
+                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                return addTaskBO.dsResult;
             }
             catch (Exception ex)
             {
@@ -136,10 +102,8 @@ namespace DataAccessLayer
             }
             finally
             {
-
             }
         }
-
 
         public DataSet GetTaskDetails()
         {
@@ -151,8 +115,8 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "sp_GetAssignedTask";
-                dsResult = new Connection().ExecuteSPWithoutID(spName);
-                return dsResult;
+                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                return addTaskBO.dsResult;
             }
             catch (Exception ex)
             {
@@ -160,10 +124,45 @@ namespace DataAccessLayer
             }
             finally
             {
-
             }
         }
 
+        public DataSet GetClients()
+        {
+            try
+            {
+                addTaskBO.dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client");
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
 
+        public DataSet GetProjectByClient(int objClientID)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "GetProjectByClient";
+                addTaskBO.dsResult = new Connection().ExecuteSP(spName, objClientID);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
     }
 }

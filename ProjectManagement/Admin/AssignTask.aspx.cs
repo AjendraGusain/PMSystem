@@ -6,12 +6,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogicLayer;
+//using DataAccessLayer.Interface;
+//using DataAccessLayer;
+using BusinessLogicLayer.Interface;
+using DataAccessLayer;
+
 namespace ProjectManagement.Admin
 {
     public partial class AssignTask : System.Web.UI.Page
     {
-
-        TaskBusinessLogicLayer assigntaskBLL = new TaskBusinessLogicLayer();
+        ITaskBusinessLogic assigntaskBLL = new TaskBusinessLogic(new TaskDataAccess());
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -46,6 +50,26 @@ namespace ProjectManagement.Admin
             pnlDisplayAssignTask.Visible = false;
             gvTaskDetails.DataSource = ds.Tables[0];
             gvTaskDetails.DataBind();
+        }
+
+        protected void lnkbtnClientName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewClient.aspx");
+        }
+
+        protected void lnkbtnProjectName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
+        }
+
+        protected void lnkbtnTaskName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
+        }
+
+        protected void lnkbtnEmployeeName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EmployeeDetail.aspx");
         }
     }
 }

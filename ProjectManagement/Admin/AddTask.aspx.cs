@@ -4,15 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BussinessObjectLayer;
 using BusinessLogicLayer;
 using BusinessLogicLayer.Interface;
+using BussinessObjectLayer;
+using DataAccessLayer;
+using DataAccessLayer.Interface;
+
 namespace ProjectManagement.Admin
 {
     public partial class addTask : System.Web.UI.Page
     {
-        TaskBusinessLogicLayer taskBusinessLogicLayer = new TaskBusinessLogicLayer();
-        TaskBusinessObjectLayer taskBussinessObjectLayer = new TaskBusinessObjectLayer();
+
+        ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
+        
+        TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -23,14 +28,14 @@ namespace ProjectManagement.Admin
 
         protected void btnAddTask_Click(object sender, EventArgs e)
         {
-            ITaskBLL addTask = (ITaskBLL)taskBusinessLogicLayer;
-            taskBussinessObjectLayer.ClientID = ddlClientName.SelectedValue;
-            taskBussinessObjectLayer.ProjectID = ddlProjectName.SelectedValue;
-            taskBussinessObjectLayer.TaskID = txtTaskID.Text.Trim();
-            taskBussinessObjectLayer.TaskName = txtTaskName.Text.Trim();
-            taskBussinessObjectLayer.TaskDescription = txtTaskDescription.Text.Trim();
-          int result=  addTask.InsertTaskDetails(taskBussinessObjectLayer);
-            if (result == 1)
+            //ITaskBusinessLogic addTask = (ITaskBusinessLogic)taskBusinessLogic;
+            addTaskBusinessObj.ClientID = ddlClientName.SelectedValue;
+            addTaskBusinessObj.ProjectID = ddlProjectName.SelectedValue;
+            addTaskBusinessObj.TaskID = txtTaskID.Text.Trim();
+            addTaskBusinessObj.TaskName = txtTaskName.Text.Trim();
+            addTaskBusinessObj.TaskDescription = txtTaskDescription.Text.Trim();
+            addTaskBusinessObj.response = addTaskDetails.InsertTaskDetails(addTaskBusinessObj);
+            if (addTaskBusinessObj.response == 1)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Record inserted sucessfully.');", true);
             }
@@ -53,13 +58,13 @@ namespace ProjectManagement.Admin
         protected void BindClientandProject()
         {
             ddlClientName.Items.Clear();
-            ddlClientName.DataSource = taskBusinessLogicLayer.GetAllClients();
+            ddlClientName.DataSource = addTaskDetails.GetAllClients();
             ddlClientName.DataTextField = "ClientName";
             ddlClientName.DataValueField = "ClientID";
             ddlClientName.DataBind();
             ddlClientName.Items.Insert(0, new ListItem("-- Select Client --", "0"));
             ddlProjectName.Items.Clear();
-            ddlProjectName.DataSource = taskBusinessLogicLayer.GetAllProject();
+            ddlProjectName.DataSource = addTaskDetails.GetAllProject();
             ddlProjectName.DataTextField = "ProjectName";
             ddlProjectName.DataValueField = "ProjectID";
             ddlProjectName.DataBind();
@@ -69,7 +74,7 @@ namespace ProjectManagement.Admin
         protected void ddlClientName_SelectedIndexChanged(object sender, EventArgs e)
         {
             string clientID = ddlClientName.SelectedValue;
-            ddlProjectName.DataSource=taskBusinessLogicLayer.GetProjectByClient(Convert.ToInt32(clientID));
+            ddlProjectName.DataSource= addTaskDetails.GetProjectByClient(Convert.ToInt32(clientID));
             ddlProjectName.DataTextField = "ProjectName";
             ddlProjectName.DataValueField = "ProjectID";
             ddlProjectName.DataBind();

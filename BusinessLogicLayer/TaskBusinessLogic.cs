@@ -7,48 +7,65 @@ using BussinessObjectLayer;
 using DataAccessLayer;
 using BusinessLogicLayer.Interface;
 using System.Data;
-
+using DataAccessLayer.Interface;
 namespace BusinessLogicLayer
 {
-    public class TaskBusinessLogicLayer : ITaskBLL
+    public class TaskBusinessLogic : ITaskBusinessLogic
     {
-        TaskDataAccessLayer taskDataAccessLayer = new TaskDataAccessLayer();
+        private ITaskDataAccess _dataAccess;
 
-        int ITaskBLL.InsertTaskDetails(TaskBusinessObjectLayer addTask)
+        public TaskBusinessLogic(ITaskDataAccess taskDAL)
         {
-            string sproc = "";
-            int dtResult = taskDataAccessLayer.InsertTaskDetails(addTask, sproc);
-            return dtResult;
+            _dataAccess = taskDAL;
+        }
+
+        
+        /// <summary>
+        /// This commented code is used for Interface implementation without DI.
+        /// </summary>
+        /// <param name="objTask"></param>
+
+        //int ITaskBLL.InsertTaskDetails(TaskBusinessObjectLayer addTask)
+        //{
+        //    string sproc = "";
+        //    int dtResult = taskDataAccessLayer.InsertTaskDetails(addTask, sproc);
+        //    return dtResult;
+        //}
+
+        public int InsertTaskDetails(TaskBusinessObject objTask)
+        {
+            objTask.response= _dataAccess.InsertTaskDetails(objTask);
+            return objTask.response;
         }
 
         public DataSet GetAllClients()
         {
-            DataSet dtResult = taskDataAccessLayer.GetClient();
+            DataSet dtResult = _dataAccess.GetClients();
             return dtResult;
         }
 
         public DataSet GetAllProject()
         {
-            DataSet dtResult = taskDataAccessLayer.GetProject();
+            DataSet dtResult = _dataAccess.GetProject();
             return dtResult;
         }
 
 
         public DataSet GetAssignedTask()
         {
-            DataSet dtResult = taskDataAccessLayer.GetAssignedTask();
+            DataSet dtResult = _dataAccess.GetAssignedTask();
             return dtResult;
         }
 
         public DataSet GetTaskDetails()
         {
-            DataSet dtResult = taskDataAccessLayer.GetTaskDetails();
+            DataSet dtResult = _dataAccess.GetTaskDetails();
             return dtResult;
         }
 
         public DataSet GetProjectByClient(int clientID)
         {
-            DataSet dtResult = taskDataAccessLayer.GetProjectByClient(clientID);
+            DataSet dtResult = _dataAccess.GetProjectByClient(clientID);
             return dtResult;
         }
     }

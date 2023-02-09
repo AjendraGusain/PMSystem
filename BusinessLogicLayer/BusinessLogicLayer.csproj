@@ -44,7 +44,7 @@
     <Compile Include="ClientBusinessLogic.cs" />
     <Compile Include="AddDesignationBusinessLogic.cs" />
     <Compile Include="AddRoleBusinessLogic.cs" />
-    <Compile Include="Interface\ITaskBLL.cs" />
+    <Compile Include="Interface\ITaskBusinessLogic.cs" />
     <Compile Include="TaskBusinessLogic.cs" />
     <Compile Include="TeamBusinessLogic.cs" />
     <Compile Include="DashboardBussinessLogic.cs" />

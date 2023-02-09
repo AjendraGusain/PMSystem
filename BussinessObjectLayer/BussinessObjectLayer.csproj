@@ -46,7 +46,7 @@
     <Compile Include="AddRoleBusinessObject.cs" />
     <Compile Include="TeamBusinessObject.cs" />
     <Compile Include="EmployeeBusinessObject.cs" />
-    <Compile Include="TaskBusinessObjectLayer.cs" />
+    <Compile Include="TaskBusinessObject.cs" />
     <Compile Include="UserLoginObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
