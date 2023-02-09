@@ -25,6 +25,7 @@ namespace ProjectManagement.Admin
             if (!IsPostBack)
             {
                 BindEmployeeList();
+                //test
             }
         }
 
