@@ -15,12 +15,10 @@
     <link href="../css/jquery.steps.css" rel="stylesheet" />
     <link href="../css/steps.css" rel="stylesheet" />
     <link href="../css/style.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
-    rel="stylesheet" type="text/css" />
+    
+    
     <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <script type="text/javascript">
     jQuery(function () {
         jQuery(".js-example-placeholder-single").select2({
@@ -112,11 +110,6 @@
         <div class="col-12 d-flex no-block align-items-center">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
                                     </asp:ContentPlaceHolder>
-          <div class="ms-auto text-end">
-            <button type="button" class="btn btn-warning btn-sm">
-                    <i class="mdi mdi-chevron-left"></i>Back
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -153,12 +146,12 @@
 <script src="../js/waves.js"></script>
 <script src="../js/sidebarmenu.js"></script>
 <script src="../js/custom.min.js"></script>
-<%--<script src="../js/datatables.min.js"></script>--%> 
+<script src="../js/datatables.min.js"></script>
 <script src="../js/select2.full.min.js"></script> 
 <script src="../js/select2.min.js"></script> 
 <%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <%--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>--%>
 <script type="text/javascript">
     $(function () {
         $('[id*=lsEmpoloyee]').multiselect({
