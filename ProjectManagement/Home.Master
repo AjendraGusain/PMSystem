@@ -120,8 +120,8 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
                 <%--<div class="row">
                     <div class="card">
                         <div class="card-body">
@@ -135,7 +135,6 @@
                         </div>
                     </div>
                 </div>--%>
-
             </div>
 
 
@@ -166,25 +165,25 @@
         });
     });
 
-    $('#ContentPlaceHolder1_txtTeamName').on('change', function () {
-        $('#lblTeamName').html(this.value);
-    });
+        $('#ContentPlaceHolder1_txtTeamName').on('change', function () {
+            $('#lblTeamName').html(this.value);
+        });
 
-    $('#ContentPlaceHolder1_ddlManager').on('change', function () {
-        $('#lblManager').html($("#ContentPlaceHolder1_ddlManager option:selected").text());
-    });
+        $('#ContentPlaceHolder1_ddlManager').on('change', function () {
+            $('#lblManager').html($("#ContentPlaceHolder1_ddlManager option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
-        $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
-    });
+        $('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
+            $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-        $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-    });
+        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+            $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-        $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-    });
-</script>
-    </body>
+        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+            $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        });
+    </script>
+</body>
 </html>

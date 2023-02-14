@@ -164,5 +164,29 @@ namespace DataAccessLayer
             {
             }
         }
+
+        public DataSet GetTaskDetailsByID(int taskID)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_AssignTaskByID";
+                MySqlCommand cmd = new MySqlCommand(spName, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, taskID);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
     }
 }

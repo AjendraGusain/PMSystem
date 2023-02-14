@@ -114,6 +114,24 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.TextBox txtTaskDescription;
 
         /// <summary>
+        /// lblEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmployee;
+
+        /// <summary>
+        /// ddlEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmployeeName;
+
+        /// <summary>
         /// btnAddTask control.
         /// </summary>
         /// <remarks>

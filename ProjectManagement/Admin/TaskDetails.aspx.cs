@@ -11,10 +11,10 @@ namespace ProjectManagement.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            pnlDisplayTaskDetails.Visible = true;
         }
 
-        protected void grvTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void grvDisplayTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
         }

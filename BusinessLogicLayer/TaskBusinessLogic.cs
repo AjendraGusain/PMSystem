@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
     public class TaskBusinessLogic : ITaskBusinessLogic
     {
         private ITaskDataAccess _dataAccess;
-
+        TaskBusinessObject taskBO = new TaskBusinessObject();
         public TaskBusinessLogic(ITaskDataAccess taskDAL)
         {
             _dataAccess = taskDAL;
@@ -34,39 +34,45 @@ namespace BusinessLogicLayer
 
         public int InsertTaskDetails(TaskBusinessObject objTask)
         {
-            objTask.response= _dataAccess.InsertTaskDetails(objTask);
-            return objTask.response;
+            taskBO.response= _dataAccess.InsertTaskDetails(objTask);
+            return taskBO.response;
         }
 
         public DataSet GetAllClients()
         {
-            DataSet dtResult = _dataAccess.GetClients();
-            return dtResult;
+            taskBO.dsResult = _dataAccess.GetClients();
+            return taskBO.dsResult;
         }
 
         public DataSet GetAllProject()
         {
-            DataSet dtResult = _dataAccess.GetProject();
-            return dtResult;
+            taskBO.dsResult = _dataAccess.GetProject();
+            return taskBO.dsResult;
         }
 
 
         public DataSet GetAssignedTask()
         {
-            DataSet dtResult = _dataAccess.GetAssignedTask();
-            return dtResult;
+            taskBO.dsResult = _dataAccess.GetAssignedTask();
+            return taskBO.dsResult;
         }
 
         public DataSet GetTaskDetails()
         {
-            DataSet dtResult = _dataAccess.GetTaskDetails();
-            return dtResult;
+            taskBO.dsResult = _dataAccess.GetTaskDetails();
+            return taskBO.dsResult;
         }
 
         public DataSet GetProjectByClient(int clientID)
         {
-            DataSet dtResult = _dataAccess.GetProjectByClient(clientID);
-            return dtResult;
+            taskBO.dsResult = _dataAccess.GetProjectByClient(clientID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet GetTaskDetailsByID(int taskID)
+        {
+            taskBO.dsResult = _dataAccess.GetTaskDetailsByID(taskID);
+            return taskBO.dsResult;
         }
     }
 }
