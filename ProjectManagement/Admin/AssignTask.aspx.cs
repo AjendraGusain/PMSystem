@@ -26,11 +26,40 @@ namespace ProjectManagement.Admin
 
         protected void grvAssignedTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
+            if (e.CommandName == "ProjectName")
+            {
+                int projectID = Convert.ToInt32(e.CommandArgument);
+                //Response.Redirect("ProjectDetail.aspx?ProjectId=" + projectID);
+            }
+
+            if (e.CommandName == "UserName")
+            {
+                int userID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("EmployeeDetail.aspx?UserId=" + userID);
+            }
+
             if (e.CommandName == "ViewAssignedTask")
             {
-                pnlDisplayAssignTask.Visible = false;
-                pnlDisplayTaskDetails.Visible = true;
-                GetTaskDetails();
+                string taskID= Convert.ToInt32(e.CommandArgument).ToString();
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID);
+              //  Response.Redirect("TaskDetails.aspx");
+            }
+
+            if (e.CommandName == "ReAssign")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID + "&UserId=" + userID);
+            }
+
+            if (e.CommandName == "Assign")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID);
             }
         }
 
@@ -67,9 +96,9 @@ namespace ProjectManagement.Admin
             Response.Redirect("");
         }
 
-        protected void lnkbtnEmployeeName_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("EmployeeDetail.aspx");
-        }
+        //protected void lnkbtnEmployeeName_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("EmployeeDetail.aspx?UserName=" + Request.QueryString["UserID"]);
+        //}
     }
 }

@@ -55,6 +55,17 @@
                           <asp:TextBox ID="txtTaskDescription" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
                       </div>
                     </div>
+
+                    <div class="form-group row">
+                        <asp:Label ID="lblEmployee" runat="server" Visible="false" CssClass="col-sm-3 text-center control-label col-form-label">Employee Name</asp:Label>
+                      <%--<label for="EmpName" class="col-sm-3 text-center control-label col-form-label">Employee Name</label>--%>
+                      <div class="col-sm-6">
+                        <%--<label for="EMname" class="text-center control-label col-form-label">Employee </label>--%>
+                            <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single"  ToolTip="Select" Visible="false">
+                           </asp:DropDownList>  
+                      </div>
+                    </div>
+
                 </section>
                 <div class="border-top text-center">
                     <div class="card-body">

@@ -15,5 +15,6 @@ namespace DataAccessLayer.Interface
         DataSet GetAssignedTask();
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
+        DataSet GetTaskDetailsByID(int taskID);
     }
 }

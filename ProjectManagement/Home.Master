@@ -16,116 +16,122 @@
     <link href="../css/steps.css" rel="stylesheet" />
     <link href="../css/style.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
-    rel="stylesheet" type="text/css" />
+        rel="stylesheet" type="text/css" />
     <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<script type="text/javascript">
-    jQuery(function () {
-        jQuery(".js-example-placeholder-single").select2({
-            placeholder: "Select",
-            allowClear: true
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery(".js-example-placeholder-single").select2({
+                placeholder: "Select",
+                allowClear: true
+            });
         });
-    });
-</script>
+    </script>
 </head>
-    <body>
-<div id="main-wrapper" data-layout="vertical">
-  <header class="topbar" data-navbarbg="skin5">
-    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-      <div class="navbar-header" data-logobg="skin5"> <a class="navbar-brand" href="#"> <b class="logo-icon ps-2"> <img src="../images/logo-icon.png" alt="homepage" class="light-logo" width="25" /> </b> <span class="logo-text ms-2"> <img src="../images/logo-text.png" alt="homepage" class="light-logo" /> </span> </a> <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a> </div>
-      <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-        <ul class="navbar-nav float-start me-auto">
-          <li class="nav-item d-none d-lg-block"> <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"> <i class="mdi mdi-menu font-24"></i> </a> </li>
-          <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"> <i class="mdi mdi-magnify fs-4"></i> </a>
-            <form class="app-search position-absolute">
-              <input type="text" class="form-control" placeholder="Search" />
-              <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-            </form>
-          </li>
-        </ul>
-        <ul class="navbar-nav float-end">
-          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i> </a> </li>
-          <li class="nav-item dropdown"> <a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" /> </a> </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <aside class="left-sidebar" data-sidebarbg="skin5">
-    <div class="scroll-sidebar"> 
-      <!-- Sidebar navigation-->
-      <nav class="sidebar-nav">
-        <ul id="sidebarnav" class="pt-4">
-          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Dashboard.aspx" aria-expanded="false"> <i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a> </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Employee Section</span></a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Add Employee</span></a> </li>
-              <li class="sidebar-item"> <a href="ViewAllEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i> <span class="hide-menu">View All Employee</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-account-outline"></i><span class="hide-menu">Client</span> </a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddClient.aspx" class="sidebar-link"> <i class="mdi mdi-account-plus"></i><span class="hide-menu">Add Client</span></a> </li>
-              <li class="sidebar-item"> <a href="ViewClient.aspx" class="sidebar-link"> <i class="mdi mdi-eye"></i><span class="hide-menu">View Client</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-settings"></i><span class="hide-menu">Role</span> </a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddRole.aspx" class="sidebar-link"> <i class="mdi mdi-worker"></i><span class="hide-menu">Add Role</span></a> </li>
-              <li class="sidebar-item"> <a href="ViewRole.aspx" class="sidebar-link"> <i class="mdi mdi-view-list"></i><span class="hide-menu">View Role</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-settings"></i><span class="hide-menu">Designation</span> </a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddDesignation.aspx" class="sidebar-link"> <i class="mdi mdi-worker"></i><span class="hide-menu">Add Designation</span></a> </li>
-              <li class="sidebar-item"> <a href="ViewDesignation.aspx" class="sidebar-link"> <i class="mdi mdi-view-list"></i><span class="hide-menu">View Designation</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-application"></i><span class="hide-menu">Project</span> </a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="addProject.html" class="sidebar-link"> <i class="mdi mdi-pencil-box"></i><span class="hide-menu">Add Project</span></a> </li>
-              <li class="sidebar-item"> <a href="viewAllProject.html" class="sidebar-link"> <i class="mdi mdi-eye"></i><span class="hide-menu">View Project</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddTask.aspx" class="sidebar-link"> <i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
-              <li class="sidebar-item"> <a href="AssignTask.aspx" class="sidebar-link"> <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
-            </ul>
-          </li>
-          <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Create Team</span></a>
-            <ul aria-expanded="false" class="collapse first-level">
-              <li class="sidebar-item"> <a href="AddTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Add Team</span></a> </li>
-              <li class="sidebar-item"> <a href="EditTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Edit Team</span></a> </li>
-              <li class="sidebar-item"> <a href="ViewTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i> <span class="hide-menu">View Team</span></a> </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <!-- End Sidebar navigation --> 
-    </div>
-  </aside>
-  <div class="page-wrapper">
-    <div class="page-breadcrumb">
-      <div class="row">
-        <div class="col-12 d-flex no-block align-items-center">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
-                                    </asp:ContentPlaceHolder>
-          <div class="ms-auto text-end">
-            <button type="button" class="btn btn-warning btn-sm">
-                    <i class="mdi mdi-chevron-left"></i>Back
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid">
+<body>
+    <div id="main-wrapper" data-layout="vertical">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5"><a class="navbar-brand" href="#"><b class="logo-icon ps-2">
+                    <img src="../images/logo-icon.png" alt="homepage" class="light-logo" width="25" />
+                </b><span class="logo-text ms-2">
+                    <img src="../images/logo-text.png" alt="homepage" class="light-logo" />
+                </span></a><a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a></div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav float-start me-auto">
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <li class="nav-item search-box"><a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-magnify fs-4"></i></a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search" />
+                                <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav float-end">
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-bell font-24"></i></a></li>
+                        <li class="nav-item dropdown"><a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" />
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="pt-4">
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="Dashboard.aspx" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a> </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Employee Section</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Add Employee</span></a> </li>
+                                <li class="sidebar-item"><a href="ViewAllEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">View All Employee</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-outline"></i><span class="hide-menu">Client</span> </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddClient.aspx" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu">Add Client</span></a> </li>
+                                <li class="sidebar-item"><a href="ViewClient.aspx" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Client</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Role</span> </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddRole.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Role</span></a> </li>
+                                <li class="sidebar-item"><a href="ViewRole.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Role</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Designation</span> </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddDesignation.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Designation</span></a> </li>
+                                <li class="sidebar-item"><a href="ViewDesignation.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Designation</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Project</span> </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="addProject.html" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Add Project</span></a> </li>
+                                <li class="sidebar-item"><a href="viewAllProject.html" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Project</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
+                                <li class="sidebar-item"><a href="AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Create Team</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="AddTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Add Team</span></a> </li>
+                                <li class="sidebar-item"><a href="EditTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Edit Team</span></a> </li>
+                                <li class="sidebar-item"><a href="ViewTeam.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">View Team</span></a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <div class="ms-auto text-end">
+                            <%--<button type="button" class="btn btn-warning btn-sm">
+                                <i class="mdi mdi-chevron-left"></i>Back
+                            </button>--%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
                 <%--<div class="row">
                     <div class="card">
                         <div class="card-body">
@@ -139,56 +145,55 @@
                         </div>
                     </div>
                 </div>--%>
-
             </div>
 
 
-    <footer class="footer text-center"> All Rights Reserved </footer>
-  </div>
-</div>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/perfect-scrollbar.jquery.min.js"></script>
-<script src="../js/sparkline.js"></script>
-<script src="../js/waves.js"></script>
-<script src="../js/sidebarmenu.js"></script>
-<script src="../js/custom.min.js"></script>
-<%--<script src="../js/datatables.min.js"></script>--%> 
-<script src="../js/select2.full.min.js"></script> 
-<script src="../js/select2.min.js"></script> 
-<%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
+            <footer class="footer text-center">All Rights Reserved </footer>
+        </div>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../js/sparkline.js"></script>
+    <script src="../js/waves.js"></script>
+    <script src="../js/sidebarmenu.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <%--<script src="../js/datatables.min.js"></script>--%>
+    <script src="../js/select2.full.min.js"></script>
+    <script src="../js/select2.min.js"></script>
+    <%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $('[id*=lsEmpoloyee]').multiselect({
-            includeSelectAllOption: true,
-            enableFiltering: true,
-            filterPlaceholder: 'Search',
-            enableCaseInsensitiveFiltering: true,
-            dropRight: true
+    <script type="text/javascript">
+        $(function () {
+            $('[id*=lsEmpoloyee]').multiselect({
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                filterPlaceholder: 'Search',
+                enableCaseInsensitiveFiltering: true,
+                dropRight: true
+            });
         });
-    });
 
-    $('#ContentPlaceHolder1_txtTeamName').on('change', function () {
-        $('#lblTeamName').html(this.value);
-    });
+        $('#ContentPlaceHolder1_txtTeamName').on('change', function () {
+            $('#lblTeamName').html(this.value);
+        });
 
-    $('#ContentPlaceHolder1_ddlManager').on('change', function () {
-        $('#lblManager').html($("#ContentPlaceHolder1_ddlManager option:selected").text());
-    });
+        $('#ContentPlaceHolder1_ddlManager').on('change', function () {
+            $('#lblManager').html($("#ContentPlaceHolder1_ddlManager option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
-        $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
-    });
+        $('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
+            $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-        $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-    });
+        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+            $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        });
 
-    $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-        $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-    });
-</script>
-    </body>
+        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+            $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        });
+    </script>
+</body>
 </html>
