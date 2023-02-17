@@ -30,7 +30,6 @@ namespace ProjectManagement.Admin
             if (e.CommandName == "ProjectName")
             {
                 int projectID = Convert.ToInt32(e.CommandArgument);
-                //Response.Redirect("ProjectDetail.aspx?ProjectId=" + projectID);
             }
 
             if (e.CommandName == "UserName")
@@ -43,7 +42,6 @@ namespace ProjectManagement.Admin
             {
                 string taskID= Convert.ToInt32(e.CommandArgument).ToString();
                 Response.Redirect("TaskDetails.aspx?TaskId=" + taskID);
-              //  Response.Redirect("TaskDetails.aspx");
             }
 
             if (e.CommandName == "ReAssign")

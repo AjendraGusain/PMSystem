@@ -13,9 +13,12 @@ namespace BussinessObjectLayer
         public int response=0;
         public string ClientID { get; set; }
         public string ProjectID { get; set; }
-        public string TaskID { get; set; }
+        public string TaskNumber { get; set; }
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public string EmployeeName { get; set; }
+        public int LoginUserID { get; set; }
+        public int TaskID { get; set; }
+        public DateTime AssignedDate { get; set; }
     }
 }
