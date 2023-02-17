@@ -30,7 +30,7 @@ namespace DataAccessLayer
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("@ClientID", addTask.ClientID));
                 cmd.Parameters.Add(new MySqlParameter("@ProjectID", addTask.ProjectID));
-                cmd.Parameters.Add(new MySqlParameter("@TaskID", addTask.TaskID));
+                cmd.Parameters.Add(new MySqlParameter("@TaskNumber", addTask.TaskNumber));
                 cmd.Parameters.Add(new MySqlParameter("@TaskName", addTask.TaskName));
                 cmd.Parameters.Add(new MySqlParameter("@TaskDescription", addTask.TaskDescription));
                 addTask.response =  cmd.ExecuteNonQuery();
@@ -46,26 +46,8 @@ namespace DataAccessLayer
                     conn.Close();
                 }
             }
-            return addTaskBO.response;
+            return addTask.response;
         }
-
-        //public DataSet GetClient()
-        //{
-        //    try
-        //    {
-        //        dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client");
-        //        return dsResult;
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-
-        //    }
-        //}
 
         public DataSet GetProject()
         {
@@ -165,7 +147,32 @@ namespace DataAccessLayer
             }
         }
 
-        public DataSet GetTaskDetailsByID(int taskID)
+        public DataSet ReAssignTask(int taskID)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_ReAssignTaskByID";
+                MySqlCommand cmd = new MySqlCommand(spName, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, taskID);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+
+        public DataSet AssignTask(int taskID)
         {
             try
             {
@@ -187,6 +194,39 @@ namespace DataAccessLayer
             finally
             {
             }
+        }
+
+        public int InsertAssignedTaskDetails(TaskBusinessObject assignTask)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TaskId,AssignedByUserID,AssignedDate,ProjectId) " +
+                    "values(@UserId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId)";
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@UserId", assignTask.EmployeeName));
+                cmd.Parameters.Add(new MySqlParameter("@TaskId", assignTask.TaskID));
+                cmd.Parameters.Add(new MySqlParameter("@AssignedByUserID", assignTask.LoginUserID));
+                cmd.Parameters.Add(new MySqlParameter("@AssignedDate", assignTask.AssignedDate));
+                cmd.Parameters.Add(new MySqlParameter("@ProjectId", assignTask.ProjectID));
+                assignTask.response = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return assignTask.response;
         }
     }
 }

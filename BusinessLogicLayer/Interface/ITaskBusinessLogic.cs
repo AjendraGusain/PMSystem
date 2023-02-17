@@ -9,12 +9,14 @@ namespace BusinessLogicLayer.Interface
 {
     public interface ITaskBusinessLogic
     {
+        int InsertAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject addTask);
         DataSet GetAllClients();
         DataSet GetAllProject();
         DataSet GetAssignedTask();
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
-        DataSet GetTaskDetailsByID(int taskID);
+        DataSet ReAssignTask(int taskID);
+        DataSet AssignTask(int taskID);
     }
 }
