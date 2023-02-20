@@ -63,12 +63,13 @@
                                 <%--<label for="EmpName" class="col-sm-3 text-center control-label col-form-label">Employee Name</label>--%>
                                 <div class="col-sm-6">
                                     <%--<label for="EMname" class="text-center control-label col-form-label">Employee </label>--%>
-                                    <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single" ToolTip="Select" Visible="false">
-                                    </asp:DropDownList>
+<%--                                    <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single" ToolTip="Select" Visible="false">
+                                    </asp:DropDownList>--%>
                                     <br/>
-                                    <%--<asp:ListBox ID="lsEmpoloyee" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                                    <%--<asp:ListBox ID="ddlEmployeeName" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
                                     </asp:ListBox>--%>
-
+                                    <asp:ListBox runat="server" SelectionMode="Multiple" ID="ddlEmployeeName"  CssClass="form-control js-example-placeholder-single" 
+                                        ToolTip="Select" Visible="false" ></asp:ListBox>
                                 </div>
                             </div>
 

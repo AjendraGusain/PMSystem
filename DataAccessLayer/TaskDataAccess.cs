@@ -228,5 +228,35 @@ namespace DataAccessLayer
             }
             return assignTask.response;
         }
+
+        public int UpdateAssignedTaskDetails(TaskBusinessObject assignTask)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
+                    "UnassignedDate=@UnassignedDate,IsActive=0 where TaskId="+ assignTask.TaskID;
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@UnassignedByUserID", assignTask.LoginUserID));
+                cmd.Parameters.Add(new MySqlParameter("@UnassignedDate", assignTask.AssignedDate));
+                assignTask.response = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return assignTask.response;
+        }
     }
 }

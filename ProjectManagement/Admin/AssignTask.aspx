@@ -48,7 +48,11 @@
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlDisplayAssignTask" runat="server">
                                
-                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvAssignedTaskDetails_RowCommand">
+                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="20" 
+                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true"  EmptyDataText="No Record Found" 
+                                        OnRowCommand="grvAssignedTaskDetails_RowCommand" OnPageIndexChanging="grvAssignedTaskDetails_PageIndexChanging">
+                                        <PagerStyle CssClass="" HorizontalAlign="Right" />
+                                <PagerSettings Mode="NumericFirstLast" PageButtonCount="2"  FirstPageText="First" LastPageText="Last"/>
                                         <Columns>
                                             <%--<asp:TemplateField>
                                                 <ItemTemplate>
@@ -170,9 +174,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                            <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite"></div>
                         </div>
-                        <div class="col-sm-12 col-md-7">
+                        <%--<div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
                                 <ul class="pagination">
                                     <li class="paginate_button page-item previous disabled" id="zero_config_previous"><a href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
@@ -181,7 +185,7 @@
                                     <li class="paginate_button page-item next" id="zero_config_next"><a href="#" aria-controls="zero_config" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
