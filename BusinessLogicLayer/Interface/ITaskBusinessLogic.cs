@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.Interface
     public interface ITaskBusinessLogic
     {
         int InsertAssignedTaskDetails(TaskBusinessObject assignTask);
+        int UpdateAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject addTask);
         DataSet GetAllClients();
         DataSet GetAllProject();

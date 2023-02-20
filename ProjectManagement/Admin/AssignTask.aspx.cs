@@ -94,6 +94,12 @@ namespace ProjectManagement.Admin
             Response.Redirect("");
         }
 
+        protected void grvAssignedTaskDetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grvAssignedTaskDetails.PageIndex = e.NewPageIndex;
+            GetAssignedTask();
+        }
+
         //protected void lnkbtnEmployeeName_Click(object sender, EventArgs e)
         //{
         //    Response.Redirect("EmployeeDetail.aspx?UserName=" + Request.QueryString["UserID"]);

@@ -10,6 +10,7 @@ namespace DataAccessLayer.Interface
    public interface ITaskDataAccess
     {
         int InsertAssignedTaskDetails(TaskBusinessObject assignTask);
+        int UpdateAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject task);
         DataSet GetClients();
         DataSet GetProject();

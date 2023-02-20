@@ -86,5 +86,11 @@ namespace BusinessLogicLayer
             taskBO.dsResult = _dataAccess.AssignTask(taskID);
             return taskBO.dsResult;
         }
+
+        public int UpdateAssignedTaskDetails(TaskBusinessObject assignTask)
+        {
+            taskBO.response = _dataAccess.UpdateAssignedTaskDetails(assignTask);
+            return taskBO.response;
+        }
     }
 }
