@@ -69,7 +69,7 @@
                                     <%--<asp:ListBox ID="ddlEmployeeName" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
                                     </asp:ListBox>--%>
                                     <asp:ListBox runat="server" SelectionMode="Multiple" ID="ddlEmployeeName"  CssClass="form-control js-example-placeholder-single" 
-                                        ToolTip="Select" Visible="false" ></asp:ListBox>
+                                        ToolTip="Select" Visible="false"></asp:ListBox>
                                 </div>
                             </div>
 

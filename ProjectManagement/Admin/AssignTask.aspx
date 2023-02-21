@@ -48,7 +48,7 @@
                         <div class="col-sm-12">
                             <asp:Panel ID="pnlDisplayAssignTask" runat="server">
                                
-                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="20" 
+                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="10" 
                                         ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true"  EmptyDataText="No Record Found" 
                                         OnRowCommand="grvAssignedTaskDetails_RowCommand" OnPageIndexChanging="grvAssignedTaskDetails_PageIndexChanging">
                                         <PagerStyle CssClass="" HorizontalAlign="Right" />
