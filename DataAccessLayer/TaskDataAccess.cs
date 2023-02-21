@@ -205,8 +205,8 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TaskId,AssignedByUserID,AssignedDate,ProjectId) " +
-                    "values(@UserId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId)";
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) " +
+                    "values(@UserId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1')";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UserId", assignTask.EmployeeName));
                 cmd.Parameters.Add(new MySqlParameter("@TaskId", assignTask.TaskID));
@@ -239,7 +239,7 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
-                    "UnassignedDate=@UnassignedDate,IsActive=0 where TaskId="+ assignTask.TaskID;
+                    "UnassignedDate=@UnassignedDate,IsActive='0' where TaskId="+ assignTask.TaskID+ " and UserId="+assignTask.EmployeeName + " and ProjectId=" + assignTask.ProjectID;
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UnassignedByUserID", assignTask.LoginUserID));
                 cmd.Parameters.Add(new MySqlParameter("@UnassignedDate", assignTask.AssignedDate));
