@@ -46,7 +46,7 @@ namespace ProjectManagement.Admin
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
                 Session["Id"] = Id;
-                int COLIEnhancedPolicyDollarsID = Convert.ToInt32(e.CommandArgument);
+                //int COLIEnhancedPolicyDollarsID = Convert.ToInt32(e.CommandArgument);
                 int dataout = viewEmployee.DeleteEmployee(Id);
                 if (dataout > 0)
                 {

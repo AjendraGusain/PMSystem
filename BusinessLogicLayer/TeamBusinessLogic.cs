@@ -33,9 +33,10 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
-        public DataSet GetTeamByID(int customerId)
+        public DataSet GetTeamByID(int Id)
         {
-            throw new NotImplementedException();
+            dtResult = _teamDataAccess.GetTeamByID(Id);
+            return dtResult;
         }
 
         public DataSet GetTeamLeader()
@@ -59,6 +60,24 @@ namespace BusinessLogicLayer
         public int UpdateTeam(TeamBusinessObject customer, int Id)
         {
             throw new NotImplementedException();
+        }
+
+        public DataSet GetProject()
+        {
+            dtResult = _teamDataAccess.GetProject();
+            return dtResult;
+        }
+
+        public int EditTeam(TeamBusinessObject createTeam, int Id)
+        {
+            respone = _teamDataAccess.EditTeam(createTeam, Id);
+            return respone;
+        }
+
+        public int DeleteTeam(int Id)
+        {
+            respone = _teamDataAccess.DeleteTeam(Id);
+            return respone;
         }
     }
 }

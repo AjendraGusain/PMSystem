@@ -47,35 +47,57 @@ namespace ProjectManagement.Admin
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-            addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
-            addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
-            addEmployee.EmployeeEmail = txtEmail.Text.Trim();
-            addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
-            addEmployee.Role = ddlRoleList.SelectedValue;
-            addEmployee.Designation = ddlDesignation.SelectedValue;
-            addEmployee.IsAdmin = chkAdminAuth.Checked;
-            if (btnAddEmployee.Text == "Add Employee")
+            addEmployee.EmployeeCode = txtEmployeeCode.Text;
+            addEmployee.EmployeeEmail = txtEmail.Text;
+            bool checkCode = addEmployeeLogic.UserCheck(addEmployee);
+            bool checkEmail = addEmployeeLogic.UserCheck(addEmployee);
+            bool checkPhone = addEmployeeLogic.UserCheck(addEmployee);
+
+            if (checkCode == true)
             {
-                successResult = addEmployeeLogic.InsertAllEmployeeDetails(addEmployee);
-                if (successResult == 1)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
-                }
-                txtEmployeeCode.Text = "";
-                txtEmployeeName.Text = "";
-                txtEmail.Text = "";
-                txtPhoneNo.Text = "";
-                ddlRoleList.SelectedValue = "0";
-                ddlDesignation.SelectedValue = "0";
-                chkAdminAuth.Checked = false;
+                lblCheckCode.Text = "Employee Code Already Exists";
             }
+            if (checkEmail==true)
+            {
+                lblCheckEmail.Text = "Employee Email Already Exists";
+            }
+            if(checkPhone==true)
+            {
+                lblCheckPhone.Text = "Phone Already Exists";
+            }
+
             else
             {
-                successResult=addEmployeeLogic.UpdateAllEmployee(addEmployee, UserId);
-                if (successResult == 1)
+                int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
+                addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
+                addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
+                addEmployee.EmployeeEmail = txtEmail.Text.Trim();
+                addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
+                addEmployee.Role = ddlRoleList.SelectedValue;
+                addEmployee.Designation = ddlDesignation.SelectedValue;
+                addEmployee.IsAdmin = chkAdminAuth.Checked;
+                if (btnAddEmployee.Text == "Add Employee")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
+                    successResult = addEmployeeLogic.InsertAllEmployeeDetails(addEmployee);
+                    if (successResult == 1)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
+                    }
+                    txtEmployeeCode.Text = "";
+                    txtEmployeeName.Text = "";
+                    txtEmail.Text = "";
+                    txtPhoneNo.Text = "";
+                    ddlRoleList.SelectedValue = "0";
+                    ddlDesignation.SelectedValue = "0";
+                    chkAdminAuth.Checked = false;
+                }
+                else
+                {
+                    successResult = addEmployeeLogic.UpdateAllEmployee(addEmployee, UserId);
+                    if (successResult == 1)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
+                    }
                 }
             }
         }
@@ -94,6 +116,43 @@ namespace ProjectManagement.Admin
             ddlDesignation.DataValueField = "Id";
             ddlDesignation.DataBind();
             ddlDesignation.Items.Insert(0, new ListItem("-- Select Designation --", "0"));
+        }
+
+        protected void txtEmployeeCode_TextChanged(object sender, EventArgs e)
+        {
+           //addEmployee.EmployeeCode = txtEmployeeCode.Text;
+           //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
+           // if (checkUser == "insert")
+           // {
+           //     lblCheckCode.Text = "";
+           // }
+           // else
+           //     lblCheckCode.Text = checkUser;
+
+        }
+
+        protected void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            //addEmployee.EmployeeEmail = txtEmail.Text;
+            //string checkUser = addEmployeeLogic.UserCheck(addEmployee);
+            //if (checkUser == "insert")
+            //{
+            //    lblCheckEmail.Text = "";
+            //}
+            //else
+            //    lblCheckEmail.Text = checkUser;
+        }
+
+        protected void txtPhoneNo_TextChanged(object sender, EventArgs e)
+        {
+            //addEmployee.EmployeePhone = txtEmail.Text;
+            //string checkUser = addEmployeeLogic.UserCheck(addEmployee);
+            //if (checkUser == "insert")
+            //{
+            //    lblCheckCode.Text = "";
+            //}
+            //else
+            //    lblCheckCode.Text = checkUser;
         }
     }
 }

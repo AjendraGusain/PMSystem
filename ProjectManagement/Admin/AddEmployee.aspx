@@ -12,7 +12,8 @@
                             <div class="form-group row">
                                 <label for="Ecode" class="col-sm-3 text-center control-label col-form-label">Employee Code</label>
                                 <div class="col-sm-6">
-                                    <asp:TextBox runat="server" ID="txtEmployeeCode" class="form-control" placeholder="Employee Code...." />
+                                    <asp:TextBox runat="server" ID="txtEmployeeCode" class="form-control" placeholder="Employee Code...." OnTextChanged="txtEmployeeCode_TextChanged" AutoPostBack="true" />
+                                    <asp:label runat="server" id="lblCheckCode" ForeColor="Red"></asp:label>
                                     <asp:RequiredFieldValidator ID="rvEmployeeCode" runat="server" ControlToValidate="txtEmployeeCode" ErrorMessage="*" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
@@ -26,7 +27,8 @@
                             <div class="form-group row">
                                 <label for="EmailID" class="col-sm-3 text-center control-label col-form-label">Email ID</label>
                                 <div class="col-sm-6">
-                                    <asp:TextBox runat="server" ID="txtEmail" class="form-control" placeholder="Email ID...." />
+                                    <asp:TextBox runat="server" ID="txtEmail" class="form-control" placeholder="Email ID...." OnTextChanged="txtEmail_TextChanged" AutoPostBack="true" />
+                                    <asp:label runat="server" id="lblCheckEmail" ForeColor="Red"></asp:label>
 
                                     <asp:RequiredFieldValidator ID="rvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="*" ForeColor="Red" Display="Dynamic" ValidationGroup="ED"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="rvPhoneNoExp" runat="server" ControlToValidate="txtEmail"
@@ -37,7 +39,8 @@
                             <div class="form-group row">
                                 <label for="PhoneNo" class="col-sm-3 text-center control-label col-form-label">Phone No</label>
                                 <div class="col-sm-6">
-                                    <asp:TextBox runat="server" ID="txtPhoneNo" class="form-control" placeholder="Phone No...." />
+                                    <asp:TextBox runat="server" ID="txtPhoneNo" class="form-control" placeholder="Phone No...." OnTextChanged="txtPhoneNo_TextChanged" AutoPostBack="true" />
+                                    <asp:label runat="server" id="lblCheckPhone" ForeColor="Red"></asp:label>
                                     <asp:RequiredFieldValidator ID="rvPhoneNo" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="*" Display="Dynamic" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" />
                                 </div>

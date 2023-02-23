@@ -109,9 +109,10 @@
     <Content Include="Admin\AddClient.aspx" />
     <Content Include="Admin\AddDesignation.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
+    <Content Include="Admin\AddManager.aspx" />
     <Content Include="Admin\AddRole.aspx" />
     <Content Include="Admin\AddTask.aspx" />
-    <Content Include="Admin\AddTeam.aspx" />
+    <Content Include="Admin\AddTeamName.aspx" />
     <Content Include="Admin\AssignTask.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\EditTeam.aspx" />
@@ -195,6 +196,13 @@
     <Compile Include="Admin\AddEmployee.aspx.designer.cs">
       <DependentUpon>AddEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AddManager.aspx.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddManager.aspx.designer.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AddRole.aspx.cs">
       <DependentUpon>AddRole.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,12 +217,12 @@
     <Compile Include="Admin\AddTask.aspx.designer.cs">
       <DependentUpon>AddTask.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AddTeam.aspx.cs">
-      <DependentUpon>AddTeam.aspx</DependentUpon>
+    <Compile Include="Admin\AddTeamName.aspx.cs">
+      <DependentUpon>AddTeamName.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\AddTeam.aspx.designer.cs">
-      <DependentUpon>AddTeam.aspx</DependentUpon>
+    <Compile Include="Admin\AddTeamName.aspx.designer.cs">
+      <DependentUpon>AddTeamName.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AssignTask.aspx.cs">
       <DependentUpon>AssignTask.aspx</DependentUpon>
