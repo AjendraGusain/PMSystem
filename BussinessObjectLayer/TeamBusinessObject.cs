@@ -12,5 +12,6 @@ namespace BussinessObjectLayer
         public string Manager { get; set; }
         public string TeamLeader { get; set; }
         public string Employee { get; set; }
+        public string ProjectId { get; set; }
     }
 }

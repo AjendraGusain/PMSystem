@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Interface;
 using DataAccessLayer;
+using DataAccessLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +23,7 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            DataSet ds = viewTeamBA.GetTeam();
+            DataSet ds = viewTeamBA.GetUser();
             grvViewTeam.DataSource = ds.Tables[0];
             grvViewTeam.DataBind();
         }

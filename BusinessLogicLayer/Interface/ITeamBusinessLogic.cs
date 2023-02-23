@@ -17,5 +17,9 @@ namespace BusinessLogicLayer.Interface
         DataSet GetManager();
         DataSet GetTeamLeader();
         DataSet GetUser();
+        DataSet GetProject();
+
+        int EditTeam(TeamBusinessObject createTeam, int Id);
+        int DeleteTeam(int Id);
     }
 }
