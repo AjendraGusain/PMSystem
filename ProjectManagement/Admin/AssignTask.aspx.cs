@@ -6,12 +6,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogicLayer;
+//using DataAccessLayer.Interface;
+//using DataAccessLayer;
+using BusinessLogicLayer.Interface;
+using DataAccessLayer;
+
 namespace ProjectManagement.Admin
 {
     public partial class AssignTask : System.Web.UI.Page
     {
-
-        TaskBusinessLogicLayer assigntaskBLL = new TaskBusinessLogicLayer();
+        ITaskBusinessLogic assigntaskBLL = new TaskBusinessLogic(new TaskDataAccess());
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -22,11 +26,38 @@ namespace ProjectManagement.Admin
 
         protected void grvAssignedTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
+            if (e.CommandName == "ProjectName")
+            {
+                int projectID = Convert.ToInt32(e.CommandArgument);
+            }
+
+            if (e.CommandName == "UserName")
+            {
+                int userID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("EmployeeDetail.aspx?UserId=" + userID);
+            }
+
             if (e.CommandName == "ViewAssignedTask")
             {
-                pnlDisplayAssignTask.Visible = false;
-                pnlDisplayTaskDetails.Visible = true;
-                GetTaskDetails();
+                string taskID= Convert.ToInt32(e.CommandArgument).ToString();
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID);
+            }
+
+            if (e.CommandName == "ReAssign")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID + "&UserId=" + userID);
+            }
+
+            if (e.CommandName == "Assign")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID);
             }
         }
 
@@ -47,5 +78,31 @@ namespace ProjectManagement.Admin
             gvTaskDetails.DataSource = ds.Tables[0];
             gvTaskDetails.DataBind();
         }
+
+        protected void lnkbtnClientName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewClient.aspx");
+        }
+
+        protected void lnkbtnProjectName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
+        }
+
+        protected void lnkbtnTaskName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
+        }
+
+        protected void grvAssignedTaskDetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grvAssignedTaskDetails.PageIndex = e.NewPageIndex;
+            GetAssignedTask();
+        }
+
+        //protected void lnkbtnEmployeeName_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("EmployeeDetail.aspx?UserName=" + Request.QueryString["UserID"]);
+        //}
     }
 }

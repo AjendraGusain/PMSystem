@@ -34,7 +34,8 @@ namespace ProjectManagement
                 {
                     Session["User"] = dtResult.Tables[0].Rows[0]["UserName"].ToString();
                     Session["RoleId"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
-                    Session["UserId"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
+                    Session["UserEmail"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
+                    Session["UserID"] = dtResult.Tables[0].Rows[0]["UserId"].ToString();
                     Response.Redirect("~/Admin/Dashboard.aspx");
                 }
                 else

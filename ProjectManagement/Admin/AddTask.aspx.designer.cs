@@ -51,22 +51,22 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProjectName;
 
         /// <summary>
-        /// txtTaskID control.
+        /// txtTaskNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTaskID;
+        protected global::System.Web.UI.WebControls.TextBox txtTaskNumber;
 
         /// <summary>
-        /// rfvTaskID control.
+        /// rfvTaskNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTaskID;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTaskNumber;
 
         /// <summary>
         /// txtTaskName control.
@@ -87,24 +87,6 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTaskName;
 
         /// <summary>
-        /// txtTaskNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTaskNumber;
-
-        /// <summary>
-        /// rfvTaskNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTaskNumber;
-
-        /// <summary>
         /// txtTaskDescription control.
         /// </summary>
         /// <remarks>
@@ -112,6 +94,24 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTaskDescription;
+
+        /// <summary>
+        /// lblEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmployee;
+
+        /// <summary>
+        /// ddlEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ddlEmployeeName;
 
         /// <summary>
         /// btnAddTask control.

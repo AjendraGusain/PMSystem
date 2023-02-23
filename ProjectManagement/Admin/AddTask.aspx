@@ -1,70 +1,96 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTask.aspx.cs" Inherits="ProjectManagement.Admin.addTask" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
     <div class="card">
         <div class="card-body wizard-content">
-          <form class="mt-3" runat="server">
-            <div class="wizard clearfix">
-              <div class="content clearfix">
-                <section class="body current">
-                    <div class="form-group row">
-                      <label for="Cname" class="col-sm-3 text-center control-label col-form-label">Client Name</label>
-                      <div class="col-sm-6">
-                          <asp:DropDownList ID="ddlClientName" runat="server" CssClass="select2 form-select shadow-none" AutoPostBack="true" OnSelectedIndexChanged="ddlClientName_SelectedIndexChanged"></asp:DropDownList>
-                      <asp:RequiredFieldValidator ID="rfvClientName" ErrorMessage="Required" ControlToValidate="ddlClientName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
-                      </div>
-                        
-                    </div>
-                    <div class="form-group row">
-                      <label for="Pname" class="col-sm-3 text-center control-label col-form-label">Project Name</label>
-                      <div class="col-sm-6">
-                          <asp:DropDownList ID="ddlProjectName" runat="server" CssClass="select2 form-select shadow-none"></asp:DropDownList>
-                          <asp:RequiredFieldValidator ID="rfvProjectName" ErrorMessage="Required" ControlToValidate="ddlProjectName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="Tid" class="col-sm-3 text-center control-label col-form-label">Task ID</label>
-                      <div class="col-sm-6">
-                          <asp:TextBox ID="txtTaskID" runat="server" CssClass="form-control"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="rfvTaskID" ErrorMessage="Required" ControlToValidate="txtTaskID" runat="server" ValidationGroup="val" ForeColor="Red" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Task Name</label>
-                      <div class="col-sm-6">
-                          <asp:TextBox ID="txtTaskName" runat="server" CssClass="form-control"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="rfvTaskName" ErrorMessage="Required" ControlToValidate="txtTaskName" runat="server" ValidationGroup="val" ForeColor="Red" />
-                      </div>
-                    </div>
+            <form class="mt-3" runat="server">
+                <div class="wizard clearfix">
+                    <div class="content clearfix">
+                        <section class="body current">
+                            <div class="form-group row">
+                                <label for="Cname" class="col-sm-3 text-center control-label col-form-label">Client Name</label>
+                                <div class="col-sm-6">
+                                    <asp:DropDownList ID="ddlClientName" runat="server" CssClass="select2 form-select shadow-none" AutoPostBack="true" OnSelectedIndexChanged="ddlClientName_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvClientName" ErrorMessage="Required" ControlToValidate="ddlClientName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
 
-                    <div class="form-group row">
-                      <label for="Tnum" class="col-sm-3 text-center control-label col-form-label">Task Number</label>
-                      <div class="col-sm-6">
-                          <asp:TextBox ID="txtTaskNumber" runat="server" CssClass="form-control"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="rfvTaskNumber" ErrorMessage="Required" ControlToValidate="txtTaskNumber" runat="server" ValidationGroup="val" ForeColor="Red" />
-                      </div>
-                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Pname" class="col-sm-3 text-center control-label col-form-label">Project Name</label>
+                                <div class="col-sm-6">
+                                    <asp:DropDownList ID="ddlProjectName" runat="server" CssClass="select2 form-select shadow-none"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvProjectName" ErrorMessage="Required" ControlToValidate="ddlProjectName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
+                            </div>
+                            <%--<div class="form-group row">
+                                <label for="Tid" class="col-sm-3 text-center control-label col-form-label">Task ID</label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtTaskID" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTaskID" ErrorMessage="Required" ControlToValidate="txtTaskID" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
+                            </div>--%>
+                             <div class="form-group row">
+                                <label for="Tnum" class="col-sm-3 text-center control-label col-form-label">Task Number</label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtTaskNumber" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTaskNumber" ErrorMessage="Required" ControlToValidate="txtTaskNumber" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Task Name</label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtTaskName" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTaskName" ErrorMessage="Required" ControlToValidate="txtTaskName" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
+                            </div>
 
-                    <div class="form-group row">
-                      <label for="Tdetails" class="col-sm-3 text-center control-label col-form-label">Task Details</label>
-                      <div class="col-sm-6">
-                          <asp:TextBox ID="txtTaskDescription" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
-                      </div>
+                           
+
+                            <div class="form-group row">
+                                <label for="Tdetails" class="col-sm-3 text-center control-label col-form-label">Task Details</label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtTaskDescription" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <asp:Label ID="lblEmployee" runat="server" Visible="false" CssClass="col-sm-3 text-center control-label col-form-label">Employee Name</asp:Label>
+                                <%--<label for="EmpName" class="col-sm-3 text-center control-label col-form-label">Employee Name</label>--%>
+                                <div class="col-sm-6">
+                                    <%--<label for="EMname" class="text-center control-label col-form-label">Employee </label>--%>
+<%--                                    <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single" ToolTip="Select" Visible="false">
+                                    </asp:DropDownList>--%>
+                                    <br/>
+                                    <%--<asp:ListBox ID="ddlEmployeeName" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                                    </asp:ListBox>--%>
+                                    <asp:ListBox runat="server" SelectionMode="Multiple" ID="ddlEmployeeName"  CssClass="form-control js-example-placeholder-single" 
+                                        ToolTip="Select" Visible="false"></asp:ListBox>
+                                </div>
+                            </div>
+
+                        </section>
+                        <div class="border-top text-center">
+                            <div class="card-body">
+                                <asp:Button ID="btnAddTask" runat="server" Text="Create Task" CssClass="btn btn-info" ValidationGroup="val" OnClick="btnAddTask_Click" />
+                                <asp:Button ID="btnResetField" runat="server" Text="Reset" CssClass="btn btn-info" OnClick="btnResetField_Click" />
+                            </div>
+                        </div>
                     </div>
-                </section>
-                <div class="border-top text-center">
-                    <div class="card-body">
-                        <asp:Button ID="btnAddTask" runat="server" Text="Create Task" CssClass="btn btn-info" ValidationGroup="val" OnClick="btnAddTask_Click" />
-                        <asp:Button ID="btnResetField" runat="server" Text="Reset" CssClass="btn btn-info" OnClick="btnResetField_Click" />
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </form>
+                </div>
+            </form>
         </div>
-      </div>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+
+
+    
 </asp:Content>
+

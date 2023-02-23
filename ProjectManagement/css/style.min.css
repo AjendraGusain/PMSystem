@@ -9165,7 +9165,11 @@ to {
 	vertical-align: middle
 }
 .table th, .table thead th {
-	font-weight: 500
+	font-weight: bold;
+	vertical-align: bottom;
+	background-color: #00ffff;
+	position: sticky;
+	top: 0;
 }
 .nowrap {
 	white-space: nowrap
@@ -9253,7 +9257,7 @@ to {
 	opacity: 1
 }
 .sidebar-nav ul .sidebar-item .first-level .sidebar-item .sidebar-link {
-	padding: 10px 15px
+	padding: 10px 25px
 }
 .sidebar-nav ul .sidebar-item .first-level .sidebar-item .sidebar-link i {
 	font-size: 14px
@@ -11619,6 +11623,29 @@ label {
 }
 
 .background-radial-gradient {
-	background-image: url("../images/001.jpg");
+	background-image: url("../images/001.png");
 	background-size: cover;
 }
+
+.taskInfo {
+	background-color: transparent;
+}
+
+	.taskInfo a {
+		background-color: #ffb848;
+		transition: all 0.25s ease;
+	}
+
+		.taskInfo a:hover {
+			background-color: #e29e33;
+			transform: translateY(-4px) scale(1.01);
+			box-shadow: 0 14px 24px rgb(62 57 107 / 10%);
+		}
+
+		.taskInfo a:active {
+			outline: #4CAF50 solid 4px;
+		}
+
+		.taskInfo a:visited {
+			outline: #4CAF50 solid 4px;
+		}

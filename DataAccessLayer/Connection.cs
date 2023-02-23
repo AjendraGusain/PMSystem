@@ -52,6 +52,18 @@ namespace DataAccessLayer
         }
 
 
+        public DataSet ExecuteSPByTaskID(string sproc, int taskId)
+        {
+            MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@TaskId", taskId);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+
         public DataSet ExecuteSPWithoutID(string sproc)
         {
             MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
