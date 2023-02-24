@@ -17,12 +17,12 @@
                                 <%--<PagerStyle CssClass="" HorizontalAlign="Right" />--%>
                                 <%--<PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />--%>
                                         <Columns>
-                                            <asp:TemplateField HeaderText="Creation Date">
+                                            <%--<asp:TemplateField HeaderText="Creation Date">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCreationDate" runat="server" Text='<%# Eval("CreationDate") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
 
                                             <asp:TemplateField HeaderText="Team Name">
                                                 <ItemTemplate>

@@ -11,7 +11,7 @@ namespace ProjectManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(Session["UserID"].ToString());
+            //int UserID = Convert.ToInt32(Session["UserID"].ToString());
         }
     }
 }
