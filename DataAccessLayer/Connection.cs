@@ -27,7 +27,16 @@ namespace DataAccessLayer
       
         public MySqlConnection GetConnection()
         {
-            return new MySqlConnection(GetPMConnection);
+            MySqlConnection conn = new MySqlConnection(GetPMConnection);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            else if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            return conn;
         }
 
      
@@ -72,6 +81,22 @@ namespace DataAccessLayer
             DataSet ds = new DataSet();
             da.Fill(ds);
             return ds;
+        }
+
+        public int SPInsert(string spName)
+        {
+            try
+            {
+                int respone = 0;
+                MySqlCommand cmd = new MySqlCommand(spName, GetConnection());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery() ;
+                return respone;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }
