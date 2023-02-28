@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+
     <div class="card">
         <div class="card-body wizard-content">
             <form class="mt-3" runat="server">
@@ -34,7 +34,7 @@
                                     <asp:RequiredFieldValidator ID="rfvTaskID" ErrorMessage="Required" ControlToValidate="txtTaskID" runat="server" ValidationGroup="val" ForeColor="Red" />
                                 </div>
                             </div>--%>
-                             <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="Tnum" class="col-sm-3 text-center control-label col-form-label">Task Number</label>
                                 <div class="col-sm-6">
                                     <asp:TextBox ID="txtTaskNumber" runat="server" CssClass="form-control"></asp:TextBox>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                             <div class="form-group row">
                                 <label for="Tdetails" class="col-sm-3 text-center control-label col-form-label">Task Details</label>
@@ -58,22 +58,82 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <asp:Label ID="lblEmployee" runat="server" Visible="false" CssClass="col-sm-3 text-center control-label col-form-label">Employee Name</asp:Label>
-                                <%--<label for="EmpName" class="col-sm-3 text-center control-label col-form-label">Employee Name</label>--%>
-                                <div class="col-sm-6">
-                                    <%--<label for="EMname" class="text-center control-label col-form-label">Employee </label>--%>
-<%--                                    <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single" ToolTip="Select" Visible="false">
+                            <%--<div class="form-group row">
+                                <%--<asp:Label ID="lblEmployee" runat="server" Visible="false" CssClass="col-sm-3 text-center control-label col-form-label">Employee Name</asp:Label>--%>
+                            <%--<label for="EmpName" class="col-sm-3 text-center control-label col-form-label">Employee Name</label>--%>
+                            <%--<div class="col-sm-6">--%>
+                            <%--<label for="EMname" class="text-center control-label col-form-label">Employee </label>--%>
+                            <%--                                    <asp:DropDownList ID="ddlEmployeeName" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single" ToolTip="Select" Visible="false">
                                     </asp:DropDownList>--%>
-                                    <br/>
-                                    <%--<asp:ListBox ID="ddlEmployeeName" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                            <br />
+                            <%--<asp:ListBox ID="ddlEmployeeName" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
                                     </asp:ListBox>--%>
-                                    <asp:ListBox runat="server" SelectionMode="Multiple" ID="ddlEmployeeName"  CssClass="form-control js-example-placeholder-single" 
-                                        ToolTip="Select" Visible="false"></asp:ListBox>
-                                </div>
+                            <%--<asp:ListBox runat="server" SelectionMode="Multiple" ID="ddlEmployeeName"  CssClass="form-control js-example-placeholder-single" 
+                                        ToolTip="Select" Visible="false"></asp:ListBox>--%>
+                            <%--<asp:CheckBoxList ID="chkEmployeeName" runat="server" CssClass="form-control js-example-placeholder-single"></asp:CheckBoxList>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+                            <div class="col-sm-6">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:TextBox ID="txtSearch" runat="server" Visible="false"  placeholder="Search..."></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:Button ID="btnSearch" runat="server" Text="Search" Visible="false" OnClick="btnSearch_Click" />
+                                        </td>
+                                        <td>
+                                            <asp:Button ID="btnClearAll" runat="server" Text="Clear" Visible="false"  OnClick="btnClearAll_Click" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
+                            <div class="form-group row">
 
+                                <asp:GridView ID="gvAllEmployee" runat="server" AutoGenerateColumns="false" class="col-sm-9 text-center control-label col-form-label"
+                                    HorizontalAlign="Left" BorderStyle="None" DataKeyNames="TeamMemberID,UserId" >
+                                    <%--OnRowDataBound="gvAllEmployee_RowDataBound"--%>
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkTeamMemberID" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblTeamMemberID" runat="server" Text='<%# Bind("TeamMemberID") %>' Visible="false"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Team">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblTeamName" runat="server" Text='<%# Bind("TeamName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Manager">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblManagerName" runat="server" Text='<%# Bind("ManagerName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Employee">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblUserName" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblUserId" runat="server" Text='<%# Bind("UserId") %>' Visible="false"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Role">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblRoleName" runat="server" Text='<%# Bind("Role") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
                         </section>
+
                         <div class="border-top text-center">
                             <div class="card-body">
                                 <asp:Button ID="btnAddTask" runat="server" Text="Create Task" CssClass="btn btn-info" ValidationGroup="val" OnClick="btnAddTask_Click" />
@@ -91,6 +151,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 
-    
+
 </asp:Content>
 

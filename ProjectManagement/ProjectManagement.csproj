@@ -117,10 +117,12 @@
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\EditTeam.aspx" />
     <Content Include="Admin\EmployeeDetail.aspx" />
+    <Content Include="Admin\ProjectDetail.aspx" />
     <Content Include="Admin\TaskDetails.aspx" />
     <Content Include="Admin\ViewAllEmployee.aspx" />
     <Content Include="Admin\ViewClient.aspx" />
     <Content Include="Admin\ViewDesignation.aspx" />
+    <Content Include="Admin\ViewProject.aspx" />
     <Content Include="Admin\ViewRole.aspx" />
     <Content Include="Admin\ViewTeam.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -252,6 +254,13 @@
     <Compile Include="Admin\EmployeeDetail.aspx.designer.cs">
       <DependentUpon>EmployeeDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ProjectDetail.aspx.cs">
+      <DependentUpon>ProjectDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProjectDetail.aspx.designer.cs">
+      <DependentUpon>ProjectDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\TaskDetails.aspx.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,6 +288,13 @@
     </Compile>
     <Compile Include="Admin\ViewDesignation.aspx.designer.cs">
       <DependentUpon>ViewDesignation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewProject.aspx.cs">
+      <DependentUpon>ViewProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewProject.aspx.designer.cs">
+      <DependentUpon>ViewProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ViewRole.aspx.cs">
       <DependentUpon>ViewRole.aspx</DependentUpon>

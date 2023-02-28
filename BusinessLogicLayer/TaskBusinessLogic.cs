@@ -92,5 +92,29 @@ namespace BusinessLogicLayer
             taskBO.response = _dataAccess.UpdateAssignedTaskDetails(assignTask);
             return taskBO.response;
         }
+
+        public DataSet SearchResult(TaskBusinessObject projectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResult(projectID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByClient(TaskBusinessObject ClientID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByClient(ClientID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByProject(TaskBusinessObject ProjectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByProject(ProjectID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByUser(TaskBusinessObject User)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByUser(User);
+            return taskBO.dsResult;
+        }
     }
 }
