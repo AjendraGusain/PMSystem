@@ -11,20 +11,33 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class TeamDataAccess: ITeamDataAccess
+    public class TeamDataAccess : ITeamDataAccess
     {
-        private DataSet dsResult;
-        private int respone;
+        DataSet dsResult = new DataSet();
+        int response = 0;
         MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+        public int DeleteTeam(int Id)
+        {
+            dsResult = new Connection().GetDataSetResults("Delete from ProjectManagementNew.team where Id=" + Id);
+            return response;
+        }
+
+        public int EditTeam(TeamBusinessObject createTeam, int Id)
+        {
+            throw new NotImplementedException();
+        }
 
         public DataSet GetManager()
         {
+            throw new NotImplementedException();
+        }
+
+        public DataSet GetProject()
+        {
             try
             {
-
-                dsResult = new Connection().GetDataSetResults("select UserId, us.UserName, r.role from ProjectManagementNew.user us inner join ProjectManagementNew.role r on us.RoleId=r.RoleId where r.Role='Manager'");
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.project");
                 return dsResult;
-
             }
             catch (Exception ex)
             {
@@ -38,76 +51,38 @@ namespace DataAccessLayer
 
         public DataSet GetTeam()
         {
-            try
-            {
-                dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_new");
-                return dsResult;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
+            throw new NotImplementedException();
         }
 
-        public DataSet GetTeamByID(int customerId)
+        public DataSet GetTeamByID(int Id)
         {
-            throw new NotImplementedException();
+            dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team where Id="+Id);
+            return dsResult;
         }
 
         public DataSet GetTeamLeader()
         {
-            try
-            {
-                dsResult = new Connection().GetDataSetResults("select UserId, us.UserName, r.role from ProjectManagementNew.user us inner join ProjectManagementNew.role r on us.RoleId=r.RoleId where r.Role='TeamLeader'");
-                return dsResult;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
+            throw new NotImplementedException();
         }
 
-        public DataSet GetTeamMembers(int ProjectId)
+        public DataSet GetTeamName()
         {
-            try
-            {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                string spName = "sp_GetTeamByProjectID";
-                MySqlCommand cmd = new MySqlCommand(spName, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                dsResult = new Connection().ExecuteSPByProjectID(spName, ProjectId);
-                return dsResult;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
+            dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.team_member tm inner join ProjectManagementNew.team t on tm.TeamId=t.Id inner join ProjectManagementNew.user u on tm.UserId = u.UserId inner join ProjectManagementNew.project p on tm.ProjectId = p.ProjectId");
+            return dsResult;
         }
 
-       
+        public DataSet GetTeamNameById(int Id)
+        {
+            dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.team_member tm inner join ProjectManagementNew.team t on tm.TeamId=t.Id inner join ProjectManagementNew.user u on tm.UserId = u.UserId inner join ProjectManagementNew.project p on tm.ProjectId = p.ProjectId where tm.ProjectId="+Id);
+            return dsResult;
+        }
 
         public DataSet GetUser()
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("select UserId, us.UserName, r.role from ProjectManagementNew.user us inner join ProjectManagementNew.role r on us.RoleId=r.RoleId where r.Role='User'");
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.team t inner join ProjectManagementNew.project p on p.ProjectId=t.ProjectId ");
                 return dsResult;
-
             }
             catch (Exception ex)
             {
@@ -117,10 +92,10 @@ namespace DataAccessLayer
             {
 
             }
-
+            //return dsResult;
         }
 
-        public int InsertTeam(TeamBusinessObject createTeam)
+        public int InsertTeam(TeamBusinessObject objTeam)
         {
             try
             {
@@ -128,13 +103,13 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.team_new(TeamName,ManagerId,TeamLeaderId,EmployeeId) values(@TeamName,@ManagerId,@TeamLeader,@EmployeeId)";
-                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
-                cmd.Parameters.Add(new MySqlParameter("@TeamName", createTeam.TeamName));
-                cmd.Parameters.Add(new MySqlParameter("@ManagerId", createTeam.Manager));
-                cmd.Parameters.Add(new MySqlParameter("@TeamLeader", createTeam.TeamLeader));
-                cmd.Parameters.Add(new MySqlParameter("@EmployeeId", createTeam.Employee));
-                respone = cmd.ExecuteNonQuery();
+                string spName = "sp_AddTeamName";
+                MySqlCommand cmd = new MySqlCommand(spName, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@TeamName", objTeam.TeamName));
+                cmd.Parameters.Add(new MySqlParameter("@ProjectID", objTeam.ProjectId));
+                response = cmd.ExecuteNonQuery();
+                return response;
             }
             catch (Exception ex)
             {
@@ -147,12 +122,34 @@ namespace DataAccessLayer
                     conn.Close();
                 }
             }
-            return respone;
         }
 
-        public int UpdateTeam(TeamBusinessObject customer, int Id)
+        public int UpdateTeam(TeamBusinessObject objTeam, int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "Update  ProjectManagementNew.team Set TeamName=@TeamName,ProjectID=@ProjectID where Id=" + Id; 
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@TeamName", objTeam.TeamName));
+                cmd.Parameters.Add(new MySqlParameter("@ProjectID", objTeam.ProjectId));
+                response = cmd.ExecuteNonQuery();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

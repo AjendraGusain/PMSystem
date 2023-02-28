@@ -55,5 +55,29 @@ namespace BusinessLogicLayer
             int dtResult = addEmployeeData.UpdateAllEmployee(userUpdate, UserId);
             return dtResult;
         }
+
+        public bool UserCheck(EmployeeBusinessObject userLogin)
+        {
+            //string sproc = "sp_InsertEmployeeDetails";
+            DataSet dtResult = addEmployeeData.UserCheck(userLogin);
+            for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+            {
+                if (userLogin.EmployeeEmail == dtResult.Tables[0].Rows[i]["Email"].ToString())
+                {
+                    return true;
+                }
+                else if (userLogin.EmployeeCode == dtResult.Tables[0].Rows[i]["EmployeeCode"].ToString())
+                {
+                    return true;
+                }
+                else if (userLogin.EmployeePhone == dtResult.Tables[0].Rows[i]["PhoneNumber"].ToString())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }

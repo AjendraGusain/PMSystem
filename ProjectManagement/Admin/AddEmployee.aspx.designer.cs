@@ -24,6 +24,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.TextBox txtEmployeeCode;
 
         /// <summary>
+        /// lblCheckCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheckCode;
+
+        /// <summary>
         /// rvEmployeeCode control.
         /// </summary>
         /// <remarks>
@@ -60,6 +69,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// lblCheckEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheckEmail;
+
+        /// <summary>
         /// rvEmail control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhoneNo;
+
+        /// <summary>
+        /// lblCheckPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheckPhone;
 
         /// <summary>
         /// rvPhoneNo control.

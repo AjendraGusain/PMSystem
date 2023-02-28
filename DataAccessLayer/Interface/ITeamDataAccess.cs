@@ -17,6 +17,10 @@ namespace DataAccessLayer.Interface
         DataSet GetManager();
         DataSet GetTeamLeader();
         DataSet GetUser();
-        DataSet GetTeamMembers(int ProjectId);
+        DataSet GetProject();
+        DataSet GetTeamName();
+        DataSet GetTeamNameById(int Id);
+        int EditTeam(TeamBusinessObject createTeam, int Id);
+        int DeleteTeam(int Id);
     }
 }

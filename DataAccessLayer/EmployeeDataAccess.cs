@@ -189,5 +189,42 @@ namespace DataAccessLayer
             }
             //return dsResult;
         }
+
+        public DataSet UserCheck(EmployeeBusinessObject addEmployee)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "SELECT * FROM ProjectManagementNew.user where Employeecode=@EmployeeCode or Email=@EmployeeEmail or PhoneNumber=@EmployeePhone";
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@EmployeeCode", addEmployee.EmployeeCode));
+                cmd.Parameters.Add(new MySqlParameter("@EmployeeName", addEmployee.EmployeeName));
+                cmd.Parameters.Add(new MySqlParameter("@EmployeeEmail", addEmployee.EmployeeEmail));
+                cmd.Parameters.Add(new MySqlParameter("@EmployeePhone", addEmployee.EmployeePhone));
+                cmd.Parameters.Add(new MySqlParameter("@Role", addEmployee.Role));
+                cmd.Parameters.Add(new MySqlParameter("@Designation", addEmployee.Designation));
+                cmd.Parameters.Add(new MySqlParameter("@IsAdmin", addEmployee.IsAdmin));
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                //DataSet ds = new DataSet();
+                da.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return ds;
+        }
     }
 }

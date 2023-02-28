@@ -28,7 +28,16 @@ namespace DataAccessLayer
       
         public MySqlConnection GetConnection()
         {
-            return new MySqlConnection(GetPMConnection);
+            MySqlConnection conn = new MySqlConnection(GetPMConnection);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            else if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+            return conn;
         }
 
      
