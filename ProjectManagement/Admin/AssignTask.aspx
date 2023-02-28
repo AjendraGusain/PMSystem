@@ -5,54 +5,72 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <form runat="server">
-    <div class="card">
-        <div class="card-body">
-            <div class="dataTables_wrapper container-fluid mb-4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Client Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
+    <form runat="server">
+        <div class="card">
+            <div class="card-body">
+                <%--<asp:ScriptManager ID="scrMng" runat="server"></asp:ScriptManager>
+            <asp:Panel ID="pnl1" runat="server">
+                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" multiple="multiple" CssClass="form-control js-example-placeholder-single" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
+                </asp:Panel>--%>
+                <div class="dataTables_wrapper container-fluid mb-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dataTables_filter" id="zero_config_length">
+                                <label>
+                                    Client Name
+                               <asp:DropDownList ID="ddlSearchClient" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchClient_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                   
+                                    <%--<asp:TextBox ID="txtSearchClient" runat="server" CssClass="form-control form-control-sm" placeholder="Search Client.."></asp:TextBox>--%>
+                                    <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
+                                </label>
+                                 
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Project Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dataTables_filter" id="zero_config_length">
+                                <label>
+                                    Project Name
+                               
+                                <asp:DropDownList ID="ddlSerachProject" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSerachProject_SelectedIndexChanged">
+                                </asp:DropDownList>    
+                                    <%--<asp:TextBox ID="txtSearchProject" runat="server" CssClass="form-control form-control-sm" placeholder="Search Project.."></asp:TextBox>--%>
+                                    <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
+                                </label>
+                                
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Employee Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dataTables_filter" id="zero_config_length">
+                                <label>
+                                    Employee Name
+                               
+                                    <%--<asp:DropDownList ID="ddlSearchEmployee" runat="server" multiple="multiple" CssClass="form-control js-example-placeholder-single"></asp:DropDownList>--%>
+                                    <asp:TextBox ID="txtSearchEmp" runat="server" CssClass="form-control form-control-sm" placeholder="Search Employee.."></asp:TextBox>
+
+                                    <%-- <input type="search" class="form-control form-control-sm" placeholder="">--%>
+                                </label>
+                                <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchEmp_Click" />
+                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
+                        <div class="col-sm-12 col-md-3">
+                            <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <asp:Panel ID="pnlDisplayAssignTask" runat="server">
-                               
-                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="10" 
-                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true"  EmptyDataText="No Record Found" 
+
+                <div class="table-responsive">
+                    <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <asp:Panel ID="pnlDisplayAssignTask" runat="server">
+
+                                    <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="15"
+                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found"
                                         OnRowCommand="grvAssignedTaskDetails_RowCommand" OnPageIndexChanging="grvAssignedTaskDetails_PageIndexChanging">
                                         <PagerStyle CssClass="" HorizontalAlign="Right" />
-                                <PagerSettings Mode="NumericFirstLast" PageButtonCount="2"  FirstPageText="First" LastPageText="Last"/>
+                                        <PagerSettings Mode="NumericFirstLast" PageButtonCount="2" FirstPageText="First" LastPageText="Last" />
                                         <Columns>
                                             <%--<asp:TemplateField>
                                                 <ItemTemplate>
@@ -69,7 +87,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Project Name">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lnkbtnProjectName" runat="server" Text='<%#Eval("ProjectName") %>'  CommandName="ProjectName" CommandArgument='<%# Eval("ProjectId") %>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="lnkbtnProjectName" runat="server" Text='<%#Eval("ProjectName") %>' CommandName="ProjectName" CommandArgument='<%# Eval("ProjectId") %>'></asp:LinkButton>
                                                     <%--<asp:Label ID="lblProjectName" runat="server" Text='<%#Eval("ProjectName") %>'></asp:Label>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
@@ -97,11 +115,11 @@
                                             </asp:TemplateField>--%>
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnViewAssignedTask"  CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>' class="badge bg-info" Text="View"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>' class="badge bg-info" Text="View"></asp:LinkButton>
                                                     <%--<span class="badge bg-info">View</span>--%>
-                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
                                                     <%--<span class="badge bg-success">Assign</span>--%>
-                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
                                                     <%--<span class="badge bg-success">Reassign</span>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
@@ -109,14 +127,14 @@
 
                                         </Columns>
                                     </asp:GridView>
-                                
-                            </asp:Panel>
+
+                                </asp:Panel>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
-                  
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
+
                                     <asp:GridView ID="gvTaskDetails" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="40"
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found">
                                         <Columns>
@@ -165,18 +183,17 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>--%>
-
                                         </Columns>
                                     </asp:GridView>
-                             
-                            </asp:Panel>
+
+                                </asp:Panel>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite"></div>
-                        </div>
-                        <%--<div class="col-sm-12 col-md-7">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="zero_config_info" role="status" aria-live="polite"></div>
+                            </div>
+                            <%--<div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
                                 <ul class="pagination">
                                     <li class="paginate_button page-item previous disabled" id="zero_config_previous"><a href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
@@ -186,10 +203,10 @@
                                 </ul>
                             </div>
                         </div>--%>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 </asp:Content>

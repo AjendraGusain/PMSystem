@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MySql.Data.MySqlClient;
+using System.Collections;
 
 namespace DataAccessLayer
 {
@@ -64,6 +65,18 @@ namespace DataAccessLayer
         }
 
 
+        public DataSet ExecuteSPByProjectID(string sproc, int ProjectId)
+        {
+            MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ProjectId", ProjectId);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+
         public DataSet ExecuteSPWithoutID(string sproc)
         {
             MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
@@ -73,6 +86,34 @@ namespace DataAccessLayer
             da.Fill(ds);
             return ds;
         }
+
+
+        public DataSet GetData(string sproc, Hashtable myParameters)
+        {
+            DataSet ds = new DataSet();
+            MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = 2000000;
+            foreach (DictionaryEntry entry in myParameters)
+            {
+                MySqlParameter objParms = new MySqlParameter();
+                objParms.ParameterName = entry.Key.ToString();
+
+                objParms.Value = entry.Value.ToString();
+                if (objParms.Value.ToString() == "")
+                {
+                    objParms.Value = DBNull.Value;
+                }
+                objParms.Direction = ParameterDirection.Input;
+                cmd.Parameters.Add(objParms);
+            }
+            da.SelectCommand = cmd;
+            da.Fill(ds);
+            return ds;
+        }
+
+
 
     }
 }

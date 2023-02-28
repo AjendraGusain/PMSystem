@@ -62,7 +62,6 @@ namespace DataAccessLayer
         {
             try
             {
-
                 dsResult = new Connection().GetDataSetResults("select UserId, us.UserName, r.role from ProjectManagementNew.user us inner join ProjectManagementNew.role r on us.RoleId=r.RoleId where r.Role='TeamLeader'");
                 return dsResult;
 
@@ -77,11 +76,35 @@ namespace DataAccessLayer
             }
         }
 
+        public DataSet GetTeamMembers(int ProjectId)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetTeamByProjectID";
+                MySqlCommand cmd = new MySqlCommand(spName, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                dsResult = new Connection().ExecuteSPByProjectID(spName, ProjectId);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+       
+
         public DataSet GetUser()
         {
             try
             {
-
                 dsResult = new Connection().GetDataSetResults("select UserId, us.UserName, r.role from ProjectManagementNew.user us inner join ProjectManagementNew.role r on us.RoleId=r.RoleId where r.Role='User'");
                 return dsResult;
 
@@ -101,7 +124,6 @@ namespace DataAccessLayer
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();

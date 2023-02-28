@@ -17,5 +17,6 @@ namespace DataAccessLayer.Interface
         DataSet GetManager();
         DataSet GetTeamLeader();
         DataSet GetUser();
+        DataSet GetTeamMembers(int ProjectId);
     }
 }

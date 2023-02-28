@@ -124,7 +124,7 @@
                                                     PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" 
                                                     OnRowCommand="grvDisplayTaskDetails_RowCommand">
                                                     <Columns>
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblTaskID" runat="server" Text='<%#Eval("TaskId") %>'></asp:Label>
                                                             </ItemTemplate>

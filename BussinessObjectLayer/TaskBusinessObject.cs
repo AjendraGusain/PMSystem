@@ -17,8 +17,10 @@ namespace BussinessObjectLayer
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public string EmployeeName { get; set; }
+        public int TeamMemberID { get; set; }
         public int LoginUserID { get; set; }
         public int TaskID { get; set; }
         public DateTime AssignedDate { get; set; }
+        public string SearchResult { get; set; }
     }
 }

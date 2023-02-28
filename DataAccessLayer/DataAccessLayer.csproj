@@ -91,8 +91,10 @@
     <Compile Include="ClientDataAccess.cs" />
     <Compile Include="AddDesignationDataAccess.cs" />
     <Compile Include="AddRoleDataAccess.cs" />
+    <Compile Include="Interface\IProjectDataAccess.cs" />
     <Compile Include="Interface\ITaskDataAccess.cs" />
     <Compile Include="Interface\ITeamDataAccess.cs" />
+    <Compile Include="ProjectDataAccess.cs" />
     <Compile Include="TeamDataAccess.cs" />
     <Compile Include="DashboardDataAccess.cs" />
     <Compile Include="EmployeeDataAccess.cs" />

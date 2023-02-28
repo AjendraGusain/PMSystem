@@ -19,5 +19,9 @@ namespace DataAccessLayer.Interface
         DataSet GetProjectByClient(int objClientID);
         DataSet ReAssignTask(int taskID);
         DataSet AssignTask(int taskID);
+        DataSet SearchResult(TaskBusinessObject searchResult);
+        DataSet SearchResultByClient(TaskBusinessObject searchResult);
+        DataSet SearchResultByProject(TaskBusinessObject searchResult);
+        DataSet SearchResultByUser(TaskBusinessObject searchResult);
     }
 }

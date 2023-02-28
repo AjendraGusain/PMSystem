@@ -17,5 +17,7 @@ namespace BusinessLogicLayer.Interface
         DataSet GetManager();
         DataSet GetTeamLeader();
         DataSet GetUser();
+
+        DataSet GetTeamMember(int projectID);
     }
 }

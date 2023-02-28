@@ -19,5 +19,10 @@ namespace BusinessLogicLayer.Interface
         DataSet GetProjectByClient(int objClientID);
         DataSet ReAssignTask(int taskID);
         DataSet AssignTask(int taskID);
+        DataSet SearchResult(TaskBusinessObject projectID);
+        DataSet SearchResultByClient(TaskBusinessObject ClientID);
+        DataSet SearchResultByProject(TaskBusinessObject ProjectID);
+        DataSet SearchResultByUser(TaskBusinessObject User);
+
     }
 }

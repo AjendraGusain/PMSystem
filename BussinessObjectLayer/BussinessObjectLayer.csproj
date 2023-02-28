@@ -44,6 +44,7 @@
     <Compile Include="ClientBusinessObject.cs" />
     <Compile Include="AddDesignationBusinessObject.cs" />
     <Compile Include="AddRoleBusinessObject.cs" />
+    <Compile Include="ProjectBusinessObject.cs" />
     <Compile Include="TeamBusinessObject.cs" />
     <Compile Include="EmployeeBusinessObject.cs" />
     <Compile Include="TaskBusinessObject.cs" />
