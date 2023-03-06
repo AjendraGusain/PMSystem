@@ -16,7 +16,7 @@ namespace ProjectManagement
         UserLoginBusinessLogic userBLL = new UserLoginBusinessLogic();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void cmdLogin_Click(object sender, EventArgs e)
@@ -33,16 +33,28 @@ namespace ProjectManagement
                 if (dtResult.Tables[0].Rows.Count > 0)
                 {
                     Session["User"] = dtResult.Tables[0].Rows[0]["UserName"].ToString();
-                    Session["RoleId"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
+                    Session["Role"] = dtResult.Tables[0].Rows[0]["Role"].ToString();
                     Session["UserEmail"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
                     Session["UserID"] = dtResult.Tables[0].Rows[0]["UserId"].ToString();
-                    Response.Redirect("~/Admin/Dashboard.aspx");
+                    if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin")
+                    {
+                        Response.Redirect("~/Admin/Dashboard.aspx");
+                    }
+                    else if (dtResult.Tables[0].Rows[0]["Role"].ToString() == "User")
+                    {
+                        Response.Redirect("~/Users/UserTask.aspx");
+                    }
                 }
                 else
                 {
                     lblError.Text = "You have entered Wrong Username or Password.";
                 }
             }
+        }
+
+        protected void lnkbtnForgetPassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ForgotPassword.aspx");
         }
     }
 }

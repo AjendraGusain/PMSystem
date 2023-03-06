@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 using MySql.Data.MySqlClient;
 using System.Collections;
+using System.Net.Mail;
+using System.Net;
 
 namespace DataAccessLayer
 {
@@ -122,7 +124,35 @@ namespace DataAccessLayer
             return ds;
         }
 
+        public void SendResetPasswordEmail(string tomail, string UniqueID)
+        {
+            string from = "deepak.dhiman1988@gmail.com";
+            MailMessage mailMsg = new MailMessage(from, tomail);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("Dear " + tomail + ",<br/><br/>");
+            stringBuilder.Append("Please click on the below link to reset your password");
+            stringBuilder.Append("<br/>");
+            stringBuilder.Append("https://localhost:44399/ResetPassword.aspx?UID=" + UniqueID);
+            stringBuilder.Append("<br/><br/>");
 
+            mailMsg.IsBodyHtml = true;
+            mailMsg.Body = stringBuilder.ToString();
+            mailMsg.Subject = "Reset Your Password";
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            NetworkCredential NetworkCred = new NetworkCredential(from, "zqgfvyigriszjcej");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.EnableSsl = true;
+            try
+            {
+                smtp.Send(mailMsg);
+               // ScriptManager.RegisterStartupScript(this, GetType(), "mail", "alert('Mail sent successfully.');", true);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+        }
 
     }
 }

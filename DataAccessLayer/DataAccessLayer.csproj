@@ -94,6 +94,7 @@
     <Compile Include="Interface\IProjectDataAccess.cs" />
     <Compile Include="Interface\ITaskDataAccess.cs" />
     <Compile Include="Interface\ITeamDataAccess.cs" />
+    <Compile Include="Interface\IUserLoginDataAccess.cs" />
     <Compile Include="ProjectDataAccess.cs" />
     <Compile Include="TeamDataAccess.cs" />
     <Compile Include="DashboardDataAccess.cs" />

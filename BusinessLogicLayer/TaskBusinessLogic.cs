@@ -57,6 +57,13 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+
+        public DataSet GetAllCreatedTask()
+        {
+            taskBO.dsResult = _dataAccess.GetAllCreatedTask();
+            return taskBO.dsResult;
+        }
+
         public DataSet GetTaskDetails()
         {
             taskBO.dsResult = _dataAccess.GetTaskDetails();
@@ -114,6 +121,24 @@ namespace BusinessLogicLayer
         public DataSet SearchResultByUser(TaskBusinessObject User)
         {
             taskBO.dsResult = _dataAccess.SearchResultByUser(User);
+            return taskBO.dsResult;
+        }
+
+        public DataSet GetAllUsers(TaskBusinessObject objProjectUser)
+        {
+            taskBO.dsResult = _dataAccess.GetAllUsers(objProjectUser);
+            return taskBO.dsResult;
+        }
+
+        public int InsertChatDetails(TaskBusinessObject Chat)
+        {
+            taskBO.response = _dataAccess.InsertChatDetails(Chat);
+            return taskBO.response;
+        }
+
+        public DataSet GetChatDetails()
+        {
+            taskBO.dsResult = _dataAccess.GetChatDetails();
             return taskBO.dsResult;
         }
     }

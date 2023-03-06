@@ -91,7 +91,26 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, Designation FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
+                dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, Designation,UID FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            //return dsResult;
+        }
+
+
+        public DataSet GetAllEmployeeByEmail(string mail)
+        {
+            try
+            {
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UD.Email='" + mail+"'");
                 return dsResult;
             }
             catch (Exception ex)
@@ -225,6 +244,33 @@ namespace DataAccessLayer
                 }
             }
             return ds;
+        }
+
+
+        public int UpdateToken(string token, string email)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "Update  ProjectManagementNew.user Set UID='"+token+"',UIDDate=Now() where Email='"+email+"'";
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                insertSuccess = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return insertSuccess;
         }
     }
 }

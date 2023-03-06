@@ -45,11 +45,11 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
-        public DataSet GetTeamMember(int ProjectId)
-        {
-            dtResult = _teamDataAccess.GetTeamMembers(ProjectId);
-            return dtResult;
-        }
+        //public DataSet GetTeamMember(int ProjectId)
+        //{
+        //    dtResult = _teamDataAccess.GetTeamMembers(ProjectId);
+        //    return dtResult;
+        //}
 
         public DataSet GetUser()
         {

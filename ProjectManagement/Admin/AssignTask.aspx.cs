@@ -6,8 +6,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogicLayer;
-//using DataAccessLayer.Interface;
-//using DataAccessLayer;
 using BusinessLogicLayer.Interface;
 using BussinessObjectLayer;
 using DataAccessLayer;
@@ -36,7 +34,6 @@ namespace ProjectManagement.Admin
             ddlSearchClient.DataValueField = "ClientID";
             ddlSearchClient.DataBind();
             ddlSearchClient.Items.Insert(0, new ListItem("Select Client", "0"));
-            //    ddlSearchClient.SelectedIndexChanged += ddlSearchClient_SelectedIndexChanged;
             ddlSerachProject.Items.Clear();
             ddlSerachProject.DataSource = assigntaskBLL.GetAllProject();
             ddlSerachProject.DataTextField = "ProjectName";
@@ -47,24 +44,20 @@ namespace ProjectManagement.Admin
 
         protected void grvAssignedTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             if (e.CommandName == "ProjectName")
             {
                 int projectID = Convert.ToInt32(e.CommandArgument);
             }
-
             if (e.CommandName == "UserName")
             {
                 int userID = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("EmployeeDetail.aspx?UserId=" + userID);
             }
-
             if (e.CommandName == "ViewAssignedTask")
             {
                 string taskID= Convert.ToInt32(e.CommandArgument).ToString();
                 Response.Redirect("TaskDetails.aspx?TaskId=" + taskID);
             }
-
             if (e.CommandName == "ReAssign")
             {
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
@@ -73,7 +66,6 @@ namespace ProjectManagement.Admin
                 string projectID = commandArgs[2];
                 Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim() + "&ProjectId=" + projectID.Trim());
             }
-
             if (e.CommandName == "Assign")
             {
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
@@ -186,8 +178,5 @@ namespace ProjectManagement.Admin
             txtSearchEmp.Text = "";
             GetAssignedTask();
         }
-
-       
-
     }
 }

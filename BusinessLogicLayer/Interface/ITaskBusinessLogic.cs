@@ -12,9 +12,16 @@ namespace BusinessLogicLayer.Interface
         int InsertAssignedTaskDetails(TaskBusinessObject assignTask);
         int UpdateAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject addTask);
+
+        int InsertChatDetails(TaskBusinessObject Chat);
         DataSet GetAllClients();
+        DataSet GetAllUsers(TaskBusinessObject objProjectUsers);
+
+        DataSet GetChatDetails();
         DataSet GetAllProject();
         DataSet GetAssignedTask();
+
+        DataSet GetAllCreatedTask();
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
         DataSet ReAssignTask(int taskID);

@@ -7,101 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProjectManagement
+namespace ProjectManagement.Admin
 {
 
 
-    public partial class Login
+    public partial class ViewAllTask
     {
 
         /// <summary>
-        /// form2 control.
+        /// ddlSearchClient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSearchClient;
 
         /// <summary>
-        /// txtUsername control.
+        /// ddlSerachProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSerachProject;
 
         /// <summary>
-        /// lblUserName control.
+        /// txtSearchEmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchEmp;
 
         /// <summary>
-        /// rfvUserName control.
+        /// btnSearchEmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserName;
+        protected global::System.Web.UI.WebControls.Button btnSearchEmp;
 
         /// <summary>
-        /// rgvEmail control.
+        /// btnCancelSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgvEmail;
+        protected global::System.Web.UI.WebControls.Button btnCancelSearch;
 
         /// <summary>
-        /// txtPassword control.
+        /// pnlDisplayAssignTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.Panel pnlDisplayAssignTask;
 
         /// <summary>
-        /// lblError control.
+        /// grvViewAllTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// rfvPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
-
-        /// <summary>
-        /// cmdLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton cmdLogin;
-
-        /// <summary>
-        /// lnkbtnForgetPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkbtnForgetPassword;
+        protected global::System.Web.UI.WebControls.GridView grvViewAllTask;
     }
 }
