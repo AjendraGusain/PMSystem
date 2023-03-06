@@ -13,7 +13,22 @@ namespace BusinessLogicLayer
     public class UserLoginBusinessLogic : IUserLogin
     {
         UserLoginDataAccess userDetail = new UserLoginDataAccess();
-       DataSet IUserLogin.UserLogin(UserLoginObject user)
+
+        public DataSet GetUsersDetailByUID(string uid)
+        {
+            DataSet dsResult = userDetail.GetUsersDetailByUID(uid);
+            return dsResult;
+        }
+
+        
+
+        public int ResetPassword(UserLoginObject password)
+        {
+            int dsResult = userDetail.ResetPassword(password);
+            return dsResult;
+        }
+
+        DataSet IUserLogin.UserLogin(UserLoginObject user)
         {
             DataSet dsResult = userDetail.GetLoginDetail(user);
             return dsResult;

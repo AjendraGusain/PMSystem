@@ -26,6 +26,13 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
+
+        public DataSet GetAllEmployeeByEmail(string mail)
+        {
+            DataSet dtResult = addEmployeeData.GetAllEmployeeByEmail(mail);
+            return dtResult;
+        }
+
         public DataSet GetEmployeeById(int UserId)
         {
             DataSet dtResult = addEmployeeData.GetEmployeeById(UserId);
@@ -78,6 +85,10 @@ namespace BusinessLogicLayer
             return false;
         }
 
-
+        public int UpdateToken(string token, string email)
+        {
+            int dtResult = addEmployeeData.UpdateToken(token, email);
+            return dtResult;
+        }
     }
 }

@@ -22,5 +22,6 @@ namespace BussinessObjectLayer
         public int TaskID { get; set; }
         public DateTime AssignedDate { get; set; }
         public string SearchResult { get; set; }
+
     }
 }

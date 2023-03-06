@@ -6,15 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicLayer.Interface
+namespace DataAccessLayer.Interface
 {
-   public interface IUserLogin
+    interface IUserLoginDataAccess
     {
-        DataSet UserLogin(UserLoginObject user);
+        DataSet GetLoginDetail(UserLoginObject userLogin);
         int ResetPassword(UserLoginObject password);
-
         DataSet GetUsersDetailByUID(string uid);
 
     }
-
 }

@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProjectManagement.Admin
+namespace ProjectManagement.Users
 {
 
 
-    public partial class TaskDetails
+    public partial class ViewTaskDetails
     {
 
         /// <summary>
-        /// pnlDisplayTaskDetails control.
+        /// pnlDisplayUserTaskDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDisplayTaskDetails;
+        protected global::System.Web.UI.WebControls.Panel pnlDisplayUserTaskDetails;
 
         /// <summary>
         /// lblClientName control.
@@ -31,15 +31,6 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblClientName;
-
-        /// <summary>
-        /// lblProjectName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProjectName;
 
         /// <summary>
         /// lblTaskName control.
@@ -58,42 +49,6 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTaskNumber;
-
-        /// <summary>
-        /// lblTaskDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTaskDetails;
-
-        /// <summary>
-        /// lblStartDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStartDate;
-
-        /// <summary>
-        /// lblEndDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEndDate;
-
-        /// <summary>
-        /// lblTimeEstimate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeEstimate;
 
         /// <summary>
         /// lblActualTime control.
@@ -123,13 +78,67 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.Label lblPause;
 
         /// <summary>
-        /// grvDisplayTaskDetails control.
+        /// lblProjectName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvDisplayTaskDetails;
+        protected global::System.Web.UI.WebControls.Label lblProjectName;
+
+        /// <summary>
+        /// lblStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStartDate;
+
+        /// <summary>
+        /// lblEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEndDate;
+
+        /// <summary>
+        /// lblTaskDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTaskDetails;
+
+        /// <summary>
+        /// lblTimeEstimate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTimeEstimate;
+
+        /// <summary>
+        /// btnPlay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPlay;
+
+        /// <summary>
+        /// grvDisplayUserTaskDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvDisplayUserTaskDetails;
 
         /// <summary>
         /// lstViewChatBox control.

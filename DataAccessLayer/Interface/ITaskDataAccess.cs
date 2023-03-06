@@ -12,11 +12,16 @@ namespace DataAccessLayer.Interface
         int InsertAssignedTaskDetails(TaskBusinessObject assignTask);
         int UpdateAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject task);
+        int InsertChatDetails(TaskBusinessObject Chat);
         DataSet GetClients();
         DataSet GetProject();
         DataSet GetAssignedTask();
+        DataSet GetAllCreatedTask();
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
+
+        DataSet GetAllUsers(TaskBusinessObject objProjectuser);
+        DataSet GetChatDetails();
         DataSet ReAssignTask(int taskID);
         DataSet AssignTask(int taskID);
         DataSet SearchResult(TaskBusinessObject searchResult);

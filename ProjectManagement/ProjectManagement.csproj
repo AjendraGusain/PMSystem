@@ -120,6 +120,7 @@
     <Content Include="Admin\ProjectDetail.aspx" />
     <Content Include="Admin\TaskDetails.aspx" />
     <Content Include="Admin\ViewAllEmployee.aspx" />
+    <Content Include="Admin\ViewAllTask.aspx" />
     <Content Include="Admin\ViewClient.aspx" />
     <Content Include="Admin\ViewDesignation.aspx" />
     <Content Include="Admin\ViewProject.aspx" />
@@ -132,6 +133,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -144,6 +146,7 @@
     <Content Include="Home.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login.aspx" />
+    <Content Include="ResetPassword.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -172,6 +175,8 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Users\UserTask.aspx" />
+    <Content Include="Users\ViewTaskDetails.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -275,6 +280,13 @@
     <Compile Include="Admin\ViewAllEmployee.aspx.designer.cs">
       <DependentUpon>ViewAllEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ViewAllTask.aspx.cs">
+      <DependentUpon>ViewAllTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewAllTask.aspx.designer.cs">
+      <DependentUpon>ViewAllTask.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ViewClient.aspx.cs">
       <DependentUpon>ViewClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +331,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -337,6 +356,27 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserTask.aspx.cs">
+      <DependentUpon>UserTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\UserTask.aspx.designer.cs">
+      <DependentUpon>UserTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\ViewTaskDetails.aspx.cs">
+      <DependentUpon>ViewTaskDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\ViewTaskDetails.aspx.designer.cs">
+      <DependentUpon>ViewTaskDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

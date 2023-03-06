@@ -11,97 +11,79 @@ namespace ProjectManagement
 {
 
 
-    public partial class Login
+    public partial class ResetPassword
     {
 
         /// <summary>
-        /// form2 control.
+        /// resetform control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
+        protected global::System.Web.UI.HtmlControls.HtmlForm resetform;
 
         /// <summary>
-        /// txtUsername control.
+        /// txtresetPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+        protected global::System.Web.UI.WebControls.TextBox txtresetPassword;
 
         /// <summary>
-        /// lblUserName control.
+        /// rfvResetPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvResetPass;
 
         /// <summary>
-        /// rfvUserName control.
+        /// rexResetPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserName;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rexResetPass;
 
         /// <summary>
-        /// rgvEmail control.
+        /// txtConfirmPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgvEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
 
         /// <summary>
-        /// txtPassword control.
+        /// rfvConfiPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConfiPass;
 
         /// <summary>
-        /// lblError control.
+        /// cmpResetPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.CompareValidator cmpResetPass;
 
         /// <summary>
-        /// rfvPassword control.
+        /// btnResetPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
-
-        /// <summary>
-        /// cmdLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton cmdLogin;
-
-        /// <summary>
-        /// lnkbtnForgetPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkbtnForgetPassword;
+        protected global::System.Web.UI.WebControls.Button btnResetPassword;
     }
 }

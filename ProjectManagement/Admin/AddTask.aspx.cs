@@ -15,13 +15,8 @@ namespace ProjectManagement.Admin
 {
     public partial class addTask : System.Web.UI.Page
     {
-        ITeamBusinessLogic createTeamBA = new TeamBusinessLogic(new TeamDataAccess());
-
         ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
-
         TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
-        DataSet dtResult = new DataSet();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -41,9 +36,10 @@ namespace ProjectManagement.Admin
             }
         }
 
-        private void BindEmployeeList(int projectID)
+        private void BindEmployee()
         {
-            gvAllEmployee.DataSource = createTeamBA.GetTeamMember(projectID);
+            addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
+            gvAllEmployee.DataSource = addTaskDetails.GetAllUsers(addTaskBusinessObj);
             gvAllEmployee.DataBind();
         }
 
@@ -55,35 +51,34 @@ namespace ProjectManagement.Admin
             if (userId == 0)
             {
                 btnAddTask.Text = "Assign";
-                dtResult = addTaskDetails.AssignTask(TaskId);
+                addTaskBusinessObj.dsResult = addTaskDetails.AssignTask(TaskId);
             }
             else
             {
                 btnAddTask.Text = "Reassign";
-                dtResult = addTaskDetails.ReAssignTask(TaskId);
+                addTaskBusinessObj.dsResult = addTaskDetails.ReAssignTask(TaskId);
             }
 
-            //chkEmployeeName.Visible = true;
-            // lblEmployee.Visible = true;
             BindClientandProject();
-            ddlProjectName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
+            ddlProjectName.SelectedValue = Convert.ToInt32(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"]).ToString();
             ddlProjectName.Enabled = false;
-            ddlClientName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ClientId"]).ToString();
+            ddlClientName.SelectedValue = Convert.ToInt32(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ClientId"]).ToString();
             ddlClientName.Enabled = false;
-            txtTaskName.Text = dtResult.Tables[0].Rows[0]["TaskName"].ToString();
+            txtTaskName.Text = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskName"].ToString();
             txtTaskName.Enabled = false;
-            txtTaskNumber.Text = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
+            txtTaskNumber.Text = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
             txtTaskNumber.Enabled = false;
-            txtTaskDescription.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
+            txtTaskDescription.Text = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskDescription"].ToString();
             txtTaskDescription.Enabled = false;
             gvAllEmployee.Visible = true;
-            BindEmployeeList(projectID);
+            BindEmployee();
+         //   BindEmployeeList(projectID);
             if (btnAddTask.Text != "Assign")
             {
                 List<string> userList = new List<string>();
-                for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < addTaskBusinessObj.dsResult.Tables[0].Rows.Count; i++)
                 {
-                    userList.Add(dtResult.Tables[0].Rows[i]["TeamMemberID"].ToString());
+                    userList.Add(addTaskBusinessObj.dsResult.Tables[0].Rows[i]["TeamMemberID"].ToString());
                 }
 
                 foreach (GridViewRow row in gvAllEmployee.Rows)
@@ -91,9 +86,9 @@ namespace ProjectManagement.Admin
                     Label chkRecord = (Label)row.FindControl("lblTeamMemberID");
                     string teamMemberID = chkRecord.Text;
 
-                    for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+                    for (int i = 0; i < addTaskBusinessObj.dsResult.Tables[0].Rows.Count; i++)
                     {
-                        if (dtResult.Tables[0].Rows[i]["TeamMemberID"].ToString() == teamMemberID)
+                        if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["TeamMemberID"].ToString() == teamMemberID)
                         {
                             CheckBox chckrw = (CheckBox)row.FindControl("chkTeamMemberID");
                             chckrw.Checked = true;
@@ -112,19 +107,16 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             if (btnAddTask.Text == "Reassign")
             {
-                txtSearch.Visible = true;
-                btnSearch.Visible = true;
-                btnClearAll.Visible = true;
                 addTaskBusinessObj.AssignedDate = DateTime.Now;
-                dtResult = addTaskDetails.ReAssignTask(addTaskBusinessObj.TaskID);
-                addTaskBusinessObj.ProjectID = dtResult.Tables[0].Rows[0]["ProjectId"].ToString();
-                addTaskBusinessObj.TaskNumber = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
+                addTaskBusinessObj.dsResult = addTaskDetails.ReAssignTask(addTaskBusinessObj.TaskID);
+                addTaskBusinessObj.ProjectID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString();
+                addTaskBusinessObj.TaskNumber = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
                 addTaskBusinessObj.LoginUserID = loginUserID;
 
                 List<string> userList = new List<string>();
-                for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < addTaskBusinessObj.dsResult.Tables[0].Rows.Count; i++)
                 {
-                    userList.Add(dtResult.Tables[0].Rows[i]["TeamMemberID"].ToString());
+                    userList.Add(addTaskBusinessObj.dsResult.Tables[0].Rows[i]["TeamMemberID"].ToString());
                 }
                 int count;
                 foreach (var item in userList)
@@ -192,8 +184,8 @@ namespace ProjectManagement.Admin
                             addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
                             foreach (var item in userList)
                             {
-                                if (addTaskBusinessObj.ProjectID == dtResult.Tables[0].Rows[0]["ProjectId"].ToString()
-                                && addTaskBusinessObj.TaskID == Convert.ToInt32(dtResult.Tables[0].Rows[0]["TaskId"].ToString())
+                                if (addTaskBusinessObj.ProjectID == addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString()
+                                && addTaskBusinessObj.TaskID == Convert.ToInt32(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskId"].ToString())
                                 && item == teamMemberID)
                                 {
                                     insertCount++;
@@ -218,13 +210,10 @@ namespace ProjectManagement.Admin
             }
             else if (btnAddTask.Text == "Assign")
             {
-                txtSearch.Visible = true;
-                btnSearch.Visible = true;
-                btnClearAll.Visible = true;
                 addTaskBusinessObj.AssignedDate = DateTime.Now;
-                dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
-                addTaskBusinessObj.ProjectID = dtResult.Tables[0].Rows[0]["ProjectId"].ToString();
-                addTaskBusinessObj.TaskNumber = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
+                addTaskBusinessObj.dsResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
+                addTaskBusinessObj.ProjectID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString();
+                addTaskBusinessObj.TaskNumber = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
                 addTaskBusinessObj.LoginUserID = loginUserID;
                 try
                 {
@@ -338,8 +327,8 @@ namespace ProjectManagement.Admin
         {
             addTaskBusinessObj.ProjectID= Request.QueryString["ProjectId"];
             addTaskBusinessObj.SearchResult = txtSearch.Text;
-            dtResult = addTaskDetails.SearchResult(addTaskBusinessObj);
-            gvAllEmployee.DataSource = dtResult.Tables[0];
+            addTaskBusinessObj.dsResult = addTaskDetails.SearchResult(addTaskBusinessObj);
+            gvAllEmployee.DataSource = addTaskBusinessObj.dsResult.Tables[0];
             gvAllEmployee.DataBind();
         }
 
@@ -347,7 +336,8 @@ namespace ProjectManagement.Admin
         {
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
             gvAllEmployee.EditIndex = -1;
-            BindEmployeeList(Convert.ToInt32(addTaskBusinessObj.ProjectID));
+            BindEmployee();
+            //BindEmployeeList(Convert.ToInt32(addTaskBusinessObj.ProjectID));
             txtSearch.Text = "";
         }
 

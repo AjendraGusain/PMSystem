@@ -85,6 +85,28 @@ namespace DataAccessLayer
             }
         }
 
+
+        public DataSet GetAllCreatedTask()
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetAllCreatedTask";
+                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
         public DataSet GetTaskDetails()
         {
             try
@@ -198,8 +220,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) " +
-                    "values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1')";
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1');  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignTask.TaskID + " and ProjectId="+ assignTask.ProjectID;
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UserId", assignTask.EmployeeName));
                 cmd.Parameters.Add(new MySqlParameter("@TeamMemberId", assignTask.TeamMemberID));
@@ -335,6 +356,81 @@ namespace DataAccessLayer
                 Hashtable obj = new Hashtable();
                 obj.Add("@name", searchResult.SearchResult);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public DataSet GetAllUsers(TaskBusinessObject objProjectuser)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetTeamByProjectID";
+                Hashtable obj = new Hashtable();
+                obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public int InsertChatDetails(TaskBusinessObject Chat)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "insert  into ProjectManagementNew.task_comment(TaskId,UserId,TaskComment,CommentDate) " +
+                    "values(@TaskId,@UserId,@TaskComment,@CommentDate)";
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@TaskId", Chat.TaskID));
+                cmd.Parameters.Add(new MySqlParameter("@UserId", Convert.ToInt32(Chat.EmployeeName)));
+                cmd.Parameters.Add(new MySqlParameter("@TaskComment", Chat.TaskDescription));
+                cmd.Parameters.Add(new MySqlParameter("@CommentDate", Chat.AssignedDate));
+                Chat.response = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return Chat.response;
+        }
+
+        public DataSet GetChatDetails()
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetChatHistory";
+                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
