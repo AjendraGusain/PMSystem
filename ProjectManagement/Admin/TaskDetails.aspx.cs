@@ -93,5 +93,10 @@ namespace ProjectManagement.Admin
             lstViewChatBox.DataSource = dtResult;
             lstViewChatBox.DataBind();
         }
+
+        protected void btnSendDescription_Click1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

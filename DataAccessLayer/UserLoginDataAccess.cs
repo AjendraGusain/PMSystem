@@ -20,7 +20,7 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("SELECT u.UserId,u.UserName,u.Email,u.Password,r.Role FROM ProjectManagementNew.user u inner join role r on u.RoleId=r.RoleId where u.Email = '" + userLogin.Email + "' and u.Password='" + userLogin.Password + "'");
+                dsResult = new Connection().GetDataSetResults("SELECT u.UserId,u.UserName,u.Email,u.Password,r.RoleId,r.Role FROM ProjectManagementNew.user u inner join role r on u.RoleId=r.RoleId where u.Email = '" + userLogin.Email + "' and u.Password='" + userLogin.Password + "'");
                 if (dsResult.Tables[0].Rows.Count > 0)
                 {
                     //var role = dsResult.Tables[0].Rows[0]["Role"];

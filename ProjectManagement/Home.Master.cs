@@ -19,7 +19,7 @@ namespace ProjectManagement
             }
             else
             {
-                int RoleID = Convert.ToInt32(Session["RoleID"].ToString());
+                int RoleID = Convert.ToInt32(Session["RoleId"].ToString());
                 if (RoleID == 1)//For Admin 
                 {
                     pnlAdmin.Visible = true;
