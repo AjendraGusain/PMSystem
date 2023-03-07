@@ -33,7 +33,7 @@ namespace ProjectManagement
                 if (dtResult.Tables[0].Rows.Count > 0)
                 {
                     Session["User"] = dtResult.Tables[0].Rows[0]["UserName"].ToString();
-                    Session["Role"] = dtResult.Tables[0].Rows[0]["Role"].ToString();
+                    Session["RoleID"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
                     Session["UserEmail"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
                     Session["UserID"] = dtResult.Tables[0].Rows[0]["UserId"].ToString();
                     if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin")

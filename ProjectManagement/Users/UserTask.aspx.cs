@@ -30,7 +30,7 @@ namespace ProjectManagement.Users
             if (e.CommandName == "ViewUserTask")
             {
                 int taskID = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("ViewTaskDetails.aspx?UserId=" + taskID);
+                Response.Redirect("ViewTaskDetails.aspx?taskID=" + taskID);
             }
             if (e.CommandName == "AssignPlayUserTask")
             {
@@ -40,7 +40,7 @@ namespace ProjectManagement.Users
 
         protected void GetUserTaskDetails()
         {
-            DataSet ds = assigntaskBLL.GetAssignedTask();
+            DataSet ds = assigntaskBLL.GetAllCreatedTask();
             pnlDisplayUserTask.Visible = true;
             gvDisplayUserTask.DataSource = ds.Tables[0];
             gvDisplayUserTask.DataBind();
