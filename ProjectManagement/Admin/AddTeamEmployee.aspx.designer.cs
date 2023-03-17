@@ -11,88 +11,79 @@ namespace ProjectManagement.Admin
 {
 
 
-    public partial class EmployeeDetail
+    public partial class AddTeamEmployee
     {
 
         /// <summary>
-        /// lblName control.
+        /// ddlMProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMProject;
 
         /// <summary>
-        /// lblEmployeeCode control.
+        /// ddlMTeamName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmployeeCode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMTeamName;
 
         /// <summary>
-        /// lblEmployeeName control.
+        /// ddlManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmployeeName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlManager;
 
         /// <summary>
-        /// lblEmail control.
+        /// ddlTeamLeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTeamLeader;
 
         /// <summary>
-        /// lblPhoneNo control.
+        /// lsEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneNo;
+        protected global::System.Web.UI.WebControls.ListBox lsEmployee;
 
         /// <summary>
-        /// lblRole control.
+        /// lsTester control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRole;
+        protected global::System.Web.UI.WebControls.ListBox lsTester;
 
         /// <summary>
-        /// lblDesignation control.
+        /// btnAddEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesignation;
+        protected global::System.Web.UI.WebControls.Button btnAddEmployee;
 
         /// <summary>
-        /// grvCurrentProject control.
+        /// grvViewEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCurrentProject;
-
-        /// <summary>
-        /// grvPreviousProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvPreviousProject;
+        protected global::System.Web.UI.WebControls.GridView grvViewEmployee;
     }
 }

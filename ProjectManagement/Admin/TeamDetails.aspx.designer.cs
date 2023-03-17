@@ -11,16 +11,25 @@ namespace ProjectManagement.Admin
 {
 
 
-    public partial class ViewTeam
+    public partial class TeamDetails
     {
 
         /// <summary>
-        /// grvAllViewTeam control.
+        /// lblProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvAllViewTeam;
+        protected global::System.Web.UI.WebControls.Label lblProject;
+
+        /// <summary>
+        /// grvViewDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvViewDetails;
     }
 }

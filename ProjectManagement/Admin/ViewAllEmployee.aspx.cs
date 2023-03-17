@@ -46,7 +46,6 @@ namespace ProjectManagement.Admin
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
                 Session["Id"] = Id;
-                //int COLIEnhancedPolicyDollarsID = Convert.ToInt32(e.CommandArgument);
                 int dataout = viewEmployee.DeleteEmployee(Id);
                 if (dataout > 0)
                 {
@@ -63,12 +62,5 @@ namespace ProjectManagement.Admin
             grvEmployeeDetails.PageIndex = e.NewPageIndex;
             BindClientList();
         }
-
-        //protected void btnViewEmployee_Click(object sender, EventArgs e)
-        //{
-        //    Response.Write("Hello");
-        //    BindClientList();
-        //    Response.Redirect("AddEmployee.aspx ?firstname= ajay" );
-        //}
     }
 }

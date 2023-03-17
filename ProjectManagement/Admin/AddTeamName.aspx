@@ -59,33 +59,6 @@
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
 
-<%--                                            <asp:TemplateField HeaderText="Manager Name">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Manager") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Team Leader">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblPhoneNumber" runat="server" Text='<%# Eval("TeamLeader") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="Employee">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblRole" runat="server" Text='<%# Eval("Employee") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>--%>
-
-                                            <%--<asp:TemplateField HeaderText="Designation">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblDesignation" runat="server" Text='<%# Eval("DesignationId") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>--%>
 
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>

@@ -1,56 +1,85 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ViewTeam.aspx.cs" Inherits="ProjectManagement.Admin.ViewTeam" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTeamEmployee.aspx.cs" Inherits="ProjectManagement.Admin.AddTeamEmployee" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
-        <div class="card">
-            <div class="card-body">  
-                 <div class="dataTables_wrapper container-fluid mb-4">
+     <form class="mt-3" runat="server">
+    <div class="container-fluid"> 
+    <div class="card">
+        <div class="card-body">
+            <div class="dataTables_wrapper">
                 <div class="row">
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Project Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
-                        </div>
+                    <div class="col-sm-7 d-flex mb-5 details">
+                        <div class="card-body">
+                            
+            <section class="body current">
+                	<div class="form-group row">
+                      <label for="Project" class="col-sm-3 text-center control-label col-form-label">Project</label>
+                      <div class="col-sm-6">
+                        <asp:DropDownList ID="ddlMProject" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlMProject_SelectedIndexChanged" AutoPostBack="true" >
+                           </asp:DropDownList>
+                      </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Team Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
-                        </div>
+                    <div class="form-group row">
+                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Name</label>
+                      <div class="col-sm-6">
+                        <asp:DropDownList ID="ddlMTeamName" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlMTeamName_SelectedIndexChanged" AutoPostBack="true" >
+                           </asp:DropDownList>
+                      </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_filter" id="zero_config_length">
-                            <label>
-                                Employee Name
-                     
-                                <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>
-                        </div>
+
+                <div class="form-group row">
+                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Manager</label>
+                      <div class="col-sm-6">
+                        <asp:DropDownList ID="ddlManager" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlManager_SelectedIndexChanged" AutoPostBack="true">
+                           </asp:DropDownList>
+                      </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
-                        <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
+
+                <div class="form-group row">
+                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Leader</label>
+                      <div class="col-sm-6">
+                        <asp:DropDownList ID="ddlTeamLeader" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlTeamLeader_SelectedIndexChanged" AutoPostBack="true" >
+                           </asp:DropDownList>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Developer</label>
+                      <div class="col-sm-6">
+                        <asp:ListBox ID="lsEmployee" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                                    </asp:ListBox>
+
+                      </div>
+                    </div>
+
+                <div class="form-group row">
+                      <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Tester</label>
+                      <div class="col-sm-6">
+                        <asp:ListBox ID="lsTester" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                                    </asp:ListBox>
+
+                      </div>
+                    </div>
+                </section>
+                <div class="text-center">
+                    <div class="card-body">
+                      <asp:Button Text="Add Employee" runat="server" ID="btnAddEmployee" OnClick="btnAddEmployee_Click" CssClass="btn btn-info" ValidationGroup="ED" />
+                    </div>
+                  </div>
+                        </div>
                     </div>
                 </div>
             </div>
-                <div class="table-responsive">
-              <div class="dataTables_wrapper container-fluid">
-                <div class="row">
-                  <div class="col-sm-12 d-flex">
-                      <form runat="server">
-                    <asp:GridView ID="grvAllViewTeam" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
-                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvViewTeam_RowCommand" EnablePaging="true">
+            
+           
+                              <asp:GridView ID="grvViewEmployee" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
+                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"  EnablePaging="true" OnRowCommand="grvViewEmployee_RowCommand" OnRowEditing="grvViewEmployee_RowEditing" 
+                                  OnRowDeleting="grvViewEmployee_RowDeleting">
                                 <%--<PagerStyle CssClass="" HorizontalAlign="Right" />--%>
                                 <%--<PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />--%>
-                                       <Columns>
+                                        <Columns>
                                             <asp:TemplateField HeaderText="Project Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
@@ -88,7 +117,6 @@
 
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                     <asp:LinkButton ID="btnView" class="link-success" CommandName="View" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                     <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="Edit" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                  <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="Delete" runat="server" CommandArgument='<%# Eval("TeamMemberId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
@@ -96,12 +124,10 @@
                                             </asp:TemplateField>
                                         </Columns>
                                 </asp:GridView>
-                          </form>
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-                </div>
-            </div>
-           </div>
+                        
+        </div>
+    </div>
+      
+    </div>
+    </form>
 </asp:Content>

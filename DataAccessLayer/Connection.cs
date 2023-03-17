@@ -49,6 +49,13 @@ namespace DataAccessLayer
             return ds;
         }
 
+        public int GetResponeResults(string query)
+        {
+            MySqlCommand cmd = new MySqlCommand(query, GetConnection());
+            int insertSuccess = cmd.ExecuteNonQuery();
+            return insertSuccess;
+        }
+
         public DataSet ExecuteSP(string sproc, int ClientID)
         {
             MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());

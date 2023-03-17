@@ -34,14 +34,14 @@ namespace ProjectManagement.Admin
         private void GetEmployee(int UserId)
         {
             btnAddEmployee.Text = "Update";
-            DataSet dtResult=addEmployeeLogic.GetEmployeeById(UserId);
-            txtEmployeeCode.Text= dtResult.Tables[0].Rows[0]["EmployeeCode"].ToString();
-            txtEmployeeName.Text= dtResult.Tables[0].Rows[0]["UserName"].ToString();
-            txtPhoneNo.Text= dtResult.Tables[0].Rows[0]["PhoneNumber"].ToString();
-            txtEmail.Text= dtResult.Tables[0].Rows[0]["Email"].ToString();
+            DataSet dtResult = addEmployeeLogic.GetEmployeeById(UserId);
+            txtEmployeeCode.Text = dtResult.Tables[0].Rows[0]["EmployeeCode"].ToString();
+            txtEmployeeName.Text = dtResult.Tables[0].Rows[0]["UserName"].ToString();
+            txtPhoneNo.Text = dtResult.Tables[0].Rows[0]["PhoneNumber"].ToString();
+            txtEmail.Text = dtResult.Tables[0].Rows[0]["Email"].ToString();
             BindEmployeeList();
-            ddlRoleList.SelectedValue=  Convert.ToInt32(dtResult.Tables[0].Rows[0]["RoleId"]).ToString();
-            ddlDesignation.SelectedValue=dtResult.Tables[0].Rows[0]["DesignationId"].ToString();
+            ddlRoleList.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["RoleId"]).ToString();
+            ddlDesignation.SelectedValue = dtResult.Tables[0].Rows[0]["DesignationId"].ToString();
             chkAdminAuth.Checked = Convert.ToBoolean(dtResult.Tables[0].Rows[0]["IsAdmin"]);
         }
 
@@ -57,11 +57,11 @@ namespace ProjectManagement.Admin
             {
                 lblCheckCode.Text = "Employee Code Already Exists";
             }
-            if (checkEmail==true)
+            if (checkEmail == true)
             {
                 lblCheckEmail.Text = "Employee Email Already Exists";
             }
-            if(checkPhone==true)
+            if (checkPhone == true)
             {
                 lblCheckPhone.Text = "Phone Already Exists";
             }
@@ -120,14 +120,14 @@ namespace ProjectManagement.Admin
 
         protected void txtEmployeeCode_TextChanged(object sender, EventArgs e)
         {
-           //addEmployee.EmployeeCode = txtEmployeeCode.Text;
-           //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
-           // if (checkUser == "insert")
-           // {
-           //     lblCheckCode.Text = "";
-           // }
-           // else
-           //     lblCheckCode.Text = checkUser;
+            //addEmployee.EmployeeCode = txtEmployeeCode.Text;
+            //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
+            // if (checkUser == "insert")
+            // {
+            //     lblCheckCode.Text = "";
+            // }
+            // else
+            //     lblCheckCode.Text = checkUser;
 
         }
 

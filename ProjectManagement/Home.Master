@@ -93,7 +93,7 @@
               <li class="sidebar-item"> <a href="AddTeamName.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Team Name</span></a> </li>
               <li class="sidebar-item"> <a href="AddManager.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Manager</span></a> </li>
               <li class="sidebar-item"> <a href="AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i> <span class="hide-menu">Team Leader</span></a> </li>
-                <li class="sidebar-item"> <a href="AddEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Employee</span></a> </li>
+                <li class="sidebar-item"> <a href="AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i> <span class="hide-menu">Employee</span></a> </li>
             </ul>
           </li>
           <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="ViewTeam.aspx" aria-expanded="false"> <i class="mdi mdi-account-card-details"></i><span class="hide-menu">All Team</span></a> </li>

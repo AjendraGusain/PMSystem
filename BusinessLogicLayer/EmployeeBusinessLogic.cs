@@ -12,6 +12,7 @@ namespace BusinessLogicLayer
     public class EmployeeBusinessLogic
     {
         EmployeeDataAccess addEmployeeData = new EmployeeDataAccess();
+        DataSet dtResultDS = new DataSet();
 
         public int InsertAllEmployeeDetails(EmployeeBusinessObject userLogin)
         {
@@ -23,6 +24,11 @@ namespace BusinessLogicLayer
         public DataSet GetAllEmployee()
         {
             DataSet dtResult = addEmployeeData.GetAllEmployee();
+            return dtResult;
+        }
+        public DataSet GetAllInTeamEmployee()
+        {
+            DataSet dtResult = addEmployeeData.GetAllInTeamEmployee();
             return dtResult;
         }
 
@@ -78,6 +84,16 @@ namespace BusinessLogicLayer
             return false;
         }
 
+        public DataSet GetProjectCurrent(int Id, int IsActive)
+        {
+            dtResultDS = addEmployeeData.GetProjectCurrent(Id, IsActive);
+            return dtResultDS;
+        }
 
+        public DataSet GetAllTaskByUserEmployeeTask(int ProjectId, int UserId)
+        {
+            dtResultDS = addEmployeeData.GetAllTaskByUserEmployeeTask(ProjectId, UserId);
+            return dtResultDS;
+        }
     }
 }

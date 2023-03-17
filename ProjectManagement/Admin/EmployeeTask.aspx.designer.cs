@@ -11,16 +11,16 @@ namespace ProjectManagement.Admin
 {
 
 
-    public partial class ViewTeam
+    public partial class EmployeeTask
     {
 
         /// <summary>
-        /// grvAllViewTeam control.
+        /// grvEmployeeTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvAllViewTeam;
+        protected global::System.Web.UI.WebControls.GridView grvEmployeeTask;
     }
 }

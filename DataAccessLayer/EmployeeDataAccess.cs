@@ -15,6 +15,8 @@ namespace DataAccessLayer
     public class EmployeeDataAccess
     {
         DataSet dsResult = new DataSet();
+        
+
         int insertSuccess = 0;
         MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
         public int InsertEmployeeDetails(EmployeeBusinessObject addEmployee, string sproc)
@@ -91,7 +93,25 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, Designation FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
+                dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, RO.RoleId, Designation FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            //return dsResult;
+        }
+
+        public DataSet GetAllInTeamEmployee()
+        {
+            try
+            {
+                dsResult = new Connection().GetDataSetResults("Select UserID, UserName FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId");
                 return dsResult;
             }
             catch (Exception ex)
@@ -225,6 +245,33 @@ namespace DataAccessLayer
                 }
             }
             return ds;
+        }
+
+        public DataSet GetProjectCurrent(int Id, int IsActive)
+        {
+            dsResult.Reset();
+            string spName = "sp_GetProjectCurrent";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@UserId", Id));
+            cmd.Parameters.Add(new MySqlParameter("@IsActive", IsActive));
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
+            return dsResult;
+        }
+
+        public DataSet GetAllTaskByUserEmployeeTask(int ProjectId, int UserId)
+        {
+            dsResult.Reset();
+            string spName = "sp_GetAllTaskByUserEmployeeTask";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@ProjectId", ProjectId));
+            cmd.Parameters.Add(new MySqlParameter("@UserId", UserId));
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
+            return dsResult;
         }
     }
 }
