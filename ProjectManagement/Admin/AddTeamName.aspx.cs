@@ -92,23 +92,23 @@ namespace ProjectManagement.Admin
                 respone = createTeamBA.InsertTeam(createTeam);
                 if (respone > 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record Inserted successfully');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Inserte", "alert('Record Inserted successfully');", true);
                 }
             }
             if (btnAddTeamName.Text == "Update")
             {
                 createTeam.TeamName = txtTeamName.Text;
-                createTeam.Manager = ddlProject.SelectedValue;
+                createTeam.ProjectId = ddlProject.SelectedValue;
                 int Id = Convert.ToInt32(Session["EmployeeUserId"]);
-                int response = createTeamBA.EditTeam(createTeam, Id);
+                int response = createTeamBA.UpdateTeam(createTeam, Id);
                 if (respone > 0)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Update", "alert('Record Updated successfully');", true);
                 }
-
+                
+                
             }
             BindEmployeeList();
-            txtTeamName.Text = "";
 
         }
 
@@ -139,7 +139,6 @@ namespace ProjectManagement.Admin
                     grvViewTeam.EditIndex = -1;
                     ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
                     BindEmployeeList();
-
                 }
             }
         }

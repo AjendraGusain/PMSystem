@@ -106,19 +106,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AddEmployee.aspx" />
+    <Content Include="AddTeamLeader.aspx" />
     <Content Include="Admin\AddClient.aspx" />
     <Content Include="Admin\AddDesignation.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AddManager.aspx" />
     <Content Include="Admin\AddRole.aspx" />
     <Content Include="Admin\AddTask.aspx" />
+    <Content Include="Admin\AddTeamEmployee.aspx" />
     <Content Include="Admin\AddTeamName.aspx" />
     <Content Include="Admin\AssignTask.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\EditTeam.aspx" />
     <Content Include="Admin\EmployeeDetail.aspx" />
     <Content Include="Admin\ProjectDetail.aspx" />
+    <Content Include="Admin\EmployeeTask.aspx" />
     <Content Include="Admin\TaskDetails.aspx" />
+    <Content Include="Admin\TeamDetails.aspx" />
     <Content Include="Admin\ViewAllEmployee.aspx" />
     <Content Include="Admin\ViewAllTask.aspx" />
     <Content Include="Admin\ViewClient.aspx" />
@@ -182,6 +187,20 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEmployee.aspx.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddEmployee.aspx.designer.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddTeamLeader.aspx.cs">
+      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddTeamLeader.aspx.designer.cs">
+      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,6 +242,13 @@
     </Compile>
     <Compile Include="Admin\AddTask.aspx.designer.cs">
       <DependentUpon>AddTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddTeamEmployee.aspx.cs">
+      <DependentUpon>AddTeamEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddTeamEmployee.aspx.designer.cs">
+      <DependentUpon>AddTeamEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AddTeamName.aspx.cs">
       <DependentUpon>AddTeamName.aspx</DependentUpon>
@@ -266,12 +292,26 @@
     <Compile Include="Admin\ProjectDetail.aspx.designer.cs">
       <DependentUpon>ProjectDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EmployeeTask.aspx.cs">
+      <DependentUpon>EmployeeTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeTask.aspx.designer.cs">
+      <DependentUpon>EmployeeTask.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\TaskDetails.aspx.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\TaskDetails.aspx.designer.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TeamDetails.aspx.cs">
+      <DependentUpon>TeamDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TeamDetails.aspx.designer.cs">
+      <DependentUpon>TeamDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ViewAllEmployee.aspx.cs">
       <DependentUpon>ViewAllEmployee.aspx</DependentUpon>

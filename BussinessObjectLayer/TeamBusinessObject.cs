@@ -13,5 +13,8 @@ namespace BussinessObjectLayer
         public string TeamLeader { get; set; }
         public string Employee { get; set; }
         public string ProjectId { get; set; }
+        public string Role { get; set; }
+        public string ParentTeamId { get; set; }
+        public int IsActive { get; set; }
     }
 }

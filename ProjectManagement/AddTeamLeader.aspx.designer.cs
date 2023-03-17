@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProjectManagement.Admin
+namespace ProjectManagement
 {
 
 
-    public partial class AddManager
+    public partial class AddTeamLeader1
     {
 
         /// <summary>
@@ -33,30 +33,39 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlMTeamName;
 
         /// <summary>
-        /// lsManager control.
+        /// ddlManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lsManager;
+        protected global::System.Web.UI.WebControls.DropDownList ddlManager;
 
         /// <summary>
-        /// btnAddTeamName control.
+        /// lsTeamLeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddTeamName;
+        protected global::System.Web.UI.WebControls.ListBox lsTeamLeader;
 
         /// <summary>
-        /// grvViewManager control.
+        /// btnAddTeamLeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvViewManager;
+        protected global::System.Web.UI.WebControls.Button btnAddTeamLeader;
+
+        /// <summary>
+        /// grvViewTeamLeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvViewTeamLeader;
     }
 }

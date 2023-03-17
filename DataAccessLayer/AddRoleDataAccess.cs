@@ -82,7 +82,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into Role (Role) values(@Role)";
+                string dsResult = "insert  into ProjectManagementNew.role (Role) values(@Role)";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@Role", addRole.Role));
                 insertSuccess = cmd.ExecuteNonQuery();

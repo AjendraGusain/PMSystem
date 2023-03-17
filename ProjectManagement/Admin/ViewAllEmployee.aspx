@@ -68,16 +68,6 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
                                             </asp:TemplateField>
-<%--                                             <asp:TemplateField>
-            <ItemTemplate>
-                <asp:CheckBox ID="myCb" runat="server" Text='Hi'/>
-                <ul id="myUnorderedList" runat="server" Visible="True">
-                    <li>
-                        <asp:TextBox ID="myTb" runat="server" Width="300" />
-                    </li>
-                </ul>
-            </ItemTemplate>
-        </asp:TemplateField>--%>
                                         </Columns>
 
                                 </asp:GridView>

@@ -1,13 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ViewTeam.aspx.cs" Inherits="ProjectManagement.Admin.ViewTeam" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="TeamDetails.aspx.cs" Inherits="ProjectManagement.Admin.TeamDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
-        <div class="card">
-            <div class="card-body">  
-                 <div class="dataTables_wrapper container-fluid mb-4">
+    <form class="mt-3" runat="server">
+    <div class="page-breadcrumb">
+        <div class="dataTables_wrapper container-fluid mb-4">
                 <div class="row">
                     <div class="col-sm-12 col-md-3">
                         <div class="dataTables_filter" id="zero_config_length">
@@ -41,22 +40,34 @@
                     </div>
                 </div>
             </div>
-                <div class="table-responsive">
-              <div class="dataTables_wrapper container-fluid">
-                <div class="row">
-                  <div class="col-sm-12 d-flex">
-                      <form runat="server">
-                    <asp:GridView ID="grvAllViewTeam" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
-                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvViewTeam_RowCommand" EnablePaging="true">
+      <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+          <h4 id="hProjectName" class="page-title">
+              <asp:Label ID="lblProject" runat="server" Text="Label"></asp:Label></h4>
+          <div class="ms-auto text-end">
+            <button type="button" class="btn btn-warning btn-sm">
+                    <i class="mdi mdi-chevron-left"></i>Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+        
+          <asp:GridView ID="grvViewDetails" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
+                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"  EnablePaging="true">
                                 <%--<PagerStyle CssClass="" HorizontalAlign="Right" />--%>
                                 <%--<PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />--%>
-                                       <Columns>
-                                            <asp:TemplateField HeaderText="Project Name">
+                                        <Columns>
+                                           <%-- <asp:TemplateField HeaderText="Project Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
 
                                             <asp:TemplateField HeaderText="Team Name">
                                                 <ItemTemplate>
@@ -86,22 +97,19 @@
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Action">
+                                            <%--<asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                     <asp:LinkButton ID="btnView" class="link-success" CommandName="View" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                     <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="Edit" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                  <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="Delete" runat="server" CommandArgument='<%# Eval("TeamMemberId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                         </Columns>
                                 </asp:GridView>
-                          </form>
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-                </div>
-            </div>
-           </div>
+ 
+          </div>
+        </div>
+      </div>
+    </div>
+        </form>
 </asp:Content>

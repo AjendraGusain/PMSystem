@@ -151,6 +151,15 @@ namespace ProjectManagement.Admin
         protected void txtEmployeeCode_TextChanged(object sender, EventArgs e)
         {
             
+            //addEmployee.EmployeeCode = txtEmployeeCode.Text;
+            //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
+            // if (checkUser == "insert")
+            // {
+            //     lblCheckCode.Text = "";
+            // }
+            // else
+            //     lblCheckCode.Text = checkUser;
+
         }
 
         protected void txtEmail_TextChanged(object sender, EventArgs e)
