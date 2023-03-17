@@ -6,12 +6,13 @@
     <h4>TaskDetails</h4>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="table-responsive">
-        <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
-                        <form runat="server">
+    <form runat="server">
+        <div class="table-responsive">
+            <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
+
                             <div class="table-responsive">
                                 <div class="dataTables_wrapper container-fluid mb-4">
                                     <div class="row">
@@ -222,10 +223,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </asp:Panel>
+                        </asp:Panel>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </asp:Content>

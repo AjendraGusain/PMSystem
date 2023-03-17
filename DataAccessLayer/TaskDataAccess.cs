@@ -32,7 +32,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@TaskNumber", addTask.TaskNumber));
                 cmd.Parameters.Add(new MySqlParameter("@TaskName", addTask.TaskName));
                 cmd.Parameters.Add(new MySqlParameter("@TaskDescription", addTask.TaskDescription));
-                addTask.response =  cmd.ExecuteNonQuery();
+                addTask.response = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -53,6 +53,23 @@ namespace DataAccessLayer
             try
             {
                 addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.project");
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+
+        public DataSet GetStatusName()
+        {
+            try
+            {
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.status");
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -220,7 +237,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1');  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignTask.TaskID + " and ProjectId="+ assignTask.ProjectID;
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1');  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignTask.TaskID + " and ProjectId=" + assignTask.ProjectID;
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UserId", assignTask.EmployeeName));
                 cmd.Parameters.Add(new MySqlParameter("@TeamMemberId", assignTask.TeamMemberID));
@@ -253,7 +270,7 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
-                    "UnassignedDate=@UnassignedDate,IsActive='0' where TaskId="+ assignTask.TaskID+ " and ProjectId=" 
+                    "UnassignedDate=@UnassignedDate,IsActive='0' where TaskId=" + assignTask.TaskID + " and ProjectId="
                     + assignTask.ProjectID + " and TeamMemberId=" + assignTask.TeamMemberID;
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UnassignedByUserID", assignTask.LoginUserID));
@@ -344,6 +361,41 @@ namespace DataAccessLayer
             }
         }
 
+
+        public DataSet SearchResultByStatus(TaskBusinessObject searchResult)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                int roleID = searchResult.RoleID;
+                string spName = "";
+                Hashtable obj = new Hashtable();
+                if (roleID == 2)
+                {
+                    spName = "sp_FilterTaskByUserandStatus";
+                    obj.Add("@StatusNameID", searchResult.StatusID);
+                    obj.Add("@UserNameID", searchResult.LoginUserID);
+                }
+                else
+                {
+                    spName = "sp_SearchTaskByStatusID";
+                    obj.Add("@StatusCheckID", searchResult.StatusID);
+                }
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
         public DataSet SearchResultByUser(TaskBusinessObject searchResult)
         {
             try
@@ -355,6 +407,41 @@ namespace DataAccessLayer
                 string spName = "sp_SearchAllTaskByUser";
                 Hashtable obj = new Hashtable();
                 obj.Add("@name", searchResult.SearchResult);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+
+        public DataSet SearchResultByDate(TaskBusinessObject searchResult)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string startDate = "";
+                string endDate = "";
+                if (Convert.ToDateTime(searchResult.StartDate).ToString() != "")
+                {
+                    startDate = Convert.ToDateTime(searchResult.StartDate).ToString("yyyy'-'MM'-'dd");
+                }
+                if (Convert.ToDateTime(searchResult.EndDate).ToString() != "")
+                {
+                    endDate = Convert.ToDateTime(searchResult.EndDate).ToString("yyyy'-'MM'-'dd");
+                }
+                string spName = "sp_FilterTaskByDate";
+                Hashtable obj = new Hashtable();
+                obj.Add("@StartDateTime", startDate);
+                obj.Add("@EndDateTime", endDate);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }
@@ -432,6 +519,122 @@ namespace DataAccessLayer
                 string spName = "sp_GetChatHistory";
                 addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
                 return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public DataSet GetTeamMemberID(TaskBusinessObject teamMember)
+        {
+            try
+            {
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and RoleId=2 and ParrentTeamMemberId!=0");
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public int InsertUserAssignedTask(TaskBusinessObject assignUserTask)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1');  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignUserTask.TaskID + " and ProjectId=" + assignUserTask.ProjectID;
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@UserId", assignUserTask.EmployeeName));
+                cmd.Parameters.Add(new MySqlParameter("@TeamMemberId", assignUserTask.TeamMemberID));
+                cmd.Parameters.Add(new MySqlParameter("@TaskId", assignUserTask.TaskID));
+                cmd.Parameters.Add(new MySqlParameter("@AssignedByUserID", assignUserTask.LoginUserID));
+                cmd.Parameters.Add(new MySqlParameter("@AssignedDate", assignUserTask.AssignedDate));
+                cmd.Parameters.Add(new MySqlParameter("@ProjectId", Convert.ToInt32(assignUserTask.ProjectID)));
+                assignUserTask.response = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return assignUserTask.response;
+        }
+
+        public DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetAllCreatedTaskByUser";
+                Hashtable obj = new Hashtable();
+                obj.Add("@UserNameID", taskByUser.EmployeeName);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public int UpdateUserTaskStatus(TaskBusinessObject taskStatus)
+        {
+            try
+            {
+                string spName = "sp_InitialStartJob";
+                Hashtable obj = new Hashtable();
+                obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                obj.Add("@TaskCheckID", taskStatus.TaskID);
+                obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
+                obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                return addTaskBO.response;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus)
+        {
+            try
+            {
+                string spName = "sp_InitialPauseJob";
+                Hashtable obj = new Hashtable();
+                obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                obj.Add("@TaskCheckID", taskStatus.TaskID);
+                obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
+                obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                obj.Add("@PauseReasonComment", taskStatus.PauseReason);
+                addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                return addTaskBO.response;
             }
             catch (Exception ex)
             {

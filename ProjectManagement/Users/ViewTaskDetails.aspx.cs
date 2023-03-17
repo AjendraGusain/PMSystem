@@ -65,5 +65,32 @@ namespace ProjectManagement.Users
         {
 
         }
+
+        protected void btnPlayTask_Click(object sender, EventArgs e)
+        {
+            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
+            addTaskBusinessObj.EmployeeName = loginUserID.ToString();
+            addTaskBusinessObj.AssignedDate = DateTime.Now;
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
+            addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
+            addTaskBusinessObj.dsResult = addTaskDetails.GetAllCreatedTaskByUser(addTaskBusinessObj);
+            for (int i = 0; i < addTaskBusinessObj.dsResult.Tables[0].Rows.Count; i++)
+            {
+                if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "In Process")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Already worked on a Task.');", true);
+                    return;
+                }
+            }
+            btnPlayTask.Visible = false;
+            btnPauseTask.Visible = true;
+            DisplayUserTaskDetails();
+        }
+
+        protected void btnPauseTask_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
