@@ -50,6 +50,11 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+        public DataSet GetStatusName()
+        {
+            taskBO.dsResult = _dataAccess.GetStatusName();
+            return taskBO.dsResult;
+        }
 
         public DataSet GetAssignedTask()
         {
@@ -118,9 +123,21 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+        public DataSet SearchResultByStatus(TaskBusinessObject StatusID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByStatus(StatusID);
+            return taskBO.dsResult;
+        }
+
         public DataSet SearchResultByUser(TaskBusinessObject User)
         {
             taskBO.dsResult = _dataAccess.SearchResultByUser(User);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByDate(TaskBusinessObject objDate)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByDate(objDate);
             return taskBO.dsResult;
         }
 
@@ -140,6 +157,36 @@ namespace BusinessLogicLayer
         {
             taskBO.dsResult = _dataAccess.GetChatDetails();
             return taskBO.dsResult;
+        }
+
+        public DataSet GetTeamMemberID(TaskBusinessObject teammember)
+        {
+            taskBO.dsResult = _dataAccess.GetTeamMemberID(teammember);
+            return taskBO.dsResult;
+        }
+
+        public int InsertUserAssignedTask(TaskBusinessObject assignUserTask)
+        {
+            taskBO.response = _dataAccess.InsertUserAssignedTask(assignUserTask);
+            return taskBO.response;
+        }
+
+        public DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser)
+        {
+            taskBO.dsResult = _dataAccess.GetAllCreatedTaskByUser(taskByUser);
+            return taskBO.dsResult;
+        }
+
+        public int UpdateUserTaskStatus(TaskBusinessObject taskStatus)
+        {
+            taskBO.response = _dataAccess.UpdateUserTaskStatus(taskStatus);
+            return taskBO.response;
+        }
+
+        public int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus)
+        {
+            taskBO.response = _dataAccess.UpdateUserTaskStatusPause(taskStatus);
+            return taskBO.response;
         }
     }
 }

@@ -19,18 +19,18 @@ namespace ProjectManagement
             }
             else
             {
-                int RoleID = Convert.ToInt32(Session["RoleId"].ToString());
-                if (RoleID == 1)//For Admin 
+                int roleID = Convert.ToInt32(Session["RoleId"].ToString());
+                if (roleID == 1)//For Admin 
                 {
                     pnlAdmin.Visible = true;
                     pnlUser.Visible = false;
                 }
-                else if (RoleID == 2)//For User 
+                else if (roleID == 2)//For User 
                 {
                     pnlAdmin.Visible = false;
                     pnlUser.Visible = true;
                 }
-                else if (RoleID == 3|| RoleID == 4)
+                else if (roleID == 3|| roleID == 4)
                 {
 
                 }

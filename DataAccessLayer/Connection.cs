@@ -68,7 +68,7 @@ namespace DataAccessLayer
         {
             MySqlCommand cmd = new MySqlCommand(sproc, GetConnection());
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@TaskId", taskId);
+            cmd.Parameters.AddWithValue("@TaskIdName", taskId);
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -87,6 +87,8 @@ namespace DataAccessLayer
             return ds;
         }
 
+
+        
 
         public DataSet ExecuteSPWithoutID(string sproc)
         {
@@ -123,6 +125,52 @@ namespace DataAccessLayer
             da.Fill(ds);
             return ds;
         }
+
+        public int InsertEntry(string SP, bool Identity, Hashtable myParameters)
+        {
+            int returnValue = 0;
+            MySqlCommand objSqlCommand = new MySqlCommand(SP, GetConnection());
+            objSqlCommand.CommandType = CommandType.StoredProcedure;
+            MySqlParameter ouputParam = new MySqlParameter();
+            foreach (DictionaryEntry entry in myParameters)
+            {
+                MySqlParameter objParms = new MySqlParameter();
+                objParms.ParameterName = entry.Key.ToString();
+                objParms.Value = entry.Value.ToString();
+                objParms.Value = entry.Value.ToString();
+                if (objParms.Value.ToString() == "")
+                {
+                    objParms.Value = DBNull.Value;
+                }
+                objParms.Direction = ParameterDirection.Input;
+                objSqlCommand.Parameters.Add(objParms);
+            }
+            if (Identity == true)
+            {
+                ouputParam.ParameterName = "@Identity";
+                ouputParam.Value = 0;
+                ouputParam.Direction = ParameterDirection.Output;
+                objSqlCommand.Parameters.Add(ouputParam);
+            }
+            try
+            {
+                objSqlCommand.ExecuteNonQuery();
+                returnValue = Convert.ToInt32(ouputParam.Value);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (GetConnection().State == ConnectionState.Open)
+                {
+                    GetConnection().Close();
+                }
+            }
+            return returnValue;
+        }
+
 
         public void SendResetPasswordEmail(string tomail, string UniqueID)
         {
