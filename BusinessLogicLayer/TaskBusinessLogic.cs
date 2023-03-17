@@ -50,10 +50,22 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+        public DataSet GetStatusName()
+        {
+            taskBO.dsResult = _dataAccess.GetStatusName();
+            return taskBO.dsResult;
+        }
 
         public DataSet GetAssignedTask()
         {
             taskBO.dsResult = _dataAccess.GetAssignedTask();
+            return taskBO.dsResult;
+        }
+
+
+        public DataSet GetAllCreatedTask()
+        {
+            taskBO.dsResult = _dataAccess.GetAllCreatedTask();
             return taskBO.dsResult;
         }
 
@@ -90,6 +102,90 @@ namespace BusinessLogicLayer
         public int UpdateAssignedTaskDetails(TaskBusinessObject assignTask)
         {
             taskBO.response = _dataAccess.UpdateAssignedTaskDetails(assignTask);
+            return taskBO.response;
+        }
+
+        public DataSet SearchResult(TaskBusinessObject projectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResult(projectID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByClient(TaskBusinessObject ClientID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByClient(ClientID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByProject(TaskBusinessObject ProjectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByProject(ProjectID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByStatus(TaskBusinessObject StatusID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByStatus(StatusID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByUser(TaskBusinessObject User)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByUser(User);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByDate(TaskBusinessObject objDate)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByDate(objDate);
+            return taskBO.dsResult;
+        }
+
+        public DataSet GetAllUsers(TaskBusinessObject objProjectUser)
+        {
+            taskBO.dsResult = _dataAccess.GetAllUsers(objProjectUser);
+            return taskBO.dsResult;
+        }
+
+        public int InsertChatDetails(TaskBusinessObject Chat)
+        {
+            taskBO.response = _dataAccess.InsertChatDetails(Chat);
+            return taskBO.response;
+        }
+
+        public DataSet GetChatDetails()
+        {
+            taskBO.dsResult = _dataAccess.GetChatDetails();
+            return taskBO.dsResult;
+        }
+
+        public DataSet GetTeamMemberID(TaskBusinessObject teammember)
+        {
+            taskBO.dsResult = _dataAccess.GetTeamMemberID(teammember);
+            return taskBO.dsResult;
+        }
+
+        public int InsertUserAssignedTask(TaskBusinessObject assignUserTask)
+        {
+            taskBO.response = _dataAccess.InsertUserAssignedTask(assignUserTask);
+            return taskBO.response;
+        }
+
+        public DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser)
+        {
+            taskBO.dsResult = _dataAccess.GetAllCreatedTaskByUser(taskByUser);
+            return taskBO.dsResult;
+        }
+
+        public int UpdateUserTaskStatus(TaskBusinessObject taskStatus)
+        {
+            taskBO.response = _dataAccess.UpdateUserTaskStatus(taskStatus);
+            return taskBO.response;
+        }
+
+        public int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus)
+        {
+            taskBO.response = _dataAccess.UpdateUserTaskStatusPause(taskStatus);
             return taskBO.response;
         }
     }

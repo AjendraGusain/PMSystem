@@ -11,6 +11,10 @@ namespace BusinessLogicLayer.Interface
    public interface IUserLogin
     {
         DataSet UserLogin(UserLoginObject user);
+        int ResetPassword(UserLoginObject password);
+
+        DataSet GetUsersDetailByUID(string uid);
+
     }
 
 }

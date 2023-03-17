@@ -25,6 +25,7 @@ namespace ProjectManagement.Admin
                 pnlDisplayTaskDetails.Visible = true;
                 GetTaskDetailsByTaskID();
                 DisplayTaskDetails();
+                GetChatHistory();
             }
         }
 
@@ -71,6 +72,30 @@ namespace ProjectManagement.Admin
             {
                 lblPause.Text = "No";
             }
+
+        }
+
+        protected void btnSendDescription_Click(object sender, EventArgs e)
+        {
+            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.EmployeeName = loginUserID.ToString();
+            addTaskBusinessObj.TaskDescription = txtChatDescription.Text;
+            addTaskBusinessObj.AssignedDate = DateTime.Now;
+            addTaskBusinessObj.response = addTaskDetails.InsertChatDetails(addTaskBusinessObj);
+            txtChatDescription.Text = "";
+            GetChatHistory();
+        }
+
+        protected void GetChatHistory()
+        {
+            DataSet dtResult = addTaskDetails.GetChatDetails();
+            lstViewChatBox.DataSource = dtResult;
+            lstViewChatBox.DataBind();
+        }
+
+        protected void btnSendDescription_Click1(object sender, EventArgs e)
+        {
 
         }
     }
