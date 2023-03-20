@@ -95,7 +95,22 @@ namespace BusinessLogicLayer
 
         public DataSet AssignTask(int taskID)
         {
+            //DataSet dsFilter = new DataSet();
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("Pause");
+            //dt.Columns.Add("Resume");
+            //dt.Columns.Add("Break");
+            
             taskBO.dsResult = _dataAccess.AssignTask(taskID);
+            //for (int i = 0; i < taskBO.dsResult.Tables[0].Rows.Count; i++)
+            //{
+            //    if (taskBO.dsResult.Tables[0].Rows[i]["Description"].ToString() != "")
+            //    {
+            //        dt.Rows[i]["Pause"] = taskBO.dsResult.Tables[0].Rows[i]["EndTime"].ToString();
+            //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i+1]["StartTime"].ToString();
+            //    }
+            //}
+            
             return taskBO.dsResult;
         }
 
@@ -187,6 +202,26 @@ namespace BusinessLogicLayer
         {
             taskBO.response = _dataAccess.UpdateUserTaskStatusPause(taskStatus);
             return taskBO.response;
+        }
+
+        public DataSet UserTaskTime(TaskBusinessObject user)
+        {
+             DataSet dsFilter = new DataSet();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Pause");
+            dt.Columns.Add("Resume");
+            dt.Columns.Add("Break");
+
+            taskBO.dsResult = _dataAccess.UserTaskTime(user);
+            //foreach (var i in taskBO.dsResult.Tables[0].Rows.Count)
+            //{
+            //    if (taskBO.dsResult.Tables[0].Rows[i]["Description"].ToString() != "")
+            //    {
+            //        dt.Rows[i]["Pause"] = taskBO.dsResult.Tables[0].Rows[i]["EndTime"].ToString();
+            //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i + 1]["StartTime"].ToString();
+            //    }
+            //}
+            return taskBO.dsResult;
         }
     }
 }

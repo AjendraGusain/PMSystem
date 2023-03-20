@@ -42,5 +42,8 @@ namespace DataAccessLayer.Interface
         DataSet SearchResultByStatus(TaskBusinessObject searchResult);
         DataSet SearchResultByUser(TaskBusinessObject searchResult);
         DataSet SearchResultByDate(TaskBusinessObject searchResult);
+
+        DataSet UserTaskTime(TaskBusinessObject objUserTask);
+
     }
 }

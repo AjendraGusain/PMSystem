@@ -6,7 +6,7 @@
     <h4>Dashboard</h4>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <form runat="server">
     <div class="row">
         <!-- Column -->
         <div class="col-md-6 col-lg-3">
@@ -93,7 +93,7 @@
                 </div>
                 <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                                     <div class="table-responsive">
-                                    <form runat="server">
+                                    
                                         <asp:GridView ID="grvDashboard" DataKeyNames="" runat="server" class="table table-striped table-bordered" PageSize="2"
                                             ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" EnablePaging="true">
                                             <PagerStyle CssClass="" HorizontalAlign="Right" />
@@ -190,12 +190,12 @@
                                             </Columns>
 
                                         </asp:GridView>
-                                    </form>
+                                    
                                 </div>
                             </div>
 
             </div>
         </div>
     </div>
-
+</form>
 </asp:Content>

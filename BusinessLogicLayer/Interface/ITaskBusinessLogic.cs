@@ -36,5 +36,8 @@ namespace BusinessLogicLayer.Interface
         DataSet SearchResultByUser(TaskBusinessObject User);
 
         DataSet SearchResultByDate(TaskBusinessObject objDate);
+
+        DataSet UserTaskTime(TaskBusinessObject user);
+
     }
 }

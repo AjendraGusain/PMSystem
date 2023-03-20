@@ -644,5 +644,28 @@ namespace DataAccessLayer
             {
             }
         }
+
+        public DataSet UserTaskTime(TaskBusinessObject objUserTask)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetUserTaskTime";
+                Hashtable obj = new Hashtable();
+                obj.Add("@TaskNameID", objUserTask.TaskID);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
     }
 }

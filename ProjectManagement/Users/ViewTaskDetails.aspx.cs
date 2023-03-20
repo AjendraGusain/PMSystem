@@ -35,7 +35,7 @@ namespace ProjectManagement.Users
         private void DisplayUserTaskDetails()
         {
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            DataSet dtResult = addTaskDetails.ReAssignTask(addTaskBusinessObj.TaskID);
+            DataSet dtResult = addTaskDetails.UserTaskTime(addTaskBusinessObj);
             pnlDisplayUserTaskDetails.Visible = true;
             grvDisplayUserTaskDetails.DataSource = dtResult.Tables[0];
             grvDisplayUserTaskDetails.DataBind();
@@ -54,6 +54,7 @@ namespace ProjectManagement.Users
             lblEndDate.Text = dtResult.Tables[0].Rows[0]["EndTime"].ToString();
             lblTimeEstimate.Text = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
             lblActualTime.Text = dtResult.Tables[0].Rows[0]["ActualTime"].ToString();
+            lblWIP.Text= dtResult.Tables[0].Rows[0]["WIP"].ToString();
         }
 
         protected void grvDisplayUserTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -89,6 +90,11 @@ namespace ProjectManagement.Users
         }
 
         protected void btnPauseTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
         }
