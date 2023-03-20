@@ -143,6 +143,7 @@
                                                 <asp:ListItem Value="1">Completed</asp:ListItem>
                                                 <asp:ListItem Value="2">Ready for Test</asp:ListItem>
                                                 <asp:ListItem Value="3">End of the Day</asp:ListItem>
+                                                <asp:ListItem Value="4">Bug Report</asp:ListItem>
                                             </asp:DropDownList>
                                             <%--<select name="languages" id="lang" class="text-muted">
                                 <option value="">Select</option>
@@ -176,25 +177,84 @@
                                                         <Columns>
                                                             <asp:TemplateField HeaderText="Date">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblStartDate" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                    <asp:Label ID="lblDate" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Start Time">
+                                                            <asp:TemplateField HeaderText="Start">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblStart" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Pause">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblPause" runat="server" Text='<%#Eval("EndTime") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Resume">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblResume" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>
+                                                            <%--<asp:TemplateField HeaderText="Break">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblBreak" runat="server" Text='<%#Eval("") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>--%>
+                                                            <asp:TemplateField HeaderText="Reason">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblReason" runat="server" Text='<%#Eval("Description") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>
+                                                           <%-- <asp:TemplateField HeaderText="Status">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblStatus" runat="server" Text='<%#Eval("StatusName") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>--%>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive">
+                            <div id="zero_config_wrapper" class="dataTables_wrapper">
+                                <h4>Bug History</h4>
+                                <div class="row chat-box scrollable" style="height: 250px">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-6 d-flex mb-5 details">
+                                                <div class="card-body">
+                                                    <asp:GridView ID="gvDisplayBugHistory" runat="server" class="table table-striped table-bordered" AllowPaging="true"
+                                                        PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"
+                                                        OnRowCommand="gvDisplayBugHistory_RowCommand">
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="Tester Name">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblTesterName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Date">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblStartTime" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="End Time">
+                                                            <asp:TemplateField HeaderText="Bug Details">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblEndTime" runat="server" Text='<%#Eval("EndTime") %>'></asp:Label>
-                                                                </ItemTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Status">
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="lblWIP" runat="server"></asp:Label>
+                                                                    <asp:Label ID="lblBugDetails" runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
@@ -207,6 +267,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
