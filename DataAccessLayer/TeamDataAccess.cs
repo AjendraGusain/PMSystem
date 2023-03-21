@@ -116,13 +116,14 @@ namespace DataAccessLayer
 
         public DataSet GetTeamMemberMangerTLUser(TeamBusinessObject createTeam)
         {
+            dsResult.Reset();
             string spName = "sp_GetTeamMemberbyMangerTLUserById";
             MySqlCommand cmd = new MySqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new MySqlParameter("@ProjectID", Convert.ToInt32(createTeam.ProjectId)));
-            cmd.Parameters.Add(new MySqlParameter("@TeamId", Convert.ToInt32(createTeam.TeamName)));
-            cmd.Parameters.Add(new MySqlParameter("@Manager", Convert.ToInt32(createTeam.Manager)));
-            cmd.Parameters.Add(new MySqlParameter("@TLId", Convert.ToInt32(createTeam.TeamLeader)));
+            cmd.Parameters.Add(new MySqlParameter("@ProjectNameID", Convert.ToInt32(createTeam.ProjectId)));
+            cmd.Parameters.Add(new MySqlParameter("@TeamNameId", Convert.ToInt32(createTeam.TeamName)));
+            cmd.Parameters.Add(new MySqlParameter("@ManagerNameId", Convert.ToInt32(createTeam.Manager)));
+            cmd.Parameters.Add(new MySqlParameter("@TLNameId", Convert.ToInt32(createTeam.TeamLeader)));
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dsResult);
             return dsResult;

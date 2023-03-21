@@ -47,6 +47,7 @@ namespace ProjectManagement.Admin
             if (e.CommandName == "ProjectName")
             {
                 int projectID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("ViewProject.aspx?ProjectId=" + projectID);
             }
             if (e.CommandName == "UserName")
             {

@@ -20,7 +20,15 @@ namespace ProjectManagement
         EmployeeBusinessObject addEmployee = new EmployeeBusinessObject();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                string email = Request.QueryString["Email"].ToString();
+                if (email != "")
+                {
+                    btnForgotPassword.Text = "Resend Link";
+                    txtEmail.Text = email;
+                }
+            }
         }
 
         protected void btnForgotPassword_Click(object sender, EventArgs e)

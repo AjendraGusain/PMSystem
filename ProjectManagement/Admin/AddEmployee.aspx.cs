@@ -52,27 +52,6 @@ namespace ProjectManagement.Admin
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            addEmployee.EmployeeCode = txtEmployeeCode.Text;
-            addEmployee.EmployeeEmail = txtEmail.Text;
-            bool checkCode = addEmployeeLogic.UserCheck(addEmployee);
-            bool checkEmail = addEmployeeLogic.UserCheck(addEmployee);
-            bool checkPhone = addEmployeeLogic.UserCheck(addEmployee);
-
-            if (checkCode == true)
-            {
-                lblCheckCode.Text = "Employee Code Already Exists";
-            }
-            if (checkEmail == true)
-            {
-                lblCheckEmail.Text = "Employee Email Already Exists";
-            }
-            if (checkPhone == true)
-            {
-                lblCheckPhone.Text = "Phone Already Exists";
-            }
-
-            else
-            {
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                 addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
                 addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
@@ -87,7 +66,7 @@ namespace ProjectManagement.Admin
                     DataSet dtResult = addEmployeeLogic.GetAllEmployeeByEmail(addEmployee.EmployeeEmail);
                     if (dtResult.Tables[0].Rows.Count > 0)
                     {
-                        if(dtResult.Tables[0].Rows[0]["Email"].ToString()!=""|| dtResult.Tables[0].Rows[0]["Email"].ToString() != null)
+                        if (dtResult.Tables[0].Rows[0]["Email"].ToString() != "" || dtResult.Tables[0].Rows[0]["Email"].ToString() != null)
                         {
                             string useremail = dtResult.Tables[0].Rows[0]["Email"].ToString();
                             string resetToken = Guid.NewGuid().ToString();
@@ -95,20 +74,6 @@ namespace ProjectManagement.Admin
                             objCon.SendResetPasswordEmail(useremail, resetToken);
                         }
                     }
-                   
-
-
-                    //btnAddEmployee_Click on link
-                    //{ 
-                    //    var Toekn
-
-                    //        update password whare toake = uid and  datetiem is under 1 hr 
-                    
-                    
-                    //}
-
-
-
                     if (successResult == 1)
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
@@ -129,7 +94,7 @@ namespace ProjectManagement.Admin
                         ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
                     }
                 }
-            }
+            Response.Redirect("ViewAllEmployee.aspx");
         }
 
         protected void BindEmployeeList()

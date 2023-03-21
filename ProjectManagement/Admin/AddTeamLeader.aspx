@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTeamLeader.aspx.cs" Inherits="ProjectManagement.AddTeamLeader1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTeamLeader.aspx.cs" Inherits="ProjectManagement.Admin.AddTeamLeader" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <form class="mt-3" runat="server">
+    <form class="mt-3" runat="server">
     <div class="container-fluid"> 
     <div class="card">
         <div class="card-body">

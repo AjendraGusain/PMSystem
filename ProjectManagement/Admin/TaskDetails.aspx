@@ -12,11 +12,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
-
                             <div class="table-responsive">
-                                <div class="dataTables_wrapper container-fluid mb-4">
-                                    <div class="row">
-                                        <div class="col-sm-6 d-flex mb-5 details">
+                                <div class="dataTables_wrapper">
+                                    <div class="row details mb-5 p-5">
+                                        <div class="col-md-6">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-sm-3">

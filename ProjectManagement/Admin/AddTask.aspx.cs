@@ -97,7 +97,6 @@ namespace ProjectManagement.Admin
                 }
             }
             btnResetField.Visible = false;
-
         }
 
         protected void btnAddTask_Click(object sender, EventArgs e)

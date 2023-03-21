@@ -76,32 +76,26 @@
             <div class="dataTables_wrapper">
                 <h4>Current Project</h4>
                 <div class="table-responsive">
-                   <asp:GridView ID="grvCurrentProject" DataKeyNames="" runat="server" class="table table-striped table-bordered" AutoGenerateColumns="false" OnRowCommand="grvCurrentProject_RowCommand" >
-                                
+                   <asp:GridView ID="grvCurrentProject" DataKeyNames="" EmptyDataText="No Record Found"  runat="server" class="table table-striped table-bordered" AutoGenerateColumns="false" OnRowCommand="grvCurrentProject_RowCommand" >
                                         <Columns>
-                                            
                                             <asp:TemplateField HeaderText="Client Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblClientName" runat="server" Text='<%# Eval("ClientName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-
                                             <asp:TemplateField HeaderText="Project Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-
                                             <asp:TemplateField HeaderText="Start Date">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("EntryDate") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-
-
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnView" CssClass="btn btn-success btn-sm text-white" CommandName="ViewProject" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("ClientId")+","+ Eval("UserId")%>'>View</asp:LinkButton>

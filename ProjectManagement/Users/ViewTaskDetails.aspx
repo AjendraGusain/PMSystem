@@ -5,6 +5,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+    <script type='text/javascript'>
+        //function openModal() {
+        //    $('[id*=exampleModal]').modal('show');
+        //}
+
+        function OpenConfirmationBox() {
+            document.getElementById('divShowConfirmwindow').style.display = "block";
+            $('#<%=pnlConfirmwindow.ClientID %>').show();
+            $("body").addClass("modal-open");
+
+        }
+
+        function HideConfirmWindow() {
+            $("#<%=hdnPause.ClientID %>").val("Yes");
+            document.getElementById('divShowConfirmwindow').style.display = "none";
+            $('#<%=pnlConfirmwindow.ClientID %>').hide();
+            $("body").removeClass("modal-open");
+            $("#btnSaveReason").click();
+
+        }
+    </script>
+
     <form runat="server">
         <asp:Panel ID="pnlDisplayUserTaskDetails" runat="server">
             <div class="row">
@@ -169,59 +193,59 @@
                                 <div class="row chat-box scrollable" style="height: 250px">
                                     <div class="col-sm-12">
                                         <div class="row">
-                                            <div class="col-sm-6 d-flex mb-5 details">
-                                                <div class="card-body">
+                                            
+                                                
                                                     <asp:GridView ID="grvDisplayUserTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true"
                                                         PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"
                                                         OnRowCommand="grvDisplayUserTaskDetails_RowCommand">
                                                         <Columns>
                                                             <asp:TemplateField HeaderText="Date">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblDate" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                    <asp:Label ID="lblDate" runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Start">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblStart" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                    <asp:Label ID="lblStart" runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Pause">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblPause" runat="server" Text='<%#Eval("EndTime") %>'></asp:Label>
+                                                                    <asp:Label ID="lblPause" runat="server" Text='<%#Eval("Pause") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Resume">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblResume" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                                    <asp:Label ID="lblResume" runat="server" Text='<%#Eval("Resume") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
-                                                            <%--<asp:TemplateField HeaderText="Break">
+                                                            <asp:TemplateField HeaderText="Break">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblBreak" runat="server" Text='<%#Eval("") %>'></asp:Label>
+                                                                    <asp:Label ID="lblBreak" runat="server" Text='<%#Eval("Break") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>--%>
+                                                            </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Reason">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblReason" runat="server" Text='<%#Eval("Description") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
-                                                           <%-- <asp:TemplateField HeaderText="Status">
+                                                            <asp:TemplateField HeaderText="Status">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblStatus" runat="server" Text='<%#Eval("StatusName") %>'></asp:Label>
+                                                                    <asp:Label ID="lblStatus" runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>--%>
+                                                            </asp:TemplateField>
                                                         </Columns>
                                                     </asp:GridView>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -268,6 +292,34 @@
                             </div>
                         </div>
 
+                        <div id="divShowConfirmwindow" style="display: none; opacity: 0.5;" class="modal-backdrop">
+                            </div>
+                            <asp:Panel ID="pnlConfirmwindow" runat="server" BackColor="#ddd" CssClass="modal" Style="background: transparent!important;">
+                                <div class="modal-dialog modal-sm" style="margin-top: 8%; min-width: 40%;">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <asp:DropDownList ID="ddlReason" runat="server" Enabled="true">
+                                                    <asp:ListItem Value="0">--Select Reason--</asp:ListItem>
+                                                    <asp:ListItem Value="1">Lunch Break</asp:ListItem>
+                                                    <asp:ListItem Value="2">Tea Break</asp:ListItem>
+                                                    <asp:ListItem Value="3">Other:</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <asp:TextBox ID="txtReason" runat="server" TextMode="MultiLine" CssClass="form-control"
+                                                    placeholder="Enter Text"></asp:TextBox>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    <asp:Button Style="" runat="server" Text="Submit" class="btn btn-info" ID="btnSaveReason" OnClientClick="HideConfirmWindow();return false; " ClientIDMode="Static" OnClick="btnSaveReason_Click" />
+                                                    <asp:Button Style="" runat="server" Text="Close" class="btn btn-danger" ID="btnClose" OnClientClick="HideConfirmWindow1();return false; " ClientIDMode="Static" OnClick="btnClose_Click" />
+                                                    <asp:HiddenField ID="hdnPause" ClientIDMode="Static" runat="server"></asp:HiddenField>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+ 
 
                         <div class="row">
                             <div class="col-12">
