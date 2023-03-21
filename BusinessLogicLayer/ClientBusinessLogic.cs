@@ -42,7 +42,7 @@ namespace BusinessLogicLayer
 
         public DataSet GetCountry()
         {
-            dtResult = _clientDataAccess.GetClients();
+            dtResult = _clientDataAccess.GetCountry();
             return dtResult;
         }
 

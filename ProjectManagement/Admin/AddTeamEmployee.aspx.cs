@@ -33,154 +33,12 @@ namespace ProjectManagement.Admin
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
+            ddlMProject.Items.Insert(0, new ListItem("-- Select Project --", "0"));
         }
 
        
 
-        protected void btnAddEmployee_Click(object sender, EventArgs e)
-        {
-            if (btnAddEmployee.Text == "Update")
-            {
-                int ProjectId = Convert.ToInt32(Session["ProjectId"]);
-                int TeamId = Convert.ToInt32(Session["TeamId"]);
-                //createTeam.Role = "2";
-                createTeam.Manager = Session["Manager"].ToString();
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
-                createTeam.ProjectId = ddlMProject.SelectedValue;
-                createTeam.TeamName = ddlMTeamName.SelectedValue;
-
-                List<string> userList = new List<string>();
-                List<string> testerList = new List<string>();
-                for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
-                {
-                    if (dtResult.Tables[0].Rows[i]["RoleId"].ToString() == "2")
-                        userList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
-                    else if (dtResult.Tables[0].Rows[i]["RoleId"].ToString() == "5")
-                        testerList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
-                }
-                lsEmployee.DataSource = userList;
-                lsTester.DataSource = testerList;
-                dtResult.Reset();
-                //dtResult = managerName.GetAllInTeamEmployee();
-                //lsEmployee.DataSource = dtResult;
-                //lsEmployee.DataTextField = "UserName";
-                //lsEmployee.DataValueField = "UserId";
-                //lsEmployee.DataBind();
-                //dtResult.Reset();
-                //lsTester.DataSource = managerName.GetAllInTeamEmployee();
-                //lsTester.DataTextField = "UserName";
-                //lsTester.DataValueField = "UserId";
-                //lsTester.DataBind();
-                int count = 0;
-                
-                
-                foreach (var item in userList)
-                {
-                    count = 0;
-                    foreach (ListItem listItem1 in lsEmployee.Items)
-                    {
-                        if (listItem1.Selected)
-                        {
-                            createTeam.Manager = listItem1.Value.ToString();
-                            if (item == createTeam.Manager)
-                            {
-                                count++;
-                            }
-                            if (count == 0)
-                            {
-                                createTeam.Manager = listItem1.Value.ToString();
-                                createTeam.ProjectId = ddlMProject.SelectedValue;
-                                createTeam.TeamName = ddlMTeamName.SelectedValue;
-                                createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
-                                createTeam.IsActive = 1;
-                                createTeam.Role = "2";
-                                createTeamBA.InsertTeamMember(createTeam);
-                            }
-                        }
-                    }
-                    if (count == 0)
-                    {
-                        createTeam.Manager = item;
-                        createTeam.ProjectId = ddlMProject.SelectedValue;
-                        createTeam.TeamName = ddlMTeamName.SelectedValue;
-                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
-                        createTeam.IsActive = 0;
-                        createTeam.Role = "2";
-                        createTeamBA.UpdateTeamMember(createTeam);
-                    }
-
-                }
-                foreach (var item in testerList)
-                {
-                    count = 0;
-                    foreach (ListItem listItem in lsTester.Items)
-                    {
-                        if (listItem.Selected)
-                        {
-                            createTeam.Manager = listItem.Value.ToString();
-                            if (item == createTeam.Manager)
-                            {
-                                count++;
-                            }
-                            if (count == 0)
-                            {
-                                createTeam.Manager = listItem.Value.ToString();
-                                createTeam.ProjectId = ddlMProject.SelectedValue;
-                                createTeam.TeamName = ddlMTeamName.SelectedValue;
-                                createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
-                                createTeam.IsActive = 1;
-                                createTeam.Role = "5";
-                                createTeamBA.InsertTeamMember(createTeam);
-                            }
-                        }
-                    }
-                    if (count == 0)
-                    {
-                        createTeam.Manager = item;
-                        createTeam.ProjectId = ddlMProject.SelectedValue;
-                        createTeam.TeamName = ddlMTeamName.SelectedValue;
-                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
-                        createTeam.IsActive = 0;
-                        createTeam.Role = "5";
-                        createTeamBA.UpdateTeamMember(createTeam);
-                    }
-
-                }
-                gridViewList();
-            }
-            if (btnAddEmployee.Text == "Add Employee")
-            {
-                foreach (ListItem item in lsEmployee.Items)
-                {
-                    if (item.Selected)
-                    {
-                        createTeam.ProjectId = ddlMProject.SelectedValue;
-                        createTeam.TeamName = ddlMTeamName.SelectedValue;
-                        createTeam.Manager = item.Value;
-                        createTeam.ParentTeamId =ddlTeamLeader.SelectedValue;
-                        createTeam.IsActive = 1;
-                        createTeam.Role = "2";
-                        createTeamBA.InsertTeamMember(createTeam);
-                    }
-                }
-                foreach (ListItem item in lsTester.Items)
-                {
-                    if (item.Selected)
-                    {
-                        createTeam.ProjectId = ddlMProject.SelectedValue;
-                        createTeam.TeamName = ddlMTeamName.SelectedValue;
-                        createTeam.Manager = item.Value;
-                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
-                        createTeam.IsActive = 1;
-                        createTeam.Role = "5";
-                        createTeamBA.InsertTeamMember(createTeam);
-                    }
-                }
-                ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "alert('Record Inserted successfully');", true);
-                gridViewList();
-            }
-            BindList();
-        }
+      
 
         protected void grvViewEmployee_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -200,17 +58,6 @@ namespace ProjectManagement.Admin
                 //BindList();
                 ddlMProject.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
                 ddlMTeamName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
-               // ddlManager.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0][""]).ToString();
-                //ddlTeamLeader.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
-                lsEmployee.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
-                lsEmployee.DataTextField = "UserName";
-                lsEmployee.DataValueField = "UserId";
-                lsEmployee.DataBind();
-
-                lsTester.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
-                lsTester.DataTextField = "UserName";
-                lsTester.DataValueField = "UserId";
-                lsTester.DataBind();
                 List<string> userList = new List<string>();
                 List<string> testerList = new List<string>();
                 for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
@@ -222,6 +69,18 @@ namespace ProjectManagement.Admin
                 }
                 lsEmployee.DataSource = userList;
                 lsTester.DataSource = testerList;
+                // ddlManager.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0][""]).ToString();
+                //ddlTeamLeader.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
+                lsEmployee.DataSource = managerName.GetAllEmployee();
+                lsEmployee.DataTextField = "UserName";
+                lsEmployee.DataValueField = "UserId";
+                lsEmployee.DataBind();
+
+                lsTester.DataSource = managerName.GetAllEmployee();
+                lsTester.DataTextField = "UserName";
+                lsTester.DataValueField = "UserId";
+                lsTester.DataBind();
+                
                 foreach (var listItem in userList)
                 {
                     ListItem itm = lsEmployee.Items.FindByValue(listItem);
@@ -257,6 +116,145 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
                 }
             }
+        }
+
+
+        protected void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            if (btnAddEmployee.Text == "Update")
+            {
+                int ProjectId = Convert.ToInt32(Session["ProjectId"]);
+                int TeamId = Convert.ToInt32(Session["TeamId"]);
+                //createTeam.Role = "2";
+                createTeam.Manager = Session["Manager"].ToString();
+                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
+                createTeam.ProjectId = ddlMProject.SelectedValue;
+                createTeam.TeamName = ddlMTeamName.SelectedValue;
+
+                List<string> userList = new List<string>();
+                List<string> testerList = new List<string>();
+                for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+                {
+                    if (dtResult.Tables[0].Rows[i]["RoleId"].ToString() == "2")
+                        userList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
+                    else if (dtResult.Tables[0].Rows[i]["RoleId"].ToString() == "5")
+                        testerList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
+                }
+                lsEmployee.DataSource = userList;
+                lsTester.DataSource = testerList;
+                int count = 0;
+                foreach (var item in userList)
+                {
+                    count = 0;
+                    int countFinal = 0;
+                    foreach (ListItem listItem1 in lsEmployee.Items)
+                    {
+                        if (listItem1.Selected)
+                        {
+                            createTeam.Manager = listItem1.Value.ToString();
+                            if (item == createTeam.Manager)
+                            {
+                                count++;
+                            }
+                            if (count == 0)
+                            {
+                                createTeam.Manager = listItem1.Value.ToString();
+                                createTeam.ProjectId = ddlMProject.SelectedValue;
+                                createTeam.TeamName = ddlMTeamName.SelectedValue;
+                                createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                                createTeam.IsActive = 1;
+                                createTeam.Role = "2";
+                                createTeamBA.InsertTeamMember(createTeam);
+                            }
+                        }
+                        countFinal += count;
+                        count = 0;
+                    }
+                    if (countFinal == 0)
+                    {
+                        createTeam.Manager = item;
+                        createTeam.ProjectId = ddlMProject.SelectedValue;
+                        createTeam.TeamName = ddlMTeamName.SelectedValue;
+                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                        createTeam.IsActive = 0;
+                        createTeam.Role = "2";
+                        createTeamBA.UpdateTeamMember(createTeam);
+                    }
+
+                }
+                foreach (var item in testerList)
+                {
+                    count = 0;
+                    int countFinal = 0;
+                    foreach (ListItem listItem in lsTester.Items)
+                    {
+                        if (listItem.Selected)
+                        {
+                            createTeam.Manager = listItem.Value.ToString();
+                            if (item == createTeam.Manager)
+                            {
+                                count++;
+                            }
+                            if (count == 0)
+                            {
+                                createTeam.Manager = listItem.Value.ToString();
+                                createTeam.ProjectId = ddlMProject.SelectedValue;
+                                createTeam.TeamName = ddlMTeamName.SelectedValue;
+                                createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                                createTeam.IsActive = 1;
+                                createTeam.Role = "5";
+                                createTeamBA.InsertTeamMember(createTeam);
+                            }
+                        }
+                        countFinal += count;
+                        count = 0;
+                    }
+                    if (countFinal == 0)
+                    {
+                        createTeam.Manager = item;
+                        createTeam.ProjectId = ddlMProject.SelectedValue;
+                        createTeam.TeamName = ddlMTeamName.SelectedValue;
+                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                        createTeam.IsActive = 0;
+                        createTeam.Role = "5";
+                        createTeamBA.UpdateTeamMember(createTeam);
+                    }
+
+                }
+                gridViewList();
+            }
+            if (btnAddEmployee.Text == "Add Employee")
+            {
+                foreach (ListItem item in lsEmployee.Items)
+                {
+                    if (item.Selected)
+                    {
+                        createTeam.ProjectId = ddlMProject.SelectedValue;
+                        createTeam.TeamName = ddlMTeamName.SelectedValue;
+                        createTeam.Manager = item.Value;
+                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                        createTeam.IsActive = 1;
+                        createTeam.Role = "2";
+                        createTeamBA.InsertTeamMember(createTeam);
+                    }
+                }
+                foreach (ListItem item in lsTester.Items)
+                {
+                    if (item.Selected)
+                    {
+                        createTeam.ProjectId = ddlMProject.SelectedValue;
+                        createTeam.TeamName = ddlMTeamName.SelectedValue;
+                        createTeam.Manager = item.Value;
+                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                        createTeam.IsActive = 1;
+                        createTeam.Role = "5";
+                        createTeamBA.InsertTeamMember(createTeam);
+                    }
+                }
+                ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "alert('Record Inserted successfully');", true);
+                gridViewList();
+            }
+            BindList();
         }
 
         protected void grvViewEmployee_RowEditing(object sender, GridViewEditEventArgs e)
@@ -310,12 +308,12 @@ namespace ProjectManagement.Admin
             DataSet ds = createTeamBA.GetTeamMemberEmployee(createTeam);
             grvViewEmployee.DataSource = ds.Tables[2];
             grvViewEmployee.DataBind();
-            lsEmployee.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
+            lsEmployee.DataSource = managerName.GetAllEmployee();
             lsEmployee.DataTextField = "UserName";
             lsEmployee.DataValueField = "UserId";
             lsEmployee.DataBind();
 
-            lsTester.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
+            lsTester.DataSource = managerName.GetAllEmployee();
             lsTester.DataTextField = "UserName";
             lsTester.DataValueField = "UserId";
             lsTester.DataBind();

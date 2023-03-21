@@ -35,9 +35,10 @@ namespace ProjectManagement
             userBusinessObject.ResetPassword = txtresetPassword.Text;
             userBusinessObject.ConfirmPassword = txtConfirmPassword.Text;
             //if (diffinHour > 24)
-            if(diffinMin>2)
+            if(diffinMin < 5)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "mail", "alert('Link expired.');", true);
+                Response.Redirect("ForgotPassword.aspx?Email="+ userBusinessObject.Email);
             }
             else
             {

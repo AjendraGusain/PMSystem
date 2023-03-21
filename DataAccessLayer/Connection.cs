@@ -194,7 +194,7 @@ namespace DataAccessLayer
             mailMsg.Body = stringBuilder.ToString();
             mailMsg.Subject = "Reset Your Password";
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            NetworkCredential NetworkCred = new NetworkCredential(from, "zqgfvyigriszjcej");
+            NetworkCredential NetworkCred = new NetworkCredential(from, "qgwojnisvyxhgmhx");
             smtp.UseDefaultCredentials = true;
             smtp.Credentials = NetworkCred;
             smtp.EnableSsl = true;

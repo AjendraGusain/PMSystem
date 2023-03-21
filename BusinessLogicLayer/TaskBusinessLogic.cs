@@ -19,7 +19,7 @@ namespace BusinessLogicLayer
             _dataAccess = taskDAL;
         }
 
-        
+
         /// <summary>
         /// This commented code is used for Interface implementation without DI.
         /// </summary>
@@ -34,7 +34,7 @@ namespace BusinessLogicLayer
 
         public int InsertTaskDetails(TaskBusinessObject objTask)
         {
-            taskBO.response= _dataAccess.InsertTaskDetails(objTask);
+            taskBO.response = _dataAccess.InsertTaskDetails(objTask);
             return taskBO.response;
         }
 
@@ -100,7 +100,7 @@ namespace BusinessLogicLayer
             //dt.Columns.Add("Pause");
             //dt.Columns.Add("Resume");
             //dt.Columns.Add("Break");
-            
+
             taskBO.dsResult = _dataAccess.AssignTask(taskID);
             //for (int i = 0; i < taskBO.dsResult.Tables[0].Rows.Count; i++)
             //{
@@ -110,7 +110,7 @@ namespace BusinessLogicLayer
             //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i+1]["StartTime"].ToString();
             //    }
             //}
-            
+
             return taskBO.dsResult;
         }
 
@@ -206,21 +206,38 @@ namespace BusinessLogicLayer
 
         public DataSet UserTaskTime(TaskBusinessObject user)
         {
-             DataSet dsFilter = new DataSet();
-            DataTable dt = new DataTable();
+            taskBO.dsResult = _dataAccess.UserTaskTime(user);
+            DataSet dsFilter = new DataSet();
+            DataTable dt = taskBO.dsResult.Tables[0];
             dt.Columns.Add("Pause");
             dt.Columns.Add("Resume");
             dt.Columns.Add("Break");
 
-            taskBO.dsResult = _dataAccess.UserTaskTime(user);
-            //foreach (var i in taskBO.dsResult.Tables[0].Rows.Count)
-            //{
-            //    if (taskBO.dsResult.Tables[0].Rows[i]["Description"].ToString() != "")
-            //    {
-            //        dt.Rows[i]["Pause"] = taskBO.dsResult.Tables[0].Rows[i]["EndTime"].ToString();
-            //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i + 1]["StartTime"].ToString();
-            //    }
-            //}
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["Description"].ToString() != "")
+                {
+                    dt.Rows[i]["Pause"] = dt.Rows[i]["EndTime"].ToString();
+
+                    if (i > 0 && dt.Columns.Contains("StartTime"))
+                    {
+                        dt.Rows[i]["Resume"] = dt.Rows[i]["StartTime"].ToString();
+                        DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
+                        DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
+                        double diffbreak = (pause - resume).Hours;
+                        dt.Rows[i]["Break"] = diffbreak;
+                    }
+                    //if (dt.Rows[i]!= dt.Rows[i+1])
+                    //{
+
+                    //}
+                    //else
+                    //{
+                    //    dt.Rows[i]["Resume"] = dt.Rows[i + 1]["StartTime"].ToString();
+                    //}
+                }
+            }
             return taskBO.dsResult;
         }
     }

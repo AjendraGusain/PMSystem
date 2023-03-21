@@ -107,14 +107,15 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AddEmployee.aspx" />
-    <Content Include="AddTeamLeader.aspx" />
     <Content Include="Admin\AddClient.aspx" />
     <Content Include="Admin\AddDesignation.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AddManager.aspx" />
+    <Content Include="Admin\AddProject.aspx" />
     <Content Include="Admin\AddRole.aspx" />
     <Content Include="Admin\AddTask.aspx" />
     <Content Include="Admin\AddTeamEmployee.aspx" />
+    <Content Include="Admin\AddTeamLeader.aspx" />
     <Content Include="Admin\AddTeamName.aspx" />
     <Content Include="Admin\AssignTask.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
@@ -194,13 +195,6 @@
     <Compile Include="AddEmployee.aspx.designer.cs">
       <DependentUpon>AddEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AddTeamLeader.aspx.cs">
-      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddTeamLeader.aspx.designer.cs">
-      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -229,6 +223,13 @@
     <Compile Include="Admin\AddManager.aspx.designer.cs">
       <DependentUpon>AddManager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AddProject.aspx.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddProject.aspx.designer.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AddRole.aspx.cs">
       <DependentUpon>AddRole.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -249,6 +250,13 @@
     </Compile>
     <Compile Include="Admin\AddTeamEmployee.aspx.designer.cs">
       <DependentUpon>AddTeamEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddTeamLeader.aspx.cs">
+      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddTeamLeader.aspx.designer.cs">
+      <DependentUpon>AddTeamLeader.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AddTeamName.aspx.cs">
       <DependentUpon>AddTeamName.aspx</DependentUpon>

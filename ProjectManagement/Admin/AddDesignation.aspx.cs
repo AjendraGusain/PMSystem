@@ -51,6 +51,7 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
                 }
                 txtDesignation.Text = "";
+                Response.Redirect("ViewDesignation.aspx");
             }
             else
             { 
@@ -59,6 +60,7 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3ada", "alert('Record Updated successfully.');", true);
                 }
+                Response.Redirect("ViewDesignation.aspx");
             }
         }
     }

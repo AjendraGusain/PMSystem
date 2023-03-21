@@ -94,6 +94,7 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Inserte", "alert('Record Inserted successfully');", true);
                 }
+                txtTeamName.Text = "";
             }
             if (btnAddTeamName.Text == "Update")
             {
@@ -105,11 +106,11 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Update", "alert('Record Updated successfully');", true);
                 }
-                
-                
+                txtTeamName.Text = "";
+
             }
             BindEmployeeList();
-
+            btnAddTeamName.Text = "Add Team";
         }
 
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)

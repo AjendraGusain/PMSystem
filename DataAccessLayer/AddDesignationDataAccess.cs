@@ -109,7 +109,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "Update  Designation Set Designation=@Designation where Id=@Id";
+                string dsResult = "Update  ProjectManagementNew.designation Set Designation=@Designation where Id=@Id";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@Id", Id));
                 cmd.Parameters.Add(new MySqlParameter("@Designation", addDesignation.Designation));

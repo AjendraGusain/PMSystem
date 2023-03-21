@@ -28,24 +28,12 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-
-           
             ddlMProject.DataSource = createTeamBA.GetTeamName();
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
             ddlMProject.Items.Insert(0, new ListItem("-- Select Project Name --", "0"));
-            ddlMTeamName.DataSource = createTeamBA.GetTeamName();
-            ddlMTeamName.DataTextField = "TeamName";
-            ddlMTeamName.DataValueField = "Id";
-            ddlMTeamName.DataBind();
-            ddlMTeamName.Items.Insert(0, new ListItem("-- Select Team Name --", "0"));
-
             
-            
-
-
-            //ddlTeamleader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
         }
 
         protected void grvViewManager_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -124,6 +112,7 @@ namespace ProjectManagement.Admin
                 foreach (var item in userList)
                 {
                     count = 0;
+                    int countFinal = 0;
                     foreach (ListItem listItem in lsManager.Items)
                     {
                         if (listItem.Selected)
@@ -143,9 +132,11 @@ namespace ProjectManagement.Admin
                                 createTeam.Role = "3";
                                 createTeamBA.InsertTeamMember(createTeam);
                             }
+                            countFinal += count;
+                            count = 0;
                         }
                     }
-                    if (count == 0)
+                    if (count == countFinal)
                     {
                         createTeam.Manager = item;
                         createTeam.ProjectId = ddlMProject.SelectedValue;
@@ -195,8 +186,9 @@ namespace ProjectManagement.Admin
             ddlMTeamName.DataTextField = "TeamName";
             ddlMTeamName.DataValueField = "Id";
             ddlMTeamName.DataBind();
+            ddlMTeamName.Items.Insert(0, new ListItem("-- Select Team Name --", "0"));
 
-            
+
         }
 
         protected void grvViewManager_RowEditing(object sender, GridViewEditEventArgs e)
@@ -235,7 +227,6 @@ namespace ProjectManagement.Admin
             dtResult = createTeamBA.GetTeamMemberMangerTLUser(createTeam);
             grvViewManager.DataSource = dtResult.Tables[0];
             grvViewManager.DataBind();
-            dtResult.Reset();
             lsManager.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsManager.DataTextField = "UserName";
             lsManager.DataValueField = "UserId";

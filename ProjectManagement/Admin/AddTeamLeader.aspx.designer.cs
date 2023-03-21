@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProjectManagement
+namespace ProjectManagement.Admin
 {
 
 
-    public partial class AddTeamLeader1
+    public partial class AddTeamLeader
     {
 
         /// <summary>

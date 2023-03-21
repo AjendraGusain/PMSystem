@@ -23,6 +23,7 @@ namespace ProjectManagement.Users
             {
                 DisplayUserTaskDetails();
                 GetTaskDetailsByTaskID();
+                btnPlayTask_Click(null, null);
             }
         }
 
@@ -80,21 +81,53 @@ namespace ProjectManagement.Users
             {
                 if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "In Process")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Already worked on a Task.');", true);
-                    return;
+                    btnPlayTask.Visible = false;
+                    btnPauseTask.Visible = true;
+//                    ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Already worked on a Task.');", true);
+  //                  return;
+                }
+                else if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "Pause")
+                {
+                    btnPlayTask.Visible = true;
+                    btnPauseTask.Visible = false;
                 }
             }
-            btnPlayTask.Visible = false;
-            btnPauseTask.Visible = true;
+            addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatus(addTaskBusinessObj);
             DisplayUserTaskDetails();
         }
 
         protected void btnPauseTask_Click(object sender, EventArgs e)
         {
-
+            Display(null,null);
         }
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void Display(object sender, EventArgs e)
+        {
+            pnlConfirmwindow.Visible = true;
+            ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "OpenConfirmationBox();", true);
+        }
+
+        protected void btnSaveReason_Click(object sender, EventArgs e)
+        {
+            string reason = ddlReason.SelectedItem.Text + " " + txtReason.Text.Trim();
+            addTaskBusinessObj.PauseReason = reason;
+            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
+            addTaskBusinessObj.EmployeeName = loginUserID.ToString();
+            addTaskBusinessObj.AssignedDate = DateTime.Now;
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
+            addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
+            addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
+            DisplayUserTaskDetails();
+            btnPlayTask.Visible = true;
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
         {
 
         }
