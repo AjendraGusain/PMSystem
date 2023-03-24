@@ -95,22 +95,7 @@ namespace BusinessLogicLayer
 
         public DataSet AssignTask(int taskID)
         {
-            //DataSet dsFilter = new DataSet();
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("Pause");
-            //dt.Columns.Add("Resume");
-            //dt.Columns.Add("Break");
-
             taskBO.dsResult = _dataAccess.AssignTask(taskID);
-            //for (int i = 0; i < taskBO.dsResult.Tables[0].Rows.Count; i++)
-            //{
-            //    if (taskBO.dsResult.Tables[0].Rows[i]["Description"].ToString() != "")
-            //    {
-            //        dt.Rows[i]["Pause"] = taskBO.dsResult.Tables[0].Rows[i]["EndTime"].ToString();
-            //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i+1]["StartTime"].ToString();
-            //    }
-            //}
-
             return taskBO.dsResult;
         }
 
@@ -204,38 +189,55 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
+        public DataSet TaskBugHistory(TaskBusinessObject taskStatus)
+        {
+            taskBO.dsResult = _dataAccess.TaskBugHistory(taskStatus);
+            return taskBO.dsResult;
+        }
+        
         public DataSet UserTaskTime(TaskBusinessObject user)
         {
             taskBO.dsResult = _dataAccess.UserTaskTime(user);
-            DataSet dsFilter = new DataSet();
             DataTable dt = taskBO.dsResult.Tables[0];
-            dt.Columns.Add("Pause");
-            dt.Columns.Add("Resume");
-            dt.Columns.Add("Break");
-
+            dt.Columns.Add("Pause", typeof(DateTime));
+            dt.Columns.Add("Resume", typeof(DateTime));
+            dt.Columns.Add("Break", typeof(int));
+            string startDate = "";
+            string startTime = "";
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Description"].ToString() != "")
                 {
                     dt.Rows[i]["Pause"] = dt.Rows[i]["EndTime"].ToString();
-
-                    if (i > 0 && dt.Columns.Contains("StartTime"))
+                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate)
                     {
-                        dt.Rows[i]["Resume"] = dt.Rows[i]["StartTime"].ToString();
+                        dt.Rows[i]["StartDate"] = DBNull.Value;
+                        dt.Rows[i]["StartTime"] = DBNull.Value;
+                    }
+                    else
+                    {
+                        startDate = Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString();
+                        startTime = Convert.ToDateTime(dt.Rows[i]["StartTime"].ToString()).ToShortTimeString();
+                    }
+                    if (i < (dt.Rows.Count-1))//.Contains("StartTime")
+                    {
+                        dt.Rows[i]["Resume"] = Convert.ToDateTime(dt.Rows[i+1]["StartTime"].ToString());
                         DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
                         DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
-                        double diffbreak = (pause - resume).Hours;
-                        dt.Rows[i]["Break"] = diffbreak;
+                        TimeSpan diffbreak = resume.Subtract(pause);
+                        //TimeSpan value = date1.Subtract(date2)
+                        int min = diffbreak.Minutes;
+                        dt.Rows[i]["Break"] = min;
+                        if(dt.Rows[i]["Status"] != DBNull.Value)
+                        {
+                            dt.Rows[i]["Description"] = DBNull.Value;
+                        }
                     }
-                    //if (dt.Rows[i]!= dt.Rows[i+1])
-                    //{
-
-                    //}
-                    //else
-                    //{
-                    //    dt.Rows[i]["Resume"] = dt.Rows[i + 1]["StartTime"].ToString();
-                    //}
+                    if(i == (dt.Rows.Count - 1))
+                    {
+                        dt.Rows[i]["Description"]= DBNull.Value;
+                    }
                 }
             }
             return taskBO.dsResult;

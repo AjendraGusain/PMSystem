@@ -61,6 +61,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -78,6 +82,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -99,6 +107,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -121,6 +133,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -142,6 +158,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -158,6 +178,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -179,6 +203,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -202,6 +230,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -226,6 +258,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -312,6 +348,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -335,6 +375,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -358,6 +402,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -393,6 +441,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -416,6 +468,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -451,6 +507,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -474,6 +534,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -526,6 +590,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -542,6 +610,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -597,6 +669,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -619,6 +695,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -626,14 +706,40 @@ namespace DataAccessLayer
         {
             try
             {
-                string spName = "sp_InitialPauseJob";
-                Hashtable obj = new Hashtable();
-                obj.Add("@UserCheckId", taskStatus.EmployeeName);
-                obj.Add("@TaskCheckID", taskStatus.TaskID);
-                obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
-                obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
-                obj.Add("@PauseReasonComment", taskStatus.PauseReason);
-                addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                if (taskStatus.PauseReasonStatus == null)
+                {
+                    string spName = "sp_InitialPauseJob";
+                    Hashtable obj = new Hashtable();
+                    obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                    obj.Add("@TaskCheckID", taskStatus.TaskID);
+                    obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
+                    obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                    obj.Add("@PauseReasonComment", taskStatus.PauseReason);
+                    addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                }
+                else if (taskStatus.PauseReasonStatus.Contains("End of the Day")|| taskStatus.PauseReasonStatus.Contains("Completed")||
+                    taskStatus.PauseReasonStatus.Contains("Ready for Test"))
+                {
+                    string spName = "sp_PauseReasonStatusJob";
+                    Hashtable obj = new Hashtable();
+                    obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                    obj.Add("@TaskCheckID", taskStatus.TaskID);
+                    obj.Add("@PauseReasonStatus", taskStatus.PauseReasonStatus);
+                    addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                }
+                else
+               // if (taskStatus.PauseReasonStatus == "Bug History")
+                {
+                    string dsResult = "insert  into ProjectManagementNew.user_task_Bug (UserId,Date,BugDescription) values(@UserId,Now(), @PauseReasonStatus);";
+                    MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@UserId", taskStatus.EmployeeName));
+                    cmd.Parameters.Add(new MySqlParameter("@PauseReasonStatus", taskStatus.PauseReasonStatus));
+                    taskStatus.response = cmd.ExecuteNonQuery();
+                }
                 return addTaskBO.response;
             }
             catch (Exception ex)
@@ -642,6 +748,10 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -655,7 +765,7 @@ namespace DataAccessLayer
                 }
                 string spName = "sp_GetUserTaskTime";
                 Hashtable obj = new Hashtable();
-                obj.Add("@TaskNameID", objUserTask.TaskID);
+                obj.Add("@TaskNameId", objUserTask.TaskID);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }
@@ -665,6 +775,38 @@ namespace DataAccessLayer
             }
             finally
             {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public DataSet TaskBugHistory(TaskBusinessObject objUserTask)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetTaskBugHistory";
+                Hashtable obj = new Hashtable();
+                obj.Add("@TaskNameID", objUserTask.TaskID);
+                obj.Add("@UserNameId", objUserTask.LoginUserID);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
     }
