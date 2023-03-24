@@ -72,7 +72,6 @@ namespace ProjectManagement.Admin
             {
                 lblPause.Text = "No";
             }
-
         }
 
         protected void btnSendDescription_Click(object sender, EventArgs e)
@@ -92,11 +91,6 @@ namespace ProjectManagement.Admin
             DataSet dtResult = addTaskDetails.GetChatDetails();
             lstViewChatBox.DataSource = dtResult;
             lstViewChatBox.DataBind();
-        }
-
-        protected void btnSendDescription_Click1(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -39,8 +39,17 @@ namespace ProjectManagement.Admin
         private void BindEmployee()
         {
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
-            gvAllEmployee.DataSource = addTaskDetails.GetAllUsers(addTaskBusinessObj);
-            gvAllEmployee.DataBind();
+            addTaskBusinessObj.dsResult= addTaskDetails.GetAllUsers(addTaskBusinessObj);
+            if (addTaskBusinessObj.dsResult.Tables[0].Rows.Count == 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('No team assigned to this project. Please assign any team first.');location.href = 'AssignTask.aspx';", true);
+                return;
+            }
+            else
+            {
+                gvAllEmployee.DataSource = addTaskBusinessObj.dsResult.Tables[0];
+                gvAllEmployee.DataBind();
+            }
         }
 
         private void GetTaskDetails(int TaskId, int userId, int projectID)

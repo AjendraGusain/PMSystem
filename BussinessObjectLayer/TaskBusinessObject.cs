@@ -27,5 +27,7 @@ namespace BussinessObjectLayer
         public DateTime EndDate { get; set; }
         public string SearchResult { get; set; }
         public string PauseReason { get; set; }
+
+        public string PauseReasonStatus { get; set; }
     }
 }

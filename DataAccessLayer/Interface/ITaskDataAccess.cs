@@ -28,6 +28,7 @@ namespace DataAccessLayer.Interface
 
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);
 
+
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
 
@@ -44,6 +45,6 @@ namespace DataAccessLayer.Interface
         DataSet SearchResultByDate(TaskBusinessObject searchResult);
 
         DataSet UserTaskTime(TaskBusinessObject objUserTask);
-
+        DataSet TaskBugHistory(TaskBusinessObject objUserTask);
     }
 }

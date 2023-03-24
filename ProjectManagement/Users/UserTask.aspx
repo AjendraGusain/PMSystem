@@ -112,7 +112,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Assign/Play/Pause">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>'></asp:LinkButton>
+                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")%>'></asp:LinkButton>
                                                             <asp:LinkButton ID="lnkbtnPlay" runat="server" Text="Play" CommandName="PlayTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                             <asp:LinkButton ID="lnkbtnPause" runat="server" Text="Pause" CommandName="PauseTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-pause fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                         </ItemTemplate>

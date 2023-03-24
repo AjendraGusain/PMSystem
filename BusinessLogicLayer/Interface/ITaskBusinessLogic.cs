@@ -34,10 +34,11 @@ namespace BusinessLogicLayer.Interface
         DataSet SearchResultByProject(TaskBusinessObject ProjectID);
         DataSet SearchResultByStatus(TaskBusinessObject StatusID);
         DataSet SearchResultByUser(TaskBusinessObject User);
-
         DataSet SearchResultByDate(TaskBusinessObject objDate);
 
         DataSet UserTaskTime(TaskBusinessObject user);
+
+        DataSet TaskBugHistory(TaskBusinessObject user);
 
     }
 }
