@@ -47,7 +47,7 @@ namespace ProjectManagement.Admin
             if (e.CommandName == "ProjectName")
             {
                 int projectID = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("ViewProject.aspx?ProjectId=" + projectID);
+                Response.Redirect("ProjectDetail.aspx?ProjectId=" + projectID);
             }
             if (e.CommandName == "UserName")
             {
@@ -56,8 +56,12 @@ namespace ProjectManagement.Admin
             }
             if (e.CommandName == "ViewAssignedTask")
             {
-                string taskID= Convert.ToInt32(e.CommandArgument).ToString();
-                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID);
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                string projectID = commandArgs[2];
+                string clientID = commandArgs[3];
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim()  + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim());
             }
             if (e.CommandName == "ReAssign")
             {
