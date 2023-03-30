@@ -55,29 +55,55 @@ namespace ProjectManagement.Users
             lblTaskName.Text = dtResult.Tables[0].Rows[0]["TaskName"].ToString();
             lblTaskNumber.Text = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
             lblTaskDetails.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
-            lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
-            lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
+            
+            
             string estimatedTime= dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
             int estimatedMin = Int32.Parse(estimatedTime) * 60;
             TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
-            lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm"); 
-            int totalTime = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
-            int breakTime = Convert.ToInt32(Session["BreakTime"].ToString());
-            int actualTime = totalTime - breakTime;
-            TimeSpan finalActualTime = TimeSpan.FromMinutes(actualTime);
-            lblActualTime.Text = finalActualTime.ToString("hh':'mm");
-            int estimatedError = actualTime - estimatedMin;
-            TimeSpan finalEstimatedError = TimeSpan.FromMinutes(estimatedError);
-            if(finalEstimatedError.Ticks < 0)
+            lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
+
+            if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
             {
-                lblEstimatedError.Text = "-" + finalEstimatedError.ToString("hh':'mm");
+                //lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
+                //lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
+                //int totalTime = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
+                //int breakTime = Convert.ToInt32(Session["BreakTime"].ToString());
+
+                //DateTime i = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()) != null ? Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()) : Convert.ToDateTime(DBNull.Value.ToString());
+
+                //Convert.ToDateTime()
+                lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
+                if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "")
+                    lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();                
+                else
+                    lblEndDate.Text = dtResult.Tables[0].Rows[0]["EndDate"].ToString();
+                
+                int totalTime=0;
+                int breakTime = 0;
+                if (dtResult.Tables[0].Rows[0]["TotalTime"].ToString() != "")
+                    totalTime += Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
+                if (Session["BreakTime"].ToString() != "")
+                    breakTime += Convert.ToInt32(Session["BreakTime"].ToString());
+                
+                int actualTime = totalTime - breakTime;
+                if (actualTime != 0)
+                {
+                    TimeSpan finalActualTime = TimeSpan.FromMinutes(actualTime);
+                    lblActualTime.Text = finalActualTime.ToString("hh':'mm");
+                    int estimatedError = actualTime - estimatedMin;
+                    TimeSpan finalEstimatedError = TimeSpan.FromMinutes(estimatedError);
+                    if (finalEstimatedError.Ticks < 0)
+                    {
+                        lblEstimatedError.Text = "-" + finalEstimatedError.ToString("hh':'mm");
+                    }
+                    else
+                    {
+                        lblEstimatedError.Text = finalEstimatedError.ToString("hh':'mm");
+                    }
+                    TimeSpan finalPauseDuration = TimeSpan.FromMinutes(breakTime);
+                    lblPause.Text = finalPauseDuration.ToString("hh':'mm");
+                }
             }
-            else
-            {
-                lblEstimatedError.Text = finalEstimatedError.ToString("hh':'mm");
-            }
-            TimeSpan finalPauseDuration = TimeSpan.FromMinutes(breakTime);
-            lblPause.Text = finalPauseDuration.ToString("hh':'mm");
         }
 
         protected void grvDisplayUserTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)

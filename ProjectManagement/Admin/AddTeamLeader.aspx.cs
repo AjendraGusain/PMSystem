@@ -15,6 +15,7 @@ namespace ProjectManagement.Admin
 {
     public partial class AddTeamLeader : System.Web.UI.Page
     {
+        ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
         EmployeeBusinessLogic managerName = new EmployeeBusinessLogic();
         ITeamBusinessLogic createTeamBA = new TeamBusinessLogic(new TeamDataAccess());
         TeamBusinessObject createTeam = new TeamBusinessObject();
@@ -41,7 +42,7 @@ namespace ProjectManagement.Admin
 
         protected void grvViewTeamLeader_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Edit")
+            if (e.CommandName == "EditTeamLeader")
             {
                 btnAddTeamLeader.Text = "Update";
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
@@ -80,20 +81,48 @@ namespace ProjectManagement.Admin
             }
 
 
-            else if (e.CommandName == "Delete")
+            else if (e.CommandName == "DeleteTeamLeader")
             {
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 createTeam.ProjectId = commandArgs[0];
                 createTeam.TeamName = commandArgs[1];
-                string userId = commandArgs[2];
+                string teamMemberId= commandArgs[3];
+                string tlUserId = commandArgs[2];
                 Session["ProjectId"] = createTeam.ProjectId;
                 Session["TeamId"] = createTeam.TeamName;
                 //int ProjectID3 = Convert.ToInt32(e.CommandArgument);
-                int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
-                if (Respone > 0)
+               dtResult= addTaskDetails.GetTaskDetails();
+                DataRow[] foundteamLeader = dtResult.Tables[0].Select("UserId = '" + tlUserId + "'");
+                if (foundteamLeader.Length != 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please reassing the task before removing the user.');location.href = 'AddTeamLeader.aspx';", true);
                 }
+                else
+                {
+                    dtResult = createTeamBA.GetTeamDetails(createTeam);
+                    DataRow[] foundteamMember = dtResult.Tables[2].Select("ParrentTeamMemberId = '" + teamMemberId + "'");
+                    if (foundteamMember.Length != 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please remove team members before removing the team leader.');location.href = 'AddTeamLeader.aspx';", true);
+                    }
+                    else
+                    {
+                        createTeam.Manager = tlUserId;
+                        createTeam.ParentTeamId = teamMemberId;
+                        createTeam.IsActive = 0;
+                        createTeam.Role = "4";
+                        int Respone = createTeamBA.UpdateTeamMember(createTeam);
+                        if (Respone > 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Team Leader deleted successfully');", true);
+                        }
+                    }
+                }                    
+                //int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
+                //if (Respone > 0)
+                //{
+                //    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
+                //}
                 gridViewList();
             }
         }

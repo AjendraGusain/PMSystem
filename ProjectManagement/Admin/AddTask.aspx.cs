@@ -39,15 +39,15 @@ namespace ProjectManagement.Admin
         private void BindEmployee()
         {
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
-            addTaskBusinessObj.dsResult= addTaskDetails.GetAllUsers(addTaskBusinessObj);
-            if (addTaskBusinessObj.dsResult.Tables[0].Rows.Count == 0)
+            DataSet dsUsers = addTaskDetails.GetAllUsers(addTaskBusinessObj);
+            if (dsUsers.Tables[0].Rows.Count == 0)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('No team assigned to this project. Please assign any team first.');location.href = 'AssignTask.aspx';", true);
                 return;
             }
             else
             {
-                gvAllEmployee.DataSource = addTaskBusinessObj.dsResult.Tables[0];
+                gvAllEmployee.DataSource = dsUsers.Tables[0];
                 gvAllEmployee.DataBind();
             }
         }
@@ -66,6 +66,11 @@ namespace ProjectManagement.Admin
             {
                 btnAddTask.Text = "Reassign";
                 addTaskBusinessObj.dsResult = addTaskDetails.ReAssignTask(TaskId);
+            }
+            if(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["StatusId"].ToString()=="3")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('User is already working on this task. Please pause the task first.');location.href = 'AssignTask.aspx';", true);
+                return;
             }
 
             BindClientandProject();

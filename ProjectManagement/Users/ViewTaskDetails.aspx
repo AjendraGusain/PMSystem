@@ -8,45 +8,31 @@
 
 
     <script type='text/javascript'>
-        //function openModal() {
-        //    $('[id*=exampleModal]').modal('show');
-        //}
-
         function OpenConfirmationBox() {
             document.getElementById('divShowConfirmwindow').style.display = "block";
             $('#<%=pnlConfirmwindow.ClientID %>').show();
             $("body").addClass("modal-open");
 
         }
-
         function HideConfirmWindow() {
             $("#<%=hdnPause.ClientID %>").val("Yes");
             document.getElementById('divShowConfirmwindow').style.display = "none";
             $('#<%=pnlConfirmwindow.ClientID %>').hide();
             $("body").removeClass("modal-open");
             $("#btnSaveReason").click();
-
         }
-
-
         function OpenConfirmationStatusHistory() {
             document.getElementById('divShowConfirmwindowHistoryStatus').style.display = "block";
             $('#<%=pnlConfirmwindowHistoryStatus.ClientID %>').show();
             $("body").addClass("modal-open");
-
         }
-
         function HideConfirmWindowStatusHistory() {
             $("#<%=hdnPause.ClientID %>").val("Yes");
             document.getElementById('divShowConfirmwindowHistoryStatus').style.display = "none";
             $('#<%=pnlConfirmwindowHistoryStatus.ClientID %>').hide();
             $("body").removeClass("modal-open");
             $("#btnOpenHistoryStatus").click();
-
         }
-
-
-
     </script>
 
     <form runat="server">

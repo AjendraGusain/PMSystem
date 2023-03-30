@@ -91,10 +91,10 @@ namespace DataAccessLayer
 
         public DataSet GetAllEmployee()
         {
+            dsResult.Reset();
             try
             {
                 dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, Designation,UID FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
-             //   dsResult = new Connection().GetDataSetResults("Select UserID, EmployeeCode, UserName, PhoneNumber, Email, Role, RO.RoleId, Designation FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id");
                 return dsResult;
             }
             catch (Exception ex)
@@ -103,9 +103,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
 
@@ -122,9 +124,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
         public DataSet GetAllInTeamEmployee()
@@ -140,9 +144,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
         public DataSet GetEmployeeById(int UserId)
@@ -158,9 +164,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
         public int DeleteEmployee(int Id)
@@ -205,9 +213,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
         public DataSet GetDesignation()
@@ -225,9 +235,11 @@ namespace DataAccessLayer
             }
             finally
             {
-
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
-            //return dsResult;
         }
 
         public DataSet UserCheck(EmployeeBusinessObject addEmployee)
@@ -250,7 +262,6 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@Designation", addEmployee.Designation));
                 cmd.Parameters.Add(new MySqlParameter("@IsAdmin", addEmployee.IsAdmin));
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                //DataSet ds = new DataSet();
                 da.Fill(ds);
             }
             catch (Exception ex)

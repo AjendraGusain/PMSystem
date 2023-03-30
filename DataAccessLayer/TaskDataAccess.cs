@@ -657,7 +657,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetAllCreatedTaskByUser";
+                string spName = "sp_GetSelfAssignedUnassignedTaskByUser";
                 Hashtable obj = new Hashtable();
                 obj.Add("@UserNameID", taskByUser.EmployeeName);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
@@ -734,9 +734,10 @@ namespace DataAccessLayer
                 else
                // if (taskStatus.PauseReasonStatus == "Bug History")
                 {
-                    string dsResult = "insert  into ProjectManagementNew.user_task_Bug (UserId,Date,BugDescription) values(@UserId,Now(), @PauseReasonStatus);";
+                    string dsResult = "insert  into ProjectManagementNew.user_task_Bug (UserId,Date,BugDescription,TaskId) values(@UserId,Now(), @PauseReasonStatus,@UserTaskID);";
                     MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                     cmd.Parameters.Add(new MySqlParameter("@UserId", taskStatus.EmployeeName));
+                    cmd.Parameters.Add(new MySqlParameter("@UserTaskID", taskStatus.TaskID));
                     cmd.Parameters.Add(new MySqlParameter("@PauseReasonStatus", taskStatus.PauseReasonStatus));
                     taskStatus.response = cmd.ExecuteNonQuery();
                 }
@@ -793,7 +794,7 @@ namespace DataAccessLayer
                 string spName = "sp_GetTaskBugHistory";
                 Hashtable obj = new Hashtable();
                 obj.Add("@TaskNameID", objUserTask.TaskID);
-                obj.Add("@UserNameId", objUserTask.LoginUserID);
+                //obj.Add("@UserNameId", objUserTask.LoginUserID);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }

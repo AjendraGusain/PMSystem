@@ -129,6 +129,21 @@ namespace DataAccessLayer
             return dsResult;
         }
 
+        public DataSet GetViewTeam(TeamBusinessObject createTeam)
+        {
+            dsResult.Reset();
+            string spName = "sp_GetTeamMemberbyMangerTLUserByIdViewTeam";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@ProjectNameID", Convert.ToInt32(createTeam.ProjectId)));
+            cmd.Parameters.Add(new MySqlParameter("@TeamNameId", Convert.ToInt32(createTeam.TeamName)));
+            cmd.Parameters.Add(new MySqlParameter("@ManagerNameId", Convert.ToInt32(createTeam.Manager)));
+            cmd.Parameters.Add(new MySqlParameter("@TLNameId", Convert.ToInt32(createTeam.TeamLeader)));
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
+            return dsResult;
+        }
+
         public DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam)
         {
             string spName = "GetTeamMemberById";
@@ -299,6 +314,7 @@ namespace DataAccessLayer
 
         public DataSet GetTeamDetails(TeamBusinessObject createTeam)
         {
+            dsResult.Reset();
             string spName = "sq_TeamDetails";
             MySqlCommand cmd = new MySqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;

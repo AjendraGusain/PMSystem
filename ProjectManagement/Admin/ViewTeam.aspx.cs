@@ -28,7 +28,7 @@ namespace ProjectManagement.Admin
         {
             createTeam.ProjectId = "0";
             createTeam.TeamName = "0";
-            DataSet ds = createTeamBA.GetTeamMemberEmployee(createTeam);
+            DataSet ds = createTeamBA.GetViewTeam(createTeam);
             grvAllViewTeam.DataSource = ds.Tables[2];
             grvAllViewTeam.DataBind();
         }
@@ -43,6 +43,17 @@ namespace ProjectManagement.Admin
                 Session["TeamId"] = TeamId;
                 createTeam.Role = "2";
                 Response.Redirect("TeamDetails.aspx?");
+            }
+
+            if (e.CommandName == "Edit")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string ProjectId = commandArgs[0];
+                string TeamId = commandArgs[1];
+                Session["ProjectId"] = ProjectId;
+                Session["TeamId"] = TeamId;
+                createTeam.Role = "2";
+                Response.Redirect("AddTeamEmployee.aspx?");
             }
         }
     }
