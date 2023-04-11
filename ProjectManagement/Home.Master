@@ -52,8 +52,12 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-bell font-24"></i></a></li>
                         <li class="nav-item dropdown"><a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" />
-                        </a></li>
+                                <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end user-dd" aria-labelledby="dropdownMenuButton1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-power-off me-1 ms-1"></i> Logout</a>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -67,53 +71,62 @@
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="Dashboard.aspx" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a> </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-outline"></i><span class="hide-menu">Client</span> </a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddClient.aspx" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu">Add Client</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewClient.aspx" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Client</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddClient.aspx" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu">Add Client</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewClient.aspx" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Client</span></a> </li>
                             </ul>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Project</span> </a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddProject.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Add Project</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewProject.aspx" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Project</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddProject.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Add Project</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewProject.aspx" class="sidebar-link"><i class="mdi mdi-eye"></i><span class="hide-menu">View Project</span></a> </li>
                             </ul>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Designation</span> </a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddDesignation.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Designation</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewDesignation.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Designation</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddDesignation.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Designation</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewDesignation.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Designation</span></a> </li>
                             </ul>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Role</span> </a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddRole.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Role</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewRole.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Role</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddRole.aspx" class="sidebar-link"><i class="mdi mdi-worker"></i><span class="hide-menu">Add Role</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewRole.aspx" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu">View Role</span></a> </li>
                             </ul>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Employee Section</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Add Employee</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewAllEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">View All Employee</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Add Employee</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewAllEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">View All Employee</span></a> </li>
                             </ul>
                         </li>
+                            <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="../Admin/AddTeamName.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Team Name</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddManager.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Manager</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Team Leader</span></a> </li>
+
+                                <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
+                            </ul>
+                        </li>
+                        </asp:Panel>
+                        <asp:Panel ID="pnlTeamLeaderAccess" runat="server">
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddTeamName.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Team Name</span></a> </li>
-                                <li class="sidebar-item"><a href="AddManager.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Manager</span></a> </li>
-                                <li class="sidebar-item"><a href="AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Team Leader</span></a> </li>
-                                <li class="sidebar-item"><a href="AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
                             </ul>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="ViewTeam.aspx" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">All Team</span></a> </li>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
-                                <li class="sidebar-item"><a href="AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
-                                <li class="sidebar-item"><a href="ViewAllTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View All Task</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
+                                <li class="sidebar-item"><a href="../Admin/ViewAllTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View All Task</span></a> </li>
                             </ul>
                         </li>
                         </asp:Panel>
+                        
                         <asp:Panel ID="pnlUser" runat="server">
-                        <li class="sidebar-item"><a href="UserTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">My Task</span></a> </li>
+                        <li class="sidebar-item"><a href="../Users/UserTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">My Task</span></a> </li>
                         </asp:Panel>
                     </ul>
                 </nav>

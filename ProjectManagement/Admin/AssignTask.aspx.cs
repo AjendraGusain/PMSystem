@@ -17,13 +17,31 @@ namespace ProjectManagement.Admin
         ITaskBusinessLogic assigntaskBLL = new TaskBusinessLogic(new TaskDataAccess());
         ITeamBusinessLogic createTeamBA = new TeamBusinessLogic(new TeamDataAccess());
         TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
+        TeamBusinessObject createTeam = new TeamBusinessObject();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                int roleID = Convert.ToInt32(Session["RoleId"].ToString());
+                int userId = Convert.ToInt32(Session["UserID"].ToString());
+                //if (roleID == 4)
+                //{
+                //    TeamLeaderAccess(roleID, userId);
+                    
+                //}
                 GetAssignedTask();
                 BindClientandProject();
             }
+        }
+
+        private void TeamLeaderAccess(int roleID, int userId)
+        {
+            createTeam.Role = roleID.ToString();
+            createTeam.Employee = userId.ToString();
+            addTaskBusinessObj.dsResult = createTeamBA.GetTeamLeaderTeam(createTeam);
+            addTaskBusinessObj.ProjectID = Convert.ToInt32(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TLUserId"]).ToString();
+            gvTaskDetails.DataSource = addTaskBusinessObj.dsResult.Tables[0];
+            gvTaskDetails.DataBind();
         }
 
         protected void BindClientandProject()
