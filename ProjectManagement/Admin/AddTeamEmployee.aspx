@@ -8,8 +8,9 @@
     <div class="container-fluid"> 
     <div class="card">
         <div class="card-body">
+            <asp:Panel ID="pnlHideForm" runat="server" Visible="false">
             <div class="dataTables_wrapper">
-                <div class="row">
+                <div  class="row">
                     <div class="col-sm-7 d-flex mb-5 details">
                         <div class="card-body">
                             
@@ -72,7 +73,8 @@
                     </div>
                 </div>
             </div>
-            
+            </asp:Panel>
+            <asp:Panel ID="pnlHideGrid" Visible="true" runat="server">
            
                               <asp:GridView ID="grvViewEmployee" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"  EnablePaging="true" OnRowCommand="grvViewEmployee_RowCommand" OnRowEditing="grvViewEmployee_RowEditing" 
@@ -124,7 +126,7 @@
                                             </asp:TemplateField>
                                         </Columns>
                                 </asp:GridView>
-                        
+                        </asp:Panel>
         </div>
     </div>
       
