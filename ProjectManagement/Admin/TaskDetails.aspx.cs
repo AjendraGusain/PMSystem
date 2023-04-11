@@ -37,8 +37,9 @@ namespace ProjectManagement.Admin
 
         private void DisplayTaskDetails()
         {
-            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
-            addTaskBusinessObj.LoginUserID = loginUserID;
+            // int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
+            // addTaskBusinessObj.LoginUserID = loginUserID;
+            addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             DataSet dtResult = addTaskDetails.UserTaskTime(addTaskBusinessObj);
             DataTable table = dtResult.Tables[0];
@@ -61,6 +62,8 @@ namespace ProjectManagement.Admin
             lblTaskName.Text = dtResult.Tables[0].Rows[0]["TaskName"].ToString();
             lblTaskNumber.Text = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
             lblTaskDetails.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
+            lblTaskCreatedBy.Text= dtResult.Tables[0].Rows[0]["CreatedByUser"].ToString();
+            lblTaskCreatedDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["TaskCreatedDate"].ToString()).ToShortDateString();
             string estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
             int estimatedMin = Int32.Parse(estimatedTime) * 60;
             TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
@@ -69,10 +72,9 @@ namespace ProjectManagement.Admin
             if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
             {
                 lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
-                if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "")
+                if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != ""&& dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
                     lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
-                else
-                    lblEndDate.Text = dtResult.Tables[0].Rows[0]["EndDate"].ToString();
+                
                 //DateTime currentTime = TimeZoneInfo.ConvertTime(Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()), TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
                 int totalTime = 0;
                 int breakTime = 0;
@@ -116,22 +118,36 @@ namespace ProjectManagement.Admin
 
         protected void GetChatHistory()
         {
-            DataSet dtResult = addTaskDetails.GetChatDetails();
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            DataSet dtResult = addTaskDetails.GetChatDetails(addTaskBusinessObj);
             lstViewChatBox.DataSource = dtResult;
             lstViewChatBox.DataBind();
         }
 
         protected void btnOpenHistoryStatus_Click(object sender, EventArgs e)
         {
+            txtHistoryStatus.Text = ddlStatus.SelectedItem.Text;
             string pauseReasonStatus = txtHistoryStatus.Text;
             // int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.ProjectID= Request.QueryString["ProjectId"];
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
+            if (pauseReasonStatus == "Reassign")
+            {
+                Response.Redirect("AddTask.aspx?TaskId=" + addTaskBusinessObj.TaskID + "&UserId=" + addTaskBusinessObj.EmployeeName + "&ProjectId=" + addTaskBusinessObj.ProjectID + "&checkIf=" + true);
+            }
             addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
-            DisplayTaskDetails();
-            ddlReason.SelectedItem.Text = "Select";
+            ddlStatus.SelectedItem.Text = "Select";
+            if (pauseReasonStatus == "Completed")
+            {
+                btnPlayTask.Visible = false;
+                btnPauseTask.Visible = false;
+                ddlStatus.Enabled = false;
+            }
+            
             txtHistoryStatus.Text = "";
+            DisplayTaskDetails();
         }
 
         protected void btnCloseHistoryStatus_Click(object sender, EventArgs e)
@@ -142,12 +158,13 @@ namespace ProjectManagement.Admin
         protected void btnClose_Click(object sender, EventArgs e)
         {
             pnlConfirmwindow.Visible = false;
+            ddlStatus.SelectedItem.Text = "Select";
         }
 
         protected void btnSaveReason_Click(object sender, EventArgs e)
         {
             string reason = ddlReason.SelectedItem.Text + " " + txtReason.Text.Trim();
-            addTaskBusinessObj.PauseReason = reason;
+            addTaskBusinessObj.PauseReason = reason.Trim();
             //  int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.AssignedDate = DateTime.Now;
@@ -158,12 +175,15 @@ namespace ProjectManagement.Admin
             DisplayTaskDetails();
             btnPlayTask.Visible = true;
             btnPauseTask.Visible = false;
+            ddlReason.SelectedItem.Text = "--Select Reason--";
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlConfirmwindowHistoryStatus.Visible = true;
+            txtHistoryStatus.Text = ddlStatus.SelectedItem.Text;
             ScriptManager.RegisterStartupScript(this, GetType(), "PopHistory", "OpenConfirmationStatusHistory();", true);
+
         }
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)

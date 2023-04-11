@@ -13,7 +13,7 @@
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <form runat="server">
-                            <asp:GridView ID="grvClient" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="2"
+                            <asp:GridView ID="grvClient" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="10"
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvClient_RowCommand" EnablePaging="true"  
                                 OnPageIndexChanging="grvClient_PageIndexChanging">
                                    <PagerStyle CssClass="" HorizontalAlign="Right" />
