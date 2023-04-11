@@ -46,7 +46,8 @@
                                     <div class="dataTables_filter text-start" id="zero_config_length">
                                         <label>
                                             Search:
-                                        <input id="search" type="search" class="form-control form-control-sm" placeholder="">
+                                       
+                                            <input id="search" type="search" class="form-control form-control-sm" placeholder="">
                                         </label>
                                     </div>
                                 </div>
@@ -66,15 +67,7 @@
                                             <asp:Label ID="lblClientName" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Task Name:</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:Label ID="lblTaskName" runat="server" class="text-muted mb-0"></asp:Label>
-                                        </div>
-                                    </div>
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -87,13 +80,14 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Task Details:</p>
+                                            <p class="mb-0">Start Date:</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:Label ID="lblTaskDetails" runat="server" class="text-muted mb-0"></asp:Label>
+                                            <asp:Label ID="lblStartDate" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
-                                    
+
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -107,13 +101,13 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Actual Time:</p>
+                                            <p class="mb-0">Pause Duration:</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:Label ID="lblActualTime" runat="server" class="text-muted mb-0"></asp:Label>
+                                            <asp:Label ID="lblPause" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
-                                    
+
                                     <hr>
                                 </div>
                                 <div class="col-md-6">
@@ -128,12 +122,13 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Start Date:</p>
+                                            <p class="mb-0">Task Name:</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:Label ID="lblStartDate" runat="server" class="text-muted mb-0"></asp:Label>
+                                            <asp:Label ID="lblTaskName" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -141,6 +136,15 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <asp:Label ID="lblEndDate" runat="server" class="text-muted mb-0"></asp:Label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Actual Time:</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:Label ID="lblActualTime" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
                                     <hr>
@@ -155,17 +159,6 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Pause Duration:</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:Label ID="lblPause" runat="server" class="text-muted mb-0"></asp:Label>
-                                        </div>
-                                    </div>
-                                    
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-
                                             <p class="mb-0">Status:</p>
                                         </div>
                                         <div class="col-sm-9">
@@ -175,25 +168,38 @@
                                                 <asp:ListItem Value="2">Ready for Test</asp:ListItem>
                                                 <asp:ListItem Value="3">End of the Day</asp:ListItem>
                                                 <asp:ListItem Value="4">Bug Report</asp:ListItem>
+                                                <asp:ListItem Value="5">Reassign</asp:ListItem>
                                             </asp:DropDownList>
-                                            <%--<select name="languages" id="lang" class="text-muted">
-                                <option value="">Select</option>
-                                <option value="">Completed</option>
-                                <option value="">Ready for Test</option>
-                                <option value="">End of the Day</option>
-                            </select>--%>
                                         </div>
                                     </div>
-                                    <hr>
+                                </div>
+                            
+                            <div class="col-sm-12 mt-3 text-center">
+                                <%--<p><a href=""><span class="btn btn-danger">Play / Pause</span></a></p>--%>
+                                <asp:Button ID="btnPlayTask" CssClass="btn btn-danger" Text="Play" runat="server" OnClick="btnPlayTask_Click" />
+                                <asp:Button ID="btnPauseTask" CssClass="btn btn-danger" Text="Pause" Visible="false" runat="server" OnClick="btnPauseTask_Click" />
+                            </div>
+                                
+                            <div>
+                                <br />
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <%--<p class="mb-0">Task Details:</p>--%>
+                                    <p>Task Details:</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <asp:Label ID="lblTaskDetails" runat="server"></asp:Label>
+                                    <%--<asp:Label ID="lblTaskDetails" runat="server" class="text-muted mb-0"></asp:Label>--%>
                                 </div>
 
-                                <div class="col-sm-12 mt-3 text-center">
-                                    <%--<p><a href=""><span class="btn btn-danger">Play / Pause</span></a></p>--%>
-                                    <asp:Button ID="btnPlayTask" CssClass="btn btn-danger" Text="Play" runat="server" OnClick="btnPlayTask_Click" />
-                                    <asp:Button ID="btnPauseTask" CssClass="btn btn-danger" Text="Pause" Visible="false" runat="server" OnClick="btnPauseTask_Click" />
-                                </div>
+                                <hr>
                             </div>
                         </div>
+                       </div>
+                        <br />
                         <div class="table-responsive">
                             <div id="zero_config_wrapper" class="dataTables_wrapper">
                                 <h4>Play/Pause History</h4>
@@ -212,19 +218,19 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Start">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblStart" runat="server" Text='<%#Eval("StartTime") %>'></asp:Label>
+                                                            <asp:Label ID="lblStart" runat="server" Text='<%#Eval("StartTime", "{0:t}") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Pause">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblPause" runat="server" Text='<%#Eval("Pause") %>'></asp:Label>
+                                                            <asp:Label ID="lblPause" runat="server" Text='<%#Eval("Pause", "{0:t}") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Resume">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblResume" runat="server" Text='<%#Eval("Resume") %>'></asp:Label>
+                                                            <asp:Label ID="lblResume" runat="server" Text='<%#Eval("Resume", "{0:t}") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>
@@ -261,31 +267,31 @@
                                 <div class="row chat-box scrollable" style="height: 250px">
                                     <div class="col-sm-12">
                                         <div class="row">
-                                                    <asp:GridView ID="gvDisplayBugHistory" runat="server" class="table table-striped table-bordered" AllowPaging="true"
-                                                        PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"
-                                                        OnRowCommand="gvDisplayBugHistory_RowCommand">
-                                                        <Columns>
-                                                            <asp:TemplateField HeaderText="Tester Name">
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="lblTesterName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
-                                                                </ItemTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Date">
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="lblStartTime" runat="server" Text='<%#Eval("Date") %>'></asp:Label>
-                                                                </ItemTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Bug Details">
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="lblBugDetails" runat="server" Text='<%#Eval("BugDescription") %>'></asp:Label>
-                                                                </ItemTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>
-                                                        </Columns>
-                                                    </asp:GridView>
-                                                </div>
+                                            <asp:GridView ID="gvDisplayBugHistory" runat="server" class="table table-striped table-bordered" AllowPaging="true"
+                                                PageSize="40" ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"
+                                                OnRowCommand="gvDisplayBugHistory_RowCommand">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Tester Name">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblTesterName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Date">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblStartTime" runat="server" Text='<%#Eval("Date") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Bug Details">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="lblBugDetails" runat="server" Text='<%#Eval("BugDescription") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -341,7 +347,7 @@
                                 </div>
                             </div>
                         </asp:Panel>
-
+                        <br />
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">

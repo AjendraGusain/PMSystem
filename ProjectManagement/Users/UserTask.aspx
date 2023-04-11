@@ -103,8 +103,8 @@
                                                     <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
                                                     <asp:BoundField DataField="ProjectName" HeaderText="Project Name" />
                                                     <asp:BoundField DataField="TaskNumber" HeaderText="Task#" />
-                                                    <asp:BoundField DataField="StartTime" HeaderText="Start Time" />
-                                                    <asp:BoundField DataField="EndTime" HeaderText="End Time" />
+                                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" />
+                                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" />
                                                     <asp:TemplateField HeaderText="View">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnViewUserTask" CommandName="ViewUserTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' class="badge bg-info"><span class="fa-stack">  <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>

@@ -40,9 +40,12 @@ namespace ProjectManagement.Admin
             {
                 int ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                 GetProjectById(ProjectId);
+                GetCurrentEmployeeByProjectId(ProjectId);
+                GetPastEmployeeByProjectId(ProjectId);
             }
 
         }
+
 
         public void GetProjectById(int ProjectId)
         {
@@ -70,5 +73,34 @@ namespace ProjectManagement.Admin
         }
 
 
+        public void GetCurrentEmployeeByProjectId(int ProjectId)
+        {
+            DataSet ds = _projectBL.GetCurrentEmployeeByProjectId(ProjectId);
+            if (ds != null)
+            {
+                grvCurrentEmployees.DataSource = ds.Tables[0];
+                grvCurrentEmployees.DataBind();
+            }
+        }
+
+        public void GetPastEmployeeByProjectId(int ProjectId)
+        {
+            DataSet ds = _projectBL.GetPastEmployeeByProjectId(ProjectId);
+            if (ds != null)
+            {
+                grvPastEmployees.DataSource = ds.Tables[0];
+                grvPastEmployees.DataBind();
+            }
+        }
+
+        protected void grvCurrentEmployees_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "ViewEmployeeInfo")
+            {
+                Response.Redirect("~/Admin/EmployeeDetail?UserId=" + e.CommandArgument.ToString());
+
+            }
+        }
     }
 }

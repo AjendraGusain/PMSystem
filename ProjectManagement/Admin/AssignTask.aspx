@@ -68,6 +68,12 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Task#">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblTaskNum" runat="server" Text='<%#Eval("TaskNumber") %>'></asp:Label>
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Left" />
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Task Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblTaskName" runat="server" Text='<%#Eval("TaskName") %>'></asp:Label>

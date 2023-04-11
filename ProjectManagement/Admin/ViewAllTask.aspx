@@ -10,11 +10,11 @@
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
                     <div class="row">
-<%--                        <div class="col-sm-12 col-md-3">
+                        <div class="col-sm-12 col-md-3">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
                                     Client Name
-                               <asp:DropDownList ID="ddlSearchClient" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true">
+                               <asp:DropDownList ID="ddlSearchClient" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchClient_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </label>
                             </div>
@@ -23,7 +23,7 @@
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
                                     Project Name
-                                <asp:DropDownList ID="ddlSerachProject" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true">
+                                <asp:DropDownList ID="ddlSerachProject" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSerachProject_SelectedIndexChanged">
                                 </asp:DropDownList>    
                                 </label>
                             </div>
@@ -34,10 +34,10 @@
                                     Employee Name
                                     <asp:TextBox ID="txtSearchEmp" runat="server" CssClass="form-control form-control-sm" placeholder="Search Employee.."></asp:TextBox>
                                 </label>
-                                <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" />
-                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" />
+                                <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchEmp_Click" />
+                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                             </div>
-                        </div>--%>
+                        </div>
                         <div class="col-sm-12 col-md-3">
                             <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
                         </div>
@@ -50,7 +50,7 @@
                                 <asp:Panel ID="pnlDisplayAssignTask" runat="server">
 
                                     <asp:GridView ID="grvViewAllTask" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="15"
-                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found">
+                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found" OnRowCommand="grvViewAllTask_RowCommand">
                                         <PagerStyle CssClass="" HorizontalAlign="Right" />
                                         <PagerSettings Mode="NumericFirstLast" PageButtonCount="2" FirstPageText="First" LastPageText="Last" />
                                         <Columns>
@@ -106,7 +106,16 @@
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
 
-                                            <%--<asp:TemplateField HeaderText="Status">
+
+                                            <asp:TemplateField HeaderText="Action">
+                                                <ItemTemplate>
+                                                 <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="EditTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                 <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
+                                            </asp:TemplateField>
+
+                                            <%--<asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%# Eval("TaskId") %>' class="badge bg-info" Text="View"></asp:LinkButton>
                                                     <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>

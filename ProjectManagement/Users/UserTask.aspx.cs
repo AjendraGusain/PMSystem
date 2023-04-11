@@ -256,7 +256,7 @@ namespace ProjectManagement.Users
         protected void GetTaskByClient()
         {
             addTaskBusinessObj.ClientID = ddlSearchClient.SelectedValue;
-            addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByClient(addTaskBusinessObj);
+            addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByClientID(addTaskBusinessObj);
             pnlDisplayUserTask.Visible = true;
             gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
             gvDisplayUserTask.DataBind();
@@ -277,7 +277,7 @@ namespace ProjectManagement.Users
         protected void GetTaskByProject()
         {
             addTaskBusinessObj.ProjectID = ddlSerachProject.SelectedValue;
-            addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByProject(addTaskBusinessObj);
+            addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByProjectID(addTaskBusinessObj);
             pnlDisplayUserTask.Visible = true;
             gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
             gvDisplayUserTask.DataBind();
