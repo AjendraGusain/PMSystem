@@ -54,41 +54,72 @@
                 </div>
               </div>
             </div>
-            <div class="table-responsive">
+
+
+
+
+<div class="table-responsive">
               <div class="dataTables_wrapper container-fluid">
                 <div class="row">
                 	<h4>Current Employee</h4>
-                  <div class="col-sm-12 d-flex">
-                    <table class="table table-striped table-bordered">
-                      <tbody>
-                        <tr>
-                          <td><a href="employeeDetail.html">Employee Name</a></td>
-                          <td>Start Date</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="col-sm-12 ">                                        
+					<asp:GridView ID="grvCurrentEmployees" DataKeyNames="" EmptyDataText="No Record Found"  runat="server" class="table table-striped table-bordered" AutoGenerateColumns="false" OnRowCommand="grvCurrentEmployees_RowCommand"   >
+						<Columns>
+							<asp:TemplateField HeaderText="Employee Name">
+							<ItemTemplate>			
+                                <asp:LinkButton ID="lnkViewClientInfo" runat="server" CausesValidation="false"  CommandArgument='<%# Eval("UserID") %>' CommandName="ViewEmployeeInfo" CssClass="edit-image-icon text-nowrap" datatextfield="Name"  Text='<%# Bind("UserName") %>' Visible="true" />
+							</ItemTemplate>
+							<ItemStyle HorizontalAlign="Left"></ItemStyle>
+							</asp:TemplateField>
+
+							<asp:TemplateField HeaderText="Start Date">
+							<ItemTemplate>
+							<asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("Entrydate") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+							</ItemTemplate>
+							<ItemStyle HorizontalAlign="Left"></ItemStyle>
+							</asp:TemplateField>
+						</Columns>
+					</asp:GridView>                     
                   </div>
                 </div>
               </div>
             </div>
-            <div class="table-responsive">
+			
+
+			<div class="table-responsive">
               <div class="dataTables_wrapper container-fluid">
                 <div class="row">
                 	<h4>Previous Employee</h4>
-                  <div class="col-sm-12 d-flex">
-                    <table class="table table-striped table-bordered">
-                      <tbody>
-                        <tr>
-                          <td><a href="#">Employee Name</a></td>
-                          <td>Start Date</td>
-                          <td>End Date</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="col-sm-12 ">                                        
+					<asp:GridView ID="grvPastEmployees" DataKeyNames="" EmptyDataText="No Record Found"  runat="server" class="table table-striped table-bordered" AutoGenerateColumns="false"  >
+						<Columns>
+							<asp:TemplateField HeaderText="Employee Name">
+							<ItemTemplate>
+							<asp:Label ID="lblUserName" runat="server" Text='<%# Eval("UserName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+							</ItemTemplate>
+							<ItemStyle HorizontalAlign="Left"></ItemStyle>
+							</asp:TemplateField>
+
+							<asp:TemplateField HeaderText="Start Date">
+							<ItemTemplate>
+							<asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("Entrydate") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+							</ItemTemplate>
+							<ItemStyle HorizontalAlign="Left"></ItemStyle>
+							</asp:TemplateField>
+							
+							<asp:TemplateField HeaderText="End Date">
+							<ItemTemplate>
+							<asp:Label ID="lblEndDate" runat="server" Text='<%# Eval("Enddate") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+							</ItemTemplate>
+							<ItemStyle HorizontalAlign="Left"></ItemStyle>
+							</asp:TemplateField>
+						</Columns>
+					</asp:GridView>                     
                   </div>
                 </div>
               </div>
             </div>
+		  
           </div>
         </div>
       </div>
