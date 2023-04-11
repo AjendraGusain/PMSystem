@@ -30,7 +30,6 @@ namespace DataAccessLayer
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@Id", Id));
                 insertSuccess = cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {

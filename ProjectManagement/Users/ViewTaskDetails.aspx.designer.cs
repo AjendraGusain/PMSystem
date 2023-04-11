@@ -33,15 +33,6 @@ namespace ProjectManagement.Users
         protected global::System.Web.UI.WebControls.Label lblClientName;
 
         /// <summary>
-        /// lblTaskName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTaskName;
-
-        /// <summary>
         /// lblTaskNumber control.
         /// </summary>
         /// <remarks>
@@ -51,22 +42,22 @@ namespace ProjectManagement.Users
         protected global::System.Web.UI.WebControls.Label lblTaskNumber;
 
         /// <summary>
-        /// lblActualTime control.
+        /// lblStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActualTime;
+        protected global::System.Web.UI.WebControls.Label lblStartDate;
 
         /// <summary>
-        /// lblWIP control.
+        /// lblTimeEstimate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWIP;
+        protected global::System.Web.UI.WebControls.Label lblTimeEstimate;
 
         /// <summary>
         /// lblPause control.
@@ -87,13 +78,13 @@ namespace ProjectManagement.Users
         protected global::System.Web.UI.WebControls.Label lblProjectName;
 
         /// <summary>
-        /// lblStartDate control.
+        /// lblTaskName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStartDate;
+        protected global::System.Web.UI.WebControls.Label lblTaskName;
 
         /// <summary>
         /// lblEndDate control.
@@ -105,22 +96,22 @@ namespace ProjectManagement.Users
         protected global::System.Web.UI.WebControls.Label lblEndDate;
 
         /// <summary>
-        /// lblTaskDetails control.
+        /// lblActualTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTaskDetails;
+        protected global::System.Web.UI.WebControls.Label lblActualTime;
 
         /// <summary>
-        /// lblTimeEstimate control.
+        /// lblEstimatedError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeEstimate;
+        protected global::System.Web.UI.WebControls.Label lblEstimatedError;
 
         /// <summary>
         /// ddlStatus control.
@@ -148,6 +139,15 @@ namespace ProjectManagement.Users
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPauseTask;
+
+        /// <summary>
+        /// lblTaskDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTaskDetails;
 
         /// <summary>
         /// grvDisplayUserTaskDetails control.
@@ -220,6 +220,51 @@ namespace ProjectManagement.Users
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnPause;
+
+        /// <summary>
+        /// pnlConfirmwindowHistoryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlConfirmwindowHistoryStatus;
+
+        /// <summary>
+        /// txtHistoryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtHistoryStatus;
+
+        /// <summary>
+        /// btnOpenHistoryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOpenHistoryStatus;
+
+        /// <summary>
+        /// btnCloseHistoryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCloseHistoryStatus;
+
+        /// <summary>
+        /// hdnHistoryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnHistoryStatus;
 
         /// <summary>
         /// lstViewChatBox control.

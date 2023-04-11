@@ -153,6 +153,12 @@ namespace BusinessLogicLayer
             return respone;
         }
 
+
+        public DataSet GetViewTeam(TeamBusinessObject createTeam)
+        {
+            dtResult = _teamDataAccess.GetViewTeam(createTeam);
+            return dtResult;
+        }
         public DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam)
         {
             dtResult = _teamDataAccess.GetTeamLeaderTeam(createTeam);

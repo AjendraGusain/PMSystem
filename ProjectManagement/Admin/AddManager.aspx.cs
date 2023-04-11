@@ -38,7 +38,7 @@ namespace ProjectManagement.Admin
 
         protected void grvViewManager_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Edit")
+            if (e.CommandName == "EditManager")
             {
                 btnAddTeamName.Text = "Update";
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
@@ -71,22 +71,38 @@ namespace ProjectManagement.Admin
                     }
                 }
                 dtResult.Reset();
+                
             }
-  
-
-            else if (e.CommandName == "Delete")
+            else if (e.CommandName == "DeleteManager")
             {
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 createTeam.ProjectId = commandArgs[0];
                 createTeam.TeamName = commandArgs[1];
                 string userId= commandArgs[2];
+                string teamMemberId = commandArgs[3];
                 Session["ProjectId"] = createTeam.ProjectId;
                 Session["TeamId"] = createTeam.TeamName;
                 //int ProjectID3 = Convert.ToInt32(e.CommandArgument);
-                int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
-                if (Respone > 0)
+
+                dtResult = createTeamBA.GetTeamDetails(createTeam);
+                DataRow[] foundteamMember = dtResult.Tables[1].Select("ParrentTeamMemberId = '" + teamMemberId + "'");
+                if (foundteamMember.Length != 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please remove team members before removing the manager.');location.href = 'AddManager.aspx';", true);
+                }
+                else
+                {
+                    createTeam.Manager = userId;
+                    createTeam.ParentTeamId = "0";
+                    createTeam.IsActive = 0;
+                    createTeam.Role = "4";
+                    int Respone = createTeamBA.UpdateTeamMember(createTeam);
+                    //int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
+                    if (Respone > 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Manager deleted successfully');", true);
+                    }
+                    gridViewList();
                 }
             }
         }
@@ -148,8 +164,10 @@ namespace ProjectManagement.Admin
                     }
 
                 }
+                
                 dtResult.Reset();
                 gridViewList();
+                
             }
             if (btnAddTeamName.Text == "Add Manager")
             {
@@ -175,6 +193,7 @@ namespace ProjectManagement.Admin
                 gridViewList();
             }
             BindList();
+            btnAddTeamName.Text = "Add Manager";
         }
 
 
@@ -227,7 +246,11 @@ namespace ProjectManagement.Admin
             dtResult = createTeamBA.GetTeamMemberMangerTLUser(createTeam);
             grvViewManager.DataSource = dtResult.Tables[0];
             grvViewManager.DataBind();
-            lsManager.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
+            //lsManager.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
+            //lsManager.DataTextField = "UserName";
+            //lsManager.DataValueField = "UserId";
+            //lsManager.DataBind();
+            lsManager.DataSource = managerName.GetAllEmployee();
             lsManager.DataTextField = "UserName";
             lsManager.DataValueField = "UserId";
             lsManager.DataBind();

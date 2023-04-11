@@ -14,6 +14,8 @@ namespace DataAccessLayer.Interface
         int InsertUserAssignedTask(TaskBusinessObject assignUserTask);
         int UpdateAssignedTaskDetails(TaskBusinessObject assignTask);
         int InsertTaskDetails(TaskBusinessObject task);
+        int DeleteTaskDetails(TaskBusinessObject task);
+        int UpdateTaskDetails(TaskBusinessObject task);
         int InsertChatDetails(TaskBusinessObject Chat);
         DataSet GetClients();
         DataSet GetTeamMemberID(TaskBusinessObject teamMember);
@@ -28,22 +30,26 @@ namespace DataAccessLayer.Interface
 
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);
 
+
         DataSet GetTaskDetails();
         DataSet GetProjectByClient(int objClientID);
 
         DataSet GetAllUsers(TaskBusinessObject objProjectuser);
-        DataSet GetChatDetails();
+        DataSet GetChatDetails(TaskBusinessObject Chat);
         DataSet ReAssignTask(int taskID);
         DataSet AssignTask(int taskID);
         DataSet SearchResult(TaskBusinessObject searchResult);
         DataSet SearchResultByClient(TaskBusinessObject searchResult);
         DataSet SearchResultByProject(TaskBusinessObject searchResult);
 
+
+        DataSet SearchResultByClientID(TaskBusinessObject searchResult);
+        DataSet SearchResultByProjectID(TaskBusinessObject searchResult);
         DataSet SearchResultByStatus(TaskBusinessObject searchResult);
         DataSet SearchResultByUser(TaskBusinessObject searchResult);
         DataSet SearchResultByDate(TaskBusinessObject searchResult);
 
         DataSet UserTaskTime(TaskBusinessObject objUserTask);
-
+        DataSet TaskBugHistory(TaskBusinessObject objUserTask);
     }
 }

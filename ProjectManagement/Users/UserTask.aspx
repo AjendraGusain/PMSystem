@@ -103,8 +103,8 @@
                                                     <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
                                                     <asp:BoundField DataField="ProjectName" HeaderText="Project Name" />
                                                     <asp:BoundField DataField="TaskNumber" HeaderText="Task#" />
-                                                    <asp:BoundField DataField="StartTime" HeaderText="Start Time" />
-                                                    <asp:BoundField DataField="EndTime" HeaderText="End Time" />
+                                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" />
+                                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" />
                                                     <asp:TemplateField HeaderText="View">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="btnViewUserTask" CommandName="ViewUserTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' class="badge bg-info"><span class="fa-stack">  <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
@@ -112,7 +112,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Assign/Play/Pause">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>'></asp:LinkButton>
+                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")%>'></asp:LinkButton>
                                                             <asp:LinkButton ID="lnkbtnPlay" runat="server" Text="Play" CommandName="PlayTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                             <asp:LinkButton ID="lnkbtnPause" runat="server" Text="Pause" CommandName="PauseTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-pause fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                         </ItemTemplate>

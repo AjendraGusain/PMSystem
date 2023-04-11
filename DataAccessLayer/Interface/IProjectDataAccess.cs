@@ -12,6 +12,8 @@ namespace DataAccessLayer.Interface
     public interface IProjectDataAccess
     {
         DataSet GetAllProject();
+        DataSet GetCurrentEmployeeByProjectId(int ProjectId);
+        DataSet GetPastEmployeeByProjectId(int ProjectId);
         DataSet GetProjectById(int ProjectId);
         DataSet GetProjectByName(string ProjectName);
         int InsertProject(ProjectBusinessObject Project);
