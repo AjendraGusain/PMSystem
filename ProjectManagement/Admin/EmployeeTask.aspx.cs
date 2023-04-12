@@ -24,7 +24,10 @@ namespace ProjectManagement.Admin
                 dtResult= addEmployeeLogic.GetAllTaskByUserEmployeeTask(projectId, userId);
                 grvEmployeeTask.DataSource = dtResult.Tables[0];
                 grvEmployeeTask.DataBind();
-                dtResult.Reset();
+                dtResult = addEmployeeLogic.GetAllTaskByUserEmployeeTask(projectId, userId);
+                grvReassign.DataSource = dtResult.Tables[1];
+                grvReassign.DataBind();
+
             }
         }
 

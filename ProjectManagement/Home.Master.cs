@@ -15,7 +15,7 @@ namespace ProjectManagement
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("~/Login.aspx");
             }
             else
             {
@@ -24,15 +24,19 @@ namespace ProjectManagement
                 {
                     pnlAdmin.Visible = true;
                     pnlUser.Visible = false;
+                    pnlTeamLeaderAccess.Visible = true;
                 }
                 else if (roleID == 2)//For User 
                 {
                     pnlAdmin.Visible = false;
+                    pnlTeamLeaderAccess.Visible = false;
                     pnlUser.Visible = true;
                 }
                 else if (roleID == 3|| roleID == 4)
                 {
-
+                    pnlAdmin.Visible = false;
+                    pnlTeamLeaderAccess.Visible = true;
+                    pnlUser.Visible = true;
                 }
             }
         }

@@ -131,6 +131,7 @@ namespace DataAccessLayer
 
         public DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam)
         {
+            dsResult.Reset();
             string spName = "GetTeamMemberById";
             MySqlCommand cmd = new MySqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -297,6 +298,21 @@ namespace DataAccessLayer
             }
         }
 
+        public DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam)
+        {
+            dsResult.Reset();
+            string spName = "sq_GetTeamLeaderTeam";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@Role", Convert.ToInt32(createTeam.Role)));
+            cmd.Parameters.Add(new MySqlParameter("@User", Convert.ToInt32(createTeam.Employee)));
+            cmd.Parameters.Add(new MySqlParameter("@ProjectId", Convert.ToInt32(createTeam.ProjectId)));
+            cmd.Parameters.Add(new MySqlParameter("@TeamId", Convert.ToInt32(createTeam.TeamName)));
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
+            return dsResult;
+        }
+
         public DataSet GetTeamDetails(TeamBusinessObject createTeam)
         {
             string spName = "sq_TeamDetails";
@@ -310,6 +326,7 @@ namespace DataAccessLayer
 
         public DataSet GetAllEmployeTeamMemberId(TeamBusinessObject createTeam)
         {
+            dsResult.Reset();
             string spName = "sp_GetEmployeeNotExist";
             MySqlCommand cmd = new MySqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;
