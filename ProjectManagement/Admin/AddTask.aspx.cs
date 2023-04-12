@@ -87,7 +87,6 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('User is already working on this task. Please pause the task first.');", true);
                     Response.Redirect("TaskDetails.aspx?TaskId=" + TaskId + "&UserId=" + userId + "&ProjectId=" + projectID);
-                    //Response.Redirect("TaskDetails.aspx");
                     return;
                 }
                 else
@@ -95,19 +94,6 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('User is already working on this task. Please pause the task first.');location.href = 'AssignTask.aspx';", true);
                     return;
                 }
-
-                //if (checkIf == true)
-                //{
-
-
-                //    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('User is already working on this task. Please pause the task first.');location.href = 'TaskDetails.aspx';", true);
-                //    return;
-                //}
-                //else
-                //{
-                //    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('User is already working on this task. Please pause the task first.');location.href = 'AssignTask.aspx';", true);
-                //    return;
-                //}
             }
             BindClientandProject();
             ddlProjectName.SelectedValue = Convert.ToInt32(addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"]).ToString();
