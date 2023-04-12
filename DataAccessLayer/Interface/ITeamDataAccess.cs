@@ -23,6 +23,8 @@ namespace DataAccessLayer.Interface
         DataSet GetTeamDetails(TeamBusinessObject createTeam);
         DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam);
         DataSet GetTeamMemberMangerTLUser(TeamBusinessObject createTeam);
+
+        DataSet GetViewTeam(TeamBusinessObject createTeam);
         DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam);
         DataSet GetAllEmployeTeamMemberId(TeamBusinessObject createTeam);
         int InsertTeamMember(TeamBusinessObject createTeam);

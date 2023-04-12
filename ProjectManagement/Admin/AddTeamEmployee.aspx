@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AddTeamEmployee.aspx.cs" Inherits="ProjectManagement.Admin.AddTeamEmployee" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
@@ -30,36 +31,34 @@
                       </div>
                     </div>
 
-                <div class="form-group row">
-                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Manager</label>
-                      <div class="col-sm-6">
-                        <asp:DropDownList ID="ddlManager" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlManager_SelectedIndexChanged" AutoPostBack="true">
-                           </asp:DropDownList>
-                      </div>
-                    </div>
+                                        <div class="form-group row">
+                                            <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Manager</label>
+                                            <div class="col-sm-6">
+                                                <asp:DropDownList ID="ddlManager" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlManager_SelectedIndexChanged" AutoPostBack="true">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
 
-                <div class="form-group row">
-                      <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Leader</label>
-                      <div class="col-sm-6">
-                        <asp:DropDownList ID="ddlTeamLeader" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlTeamLeader_SelectedIndexChanged" AutoPostBack="true" >
-                           </asp:DropDownList>
-                      </div>
-                    </div>
+                                        <div class="form-group row">
+                                            <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Leader</label>
+                                            <div class="col-sm-6">
+                                                <asp:DropDownList ID="ddlTeamLeader" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlTeamLeader_SelectedIndexChanged" AutoPostBack="true">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
 
-                    <div class="form-group row">
-                      <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Developer</label>
-                      <div class="col-sm-6">
-                        <asp:ListBox ID="lsEmployee" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
-                                    </asp:ListBox>
+                                        <div class="form-group row">
+                                            <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Developer</label>
+                                            <div class="col-sm-6">
+                                                <asp:ListBox ID="lsEmployee" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"></asp:ListBox>
 
-                      </div>
-                    </div>
+                                            </div>
+                                        </div>
 
-                <div class="form-group row">
-                      <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Tester</label>
-                      <div class="col-sm-6">
-                        <asp:ListBox ID="lsTester" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
-                                    </asp:ListBox>
+                                        <div class="form-group row">
+                                            <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Tester</label>
+                                            <div class="col-sm-6">
+                                                <asp:ListBox ID="lsTester" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"></asp:ListBox>
 
                       </div>
                     </div>

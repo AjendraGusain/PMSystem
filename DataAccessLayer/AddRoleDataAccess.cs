@@ -111,7 +111,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "Update  Role Set Role=@Role where RoleId=@Id";
+                string dsResult = "Update  role Set Role=@Role where RoleId=@Id";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@Id", Id));
                 cmd.Parameters.Add(new MySqlParameter("@Role", addRole.Role));

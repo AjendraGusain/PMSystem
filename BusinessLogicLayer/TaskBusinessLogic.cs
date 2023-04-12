@@ -8,6 +8,8 @@ using DataAccessLayer;
 using BusinessLogicLayer.Interface;
 using System.Data;
 using DataAccessLayer.Interface;
+using System.Globalization;
+
 namespace BusinessLogicLayer
 {
     public class TaskBusinessLogic : ITaskBusinessLogic
@@ -35,6 +37,12 @@ namespace BusinessLogicLayer
         public int InsertTaskDetails(TaskBusinessObject objTask)
         {
             taskBO.response = _dataAccess.InsertTaskDetails(objTask);
+            return taskBO.response;
+        }
+
+        public int UpdateTaskDetails(TaskBusinessObject objTask)
+        {
+            taskBO.response = _dataAccess.UpdateTaskDetails(objTask);
             return taskBO.response;
         }
 
@@ -95,22 +103,7 @@ namespace BusinessLogicLayer
 
         public DataSet AssignTask(int taskID)
         {
-            //DataSet dsFilter = new DataSet();
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("Pause");
-            //dt.Columns.Add("Resume");
-            //dt.Columns.Add("Break");
-
             taskBO.dsResult = _dataAccess.AssignTask(taskID);
-            //for (int i = 0; i < taskBO.dsResult.Tables[0].Rows.Count; i++)
-            //{
-            //    if (taskBO.dsResult.Tables[0].Rows[i]["Description"].ToString() != "")
-            //    {
-            //        dt.Rows[i]["Pause"] = taskBO.dsResult.Tables[0].Rows[i]["EndTime"].ToString();
-            //        dt.Rows[i]["Resume"] = taskBO.dsResult.Tables[0].Rows[i+1]["StartTime"].ToString();
-            //    }
-            //}
-
             return taskBO.dsResult;
         }
 
@@ -133,6 +126,19 @@ namespace BusinessLogicLayer
         }
 
         public DataSet SearchResultByProject(TaskBusinessObject ProjectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByProject(ProjectID);
+            return taskBO.dsResult;
+        }
+
+
+        public DataSet SearchResultByClientID(TaskBusinessObject ClientID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByClient(ClientID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByProjectID(TaskBusinessObject ProjectID)
         {
             taskBO.dsResult = _dataAccess.SearchResultByProject(ProjectID);
             return taskBO.dsResult;
@@ -168,9 +174,9 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
-        public DataSet GetChatDetails()
+        public DataSet GetChatDetails(TaskBusinessObject Chat)
         {
-            taskBO.dsResult = _dataAccess.GetChatDetails();
+            taskBO.dsResult = _dataAccess.GetChatDetails(Chat);
             return taskBO.dsResult;
         }
 
@@ -204,41 +210,77 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
+        public DataSet TaskBugHistory(TaskBusinessObject taskStatus)
+        {
+            taskBO.dsResult = _dataAccess.TaskBugHistory(taskStatus);
+            return taskBO.dsResult;
+        }
+        
         public DataSet UserTaskTime(TaskBusinessObject user)
         {
             taskBO.dsResult = _dataAccess.UserTaskTime(user);
-            DataSet dsFilter = new DataSet();
             DataTable dt = taskBO.dsResult.Tables[0];
-            dt.Columns.Add("Pause");
-            dt.Columns.Add("Resume");
-            dt.Columns.Add("Break");
-
-
+            dt.Columns.Add("Pause", typeof(DateTime));
+            dt.Columns.Add("Resume", typeof(DateTime));
+            dt.Columns.Add("Break", typeof(int));
+            string startDate = "";
+            string startTime = "";
+            string userName = "";
+            CultureInfo ci = CultureInfo.InvariantCulture;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Description"].ToString() != "")
                 {
-                    dt.Rows[i]["Pause"] = dt.Rows[i]["EndTime"].ToString();
-
-                    if (i > 0 && dt.Columns.Contains("StartTime"))
+                    dt.Rows[i]["Pause"] = Convert.ToDateTime(dt.Rows[i]["EndTime"].ToString());
+                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate&& dt.Rows[i]["UserName"].ToString()== userName)
                     {
-                        dt.Rows[i]["Resume"] = dt.Rows[i]["StartTime"].ToString();
-                        DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
-                        DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
-                        double diffbreak = (pause - resume).Hours;
-                        dt.Rows[i]["Break"] = diffbreak;
+                        dt.Rows[i]["StartDate"] = DBNull.Value;
+                        dt.Rows[i]["StartTime"] = DBNull.Value;
+                        dt.Rows[i]["UserName"] = DBNull.Value;
                     }
-                    //if (dt.Rows[i]!= dt.Rows[i+1])
-                    //{
-
-                    //}
-                    //else
-                    //{
-                    //    dt.Rows[i]["Resume"] = dt.Rows[i + 1]["StartTime"].ToString();
-                    //}
+                    else
+                    {
+                        startDate = Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString();
+                        startTime = Convert.ToDateTime(dt.Rows[i]["StartTime"].ToString()).ToShortTimeString();
+                        userName= dt.Rows[i]["UserName"].ToString();
+                    }
+                    if (i < (dt.Rows.Count - 1))
+                    {
+                        if (startDate == Convert.ToDateTime(dt.Rows[i + 1]["StartDate"].ToString()).ToShortDateString() && userName==dt.Rows[i+1]["UserName"].ToString())
+                        {
+                            dt.Rows[i]["Resume"] = Convert.ToDateTime(dt.Rows[i + 1]["StartTime"].ToString());
+                            DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
+                            DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
+                            TimeSpan diffbreak = resume.Subtract(pause);
+                            int min = diffbreak.Minutes;
+                            dt.Rows[i]["Break"] = min;
+                            if (dt.Rows[i]["Status"] != DBNull.Value)
+                            {
+                                dt.Rows[i]["Description"] = DBNull.Value;
+                            }
+                        }
+                        else
+                        {
+                            //  DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
+                            if (dt.Rows[i]["Status"] != DBNull.Value)
+                            {
+                                dt.Rows[i]["Description"] = DBNull.Value;
+                            }
+                        }
+                    }
+                    if(i == (dt.Rows.Count - 1)&& dt.Rows[i]["Status"] != DBNull.Value)
+                    {
+                        dt.Rows[i]["Description"]= DBNull.Value;
+                    }
                 }
             }
             return taskBO.dsResult;
+        }
+
+        public int DeleteTaskDetails(TaskBusinessObject addTask)
+        {
+            taskBO.response = _dataAccess.DeleteTaskDetails(addTask);
+            return taskBO.response;
         }
     }
 }

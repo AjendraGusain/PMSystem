@@ -13,6 +13,8 @@ namespace BusinessLogicLayer.Interface
     {
         DataSet GetAllProject();
         DataSet GetProjectById(int ProjectId);
+        DataSet GetCurrentEmployeeByProjectId(int ProjectId);
+        DataSet GetPastEmployeeByProjectId(int ProjectId);
         DataSet GetProjectByName(string ProjectName);
         int InsertProject(ProjectBusinessObject Project);
         int DeleteProject(int Id);
