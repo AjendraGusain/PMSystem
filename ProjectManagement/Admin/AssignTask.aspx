@@ -68,6 +68,12 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
                                             </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Task#">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblTaskNum" runat="server" Text='<%#Eval("TaskNumber") %>'></asp:Label>
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Left" />
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Task Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblTaskName" runat="server" Text='<%#Eval("TaskName") %>'></asp:Label>
@@ -82,9 +88,9 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>' class="badge bg-info" Text="View"></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("Id")%>' class="badge bg-info" Text="View"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("Id")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("Id")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>

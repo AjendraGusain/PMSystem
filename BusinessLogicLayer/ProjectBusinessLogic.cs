@@ -29,6 +29,17 @@ namespace BusinessLogicLayer
             return allProject;
         }
 
+        public DataSet GetCurrentEmployeeByProjectId(int ProjectId)
+        {
+            DataSet currentEmployee = _projectRepo.GetCurrentEmployeeByProjectId(ProjectId);
+            return currentEmployee;
+        }
+        public DataSet GetPastEmployeeByProjectId(int ProjectId)
+        {
+            DataSet pastEmployee = _projectRepo.GetPastEmployeeByProjectId(ProjectId);
+            return pastEmployee;
+        }
+
         public DataSet GetProjectById(int ProjectId)
         {
             DataSet allProject = _projectRepo.GetProjectById(ProjectId);

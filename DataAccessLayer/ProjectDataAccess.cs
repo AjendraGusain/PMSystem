@@ -28,6 +28,33 @@ namespace DataAccessLayer
             }
         }
 
+        public DataSet GetCurrentEmployeeByProjectId(int ProjectId)
+        {
+            try
+            {
+                dsResult = new Connection().GetDataSetResults("SELECT user.UserName, team_member.UserId, team_member.Entrydate FROM `team_member` INNER join `user` on team_member.UserId = user.UserId WHERE `ProjectId` = '" + ProjectId + "' and `Is_Active` = '1' group by team_member.UserId");
+                return dsResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public DataSet GetPastEmployeeByProjectId(int ProjectId)
+        {
+            try
+            {
+                dsResult = new Connection().GetDataSetResults("SELECT user.UserName, team_member.Entrydate, team_member.Enddate FROM `team_member` INNER join `user` on team_member.UserId = user.UserId WHERE `ProjectId` = '" + ProjectId + "' and `Is_Active` = '0'and team_member.UserId Not In(SELECT UserId FROM `team_member` WHERE `ProjectId` = '" + ProjectId + "' and `Is_Active` = '1') group by team_member.UserId");
+                return dsResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DataSet GetProjectById(int ProjectId)
         {
             try
@@ -61,23 +88,24 @@ namespace DataAccessLayer
         {
             try
             {
-                var query = "SELECT * FROM project where ";
+                var query = "SELECT project.*, client.ClientName FROM project JOIN client ON project.ClientId = client.ClientId ";
 
-                if (Project.ProjectName != "")
+                if (!string.IsNullOrEmpty(Project.ProjectName))
                 {
-                    query += "ProjectName LIKE '% " + Project.ProjectName + " %'";
+                    query += "WHERE project.ProjectName LIKE '%" + Project.ProjectName + "%'";
                 }
-                if (Project.StartDate != "" && Project.EndDate != "")
+                if (!string.IsNullOrEmpty(Project.StartDate) && !string.IsNullOrEmpty(Project.EndDate))
                 {
-                    query += "OR StartDate <= '" + Project.StartDate + "' AND EndDate <= '" + Project.EndDate + "'";
+                    //query += " AND project.StartDate >= '" + Project.StartDate + "' AND project.EndDate <= '" + Project.EndDate + "'";
+                    query += " AND project.StartDate = '" + Project.StartDate + "' AND project.EndDate = '" + Project.EndDate + "'";
                 }
-                else if (Project.StartDate != "" && Project.EndDate == "")
+                else if (!string.IsNullOrEmpty(Project.StartDate))
                 {
-                    query += " AND StartDate = '" + Project.StartDate + "'";
+                    query += " AND project.StartDate = '" + Project.StartDate + "'";
                 }
-                else if (Project.StartDate == "" && Project.EndDate != "")
+                else if (!string.IsNullOrEmpty(Project.EndDate))
                 {
-                    query += " AND EndDate = '" + Project.EndDate + "'";
+                    query += " AND project.EndDate = '" + Project.EndDate + "'";
                 }
                 dsResult = new Connection().GetDataSetResults(query);
                 return dsResult;

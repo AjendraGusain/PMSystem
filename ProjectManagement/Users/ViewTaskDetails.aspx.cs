@@ -148,6 +148,7 @@ namespace ProjectManagement.Users
             DisplayUserTaskDetails();
             btnPlayTask.Visible = false;
             btnPauseTask.Visible = true;
+            ddlStatus.SelectedItem.Text = "Select";
         }
 
         protected void btnPauseTask_Click(object sender, EventArgs e)
@@ -169,6 +170,11 @@ namespace ProjectManagement.Users
         protected void btnSaveReason_Click(object sender, EventArgs e)
         {
             string reason = ddlReason.SelectedItem.Text + " " + txtReason.Text.Trim();
+            if (reason == "--Select Reason-- ")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please select any reason first.');", true);
+                return;
+            }
             addTaskBusinessObj.PauseReason = reason;
             int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = loginUserID.ToString();
@@ -231,7 +237,8 @@ namespace ProjectManagement.Users
 
         protected void GetChatHistory()
         {
-            DataSet dtResult = addTaskDetails.GetChatDetails();
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            DataSet dtResult = addTaskDetails.GetChatDetails(addTaskBusinessObj);
             lstViewChatBox.DataSource = dtResult;
             lstViewChatBox.DataBind();
         }

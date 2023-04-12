@@ -8,6 +8,8 @@ using DataAccessLayer;
 using BusinessLogicLayer.Interface;
 using System.Data;
 using DataAccessLayer.Interface;
+using System.Globalization;
+
 namespace BusinessLogicLayer
 {
     public class TaskBusinessLogic : ITaskBusinessLogic
@@ -35,6 +37,12 @@ namespace BusinessLogicLayer
         public int InsertTaskDetails(TaskBusinessObject objTask)
         {
             taskBO.response = _dataAccess.InsertTaskDetails(objTask);
+            return taskBO.response;
+        }
+
+        public int UpdateTaskDetails(TaskBusinessObject objTask)
+        {
+            taskBO.response = _dataAccess.UpdateTaskDetails(objTask);
             return taskBO.response;
         }
 
@@ -123,6 +131,19 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+
+        public DataSet SearchResultByClientID(TaskBusinessObject ClientID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByClient(ClientID);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchResultByProjectID(TaskBusinessObject ProjectID)
+        {
+            taskBO.dsResult = _dataAccess.SearchResultByProject(ProjectID);
+            return taskBO.dsResult;
+        }
+
         public DataSet SearchResultByStatus(TaskBusinessObject StatusID)
         {
             taskBO.dsResult = _dataAccess.SearchResultByStatus(StatusID);
@@ -153,9 +174,9 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
-        public DataSet GetChatDetails()
+        public DataSet GetChatDetails(TaskBusinessObject Chat)
         {
-            taskBO.dsResult = _dataAccess.GetChatDetails();
+            taskBO.dsResult = _dataAccess.GetChatDetails(Chat);
             return taskBO.dsResult;
         }
 
@@ -196,7 +217,7 @@ namespace BusinessLogicLayer
         }
         
         public DataSet UserTaskTime(TaskBusinessObject user)
-        {
+        {            
             taskBO.dsResult = _dataAccess.UserTaskTime(user);
             DataTable dt = taskBO.dsResult.Tables[0];
             dt.Columns.Add("Pause", typeof(DateTime));
@@ -204,43 +225,64 @@ namespace BusinessLogicLayer
             dt.Columns.Add("Break", typeof(int));
             string startDate = "";
             string startTime = "";
-
+            string userName = "";
+            CultureInfo ci = CultureInfo.InvariantCulture;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Description"].ToString() != "")
                 {
-                    dt.Rows[i]["Pause"] = dt.Rows[i]["EndTime"].ToString();
-                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate)
+                    dt.Rows[i]["Pause"] = Convert.ToDateTime(dt.Rows[i]["EndTime"].ToString());
+                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate&& dt.Rows[i]["UserName"].ToString()== userName)
                     {
                         dt.Rows[i]["StartDate"] = DBNull.Value;
                         dt.Rows[i]["StartTime"] = DBNull.Value;
+                        dt.Rows[i]["UserName"] = DBNull.Value;
                     }
                     else
                     {
                         startDate = Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString();
                         startTime = Convert.ToDateTime(dt.Rows[i]["StartTime"].ToString()).ToShortTimeString();
+                        userName= dt.Rows[i]["UserName"].ToString();
                     }
-                    if (i < (dt.Rows.Count-1))//.Contains("StartTime")
+                    if (i < (dt.Rows.Count - 1))
                     {
-                        dt.Rows[i]["Resume"] = Convert.ToDateTime(dt.Rows[i+1]["StartTime"].ToString());
-                        DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
-                        DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
-                        TimeSpan diffbreak = resume.Subtract(pause);
-                        //TimeSpan value = date1.Subtract(date2)
-                        int min = diffbreak.Minutes;
-                        dt.Rows[i]["Break"] = min;
-                        if(dt.Rows[i]["Status"] != DBNull.Value)
+                        if (startDate == Convert.ToDateTime(dt.Rows[i + 1]["StartDate"].ToString()).ToShortDateString() && userName==dt.Rows[i+1]["UserName"].ToString())
                         {
-                            dt.Rows[i]["Description"] = DBNull.Value;
+                            dt.Rows[i]["Resume"] = Convert.ToDateTime(dt.Rows[i + 1]["StartTime"].ToString());
+                            DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
+                            DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
+                            TimeSpan diffbreak = resume.Subtract(pause);
+                            int hour= diffbreak.Hours;
+                            int minutes = hour * 60;
+                            int min = diffbreak.Minutes;
+                            dt.Rows[i]["Break"] = min+minutes;
+                            if (dt.Rows[i]["Status"] != DBNull.Value)
+                            {
+                                dt.Rows[i]["Description"] = DBNull.Value;
+                            }
+                        }
+                        else
+                        {
+                            //  DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
+                            if (dt.Rows[i]["Status"] != DBNull.Value)
+                            {
+                                dt.Rows[i]["Description"] = DBNull.Value;
+                            }
                         }
                     }
-                    if(i == (dt.Rows.Count - 1))
+                    if(i == (dt.Rows.Count - 1)&& dt.Rows[i]["Status"] != DBNull.Value)
                     {
                         dt.Rows[i]["Description"]= DBNull.Value;
                     }
                 }
             }
             return taskBO.dsResult;
+        }
+
+        public int DeleteTaskDetails(TaskBusinessObject addTask)
+        {
+            taskBO.response = _dataAccess.DeleteTaskDetails(addTask);
+            return taskBO.response;
         }
     }
 }

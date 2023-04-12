@@ -61,7 +61,8 @@ namespace ProjectManagement.Admin
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
                 string clientID = commandArgs[3];
-                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim()  + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim());
+                string teamID = commandArgs[4];
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim()  + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim() + "&TeamId=" + teamID.Trim());
             }
             if (e.CommandName == "ReAssign")
             {
@@ -69,7 +70,8 @@ namespace ProjectManagement.Admin
                 string taskID = commandArgs[0];
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
-                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim() + "&ProjectId=" + projectID.Trim());
+                string teamID = commandArgs[3];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim() + "&ProjectId=" + projectID.Trim() + "&TeamId=" + teamID.Trim());
             }
             if (e.CommandName == "Assign")
             {
@@ -77,7 +79,8 @@ namespace ProjectManagement.Admin
                 string taskID = commandArgs[0];
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
-                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&ProjectId=" + projectID.Trim());
+                string teamID = commandArgs[3];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&ProjectId=" + projectID.Trim() + "&TeamId=" + teamID.Trim());
             }
         }
 
