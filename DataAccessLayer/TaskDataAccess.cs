@@ -761,15 +761,17 @@ namespace DataAccessLayer
 
         public DataSet UserTaskTime(TaskBusinessObject objUserTask)
         {
+            
             try
             {
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
                 }
+                addTaskBO.dsResult.Reset();
                 string spName = "sp_GetUserTaskTime";
                 Hashtable obj = new Hashtable();
-                obj.Add("@TaskNameId", objUserTask.TaskID);
+                obj.Add("@TaskNameID", objUserTask.TaskID);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }

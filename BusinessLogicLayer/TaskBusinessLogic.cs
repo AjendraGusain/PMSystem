@@ -217,7 +217,7 @@ namespace BusinessLogicLayer
         }
         
         public DataSet UserTaskTime(TaskBusinessObject user)
-        {
+        {            
             taskBO.dsResult = _dataAccess.UserTaskTime(user);
             DataTable dt = taskBO.dsResult.Tables[0];
             dt.Columns.Add("Pause", typeof(DateTime));
@@ -252,8 +252,10 @@ namespace BusinessLogicLayer
                             DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
                             DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
                             TimeSpan diffbreak = resume.Subtract(pause);
+                            int hour= diffbreak.Hours;
+                            int minutes = hour * 60;
                             int min = diffbreak.Minutes;
-                            dt.Rows[i]["Break"] = min;
+                            dt.Rows[i]["Break"] = min+minutes;
                             if (dt.Rows[i]["Status"] != DBNull.Value)
                             {
                                 dt.Rows[i]["Description"] = DBNull.Value;

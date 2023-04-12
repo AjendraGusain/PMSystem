@@ -170,6 +170,11 @@ namespace ProjectManagement.Users
         protected void btnSaveReason_Click(object sender, EventArgs e)
         {
             string reason = ddlReason.SelectedItem.Text + " " + txtReason.Text.Trim();
+            if (reason == "--Select Reason-- ")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please select any reason first.');", true);
+                return;
+            }
             addTaskBusinessObj.PauseReason = reason;
             int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = loginUserID.ToString();

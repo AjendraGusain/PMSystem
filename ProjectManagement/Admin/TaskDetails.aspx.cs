@@ -16,7 +16,6 @@ namespace ProjectManagement.Admin
     public partial class TaskDetails : System.Web.UI.Page
     {
         ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
-
         TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -133,19 +132,25 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.ProjectID= Request.QueryString["ProjectId"];
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
+            DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
+            if (addTaskBusinessObj.PauseReasonStatus=="Reassign" && dtResult.Tables[0].Rows[0]["StatusId"].ToString()=="3")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Already working on this task.');", true);
+                ddlStatus.SelectedItem.Text = "Select";
+                return;
+            }
+            addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
+            ddlStatus.SelectedItem.Text = "Select";
             if (pauseReasonStatus == "Reassign")
             {
                 Response.Redirect("AddTask.aspx?TaskId=" + addTaskBusinessObj.TaskID + "&UserId=" + addTaskBusinessObj.EmployeeName + "&ProjectId=" + addTaskBusinessObj.ProjectID + "&checkIf=" + true);
             }
-            addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
-            ddlStatus.SelectedItem.Text = "Select";
             if (pauseReasonStatus == "Completed")
             {
                 btnPlayTask.Visible = false;
                 btnPauseTask.Visible = false;
                 ddlStatus.Enabled = false;
             }
-            
             txtHistoryStatus.Text = "";
             DisplayTaskDetails();
         }
@@ -164,6 +169,11 @@ namespace ProjectManagement.Admin
         protected void btnSaveReason_Click(object sender, EventArgs e)
         {
             string reason = ddlReason.SelectedItem.Text + " " + txtReason.Text.Trim();
+            if (reason == "--Select Reason-- ")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please select any reason first.');", true);
+                return;
+            }
             addTaskBusinessObj.PauseReason = reason.Trim();
             //  int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
