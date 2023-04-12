@@ -103,6 +103,17 @@
                                     </div>
 
                                     <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Task Assiged To:</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:Label ID="lblTaskAssigedTo" runat="server" class="text-muted mb-0"></asp:Label>
+                                        </div>
+                                    </div>
+
+
+                                    <hr>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">

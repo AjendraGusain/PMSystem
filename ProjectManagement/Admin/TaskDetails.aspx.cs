@@ -62,6 +62,7 @@ namespace ProjectManagement.Admin
             lblTaskNumber.Text = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
             lblTaskDetails.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
             lblTaskCreatedBy.Text= dtResult.Tables[0].Rows[0]["CreatedByUser"].ToString();
+            lblTaskAssigedTo.Text = dtResult.Tables[0].Rows[0]["AssignedTo"].ToString();
             lblTaskCreatedDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["TaskCreatedDate"].ToString()).ToShortDateString();
             string estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
             int estimatedMin = Int32.Parse(estimatedTime) * 60;
@@ -70,6 +71,7 @@ namespace ProjectManagement.Admin
 
             if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
             {
+                if(dtResult.Tables[0].Rows[0]["StartDate"].ToString()!="")
                 lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
                 if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != ""&& dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
                     lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
@@ -133,10 +135,9 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.ProjectID= Request.QueryString["ProjectId"];
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
             DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
-            if (addTaskBusinessObj.PauseReasonStatus=="Reassign" && dtResult.Tables[0].Rows[0]["StatusId"].ToString()=="3")
+            if (dtResult.Tables[0].Rows[0]["StatusId"].ToString()=="3")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Already working on this task.');", true);
-                ddlStatus.SelectedItem.Text = "Select";
                 return;
             }
             addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
@@ -153,6 +154,7 @@ namespace ProjectManagement.Admin
             }
             txtHistoryStatus.Text = "";
             DisplayTaskDetails();
+            GetTaskDetailsByTaskID();
         }
 
         protected void btnCloseHistoryStatus_Click(object sender, EventArgs e)
@@ -186,6 +188,7 @@ namespace ProjectManagement.Admin
             btnPlayTask.Visible = true;
             btnPauseTask.Visible = false;
             ddlReason.SelectedItem.Text = "--Select Reason--";
+            GetTaskDetailsByTaskID();
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,6 +216,7 @@ namespace ProjectManagement.Admin
             DisplayTaskDetails();
             btnPlayTask.Visible = false;
             btnPauseTask.Visible = true;
+            GetTaskDetailsByTaskID();
         }
 
         protected void Display(object sender, EventArgs e)
