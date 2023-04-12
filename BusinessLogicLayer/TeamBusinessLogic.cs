@@ -159,6 +159,18 @@ namespace BusinessLogicLayer
             dtResult = _teamDataAccess.GetViewTeam(createTeam);
             return dtResult;
         }
+        public DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam)
+        {
+            dtResult = _teamDataAccess.GetTeamLeaderTeam(createTeam);
+            return dtResult;
+        }
+
+        public DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam)
+        {
+            dtResult = _teamDataAccess.GetTeamLeaderTeam(createTeam);
+            return dtResult;
+        }
+
         public DataSet GetTeamMemberTeamLeader(TeamBusinessObject createTeam)
         {
             dtResult = _teamDataAccess.GetTeamMemberMangerTLUser(createTeam); ;

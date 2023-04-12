@@ -193,6 +193,7 @@ namespace ProjectManagement.Admin
             pnlConfirmwindowHistoryStatus.Visible = true;
             txtHistoryStatus.Text = ddlStatus.SelectedItem.Text;
             ScriptManager.RegisterStartupScript(this, GetType(), "PopHistory", "OpenConfirmationStatusHistory();", true);
+
         }
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)

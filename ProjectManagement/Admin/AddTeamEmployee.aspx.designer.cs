@@ -15,6 +15,15 @@ namespace ProjectManagement.Admin
     {
 
         /// <summary>
+        /// pnlHideForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlHideForm;
+
+        /// <summary>
         /// ddlMProject control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddEmployee;
+
+        /// <summary>
+        /// pnlHideGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlHideGrid;
 
         /// <summary>
         /// grvViewEmployee control.
