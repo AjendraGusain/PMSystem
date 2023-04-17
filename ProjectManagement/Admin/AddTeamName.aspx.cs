@@ -90,9 +90,13 @@ namespace ProjectManagement.Admin
                 createTeam.TeamName = txtTeamName.Text;
                 createTeam.ProjectId = ddlProject.Text;
                 respone = createTeamBA.InsertTeam(createTeam);
-                if (respone > 0)
+                if (respone == 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Inserte", "alert('Record Inserted successfully');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Inserte", "alert('Record already exists.');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Inserte", "alert('Record Inserted successfully.');", true);
                 }
                 txtTeamName.Text = "";
             }
@@ -101,7 +105,7 @@ namespace ProjectManagement.Admin
                 createTeam.TeamName = txtTeamName.Text;
                 createTeam.ProjectId = ddlProject.SelectedValue;
                 int Id = Convert.ToInt32(Session["EmployeeUserId"]);
-                int response = createTeamBA.UpdateTeam(createTeam, Id);
+                int respone = createTeamBA.UpdateTeam(createTeam, Id);
                 if (respone > 0)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Update", "alert('Record Updated successfully');", true);

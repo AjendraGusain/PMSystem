@@ -14,6 +14,7 @@
                       <label for="Pname" class="col-sm-3 text-center control-label col-form-label">Project Name</label>
                       <div class="col-sm-6">
                           <asp:TextBox runat="server" ID="txtProjectName" class="form-control" placeholder="Project Name...." />
+                          <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" ForeColor="Red" ValidationGroup="AC"></asp:RequiredFieldValidator>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -26,12 +27,13 @@
                       <label for="Sdate" class="col-sm-3 text-center control-label col-form-label">Start Date</label>
                       <div class="col-sm-6"> 
                         <asp:TextBox ID="txtProjectStartDate" runat="server" class="form-control" placeholder="Start Date...." type="date"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="rfvProjectStartDate" runat="server" ControlToValidate="txtProjectStartDate" ErrorMessage="*" ForeColor="Red" ValidationGroup="AC"></asp:RequiredFieldValidator>
                       </div>
                     </div>
                 </section>
                 <div class="border-top text-center">
                     <div class="card-body">
-                     <asp:Button Text="Add Project" runat="server" ID="btnAddProject" OnClick="btnAddProject_Click" CssClass="btn btn-info" ValidationGroup="AD" />
+                     <asp:Button Text="Add Project" runat="server" ID="btnAddProject" OnClick="btnAddProject_Click" CssClass="btn btn-info" ValidationGroup="AC" />
                     </div>
                   </div>
               </div>

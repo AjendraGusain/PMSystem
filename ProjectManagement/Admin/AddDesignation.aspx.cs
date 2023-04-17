@@ -48,10 +48,14 @@ namespace ProjectManagement.Admin
                 successResult = addDesignation.InsertDesignation(addDesignationObj);
                 if (successResult == 1)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');location.href = 'ViewDesignation.aspx';", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record already exists.');location.href = 'ViewDesignation.aspx';", true);
                 }
                 txtDesignation.Text = "";
-                Response.Redirect("ViewDesignation.aspx");
+              //  Response.Redirect("ViewDesignation.aspx");
             }
             else
             { 

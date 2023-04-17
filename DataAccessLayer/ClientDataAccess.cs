@@ -71,12 +71,12 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.client(ClientName, CountryId) values(@ClientName, @Country)";
+                string dsResult = "sp_CheckClientByName";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
-                cmd.Parameters.Add(new MySqlParameter("@ClientName", addClient.ClientName));
-                cmd.Parameters.Add(new MySqlParameter("@Country", addClient.Country));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@CheckClientName", addClient.ClientName));
+                cmd.Parameters.Add(new MySqlParameter("@CountryName", addClient.Country));
                 insertSuccess=cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {

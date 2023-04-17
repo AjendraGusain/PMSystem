@@ -33,6 +33,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlMProject;
 
         /// <summary>
+        /// rvProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvProject;
+
+        /// <summary>
         /// ddlMTeamName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMTeamName;
+
+        /// <summary>
+        /// rvTeamName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvTeamName;
 
         /// <summary>
         /// ddlManager control.
@@ -51,6 +69,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlManager;
 
         /// <summary>
+        /// rvManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvManager;
+
+        /// <summary>
         /// ddlTeamLeader control.
         /// </summary>
         /// <remarks>
@@ -58,6 +85,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTeamLeader;
+
+        /// <summary>
+        /// rvTeamLeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvTeamLeader;
 
         /// <summary>
         /// lsEmployee control.
@@ -69,6 +105,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.ListBox lsEmployee;
 
         /// <summary>
+        /// rvEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvEmployee;
+
+        /// <summary>
         /// lsTester control.
         /// </summary>
         /// <remarks>
@@ -76,6 +121,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lsTester;
+
+        /// <summary>
+        /// rvTester control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvTester;
 
         /// <summary>
         /// btnAddEmployee control.

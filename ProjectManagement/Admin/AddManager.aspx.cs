@@ -28,7 +28,8 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            ddlMProject.DataSource = createTeamBA.GetTeamName();
+            dtResult= createTeamBA.GetTeamName();
+            ddlMProject.DataSource = dtResult.Tables[1];
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
@@ -95,7 +96,7 @@ namespace ProjectManagement.Admin
                     createTeam.Manager = userId;
                     createTeam.ParentTeamId = "0";
                     createTeam.IsActive = 0;
-                    createTeam.Role = "4";
+                    createTeam.Role = "3";
                     int Respone = createTeamBA.UpdateTeamMember(createTeam);
                     //int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
                     if (Respone > 0)
@@ -250,7 +251,7 @@ namespace ProjectManagement.Admin
             //lsManager.DataTextField = "UserName";
             //lsManager.DataValueField = "UserId";
             //lsManager.DataBind();
-            lsManager.DataSource = managerName.GetAllEmployee();
+            lsManager.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsManager.DataTextField = "UserName";
             lsManager.DataValueField = "UserId";
             lsManager.DataBind();

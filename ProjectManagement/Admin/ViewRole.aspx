@@ -26,13 +26,8 @@
 
                                 <asp:TemplateField HeaderText="Action">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditRole" class="link-info" CommandName="EditRole" runat="server" CommandArgument='<%# Eval("RoleId") %>' >Edit</asp:LinkButton> 
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                </asp:TemplateField>
-                                     <asp:TemplateField HeaderText="Action">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnDeleteRole" class="link-info" CommandName="DeleteRole" runat="server" CommandArgument='<%# Eval("RoleId") %>' >Delete</asp:LinkButton> 
+                                        <asp:LinkButton ID="btnEditRole" Text="Edit" CommandName="EditRole" runat="server" CommandArgument='<%# Eval("RoleId") %>' CssClass="link-success"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                        <asp:LinkButton ID="btnDeleteRole" Text="Delete" CommandName="DeleteRole" runat="server" CommandArgument='<%# Eval("RoleId") %>' CssClass="link-danger" OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:TemplateField>

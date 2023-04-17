@@ -344,17 +344,16 @@ namespace ProjectManagement.Admin
 
                     if (addTaskBusinessObj.response == 1)
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "sucess", "alert('Record inserted sucessfully.');location.href = 'AssignTask.aspx';", true);
-                        //ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Record inserted sucessfully.');", true);
+                       // ScriptManager.RegisterStartupScript(this, this.GetType(), "sucess", "alert('Record inserted sucessfully.');location.href = 'AssignTask.aspx';", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Record inserted sucessfully.');", true);
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "fail", "alert('Record not inserted.');location.href = 'AssignTask.aspx';", true);
-                        //ScriptManager.RegisterStartupScript(this, GetType(), "fail", "alert('Record not inserted.');", true);
+                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "fail", "alert('Record not inserted.');location.href = 'AssignTask.aspx';", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "fail", "alert('Record not inserted.');", true);
                     }
                 }
                 ResetAllFields();
-                //Response.Redirect("~/Admin/ViewAllTask.aspx");
             }
         }
 

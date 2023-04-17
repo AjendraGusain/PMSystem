@@ -144,6 +144,19 @@ namespace DataAccessLayer
             return dsResult;
         }
 
+
+        public DataSet CheckTeamTeamMemberExistTask(TeamBusinessObject createTeam)
+        {
+            dsResult.Reset();
+            string spName = "sp_CheckProjectExists";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new MySqlParameter("@ProjectCheckID", Convert.ToInt32(createTeam.ProjectId)));
+            cmd.Parameters.Add(new MySqlParameter("@TeamCheckId", Convert.ToInt32(createTeam.TeamName)));
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
+            return dsResult;
+        }
         public DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam)
         {
             dsResult.Reset();
@@ -161,8 +174,15 @@ namespace DataAccessLayer
 
         public DataSet GetTeamName()
         {
-            dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.team tm inner join ProjectManagementNew.project p on tm.ProjectId=p.ProjectId");
+            dsResult.Reset();
+            string spName = "sp_GetProjectTeamName";
+            MySqlCommand cmd = new MySqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            da.Fill(dsResult);
             return dsResult;
+            //dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.team tm inner join ProjectManagementNew.project p on tm.ProjectId=p.ProjectId");
+            //return dsResult;
         }
 
         public DataSet GetTeamNameById(int Id)
@@ -200,8 +220,8 @@ namespace DataAccessLayer
                 string spName = "sp_AddTeamName";
                 MySqlCommand cmd = new MySqlCommand(spName, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new MySqlParameter("@TeamName", objTeam.TeamName));
-                cmd.Parameters.Add(new MySqlParameter("@ProjectID", objTeam.ProjectId));
+                cmd.Parameters.Add(new MySqlParameter("@CheckTeamName", objTeam.TeamName));
+                cmd.Parameters.Add(new MySqlParameter("@CheckProjectId", objTeam.ProjectId));
                 response = cmd.ExecuteNonQuery();
                 return response;
             }

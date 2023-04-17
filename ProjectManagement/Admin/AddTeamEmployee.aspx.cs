@@ -79,14 +79,22 @@ namespace ProjectManagement.Admin
             createTeam.IsActive = 0;
             //createTeam.Role = "2";
             createTeam.Manager = "0";
-            int Respone = createTeamBA.UpdateTeamMember(createTeam);
-            if (Respone > 0)
+            dtResult = createTeamBA.CheckTeamTeamMemberExistTask(createTeam);
+            if (dtResult.Tables[0].Rows.Count == 0)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
-                Response.Redirect("ViewTeam.aspx?");
+                int Respone = createTeamBA.UpdateTeamMember(createTeam);
+                if (Respone > 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Team Deleted Successfully.');location.href = 'ViewTeam.aspx';", true);
+                    // Response.Redirect("ViewTeam.aspx?");
+                }
             }
-        }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message1", "alert('Team can not be deleted. Task is exists for this team.');location.href = 'ViewTeam.aspx';", true);
+            }
 
+        }
         private void DataBindTeamLeaderViewTeam()
         {
             ddlMProject.DataSource = createTeamBA.GetTeamName();
@@ -129,7 +137,9 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            ddlMProject.DataSource = createTeamBA.GetTeamName();
+            dtResult = createTeamBA.GetTeamName();
+            ddlMProject.DataSource = dtResult.Tables[1];
+            //ddlMProject.DataSource = createTeamBA.GetTeamName();
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
@@ -256,6 +266,30 @@ namespace ProjectManagement.Admin
             lsEmployee.DataTextField = "UserName";
             lsEmployee.DataValueField = "UserId";
             lsEmployee.DataBind();
+
+            lsTester.DataSource = managerName.GetAllEmployee();
+            lsTester.DataTextField = "UserName";
+            lsTester.DataValueField = "UserId";
+            lsTester.DataBind();
+
+
+
+            foreach (var listItem in userList)
+            {
+                ListItem itm = lsEmployee.Items.FindByValue(listItem);
+                if (itm != null)
+                {
+                    itm.Selected = true;
+                }
+            }
+            foreach (var listItem in testerList)
+            {
+                ListItem itm = lsTester.Items.FindByValue(listItem);
+                if (itm != null)
+                {
+                    itm.Selected = true;
+                }
+            }
         }
 
 
@@ -267,12 +301,14 @@ namespace ProjectManagement.Admin
                 int ProjectId = Convert.ToInt32(Session["ProjectId"]);
                 int TeamId = Convert.ToInt32(Session["TeamId"]);
                 string viewTeam = Session["ViewTeam"].ToString();
-                //createTeam.Role = "2";
-                string parrentTeamMemberId = Session["Manager"].ToString();
+                //createTeam.Role = "2";
+                string parrentTeamMemberId = Session["Manager"].ToString();
                 createTeam.Manager = parrentTeamMemberId;
                 dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
                 createTeam.ProjectId = ddlMProject.SelectedValue;
                 createTeam.TeamName = ddlMTeamName.SelectedValue;
+
+
 
                 List<string> userList = new List<string>();
                 List<string> testerList = new List<string>();
@@ -303,6 +339,8 @@ namespace ProjectManagement.Admin
                             }
                             else
                                 createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+
+
 
                             createTeam.IsActive = 1;
                             createTeam.Role = "2";
@@ -339,6 +377,8 @@ namespace ProjectManagement.Admin
                                     else
                                         createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
 
+
+
                                     createTeam.IsActive = 1;
                                     createTeam.Role = "2";
                                     createTeamBA.InsertTeamMember(createTeam);
@@ -361,10 +401,14 @@ namespace ProjectManagement.Admin
                             else
                                 createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
 
+
+
                             createTeam.IsActive = 0;
                             createTeam.Role = "2";
                             createTeamBA.UpdateTeamMember(createTeam);
                         }
+
+
 
                     }
                 }
@@ -385,6 +429,8 @@ namespace ProjectManagement.Admin
                             }
                             else
                                 createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+
+
 
                             createTeam.IsActive = 1;
                             createTeam.Role = "5";
@@ -421,6 +467,8 @@ namespace ProjectManagement.Admin
                                     else
                                         createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
 
+
+
                                     createTeam.IsActive = 1;
                                     createTeam.Role = "5";
                                     createTeamBA.InsertTeamMember(createTeam);
@@ -443,21 +491,25 @@ namespace ProjectManagement.Admin
                             else
                                 createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
 
+
+
                             createTeam.IsActive = 0;
                             createTeam.Role = "5";
                             createTeamBA.UpdateTeamMember(createTeam);
                         }
 
+
+
                     }
                 }
                 if (viewTeam != "")
                 {
-                    Response.Redirect("ViewTeam.aspx?");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "updateallteam", "alert('Updated Successfully');location.href = 'ViewTeam.aspx';", true);
                 }
                 else
                 {
-                    //pnlHideForm.Visible = false;
-                    gridViewList();
+                    //pnlHideForm.Visible = false;
+                    gridViewList();
                 }
             }
             if (btnAddEmployee.Text == "Add Employee")

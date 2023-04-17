@@ -52,11 +52,30 @@ namespace ProjectManagement.Admin
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
         {
+            addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
+            addEmployee.EmployeeEmail = txtEmail.Text.Trim();
+            addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
+            if(btnAddEmployee.Text == "Add Employee")
+            {
+                string checkCode = addEmployeeLogic.UserCheck(addEmployee);
+                if (checkCode == "Code")
+                {
+                    lblCheckCode.Text = "Employee Code Already Exists";
+                }
+                else if (checkCode == "Email")
+                {
+                    lblCheckCode.Text = "Employee Code Already Exists";
+                    lblCheckEmail.Text = "Employee Email Already Exists";
+                }
+                else if (checkCode == "Phone")
+                {
+                    lblCheckCode.Text = "Employee Code Already Exists";
+                    lblCheckEmail.Text = "Employee Email Already Exists";
+                    lblCheckPhone.Text = "Phone Already Exists";
+                }
+            }
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-                addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
                 addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
-                addEmployee.EmployeeEmail = txtEmail.Text.Trim();
-                addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
                 addEmployee.Role = ddlRoleList.SelectedValue;
                 addEmployee.Designation = ddlDesignation.SelectedValue;
                 addEmployee.IsAdmin = chkAdminAuth.Checked;
@@ -94,7 +113,8 @@ namespace ProjectManagement.Admin
                         ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
                     }
                 }
-            Response.Redirect("ViewAllEmployee.aspx");
+                Response.Redirect("ViewAllEmployee.aspx");
+            
         }
 
         protected void BindEmployeeList()

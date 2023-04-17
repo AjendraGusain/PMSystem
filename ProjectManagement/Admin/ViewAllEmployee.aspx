@@ -64,7 +64,7 @@
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnViewEmployee" CssClass="link-info" CommandName="ViewEmployee" runat="server" CommandArgument='<%# Eval("UserId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                     <asp:LinkButton ID="btnEditEmployee" class="link-success" CommandName="EditEmployee" runat="server" CommandArgument='<%# Eval("UserId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%# Eval("UserId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%# Eval("UserId") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
                                             </asp:TemplateField>

@@ -80,11 +80,12 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.designation(Designation) values(@Designation)";
+                //string dsResult = "insert  into ProjectManagementNew.designation(Designation) values(@Designation)";
+                string dsResult = "sp_CheckDesignation";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
-                cmd.Parameters.Add(new MySqlParameter("@Designation", addDesignation.Designation));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@CheckDesignation", addDesignation.Designation));
                 insertSuccess = cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
