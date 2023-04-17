@@ -153,6 +153,11 @@ namespace BusinessLogicLayer
             return respone;
         }
 
+        public DataSet CheckTeamTeamMemberExistTask(TeamBusinessObject createTeam)
+        {
+            dtResult = _teamDataAccess.CheckTeamTeamMemberExistTask(createTeam);
+            return dtResult;
+        }
 
         public DataSet GetViewTeam(TeamBusinessObject createTeam)
         {

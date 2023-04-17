@@ -62,6 +62,11 @@ namespace ProjectManagement.Admin
                     txtClient.Text = "";
                     ddlClientCountry.SelectedValue = "0";
                 }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record already exists.');", true);
+                    return; 
+                }
             }
             else
             {

@@ -26,6 +26,8 @@ namespace BusinessLogicLayer.Interface
         DataSet GetTeamMemberMangerTLUser(TeamBusinessObject createTeam);
         DataSet GetTeamMemberTeamLeader(TeamBusinessObject createTeam);
         DataSet GetViewTeam(TeamBusinessObject createTeam);
+
+        DataSet CheckTeamTeamMemberExistTask(TeamBusinessObject createTeam);
         DataSet GetTeamMemberEmployee(TeamBusinessObject createTeam);
         DataSet GetAllEmployeTeamMemberId(TeamBusinessObject createTeam);
         DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam);

@@ -24,6 +24,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.TextBox txtProjectName;
 
         /// <summary>
+        /// rfvProjectName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProjectName;
+
+        /// <summary>
         /// ddlClient control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProjectStartDate;
+
+        /// <summary>
+        /// rfvProjectStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProjectStartDate;
 
         /// <summary>
         /// btnAddProject control.

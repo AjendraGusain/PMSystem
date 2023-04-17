@@ -69,26 +69,31 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
-        public bool UserCheck(EmployeeBusinessObject userLogin)
+        public string UserCheck(EmployeeBusinessObject userLogin)
         {
             //string sproc = "sp_InsertEmployeeDetails";
             DataSet dtResult = addEmployeeData.UserCheck(userLogin);
-            for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
-            {
-                if (userLogin.EmployeeEmail == dtResult.Tables[0].Rows[i]["Email"].ToString())
-                {
-                    return true;
-                }
-                else if (userLogin.EmployeeCode == dtResult.Tables[0].Rows[i]["EmployeeCode"].ToString())
-                {
-                    return true;
-                }
-                else if (userLogin.EmployeePhone == dtResult.Tables[0].Rows[i]["PhoneNumber"].ToString())
-                {
-                    return true;
-                }
-            }
-            return false;
+           bool checkCode =dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("EmployeeCode") == userLogin.EmployeeCode);
+            bool checkEmail = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("Email") == userLogin.EmployeeCode);
+            bool checkPhone = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("PhoneNumber") == userLogin.EmployeeCode);
+            //string checkEmailCode = "";
+            //for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+            //{
+            //    if (userLogin.EmployeeCode == dtResult.Tables[0].Rows[i]["EmployeeCode"].ToString())
+            //    {
+            //        checkEmailCode="Code";
+            //    }
+            //    if (userLogin.EmployeeEmail == dtResult.Tables[0].Rows[i]["Email"].ToString())
+            //    {
+            //        checkEmailCode= "Email";
+            //    }
+            //    if (userLogin.EmployeePhone == dtResult.Tables[0].Rows[i]["PhoneNumber"].ToString())
+            //    {
+            //        checkEmailCode= "Phone";
+            //    }
+            //}
+            
+            return checkCode+"&"+ checkEmail+"&"+ checkPhone;
         }
 
         public int UpdateToken(string token, string email)

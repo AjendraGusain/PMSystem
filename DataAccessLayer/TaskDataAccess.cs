@@ -307,13 +307,17 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
-                    "UnassignedDate=@UnassignedDate,IsActive='0',StatusId=7 where TaskId=" + assignTask.TaskID + " and ProjectId="
-                    + assignTask.ProjectID + " and TeamMemberId=" + assignTask.TeamMemberID;
-                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
-                cmd.Parameters.Add(new MySqlParameter("@UnassignedByUserID", assignTask.LoginUserID));
-                cmd.Parameters.Add(new MySqlParameter("@UnassignedDate", assignTask.AssignedDate));
-                assignTask.response = cmd.ExecuteNonQuery();
+                //string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
+                //    "UnassignedDate=@UnassignedDate,IsActive='0',StatusId=7 where TaskId=" + assignTask.TaskID + " and ProjectId="
+                //    + assignTask.ProjectID + " and TeamMemberId=" + assignTask.TeamMemberID;
+                string spName = "sp_ReassignTaskByTeamMemberID";
+                Hashtable obj = new Hashtable();
+                obj.Add("@UserCheckId", assignTask.EmployeeName);
+                obj.Add("@TaskCheckID", assignTask.TaskID);
+                obj.Add("@UnassignedByUser", assignTask.LoginUserID);
+                obj.Add("@ProjectCheckID", assignTask.ProjectID);
+                obj.Add("@TeamMemberID", assignTask.TeamMemberID);
+                addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
             }
             catch (Exception ex)
             {

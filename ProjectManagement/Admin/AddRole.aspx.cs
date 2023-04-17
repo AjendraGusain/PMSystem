@@ -46,7 +46,11 @@ namespace ProjectManagement.Admin
             if (btnAddRole.Text == "Add Role")
             {
                 successResult = addRole.InsertRole(addRoleObj);
-                if (successResult == 1)
+                if (successResult == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record already exists.');", true);
+                }
+                else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
                 }

@@ -32,7 +32,18 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                throw ex;
+                if (ex is MySql.Data.MySqlClient.MySqlException)
+                {
+                    insertSuccess = 0;
+                }
+                else
+                {
+                    throw ex;
+                }
+                //string error = ex.Message.ToString();
+                //insertSuccess = 0;
+                //throw ex;
+                //ScriptManager.RegisterStartupScript(this, GetType(), "keyselectedreport", "alert('" + eall.Message.ToString() + "');", true);
             }
             finally
             {
@@ -56,7 +67,7 @@ namespace DataAccessLayer
             {
                 throw ex;
             }
-           
+
         }
 
         public DataSet GetRoleById(int Id)
@@ -82,9 +93,10 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.role (Role) values(@Role)";
+                string dsResult = "sp_CheckRoleName";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
-                cmd.Parameters.Add(new MySqlParameter("@Role", addRole.Role));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@CheckRoleName", addRole.Role));
                 insertSuccess = cmd.ExecuteNonQuery();
 
             }

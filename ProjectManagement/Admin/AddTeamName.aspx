@@ -21,12 +21,14 @@
                       <div class="col-sm-6">
                         <asp:DropDownList ID="ddlProject" runat="server" class="select2 form-select shadow-none" >
                            </asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="rvProject" runat="server" ControlToValidate="ddlProject" InitialValue="0" ErrorMessage="Select Project" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Name</label>
                       <div class="col-sm-6">
                          <asp:TextBox runat="server" ID="txtTeamName" class="form-control"  placeholder="Team Name...." />
+                          <asp:RequiredFieldValidator ID="rvTeamName" runat="server" ControlToValidate="txtTeamName" ErrorMessage="Enter Team Name" Display="Dynamic" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
                       </div>
                     </div>
                 </section>
@@ -63,7 +65,7 @@
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="Edit" runat="server" CommandArgument='<%# Eval("Id") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
-                                                 <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="Delete" runat="server" CommandArgument='<%# Eval("Id") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                 <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="Delete" runat="server" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
                                             </asp:TemplateField>

@@ -24,6 +24,15 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlProject;
 
         /// <summary>
+        /// rvProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvProject;
+
+        /// <summary>
         /// txtTeamName control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTeamName;
+
+        /// <summary>
+        /// rvTeamName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvTeamName;
 
         /// <summary>
         /// btnAddTeamName control.

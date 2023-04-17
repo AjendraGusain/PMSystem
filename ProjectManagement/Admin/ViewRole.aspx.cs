@@ -43,12 +43,15 @@ namespace ProjectManagement.Admin
                 Session["Id"] = Id;
                 int COLIEnhancedPolicyDollarsID = Convert.ToInt32(e.CommandArgument);
                 int dataout = viewRole.DeleteRole(Id);
-                if (dataout > 0)
+                if (dataout == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Role is currently in use.');", true);
+                }
+                else if(dataout>0)
                 {
                     grvRole.EditIndex = -1;
                     ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
                     BindClientList();
-
                 }
             }
         }

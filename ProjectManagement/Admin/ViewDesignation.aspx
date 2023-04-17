@@ -27,16 +27,17 @@
 
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnEditDesignation" class="link-info" CommandName="EditDesignation" runat="server" CommandArgument='<%# Eval("Id") %>'>Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnEditDesignation" class="link-info" Text="Edit" CommandName="EditDesignation" runat="server" CommandArgument='<%# Eval("Id") %>' CssClass="link-success"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDeleteDesignation" class="link-info" Text="Delete" CommandName="DeleteDesignation" runat="server" CommandArgument='<%# Eval("Id") %>' CssClass="link-danger" OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Action">
+                                            <%--<asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnDeleteDesignation" class="link-info" CommandName="DeleteDesignation" runat="server" CommandArgument='<%# Eval("Id") %>'>Delete</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDeleteDesignation" class="link-info" CommandName="DeleteDesignation" runat="server" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');">Delete</asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                         </Columns>
                                     </asp:GridView>
                         </form>

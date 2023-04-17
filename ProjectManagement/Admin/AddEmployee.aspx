@@ -42,7 +42,7 @@
                                     <asp:TextBox runat="server" ID="txtPhoneNo" class="form-control" placeholder="Phone No...." OnTextChanged="txtPhoneNo_TextChanged" AutoPostBack="true" />
                                     <asp:label runat="server" id="lblCheckPhone" ForeColor="Red"></asp:label>
                                     <asp:RequiredFieldValidator ID="rvPhoneNo" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="*" Display="Dynamic" ForeColor="Red" ValidationGroup="ED"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" />
+                                    <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" ValidationGroup="ED"/>
                                 </div>
                             </div>
                             <div class="form-group row">

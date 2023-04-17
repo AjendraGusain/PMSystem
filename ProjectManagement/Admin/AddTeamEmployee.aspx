@@ -21,6 +21,7 @@
                                                 <div class="col-sm-6">
                                                     <asp:DropDownList ID="ddlMProject" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlMProject_SelectedIndexChanged" AutoPostBack="true">
                                                     </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rvProject" runat="server" ControlToValidate="ddlMProject" InitialValue="0" ErrorMessage="Select Project" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -28,6 +29,7 @@
                                                 <div class="col-sm-6">
                                                     <asp:DropDownList ID="ddlMTeamName" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlMTeamName_SelectedIndexChanged" AutoPostBack="true">
                                                     </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rvTeamName" runat="server" ControlToValidate="ddlMTeamName" InitialValue="0" ErrorMessage="Select Team" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
 
@@ -36,6 +38,7 @@
                                                 <div class="col-sm-6">
                                                     <asp:DropDownList ID="ddlManager" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlManager_SelectedIndexChanged" AutoPostBack="true">
                                                     </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rvManager" runat="server" ControlToValidate="ddlManager" InitialValue="0" ErrorMessage="Select Manager" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
 
@@ -44,6 +47,7 @@
                                                 <div class="col-sm-6">
                                                     <asp:DropDownList ID="ddlTeamLeader" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlTeamLeader_SelectedIndexChanged" AutoPostBack="true">
                                                     </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rvTeamLeader" runat="server" ControlToValidate="ddlTeamLeader" InitialValue="0" ErrorMessage="Select Team Leader" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
 
@@ -51,7 +55,7 @@
                                                 <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Developer</label>
                                                 <div class="col-sm-6">
                                                     <asp:ListBox ID="lsEmployee" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"></asp:ListBox>
-
+                                                    <asp:RequiredFieldValidator ID="rvEmployee" runat="server" ControlToValidate="lsEmployee" ErrorMessage="Enter Developer" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
 
@@ -59,7 +63,7 @@
                                                 <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Tester</label>
                                                 <div class="col-sm-6">
                                                     <asp:ListBox ID="lsTester" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"></asp:ListBox>
-
+                                                    <asp:RequiredFieldValidator ID="rvTester" runat="server" ControlToValidate="lsTester" ErrorMessage="Enter Tester" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
                                         </section>
@@ -116,7 +120,7 @@
 
                                 <asp:TemplateField HeaderText="Delete Team Member">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("userID")+","+ Eval("TeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                        <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("userID")+","+ Eval("TeamMemberId")%>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 

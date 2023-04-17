@@ -30,7 +30,8 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            ddlMProject.DataSource = createTeamBA.GetTeamName();
+            dtResult = createTeamBA.GetTeamName();
+            ddlMProject.DataSource = dtResult.Tables[1];
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
@@ -280,7 +281,7 @@ namespace ProjectManagement.Admin
             grvViewTeamLeader.DataSource = dtResult.Tables[1];
             grvViewTeamLeader.DataBind();
             dtResult.Reset();
-            lsTeamLeader.DataSource = managerName.GetAllEmployee();
+            lsTeamLeader.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsTeamLeader.DataTextField = "UserName";
             lsTeamLeader.DataValueField = "UserId";
             lsTeamLeader.DataBind();
