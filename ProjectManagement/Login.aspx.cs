@@ -36,7 +36,7 @@ namespace ProjectManagement
                     Session["RoleID"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
                     Session["UserEmail"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
                     Session["UserID"] = dtResult.Tables[0].Rows[0]["UserId"].ToString();
-                    if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin"|| dtResult.Tables[0].Rows[0]["Role"].ToString() == "TeamLeader")
+                    if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin"|| dtResult.Tables[0].Rows[0]["Role"].ToString() == "TeamLeader"|| dtResult.Tables[0].Rows[0]["Role"].ToString() == "Manager")
                     {
                         Response.Redirect("~/Admin/Dashboard.aspx");
                     }

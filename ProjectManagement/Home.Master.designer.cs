@@ -33,6 +33,15 @@ namespace ProjectManagement
         protected global::System.Web.UI.WebControls.Panel pnlAdmin;
 
         /// <summary>
+        /// pnlManagerTeamAccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlManagerTeamAccess;
+
+        /// <summary>
         /// pnlTeamLeaderAccess control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace ProjectManagement
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlTeamLeaderAccess;
+
+        /// <summary>
+        /// pnlAddTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAddTask;
 
         /// <summary>
         /// pnlUser control.

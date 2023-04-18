@@ -32,7 +32,7 @@ namespace ProjectManagement.Admin
                 int parrentTeamMemberId = Convert.ToInt32(Request.QueryString["ParrentTeamMemberId"]);
 
 
-                if (roleID == 4)
+                if (roleID == 4|| roleID == 3)
                 {
                     TeamLeaderAccess(roleID, userId);
                     DataBindTeamLeaderViewTeam();
@@ -213,11 +213,12 @@ namespace ProjectManagement.Admin
                 //dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
                 dsResultTeamLeader = dtResult;
             }
-            else if (roleID == 4 || viewTeam != "")
+            else if (roleID == 4 || roleID == 3|| viewTeam != "")
             {
                 if (viewTeam == "")
                 {
                     userId = Convert.ToInt32(Session["UserID"].ToString());
+                    createTeam.Employee = userId.ToString();
                     createTeam.Role = roleID.ToString();
                 }
                 else
@@ -331,7 +332,7 @@ namespace ProjectManagement.Admin
                             createTeam.ProjectId = ddlMProject.SelectedValue;
                             createTeam.TeamName = ddlMTeamName.SelectedValue;
                             createTeam.Manager = item.Value;
-                            if (roleID == 4 && viewTeam == "")
+                            if ((roleID == 4 || roleID == 3) && viewTeam == "")
                                 createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (viewTeam != "")
                             {
@@ -368,7 +369,7 @@ namespace ProjectManagement.Admin
                                     createTeam.Manager = listItem1.Value.ToString();
                                     createTeam.ProjectId = ddlMProject.SelectedValue;
                                     createTeam.TeamName = ddlMTeamName.SelectedValue;
-                                    if (roleID == 4 && viewTeam == "")
+                                    if ((roleID == 4|| roleID == 3) && viewTeam == "")
                                         createTeam.ParentTeamId = Session["TLId"].ToString();
                                     else if (viewTeam != "")
                                     {
@@ -392,7 +393,7 @@ namespace ProjectManagement.Admin
                             createTeam.Manager = item;
                             createTeam.ProjectId = ddlMProject.SelectedValue;
                             createTeam.TeamName = ddlMTeamName.SelectedValue;
-                            if (roleID == 4 && viewTeam == "")
+                            if ((roleID == 4|| roleID == 3)&& viewTeam == "")
                                 createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (viewTeam != "")
                             {
@@ -421,7 +422,7 @@ namespace ProjectManagement.Admin
                             createTeam.ProjectId = ddlMProject.SelectedValue;
                             createTeam.TeamName = ddlMTeamName.SelectedValue;
                             createTeam.Manager = item.Value;
-                            if (roleID == 4 && viewTeam == "")
+                            if ((roleID == 4|| roleID == 3)&& viewTeam == "")
                                 createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (viewTeam != "")
                             {
@@ -458,7 +459,7 @@ namespace ProjectManagement.Admin
                                     createTeam.Manager = listItem.Value.ToString();
                                     createTeam.ProjectId = ddlMProject.SelectedValue;
                                     createTeam.TeamName = ddlMTeamName.SelectedValue;
-                                    if (roleID == 4 && viewTeam == "")
+                                    if ((roleID == 4|| roleID == 3)&& viewTeam == "")
                                         createTeam.ParentTeamId = Session["TLId"].ToString();
                                     else if (viewTeam != "")
                                     {
@@ -482,7 +483,7 @@ namespace ProjectManagement.Admin
                             createTeam.Manager = item;
                             createTeam.ProjectId = ddlMProject.SelectedValue;
                             createTeam.TeamName = ddlMTeamName.SelectedValue;
-                            if (roleID == 4 && viewTeam == "")
+                            if ((roleID == 4|| roleID == 3)&& viewTeam == "")
                                 createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (viewTeam != "")
                             {
@@ -508,7 +509,7 @@ namespace ProjectManagement.Admin
                 }
                 else
                 {
-                    //pnlHideForm.Visible = false;
+                    pnlHideForm.Visible = false;
                     gridViewList();
                 }
             }
