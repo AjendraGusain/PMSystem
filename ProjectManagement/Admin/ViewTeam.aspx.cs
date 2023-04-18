@@ -21,7 +21,6 @@ namespace ProjectManagement.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             BindList();
-
         }
 
         private void BindList()
@@ -29,7 +28,7 @@ namespace ProjectManagement.Admin
             createTeam.ProjectId = "0";
             createTeam.TeamName = "0";
             DataSet ds = createTeamBA.GetViewTeam(createTeam);
-            grvAllViewTeam.DataSource = ds.Tables[2];
+            grvAllViewTeam.DataSource = ds.Tables[0];
             grvAllViewTeam.DataBind();
         }
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)

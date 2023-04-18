@@ -24,19 +24,32 @@ namespace ProjectManagement
                 {
                     pnlAdmin.Visible = true;
                     pnlUser.Visible = false;
-                    pnlTeamLeaderAccess.Visible = true;
+                    pnlTeamLeaderAccess.Visible = false;
+                    pnlManagerTeamAccess.Visible = false;
+                    pnlAddTask.Visible = true;
                 }
                 else if (roleID == 2)//For User 
                 {
                     pnlAdmin.Visible = false;
                     pnlTeamLeaderAccess.Visible = false;
+                    pnlManagerTeamAccess.Visible = false;
                     pnlUser.Visible = true;
                 }
-                else if (roleID == 3|| roleID == 4)
+                else if (roleID == 4)//For TL
                 {
                     pnlAdmin.Visible = false;
                     pnlTeamLeaderAccess.Visible = true;
+                    pnlManagerTeamAccess.Visible = false;
                     pnlUser.Visible = true;
+                    pnlAddTask.Visible = true;
+                }
+                else if(roleID == 3)//For Manager
+                {
+                    pnlAdmin.Visible = false;
+                    pnlManagerTeamAccess.Visible = true;
+                    pnlUser.Visible = true;
+                    pnlTeamLeaderAccess.Visible = false;
+                    pnlAddTask.Visible = true;
                 }
             }
         }
