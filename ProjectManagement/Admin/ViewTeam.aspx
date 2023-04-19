@@ -46,7 +46,7 @@
                   <div class="col-sm-12 d-flex">
                       <form runat="server">
                     <asp:GridView ID="grvAllViewTeam" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
-                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvViewTeam_RowCommand">
+                                        ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvViewTeam_RowCommand" OnRowDataBound="grvAllViewTeam_RowDataBound">
                                 <%--<PagerStyle CssClass="" HorizontalAlign="Right" />--%>
                                 <%--<PagerSettings PageButtonCount="5" FirstPageText="Previous"  PreviousPageText="1" NextPageText="2" LastPageText="Next"  Mode="Numeric"  />--%>
                                        <Columns>
@@ -85,7 +85,7 @@
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Action">
+                                            <asp:TemplateField HeaderText="Action" ShowHeader="false">
                                                 <ItemTemplate>
                                                     <%--<asp:LinkButton ID="btnViewEmployee" CssClass="link-info" CommandName="ViewTeam" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>--%>
                                                     <asp:LinkButton ID="btnEditEmployee" class="link-success" CommandName="EditTeam" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("TLUserId")+","+ Eval("ParrentTeamMemberId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>

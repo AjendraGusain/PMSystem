@@ -20,7 +20,11 @@ namespace ProjectManagement.Admin
         TeamBusinessObject createTeam = new TeamBusinessObject();
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindList();
+            if (!IsPostBack)
+            {
+                Global.Role = Session["Role"].ToString();
+                BindList();
+            }
         }
 
         private void BindList()
@@ -35,6 +39,7 @@ namespace ProjectManagement.Admin
         {
             if (e.CommandName == "ViewTeam")
             {
+
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string ProjectId = commandArgs[0];
                 string TeamId = commandArgs[1];
@@ -72,6 +77,20 @@ namespace ProjectManagement.Admin
                 //Session["parrentTeamMemberId"] = parrentTeamMemberId;
                 createTeam.Role = "1";
                 Response.Redirect("AddTeamEmployee.aspx?ProjectId=" + ProjectId.Trim() + "&TeamId=" + TeamId + "&ParrentTeamMemberId=" + ParrentTeamMemberId.Trim() + "&ViewTeam=" + ViewTeam.Trim());
+            }
+        }
+
+        protected void grvAllViewTeam_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (Global.Role == "User")
+                {
+                    LinkButton lnkBtn = (LinkButton)e.Row.FindControl("btnEditEmployee");
+                    lnkBtn.Visible = false;
+                    LinkButton lnkBtn1 = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+                    lnkBtn1.Visible = false;
+                }
             }
         }
     }
