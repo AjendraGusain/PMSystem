@@ -40,5 +40,19 @@ namespace ProjectManagement
                 }
             }
         }
+
+        //protected void btnLogout_Click(object sender, EventArgs e)
+        //{
+        //    Session.Abandon();
+        //    Response.Redirect("~/Login.aspx");
+        //}
+
+        //protected void btnlogin_Click(object sender, EventArgs e)
+        //{
+        //        Session.Abandon();
+        //        //Session.Remove("UserID");
+        //        //Session.Remove("password");
+        //        Response.Redirect("~/Login.aspx");
+        //}
     }
 }

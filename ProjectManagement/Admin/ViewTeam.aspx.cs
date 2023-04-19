@@ -29,7 +29,7 @@ namespace ProjectManagement.Admin
             createTeam.ProjectId = "0";
             createTeam.TeamName = "0";
             DataSet ds = createTeamBA.GetViewTeam(createTeam);
-            grvAllViewTeam.DataSource = ds.Tables[2];
+            grvAllViewTeam.DataSource = ds.Tables[0];
             grvAllViewTeam.DataBind();
         }
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -74,6 +74,14 @@ namespace ProjectManagement.Admin
                 createTeam.Role = "1";
                 Response.Redirect("AddTeamEmployee.aspx?ProjectId=" + ProjectId.Trim() + "&TeamId=" + TeamId + "&ParrentTeamMemberId=" + ParrentTeamMemberId.Trim() + "&ViewTeam=" + ViewTeam.Trim());
             }
+        }
+
+        protected void btnSearchTeam_Click(object sender, EventArgs e)
+        {
+            createTeam.SearchTeam = txtSearchTeam.Text.ToString();
+            DataSet dsResult = createTeamBA.SearchTeam(createTeam);
+            grvAllViewTeam.DataSource = dsResult.Tables[0];
+            grvAllViewTeam.DataBind();
         }
     }
 }

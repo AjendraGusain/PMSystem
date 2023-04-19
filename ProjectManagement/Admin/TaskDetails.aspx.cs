@@ -187,7 +187,7 @@ namespace ProjectManagement.Admin
             DisplayTaskDetails();
             btnPlayTask.Visible = true;
             btnPauseTask.Visible = false;
-            ddlReason.SelectedItem.Text = "--Select Reason--";
+            //ddlReason.SelectedItem.Text = "--Select Reason--";
             GetTaskDetailsByTaskID();
         }
 
@@ -237,18 +237,26 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
             addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
-            addTaskBusinessObj.dsResult = addTaskDetails.GetAllCreatedTaskByUser(addTaskBusinessObj);
+            addTaskBusinessObj.dsResult = addTaskDetails.GetTaskDetailsByTask(addTaskBusinessObj);
             for (int i = 0; i < addTaskBusinessObj.dsResult.Tables[0].Rows.Count; i++)
             {
                 if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "In Process")
                 {
                     btnPlayTask.Visible = false;
                     btnPauseTask.Visible = true;
+                    ddlStatus.Enabled = true;
                 }
                 else if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "Pause")
                 {
                     btnPlayTask.Visible = true;
                     btnPauseTask.Visible = false;
+                    ddlStatus.Enabled = true;
+                }
+                else if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "Unassigned")
+                {
+                    btnPlayTask.Visible = false;
+                    btnPauseTask.Visible = false;
+                    ddlStatus.Enabled = false;
                 }
             }
         }

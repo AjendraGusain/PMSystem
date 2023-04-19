@@ -312,5 +312,11 @@ namespace BusinessLogicLayer
             dtResult = _teamDataAccess.GetAllEmployeTeamMemberId(createTeam);
             return dtResult;
         }
+
+        public DataSet SearchTeam(TeamBusinessObject Team)
+        {
+            dtResult = _teamDataAccess.SearchTeam(Team);
+            return dtResult;
+        }
     }
 }

@@ -34,5 +34,7 @@ namespace DataAccessLayer.Interface
         int UpdateTeamMember(TeamBusinessObject createTeam);
         int EditTeam(TeamBusinessObject createTeam, int Id);
         int DeleteTeam(int Id);
+
+        DataSet SearchTeam(TeamBusinessObject Team);
     }
 }

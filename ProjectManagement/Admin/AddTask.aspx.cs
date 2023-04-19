@@ -148,6 +148,7 @@ namespace ProjectManagement.Admin
             int checkRecord = 0;
             int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
             if (btnAddTask.Text == "Reassign")
             {
                 addTaskBusinessObj.AssignedDate = DateTime.Now;
@@ -286,12 +287,15 @@ namespace ProjectManagement.Admin
                             if (chckrw.Checked == true)
                             {
                                 Label teamMemberId = (Label)row.FindControl("lblTeamMemberID");
+                                Label teamId = (Label)row.FindControl("lblTeamID");
+                                int teamID = Convert.ToInt32(teamId.Text);
                                 int teamMemberID = Convert.ToInt32(teamMemberId.Text);
                                 Label empId = (Label)row.FindControl("lblUserId");
                                 string userName = empId.Text;
                                 Label role = (Label)row.FindControl("lblRoleName");
                                 addTaskBusinessObj.EmployeeName = userName;
                                 addTaskBusinessObj.TeamMemberID = teamMemberID;
+                                addTaskBusinessObj.TeamId = teamID.ToString();
                                 addTaskBusinessObj.response = addTaskDetails.InsertAssignedTaskDetails(addTaskBusinessObj);
                             }
                         }

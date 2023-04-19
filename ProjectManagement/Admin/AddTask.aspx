@@ -7,7 +7,12 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card">
+         
         <div class="card-body wizard-content">
+            <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
             <form class="mt-3" runat="server">
                 <div class="wizard clearfix">
                     <div class="content clearfix">
@@ -73,6 +78,11 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
+                                                <asp:Label ID="lblTeamID" runat="server" Text='<%# Bind("TeamId") %>' Visible="false"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
                                                 <asp:Label ID="lblTeamMemberID" runat="server" Text='<%# Bind("TeamMemberID") %>' Visible="false"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -116,6 +126,12 @@
             </form>
         </div>
     </div>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>

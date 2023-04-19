@@ -15,24 +15,6 @@ namespace ProjectManagement.Admin
     {
 
         /// <summary>
-        /// ddlSearchClient control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSearchClient;
-
-        /// <summary>
-        /// ddlSerachProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSerachProject;
-
-        /// <summary>
         /// txtSearchEmp control.
         /// </summary>
         /// <remarks>
@@ -42,6 +24,24 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.TextBox txtSearchEmp;
 
         /// <summary>
+        /// txtTaskStartDateSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTaskStartDateSearch;
+
+        /// <summary>
+        /// txtTaskEndDateSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTaskEndDateSearch;
+
+        /// <summary>
         /// btnSearchEmp control.
         /// </summary>
         /// <remarks>
@@ -49,15 +49,6 @@ namespace ProjectManagement.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearchEmp;
-
-        /// <summary>
-        /// btnCancelSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelSearch;
 
         /// <summary>
         /// pnlDisplayAssignTask control.
