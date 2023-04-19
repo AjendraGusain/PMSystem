@@ -313,7 +313,7 @@ namespace DataAccessLayer
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("@TeamName", Convert.ToInt32(createTeam.TeamName)));
                 cmd.Parameters.Add(new MySqlParameter("@ProjectID", Convert.ToInt32(createTeam.ProjectId)));
-                cmd.Parameters.Add(new MySqlParameter("@Manager", Convert.ToInt32(createTeam.Manager)));
+                cmd.Parameters.Add(new MySqlParameter("@Employee", Convert.ToInt32(createTeam.Employee)));
                 cmd.Parameters.Add(new MySqlParameter("@ParentTeamMemberId", Convert.ToInt32(createTeam.ParentTeamId)));
                 cmd.Parameters.Add(new MySqlParameter("@RoleId", Convert.ToInt32(createTeam.Role)));
                 cmd.Parameters.Add(new MySqlParameter("@IsActive", Convert.ToInt32(createTeam.IsActive)));

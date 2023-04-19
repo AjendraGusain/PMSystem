@@ -33,17 +33,18 @@ namespace ProjectManagement
                 if (dtResult.Tables[0].Rows.Count > 0)
                 {
                     Session["User"] = dtResult.Tables[0].Rows[0]["UserName"].ToString();
-                    Session["RoleID"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
+                    Session["RoleId"] = dtResult.Tables[0].Rows[0]["RoleId"].ToString();
+                    Session["Role"] = dtResult.Tables[0].Rows[0]["Role"].ToString();
                     Session["UserEmail"] = dtResult.Tables[0].Rows[0]["Email"].ToString();
                     Session["UserID"] = dtResult.Tables[0].Rows[0]["UserId"].ToString();
-                    if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin"|| dtResult.Tables[0].Rows[0]["Role"].ToString() == "TeamLeader"
-                        || dtResult.Tables[0].Rows[0]["Role"].ToString() == "Manager")
+                    Session["Designation"] = dtResult.Tables[0].Rows[0]["Designation"].ToString();
+                    if (dtResult.Tables[0].Rows[0]["Role"].ToString()=="Admin"|| dtResult.Tables[0].Rows[0]["Role"].ToString() == "User")
                     {
+                        if(dtResult.Tables[0].Rows[0]["Role"].ToString() == "Admin" || dtResult.Tables[0].Rows[0]["Designation"].ToString()=="Manager" 
+                            || dtResult.Tables[0].Rows[0]["Designation"].ToString() == "TeamLeader")
                         Response.Redirect("~/Admin/Dashboard.aspx");
-                    }
-                    else if (dtResult.Tables[0].Rows[0]["Role"].ToString() == "User")
-                    {
-                        Response.Redirect("~/Users/UserTask.aspx");
+                        else
+                            Response.Redirect("~/Users/UserTask.aspx");
                     }
                 }
                 else

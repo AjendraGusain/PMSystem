@@ -83,7 +83,7 @@
                         </div>
                     </asp:Panel>
                     <asp:Panel ID="pnlHideGrid" Visible="true" runat="server">
-
+                        <asp:Label ID="lblNotFound" runat="server"></asp:Label>
                         <asp:GridView ID="grvViewEmployee" DataKeyNames="" runat="server" class="table table-striped table-bordered"
                             ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" EnablePaging="true" OnRowCommand="grvViewEmployee_RowCommand" OnRowEditing="grvViewEmployee_RowEditing"
                             OnRowDeleting="grvViewEmployee_RowDeleting" OnRowCreated="grvViewEmployee_RowCreated">
@@ -125,7 +125,7 @@
 
                                 <asp:TemplateField HeaderText="Delete Team Member">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("userID")+","+ Eval("TeamMemberId")%>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                        <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteEmployee" runat="server" CommandArgument='<%#Eval("ProjectId")+","+ Eval("TeamId")+","+ Eval("userID")+","+ Eval("ParrentTeamMemberId")+","+ Eval("RoleId")%>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 

@@ -17,5 +17,10 @@ namespace ProjectManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        public static string Role;
+        public static int RoleIdSession;
+        public static int RoleId;
+        public static int UserId;
+        public static string Designation;
     }
 }
