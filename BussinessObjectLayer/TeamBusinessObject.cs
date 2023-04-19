@@ -16,5 +16,6 @@ namespace BussinessObjectLayer
         public string Role { get; set; }
         public string ParentTeamId { get; set; }
         public int IsActive { get; set; }
+        public string SearchTeam { get; set; }
     }
 }

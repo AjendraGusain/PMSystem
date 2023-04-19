@@ -32,11 +32,11 @@
                         <div class="col-sm-12 col-md-3">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
-                                    Employee Name
-                                    <asp:TextBox ID="txtSearchEmp" runat="server" CssClass="form-control form-control-sm" placeholder="Search Employee.."></asp:TextBox>
+                                    Search
+                                    <asp:TextBox ID="txtSearchEmp" runat="server" CssClass="form-control form-control-sm" placeholder="Search.."></asp:TextBox>
                                 </label>
                                 <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchEmp_Click" />
-                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
+                                <%--<asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />--%>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3">
@@ -44,6 +44,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <div class="row">
@@ -88,9 +92,9 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("Id")%>' class="badge bg-info" Text="View"></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("Id")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("Id")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>' class="badge bg-info" Text="View"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnAssignTask" CommandName="Assign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Assign" Visible='<%# Eval("UserId").ToString() == "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnReAssignTask" CommandName="ReAssign" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>' Text="Reassign" Visible='<%# Eval("UserId").ToString() != "" ? true : false %>' class="badge bg-success"></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
@@ -152,4 +156,10 @@
             </div>
         </div>
     </form>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

@@ -284,5 +284,17 @@ namespace BusinessLogicLayer
             taskBO.response = _dataAccess.DeleteTaskDetails(addTask);
             return taskBO.response;
         }
+
+        public DataSet GetTaskDetailsByTask(TaskBusinessObject Task)
+        {
+            taskBO.dsResult = _dataAccess.GetTaskDetailsByTask(Task);
+            return taskBO.dsResult;
+        }
+
+        public DataSet SearchTask(TaskBusinessObject Task)
+        {
+            taskBO.dsResult = _dataAccess.SearchTask(Task);
+            return taskBO.dsResult;
+        }
     }
 }

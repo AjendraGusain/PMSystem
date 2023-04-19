@@ -15,6 +15,24 @@ namespace ProjectManagement.Admin
     {
 
         /// <summary>
+        /// txtSearchTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchTeam;
+
+        /// <summary>
+        /// btnSearchTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearchTeam;
+
+        /// <summary>
         /// grvAllViewTeam control.
         /// </summary>
         /// <remarks>

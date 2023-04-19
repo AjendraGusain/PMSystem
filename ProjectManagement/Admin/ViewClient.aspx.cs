@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Interface;
 using BussinessObjectLayer;
 using DataAccessLayer;
+using DataAccessLayer.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ProjectManagement.Admin
     public partial class ViewClient : System.Web.UI.Page
     {
         IClientBusinessLogic viewClient = new ClientBusinessLogic(new ClientDataAccess());
+        IProjectDataAccess projectRepo = new ProjectDataAccess();
         DataSet dsResult = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,14 +48,21 @@ namespace ProjectManagement.Admin
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
                 Session["EmployeeUserId"] = Id;
-                int COLIEnhancedPolicyDollarsID = Convert.ToInt32(e.CommandArgument);
-                int dataout = viewClient.DeleteClient(Id);
-                if (dataout > 0)
+                dsResult = projectRepo.GetAllProject();
+                DataRow[] foundClient = dsResult.Tables[0].Select("ClientId = '" + Id + "'");
+                if (foundClient.Length != 0)
                 {
-                    grvClient.EditIndex = -1;
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
-                    BindClientList();
-
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('A project is assigned to this client. Please reassing the project before removing the client.');", true);//location.href = 'AddTeamEmployee.aspx';
+                }
+                else
+                {
+                    int dataout = viewClient.DeleteClient(Id);
+                    if (dataout > 0)
+                    {
+                        grvClient.EditIndex = -1;
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
+                        BindClientList();
+                    }
                 }
             }
         }

@@ -96,7 +96,6 @@ namespace DataAccessLayer
                 }
                 if (!string.IsNullOrEmpty(Project.StartDate) && !string.IsNullOrEmpty(Project.EndDate))
                 {
-                    //query += " AND project.StartDate >= '" + Project.StartDate + "' AND project.EndDate <= '" + Project.EndDate + "'";
                     query += " AND project.StartDate = '" + Project.StartDate + "' AND project.EndDate = '" + Project.EndDate + "'";
                 }
                 else if (!string.IsNullOrEmpty(Project.StartDate))
