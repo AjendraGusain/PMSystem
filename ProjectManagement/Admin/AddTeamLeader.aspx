@@ -60,7 +60,7 @@
                 </div>
             </div>
             </asp:Panel>
-           
+           <asp:Label ID="lblNotFound" runat="server"></asp:Label>
                               <asp:GridView ID="grvViewTeamLeader" DataKeyNames="" runat="server" class="table table-striped table-bordered"  
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found"  EnablePaging="true" OnRowCommand="grvViewTeamLeader_RowCommand" OnRowEditing="grvViewTeamLeader_RowEditing" 
                                   OnRowDeleting="grvViewTeamLeader_RowDeleting">
