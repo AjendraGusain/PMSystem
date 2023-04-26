@@ -88,23 +88,23 @@ namespace DataAccessLayer
         {
             try
             {
-                var query = "SELECT project.*, client.ClientName FROM project JOIN client ON project.ClientId = client.ClientId ";
+                var query = "SELECT p.ProjectId, p.ProjectName,p.ClientId,Date(p.StartDate)as StartDate,Date(p.EndDate)as EndDate, c.ClientName FROM project p JOIN client c ON p.ClientId = c.ClientId ";
 
                 if (!string.IsNullOrEmpty(Project.ProjectName))
                 {
-                    query += "WHERE project.ProjectName LIKE '%" + Project.ProjectName + "%'";
+                    query += "WHERE p.ProjectName LIKE '%" + Project.ProjectName + "%'";
                 }
                 if (!string.IsNullOrEmpty(Project.StartDate) && !string.IsNullOrEmpty(Project.EndDate))
                 {
-                    query += " AND project.StartDate = '" + Project.StartDate + "' AND project.EndDate = '" + Project.EndDate + "'";
+                    query += " AND p.StartDate = '" + Project.StartDate + "' AND p.EndDate = '" + Project.EndDate + "'";
                 }
                 else if (!string.IsNullOrEmpty(Project.StartDate))
                 {
-                    query += " AND project.StartDate = '" + Project.StartDate + "'";
+                    query += " AND p.StartDate = '" + Project.StartDate + "'";
                 }
                 else if (!string.IsNullOrEmpty(Project.EndDate))
                 {
-                    query += " AND project.EndDate = '" + Project.EndDate + "'";
+                    query += " AND p.EndDate = '" + Project.EndDate + "'";
                 }
                 dsResult = new Connection().GetDataSetResults(query);
                 return dsResult;

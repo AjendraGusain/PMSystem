@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using BussinessObjectLayer;
 using System.Collections;
 using DataAccessLayer.Interface;
+using System.Globalization;
+
 namespace DataAccessLayer
 {
     public class TaskDataAccess : ITaskDataAccess
@@ -616,7 +618,7 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and RoleId=2 and ParrentTeamMemberId!=0");
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and (RoleId=2 or RoleId=4) and ParrentTeamMemberId!=0");
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -779,6 +781,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
+
                 addTaskBO.dsResult.Reset();
                 string spName = "sp_GetUserTaskTime";
                 Hashtable obj = new Hashtable();
@@ -975,16 +978,35 @@ namespace DataAccessLayer
         {
             try
             {
-                var query = "select t.*, p.ProjectName, c.ClientName, c.ClientId, ut.UserId,u.UserName, s.StatusName from task as t inner join project as p " +
-                    "on p.ProjectId=t.ProjectId inner join client as c on p.ClientId=c.ClientId inner join status s  on s.StatusId=t.StatusId " +
-                    "left join user_task as ut on ut.TaskId=t.TaskId and ut.IsActive!='0' left join user as u on u.UserId=ut.UserId WHERE t.IsActive!=0 ";
-
-                if (!string.IsNullOrEmpty(Task.SearchResult))
+                string startTime = "0";
+                string endTime = "0";
+                Hashtable hashtable = new Hashtable();
+                if (Task.StartDate.ToString()!="" || Task.EndDate.ToString() != "")
                 {
-                    query += " AND (p.ProjectName like '%" + Task.SearchResult + "%' or t.TaskNumber like '%" + Task.SearchResult + "%' or t.TaskName like '%" 
-                        + Task.SearchResult + "%' or t.StartTime like '%" + Task.SearchResult + "%' or t.EndTime like '%" 
-                        + Task.SearchResult + "%' or u.UserName like '%" + Task.SearchResult + "%' or s.StatusName like '%" + Task.SearchResult + "%'); ";
+                    string spName = "sp_SearchDateWise";
+                    DateTime startdate = Convert.ToDateTime(Task.StartDate.ToString());
+                    DateTime enddate = Convert.ToDateTime(Task.EndDate);
+                    startTime = startdate.ToString("yyyy-MM-dd");
+                    endTime = enddate.ToString("yyyy-MM-dd");
+                    hashtable.Add("@StartingTime", startTime);
+                    hashtable.Add("@EndingTime", endTime);
+                    hashtable.Add("@Stringname", Task.SearchResult);
+                    Task.dsResult = new Connection().GetData(spName, hashtable);
+                }                
+                else
+                {
+                    string spName = "sp_SearchDateWise";
+                    hashtable.Add("@StartingTime", startTime);
+                    hashtable.Add("@EndingTime", endTime);
+                    hashtable.Add("@Stringname", Task.SearchResult);
+                    Task.dsResult = new Connection().GetData(spName, hashtable);
                 }
+                //if (!string.IsNullOrEmpty(Task.SearchResult))
+                //{
+                //    query += " AND (p.ProjectName like '%" + Task.SearchResult + "%' or t.TaskNumber like '%" + Task.SearchResult + "%' or t.TaskName like '%" 
+                //        + Task.SearchResult + "%' or t.StartTime like '%" + Task.SearchResult + "%' or t.EndTime like '%" 
+                //        + Task.SearchResult + "%' or u.UserName like '%" + Task.SearchResult + "%' or s.StatusName like '%" + Task.SearchResult + "%'); ";
+                //}
                 //if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()) && !string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
                 //{
                 //    query += " AND t.StartTime = '" + Task.StartDate + "' AND t.EndTime = '" + Task.EndDate + "'";
@@ -997,7 +1019,6 @@ namespace DataAccessLayer
                 //{
                 //    query += " AND t.EndTime = '" + Task.EndDate + "'";
                 //}
-                Task.dsResult = new Connection().GetDataSetResults(query);
                 return Task.dsResult;
             }
             catch (Exception ex)

@@ -141,7 +141,7 @@ namespace ProjectManagement.Admin
                 return;
             }
             addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
-            ddlStatus.SelectedItem.Text = "Select";
+            //ddlStatus.SelectedItem.Text = "Select";
             if (pauseReasonStatus == "Reassign")
             {
                 Response.Redirect("AddTask.aspx?TaskId=" + addTaskBusinessObj.TaskID + "&UserId=" + addTaskBusinessObj.EmployeeName + "&ProjectId=" + addTaskBusinessObj.ProjectID + "&checkIf=" + true);
@@ -196,7 +196,6 @@ namespace ProjectManagement.Admin
             pnlConfirmwindowHistoryStatus.Visible = true;
             txtHistoryStatus.Text = ddlStatus.SelectedItem.Text;
             ScriptManager.RegisterStartupScript(this, GetType(), "PopHistory", "OpenConfirmationStatusHistory();", true);
-
         }
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)

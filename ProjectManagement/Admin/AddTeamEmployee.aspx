@@ -4,16 +4,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>Add Team Employee</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form class="mt-3" runat="server">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <div class="ms-auto text-end">
-                        <i class="mdi mdi-chevron-left"></i>
-                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
-                    </div>
+                    
                     <asp:Panel ID="pnlHideForm" runat="server" Visible="false">
                         <div class="dataTables_wrapper">
                             <div class="row">

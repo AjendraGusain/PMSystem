@@ -25,6 +25,14 @@ namespace ProjectManagement.Users
             }
         }
 
+        protected void GetUserTaskDetails()
+        {
+            addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
+            DataSet ds = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
+            pnlDisplayUserTask.Visible = true;
+            gvDisplayUserTask.DataSource = ds.Tables[0];
+            gvDisplayUserTask.DataBind();
+        }
         protected void gvDisplayUserTask_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
@@ -40,18 +48,29 @@ namespace ProjectManagement.Users
             {
                 try
                 {
-                    int taskID = Convert.ToInt32(e.CommandArgument);
+                    string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                    string taskID = commandArgs[0];
+                    string taskNumber = commandArgs[1];
+                    string projectID = commandArgs[2];
+                    string clientID = commandArgs[3];
+                    string teamID = commandArgs[4];
+                    string teamMemberID = commandArgs[5];
                     Session["TaskID"] = taskID;
+                    addTaskBusinessObj.TeamId = teamID;
+                    addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
                     addTaskBusinessObj.TaskID = Convert.ToInt32(Session["TaskID"].ToString());
                     addTaskBusinessObj.AssignedDate = DateTime.Now;
-                    addTaskBusinessObj.dsResult = assigntaskBLL.AssignTask(addTaskBusinessObj.TaskID);
-                    addTaskBusinessObj.ProjectID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString();
-                    addTaskBusinessObj.TaskNumber = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
+                    addTaskBusinessObj.ProjectID = projectID;
+                    addTaskBusinessObj.TaskNumber = taskNumber;
+                    addTaskBusinessObj.ClientID = clientID;
+                    //addTaskBusinessObj.dsResult = assigntaskBLL.AssignTask(addTaskBusinessObj.TaskID);
+                    //addTaskBusinessObj.ProjectID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString();
+                    //addTaskBusinessObj.TaskNumber = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
                     addTaskBusinessObj.LoginUserID = loginUserID;
                     addTaskBusinessObj.EmployeeName = loginUserID.ToString();
-                    addTaskBusinessObj.ClientID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ClientId"].ToString();
-                    DataSet ds = assigntaskBLL.GetTeamMemberID(addTaskBusinessObj);
-                    addTaskBusinessObj.TeamMemberID = Convert.ToInt32(ds.Tables[0].Rows[0]["TeamMemberId"].ToString());
+                    //addTaskBusinessObj.ClientID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ClientId"].ToString();
+                    //DataSet ds = assigntaskBLL.GetTeamMemberID(addTaskBusinessObj);
+                    //addTaskBusinessObj.TeamMemberID = Convert.ToInt32(ds.Tables[0].Rows[0]["TeamMemberId"].ToString());
                     addTaskBusinessObj.response = assigntaskBLL.InsertAssignedTaskDetails(addTaskBusinessObj);
                 }
                 catch (Exception ex)
@@ -93,14 +112,7 @@ namespace ProjectManagement.Users
             }
         }
 
-        protected void GetUserTaskDetails()
-        {
-            addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
-            DataSet ds = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
-            pnlDisplayUserTask.Visible = true;
-            gvDisplayUserTask.DataSource = ds.Tables[0];
-            gvDisplayUserTask.DataBind();
-        }
+        
 
         protected void gvDisplayUserTask_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -109,25 +121,25 @@ namespace ProjectManagement.Users
                 LinkButton lbAssign = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnAssign");
                 LinkButton lbPlay = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPlay");
                 LinkButton lbPause = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPause");
-                if (e.Row.Cells[7].Text.ToString() == "Unassigned")
+                if (e.Row.Cells[9].Text.ToString() == "Unassigned")
                 {
                     lbAssign.Visible = true;
                     lbPlay.Visible = false;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[7].Text.ToString() == "Assigned")
+                else if (e.Row.Cells[9].Text.ToString() == "Assigned")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[7].Text.ToString() == "In Process")
+                else if (e.Row.Cells[9].Text.ToString() == "In Process")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = false;
                     lbPause.Visible = true;
                 }
-                else if (e.Row.Cells[7].Text.ToString() == "Pause")
+                else if (e.Row.Cells[9].Text.ToString() == "Pause")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
