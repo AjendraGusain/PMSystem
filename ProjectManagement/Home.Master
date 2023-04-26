@@ -216,36 +216,48 @@
     <%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <script src="Typescript/AddTeam.ts"></script>
     <script type="text/javascript">
-        $(function () {
-            $('[id*=lsEmpoloyee]').multiselect({
-                includeSelectAllOption: true,
-                enableFiltering: true,
-                filterPlaceholder: 'Search',
-                enableCaseInsensitiveFiltering: true,
-                dropRight: true
-            });
-        });
+        //$(function () {
+        //    $('[id*=lsManager]').multiselect({
+        //        includeSelectAllOption: true,
+        //        enableFiltering: true,
+        //        filterPlaceholder: 'Search',
+        //        enableCaseInsensitiveFiltering: true,
+        //        dropRight: true
+        //    });
+        //});
 
-        $('#ContentPlaceHolder1_txtTeamName').on('change', function () {
-            $('#lblTeamName').html(this.value);
-        });
+        //$('#ContentPlaceHolder1_lblCheckUser').on('change', function () {
+        //    $('#lblTeamName').html(this.value);
+        //});
 
-        $('#ContentPlaceHolder1_ddlManager').on('change', function () {
-            $('#lblManager').html($("#ContentPlaceHolder1_ddlManager option:selected").text());
-        });
+        //$('#ContentPlaceHolder1_lsManager').on('change', function () {
+        //    $('#lblCheckUser').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        //});
 
-        $('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
-            $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
-        });
+        //$('#ContentPlaceHolder1_ddlTeamleader').on('change', function () {
+        //    $('#lblTeamLeader').html($("#ContentPlaceHolder1_ddlTeamleader option:selected").text());
+        //});
 
-        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-            $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-        });
+        //$('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+        //    $('#lblEmployeeName').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
+        //});
 
-        $('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
-            $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsEmpoloyee option:selected").text());
-        });
+        //$('#ContentPlaceHolder1_lsEmpoloyee').on('change', function () {
+        //    $('#lblEmployeeName1').html($("#ContentPlaceHolder1_lsManager option:selected").text());
+        //});
+        //function myFunction() {
+        //    $("ContentPlaceHolder1_lsManager").change(function () {
+        //        var SelMultiValues = $("#ContentPlaceHolder1_lsManager option:selected").val();
+        //        alert("You have selected : " + SelMultiValues);
+        //    })umentString);
+        //};
+        //function myFunction() {
+        //    var multiselectvalues = $('ContentPlaceHolder1_lsManager option:selected').toArray().map(item => item.value).join();
+        //    alert(multiselectvalues);
+        //}
+
     </script>
 </body>
 </html>
