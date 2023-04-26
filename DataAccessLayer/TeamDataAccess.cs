@@ -372,5 +372,40 @@ namespace DataAccessLayer
             da.Fill(dsResult);
             return dsResult;
         }
+
+        public DataSet SearchTeam(TeamBusinessObject Team)
+        {
+            try
+            {
+                var query = "select t.*, p.ProjectName, c.ClientName, c.ClientId, ut.UserId,u.UserName, s.StatusName from task as t inner join project as p " +
+                    "on p.ProjectId=t.ProjectId inner join client as c on p.ClientId=c.ClientId inner join status s  on s.StatusId=t.StatusId " +
+                    "left join user_task as ut on ut.TaskId=t.TaskId and ut.IsActive!='0' left join user as u on u.UserId=ut.UserId WHERE t.IsActive!=0 ";
+
+                if (!string.IsNullOrEmpty(Team.SearchTeam))
+                {
+                    query += " AND (p.ProjectName like '%" + Team.SearchTeam + "%' or t.TaskNumber like '%" + Team.SearchTeam + "%' or t.TaskName like '%"
+                        + Team.SearchTeam + "%' or t.StartTime like '%" + Team.SearchTeam + "%' or t.EndTime like '%"
+                        + Team.SearchTeam + "%' or u.UserName like '%" + Team.SearchTeam + "%' or s.StatusName like '%" + Team.SearchTeam + "%'); ";
+                }
+                //if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()) && !string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.StartTime = '" + Task.StartDate + "' AND t.EndTime = '" + Task.EndDate + "'";
+                //}
+                //else if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.StartTime = '" + Task.StartDate + "'";
+                //}
+                //else if (!string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.EndTime = '" + Task.EndDate + "'";
+                //}
+                dsResult = new Connection().GetDataSetResults(query);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

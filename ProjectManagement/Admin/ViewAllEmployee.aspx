@@ -9,6 +9,10 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
+                <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <form runat="server">
@@ -77,4 +81,10 @@
             </div>
         </div>
     </div>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

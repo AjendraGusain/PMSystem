@@ -7,6 +7,10 @@
         <div class="card-body wizard-content">
             <form runat="server">
                 <div class="wizard clearfix">
+                    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
                     <div class="content clearfix">
                         <section class="body current">
                             <div class="form-group row">
@@ -79,4 +83,10 @@
             </form>
         </div>
     </div>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

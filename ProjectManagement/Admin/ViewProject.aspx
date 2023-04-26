@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
+    <h4>View Project</h4>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -12,11 +13,11 @@
                     <div class="dataTables_wrapper container-fluid mb-4">
                         <div class="row">
 
-                            <div class="col-sm-12 col-md-3">
+                            <div class="col-sm-12 col-md-2">
                                 <div id="zero_config_filter" class="dataTables_filter">
                                     <label>
                                         Search:
-                      <asp:TextBox ID="txtProNameSearch" runat="server"></asp:TextBox>
+                      <asp:TextBox ID="txtProNameSearch" runat="server" placeholder="Search.."></asp:TextBox>
                                     </label>
                                 </div>
                             </div>
@@ -25,12 +26,10 @@
                                     <label>
                                         Date Range:
                          <asp:TextBox ID="txtProStartDateSearch" runat="server" class="form-control" placeholder="Start Date...." type="date"></asp:TextBox>
-                                        <!--input id="start" class="form-control form-control-sm" placeholder="Start Date"-->
                                     </label>
                                     <label>
                                         to
                         <asp:TextBox ID="txtProEndDateSearch" runat="server" class="form-control" placeholder="Start Date...." type="date"></asp:TextBox>
-                                        <!--input id="end" class="form-control form-control-sm" placeholder="End Date"-->
                                     </label>
 
                                 </div>
@@ -48,7 +47,10 @@
                         </div>
                     </div>
 
-
+                    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
                     <div class="table-responsive">
                         <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                             <div class="row">
@@ -98,10 +100,6 @@
                                     </asp:GridView>
                                 </asp:Panel>
 
-
-
-
-
                                 <%-- </div>--%>
                             </div>
 
@@ -111,4 +109,10 @@
             </div>
         </div>
     </form>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

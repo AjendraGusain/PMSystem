@@ -7,10 +7,14 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="card">
-       
         <div class="card-body">
+            <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
             <form runat="server" class="mt-3">
             <div class="dataTables_wrapper">
+                
                 <div class="row">
                     <div class="col-sm-7 d-flex mb-5 details">
                         <div class="card-body">
@@ -74,7 +78,10 @@
                 </form>
         </div>
     </div>
-
-
- 
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

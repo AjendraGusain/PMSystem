@@ -17,6 +17,7 @@ namespace ProjectManagement.Admin
     {
         IProjectDataAccess _projectRepo = new ProjectDataAccess();
         ProjectBusinessObject _projectBO = new ProjectBusinessObject(); // Business Object or Model
+        ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
         private readonly IProjectBusinessLogic _projectBL;
         public ViewProject()
         {
@@ -89,13 +90,23 @@ namespace ProjectManagement.Admin
             }
             else if (e.CommandName == "DeleteProject")
             {
-                var Response = _projectBL.DeleteProject(Id);
-                if (Response > 0)
+                DataSet dtResult = addTaskDetails.GetAllCreatedTask();
+                DataRow[] foundProject = dtResult.Tables[0].Select("ProjectId = '" + Id + "'");
+                if (foundProject.Length != 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
-                    BindProjectGrid();
-
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please reassing the task before removing the project.');", true);//location.href = 'AddTeamEmployee.aspx';
                 }
+                else
+                {
+                    var Response = _projectBL.DeleteProject(Id);
+                    if (Response > 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
+                        BindProjectGrid();
+
+                    }
+                }
+                
             }
 
         }

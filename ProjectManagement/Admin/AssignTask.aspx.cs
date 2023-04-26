@@ -79,17 +79,30 @@ namespace ProjectManagement.Admin
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
                 string clientID = commandArgs[3];
-                string teamID = commandArgs[4];
-                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim()  + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim() + "&TeamId=" + teamID.Trim());
+                //string teamID = commandArgs[4];
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim()  + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim());
             }
             if (e.CommandName == "ReAssign")
             {
+                string pauseReasonStatus = "Reassign";
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string taskID = commandArgs[0];
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
-                string teamID = commandArgs[3];
-                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim() + "&ProjectId=" + projectID.Trim() + "&TeamId=" + teamID.Trim());
+                addTaskBusinessObj.TaskID = Convert.ToInt32(taskID);
+                addTaskBusinessObj.EmployeeName = userID;
+                addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
+                DataSet dtResult = assigntaskBLL.AssignTask(addTaskBusinessObj.TaskID);
+                if (dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "3")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Already working on this task.');", true);
+                    return;
+                }
+                addTaskBusinessObj.response = assigntaskBLL.UpdateUserTaskStatusPause(addTaskBusinessObj);
+                if (pauseReasonStatus == "Reassign")
+                {
+                    Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&UserId=" + userID.Trim() + "&ProjectId=" + projectID.Trim());
+                }
             }
             if (e.CommandName == "Assign")
             {
@@ -97,8 +110,8 @@ namespace ProjectManagement.Admin
                 string taskID = commandArgs[0];
                 string userID = commandArgs[1];
                 string projectID = commandArgs[2];
-                string teamID = commandArgs[3];
-                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&ProjectId=" + projectID.Trim() + "&TeamId=" + teamID.Trim());
+                //string teamID = commandArgs[3];
+                Response.Redirect("AddTask.aspx?TaskId=" + taskID.Trim() + "&ProjectId=" + projectID.Trim());
             }
         }
 
@@ -196,13 +209,13 @@ namespace ProjectManagement.Admin
             grvAssignedTaskDetails.DataBind();
         }
 
-        protected void btnCancelSearch_Click(object sender, EventArgs e)
-        {
-            ddlSearchClient.SelectedItem.Text = "Select Client";
-            ddlSerachProject.SelectedItem.Text = "Select Project";
-            grvAssignedTaskDetails.EditIndex = -1;
-            txtSearchEmp.Text = "";
-            GetAssignedTask();
-        }
+        //protected void btnCancelSearch_Click(object sender, EventArgs e)
+        //{
+        //    ddlSearchClient.SelectedItem.Text = "Select Client";
+        //    ddlSerachProject.SelectedItem.Text = "Select Project";
+        //    grvAssignedTaskDetails.EditIndex = -1;
+        //    txtSearchEmp.Text = "";
+        //    GetAssignedTask();
+        //}
     }
 }

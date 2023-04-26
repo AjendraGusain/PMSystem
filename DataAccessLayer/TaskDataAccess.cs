@@ -53,7 +53,8 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.project");
+                addTaskBO.dsResult = new Connection().GetDataSetResults("select distinct p.* from task t inner join client c  " +
+                    "on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;");//Modified from project table
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -171,7 +172,8 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("select * from ProjectManagementNew.client");
+                addTaskBO.dsResult = new Connection().GetDataSetResults("select distinct c.* from task t inner join client c " +
+                    "on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0; ");//Modified from client table
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -275,7 +277,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1');  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignTask.TaskID + " and ProjectId=" + assignTask.ProjectID;
+                string dsResult = "insert  into ProjectManagementNew.user_task(UserId,TeamMemberId,TaskId,AssignedByUserID,AssignedDate,ProjectId,IsActive,TeamId) values(@UserId,@TeamMemberId, @TaskId,@AssignedByUserID,@AssignedDate,@ProjectId,'1',@TeamId);  Update ProjectManagementNew.task set StatusID=2 where TaskId=" + assignTask.TaskID + " and ProjectId=" + assignTask.ProjectID;
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 cmd.Parameters.Add(new MySqlParameter("@UserId", assignTask.EmployeeName));
                 cmd.Parameters.Add(new MySqlParameter("@TeamMemberId", assignTask.TeamMemberID));
@@ -283,6 +285,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@AssignedByUserID", assignTask.LoginUserID));
                 cmd.Parameters.Add(new MySqlParameter("@AssignedDate", assignTask.AssignedDate));
                 cmd.Parameters.Add(new MySqlParameter("@ProjectId", Convert.ToInt32(assignTask.ProjectID)));
+                cmd.Parameters.Add(new MySqlParameter("@TeamId", Convert.ToInt32(assignTask.TeamId)));
                 assignTask.response = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -307,17 +310,21 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                //string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
-                //    "UnassignedDate=@UnassignedDate,IsActive='0',StatusId=7 where TaskId=" + assignTask.TaskID + " and ProjectId="
-                //    + assignTask.ProjectID + " and TeamMemberId=" + assignTask.TeamMemberID;
-                string spName = "sp_ReassignTaskByTeamMemberID";
-                Hashtable obj = new Hashtable();
-                obj.Add("@UserCheckId", assignTask.EmployeeName);
-                obj.Add("@TaskCheckID", assignTask.TaskID);
-                obj.Add("@UnassignedByUser", assignTask.LoginUserID);
-                obj.Add("@ProjectCheckID", assignTask.ProjectID);
-                obj.Add("@TeamMemberID", assignTask.TeamMemberID);
-                addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
+                string dsResult = "Update ProjectManagementNew.user_task set UnassignedByUserID=@UnassignedByUserID," +
+                    "UnassignedDate=@UnassignedDate,IsActive='0',StatusId=7 where TaskId=" + assignTask.TaskID + " and ProjectId="
+                    + assignTask.ProjectID + " and TeamMemberId=" + assignTask.TeamMemberID;
+                MySqlCommand cmd = new MySqlCommand(dsResult, conn);
+                cmd.Parameters.Add(new MySqlParameter("@UnassignedByUserID", assignTask.LoginUserID));
+                cmd.Parameters.Add(new MySqlParameter("@UnassignedDate", assignTask.AssignedDate));
+                assignTask.response = cmd.ExecuteNonQuery();
+                //string spName = "sp_ReassignTaskByTeamMemberID";
+                //Hashtable obj = new Hashtable();
+                //obj.Add("@UserCheckId", assignTask.EmployeeName);
+                //obj.Add("@TaskCheckID", assignTask.TaskID);
+                //obj.Add("@UnassignedByUser", assignTask.LoginUserID);
+                //obj.Add("@ProjectCheckID", assignTask.ProjectID);
+                //obj.Add("@TeamMemberID", assignTask.TeamMemberID);
+              //  addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
             }
             catch (Exception ex)
             {
@@ -934,6 +941,68 @@ namespace DataAccessLayer
                 {
                     conn.Close();
                 }
+            }
+        }
+
+        public DataSet GetTaskDetailsByTask(TaskBusinessObject Task)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string spName = "sp_GetTaskbyTaskID";
+                Hashtable obj = new Hashtable();
+                obj.Add("@CheckTaskID", Task.TaskID);
+                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public DataSet SearchTask(TaskBusinessObject Task)
+        {
+            try
+            {
+                var query = "select t.*, p.ProjectName, c.ClientName, c.ClientId, ut.UserId,u.UserName, s.StatusName from task as t inner join project as p " +
+                    "on p.ProjectId=t.ProjectId inner join client as c on p.ClientId=c.ClientId inner join status s  on s.StatusId=t.StatusId " +
+                    "left join user_task as ut on ut.TaskId=t.TaskId and ut.IsActive!='0' left join user as u on u.UserId=ut.UserId WHERE t.IsActive!=0 ";
+
+                if (!string.IsNullOrEmpty(Task.SearchResult))
+                {
+                    query += " AND (p.ProjectName like '%" + Task.SearchResult + "%' or t.TaskNumber like '%" + Task.SearchResult + "%' or t.TaskName like '%" 
+                        + Task.SearchResult + "%' or t.StartTime like '%" + Task.SearchResult + "%' or t.EndTime like '%" 
+                        + Task.SearchResult + "%' or u.UserName like '%" + Task.SearchResult + "%' or s.StatusName like '%" + Task.SearchResult + "%'); ";
+                }
+                //if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()) && !string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.StartTime = '" + Task.StartDate + "' AND t.EndTime = '" + Task.EndDate + "'";
+                //}
+                //else if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.StartTime = '" + Task.StartDate + "'";
+                //}
+                //else if (!string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
+                //{
+                //    query += " AND t.EndTime = '" + Task.EndDate + "'";
+                //}
+                Task.dsResult = new Connection().GetDataSetResults(query);
+                return Task.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
