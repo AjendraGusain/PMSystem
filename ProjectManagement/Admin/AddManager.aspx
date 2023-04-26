@@ -35,11 +35,14 @@
                     </div>
                     <div class="form-group row">
                       <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Manager</label>
-                      <div class="col-sm-6">
-                        <asp:ListBox ID="lsManager" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single" >
+                        <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">--%>
+                        <div class="col-sm-6">
+                        <asp:ListBox ID="lsManager" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"  AutoPostBack="true">
                                     </asp:ListBox>
-
+                          
+                          <asp:Label ID="lblCheckUser" CssClass="lblCheckUser" runat="server" Text=""></asp:Label>
                       </div>
+                           <%-- </asp:UpdatePanel>--%>
                     </div>
                 </section>
                 <div class="text-center">

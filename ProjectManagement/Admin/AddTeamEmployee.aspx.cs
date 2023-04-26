@@ -582,12 +582,14 @@ namespace ProjectManagement.Admin
                         createTeam.TeamName = ddlMTeamName.SelectedValue;
                         createTeam.Manager = item.Value;
                         if (Global.Role == "User")
-                            if(Global.Designation=="Manager")
-                            createTeam.ParentTeamId = Session["TLId"].ToString();
+                        {
+                            if (Global.Designation == "Manager")
+                                createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (Global.Designation == "TeamLeader")
                                 createTeam.ParentTeamId = Session["Manager"].ToString();
+                        }
                         else
-                        createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                            createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
                         
                         createTeam.IsActive = 1;
                         createTeam.Role = "2";
@@ -602,12 +604,14 @@ namespace ProjectManagement.Admin
                         createTeam.TeamName = ddlMTeamName.SelectedValue;
                         createTeam.Manager = item.Value;
                         if (Global.Role == "User")
+                        {
                             if (Global.Designation == "Manager")
                                 createTeam.ParentTeamId = Session["TLId"].ToString();
                             else if (Global.Designation == "TeamLeader")
                                 createTeam.ParentTeamId = Session["Manager"].ToString();
-                            else
-                                createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
+                        }
+                        else
+                            createTeam.ParentTeamId = ddlTeamLeader.SelectedValue;
                         createTeam.IsActive = 1;
                         createTeam.Role = "5";
                         createTeamBA.InsertTeamMember(createTeam);
