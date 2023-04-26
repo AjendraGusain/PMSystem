@@ -3,6 +3,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>Add Team Leader</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form class="mt-3" runat="server">

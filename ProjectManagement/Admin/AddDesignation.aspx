@@ -4,16 +4,17 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>Add Designation</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card">
         <div class="card-body wizard-content">
             <form runat="server">
                 <div class="wizard clearfix">
-                    <div class="ms-auto text-end">
-                        <i class="mdi mdi-chevron-left"></i>
-                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
-                    </div>
+                    
                     <div class="content clearfix">
                         <section class="body current">
                             <div class="form-group row">

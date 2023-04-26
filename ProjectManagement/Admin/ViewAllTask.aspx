@@ -4,6 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>View All Task</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -57,10 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ms-auto text-end">
-                        <i class="mdi mdi-chevron-left"></i>
-                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
-                    </div>
+                
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <div class="row">

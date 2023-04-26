@@ -3,6 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
+    <h4>View Task Details</h4>
+    <%--<div class="ms-auto text-end">
+                    <i class="mdi mdi-chevron-left"></i>
+                    <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                </div>--%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -109,6 +114,27 @@
                                     </div>
 
                                     <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Task Created By:</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:Label ID="lblTaskCreatedBy" runat="server" class="text-muted mb-0"></asp:Label>
+                                        </div>
+                                    </div>
+
+                                    <%--<hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Task Assiged To:</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:Label ID="lblTaskAssigedTo" runat="server" class="text-muted mb-0"></asp:Label>
+                                        </div>
+                                    </div>--%>
+
+
+                                    <hr>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
@@ -156,6 +182,17 @@
                                             <asp:Label ID="lblEstimatedError" runat="server" class="text-muted mb-0"></asp:Label>
                                         </div>
                                     </div>
+
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Task Created Date:</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:Label ID="lblTaskCreatedDate" runat="server" class="text-muted mb-0"></asp:Label>
+                                        </div>
+                                    </div>
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -168,7 +205,7 @@
                                                 <asp:ListItem Value="2">Ready for Test</asp:ListItem>
                                                 <asp:ListItem Value="3">End of the Day</asp:ListItem>
                                                 <asp:ListItem Value="4">Bug Report</asp:ListItem>
-                                                <asp:ListItem Value="5">Reassign</asp:ListItem>
+                                                <%--<asp:ListItem Value="5">Reassign</asp:ListItem>--%>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -403,4 +440,10 @@
             </div>
         </asp:Panel>
     </form>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

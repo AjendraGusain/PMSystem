@@ -4,15 +4,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>Add Task</h4>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="card">
-         
-        <div class="card-body wizard-content">
-            <div class="ms-auto text-end">
+    <div class="ms-auto text-end">
                         <i class="mdi mdi-chevron-left"></i>
                         <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
                     </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="card">
+        <div class="card-body wizard-content">
             <form class="mt-3" runat="server">
                 <div class="wizard clearfix">
                     <div class="content clearfix">

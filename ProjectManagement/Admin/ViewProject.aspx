@@ -4,6 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>View Project</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -13,7 +17,7 @@
                     <div class="dataTables_wrapper container-fluid mb-4">
                         <div class="row">
 
-                            <div class="col-sm-12 col-md-2">
+                            <div class="col-sm-12 col-md-3">
                                 <div id="zero_config_filter" class="dataTables_filter">
                                     <label>
                                         Search:
@@ -45,11 +49,6 @@
                                 <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="ms-auto text-end">
-                        <i class="mdi mdi-chevron-left"></i>
-                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
                     </div>
                     <div class="table-responsive">
                         <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">

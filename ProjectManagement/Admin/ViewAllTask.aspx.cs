@@ -5,6 +5,7 @@ using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -130,31 +131,47 @@ namespace ProjectManagement.Admin
 
         protected void btnSearchEmp_Click(object sender, EventArgs e)
         {
-            //if ((!string.IsNullOrEmpty(txtTaskStartDateSearch.Text)))
-            //{
-            //    addTaskBusinessObj.StartDate = Convert.ToDateTime(txtTaskStartDateSearch.Text.ToString());
-            //}
+            //string[] formats = {"dd/MM/yyyy", "dd-MMM-yyyy", "yyyy-MM-dd","dd-MM-yyyy", "M/d/yyyy", "dd MMM yyyy"};
+            //string convertedStartDate = DateTime.ParseExact(txtTaskStartDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
+            //string convertedEndDate = DateTime.ParseExact(txtTaskEndDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
+
+            if (!string.IsNullOrEmpty(txtTaskStartDateSearch.Text))
+            {
+                addTaskBusinessObj.StartDate = DateTime.Parse(txtTaskStartDateSearch.Text);
+            }
             //else
             //{
-            //    addTaskBusinessObj.StartDate = DateTime.Now;
+            //    addTaskBusinessObj.StartDate = DateTime.MaxValue;
             //}
-            //if ((!string.IsNullOrEmpty(txtTaskEndDateSearch.Text)))
-            //{
-            //    addTaskBusinessObj.EndDate = Convert.ToDateTime(txtTaskEndDateSearch.Text.ToString());
-            //}
+            if (!string.IsNullOrEmpty(txtTaskEndDateSearch.Text))
+            {
+                addTaskBusinessObj.EndDate = Convert.ToDateTime(txtTaskEndDateSearch.Text);
+            }
             //else
             //{
-            //    addTaskBusinessObj.EndDate = DateTime.Now;
+            //    addTaskBusinessObj.EndDate = DateTime.MaxValue;
             //}
             //if ((!string.IsNullOrEmpty(txtTaskStartDateSearch.Text)) && !string.IsNullOrEmpty(txtTaskEndDateSearch.Text.ToString()))
             //{
             //    addTaskBusinessObj.StartDate = Convert.ToDateTime(txtTaskStartDateSearch.Text.ToString());
             //    addTaskBusinessObj.EndDate = Convert.ToDateTime(txtTaskEndDateSearch.Text.ToString());
             //}
-            addTaskBusinessObj.SearchResult = txtSearchEmp.Text;
+            if (!string.IsNullOrEmpty(txtSearchEmp.Text))
+            {
+                addTaskBusinessObj.SearchResult = txtSearchEmp.Text;
+            }
+            else
+            {
+                addTaskBusinessObj.SearchResult = "0";
+            }
             addTaskBusinessObj.dsResult = assigntaskBLL.SearchTask(addTaskBusinessObj);
-            grvViewAllTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
-            grvViewAllTask.DataBind();
+            if (addTaskBusinessObj.dsResult.Tables.Count > 0)
+            {
+                grvViewAllTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
+                grvViewAllTask.DataBind();
+                txtTaskStartDateSearch.Text = "";
+                txtTaskEndDateSearch.Text = "";
+            }
         }
 
         //protected void btnCancelSearch_Click(object sender, EventArgs e)

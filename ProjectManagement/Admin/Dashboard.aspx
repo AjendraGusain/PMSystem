@@ -101,35 +101,35 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Client Name">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblEmployeeCode" runat="server" Text='<%# Eval("ClientName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblClientName" runat="server" Text='<%# Eval("ClientName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Project Name">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblEmployeeName" runat="server" Text='<%# Eval("ProjectName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Task Id">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("TaskId") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblTaskID" runat="server" Text='<%# Eval("TaskId") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Task Name">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblPhoneNumber" runat="server" Text='<%# Eval("TaskName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblTaskNumber" runat="server" Text='<%# Eval("TaskName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Time Estimate">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblRole" runat="server" Text='<%# Eval("EstimateTime") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblEstimate" runat="server" Text='<%# Eval("EstimateTime") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
@@ -143,28 +143,28 @@
 
                                                 <asp:TemplateField HeaderText="StartTime">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblDesignation" runat="server" Text='<%# Eval("StartTime") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblStartTime" runat="server" Text='<%# Eval("StartTime", "{0:t}") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="EndTime">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblDesignation" runat="server" Text='<%# Eval("EndTime") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblEndTime" runat="server" Text='<%# Eval("EndTime", "{0:t}") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Employee Name">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblDesignation" runat="server" Text='<%# Eval("UserName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblEmpName" runat="server" Text='<%# Eval("UserName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Status">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblDesignation" runat="server" Text='<%# Eval("IsActive") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
+                                                        <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("StatusName") %>' ItemStyle-HorizontalAlign="Right"></asp:Label>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>

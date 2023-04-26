@@ -97,7 +97,7 @@ namespace ProjectManagement.Admin
         protected void btnSearchTeam_Click(object sender, EventArgs e)
         {
             createTeam.SearchTeam = txtSearchTeam.Text.ToString();
-            DataSet dsResult = createTeamBA.SearchTeam(createTeam);
+            DataSet dsResult = createTeamBA.GetViewTeam(createTeam);
             grvAllViewTeam.DataSource = dsResult.Tables[0];
             grvAllViewTeam.DataBind();
         }

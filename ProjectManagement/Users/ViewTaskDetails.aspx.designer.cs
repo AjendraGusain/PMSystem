@@ -69,6 +69,15 @@ namespace ProjectManagement.Users
         protected global::System.Web.UI.WebControls.Label lblPause;
 
         /// <summary>
+        /// lblTaskCreatedBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTaskCreatedBy;
+
+        /// <summary>
         /// lblProjectName control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace ProjectManagement.Users
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEstimatedError;
+
+        /// <summary>
+        /// lblTaskCreatedDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTaskCreatedDate;
 
         /// <summary>
         /// ddlStatus control.

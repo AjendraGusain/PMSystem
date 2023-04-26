@@ -4,7 +4,11 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
-    <asp:Label runat="server" ID="lblName" Text=""></asp:Label>
+    <h4><asp:Label runat="server" ID="lblName" Text=""></asp:Label></h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -148,4 +152,10 @@
         </div>
     </div>
         </form>
+    <script language="javascript" type="text/javascript">
+        function Back() {
+            history.go(-1);
+            return false;
+        }
+    </script>
 </asp:Content>

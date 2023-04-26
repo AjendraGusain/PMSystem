@@ -4,6 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <h4>TaskDetails</h4>
+    <div class="ms-auto text-end">
+                        <i class="mdi mdi-chevron-left"></i>
+                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -44,10 +48,7 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <div class="ms-auto text-end">
-                        <i class="mdi mdi-chevron-left"></i>
-                        <input type="submit" name="btnEdit" value="Back" onclick="return Back();" class="btn btn-warning btn-sm" id="btnEdit" />
-                    </div>
+                        
                         <div class="dataTables_wrapper">
                             <div class="row details mb-5 p-5">
                                 <div class="col-md-6">

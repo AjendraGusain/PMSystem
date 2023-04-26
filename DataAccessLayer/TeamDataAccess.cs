@@ -139,6 +139,7 @@ namespace DataAccessLayer
             cmd.Parameters.Add(new MySqlParameter("@TeamNameId", Convert.ToInt32(createTeam.TeamName)));
             cmd.Parameters.Add(new MySqlParameter("@ManagerNameId", Convert.ToInt32(createTeam.Manager)));
             cmd.Parameters.Add(new MySqlParameter("@TLNameId", Convert.ToInt32(createTeam.TeamLeader)));
+            cmd.Parameters.Add(new MySqlParameter("@name", createTeam.SearchTeam));
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dsResult);
             return dsResult;

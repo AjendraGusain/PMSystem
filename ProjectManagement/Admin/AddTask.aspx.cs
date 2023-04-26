@@ -223,7 +223,9 @@ namespace ProjectManagement.Admin
                             Label employee = (Label)row.FindControl("lblUserId");
                             string teamMemberID = teamMember.Text;
                             string employeeID = employee.Text;
-
+                            Label team = (Label)row.FindControl("lblTeamID");
+                            string teamID = team.Text;
+                            addTaskBusinessObj.TeamId = teamID;
                             addTaskBusinessObj.EmployeeName = employeeID;
                             addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
                             foreach (var item in userList)
