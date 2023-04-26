@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace ProjectManagement.Admin
 {
@@ -20,11 +21,81 @@ namespace ProjectManagement.Admin
         DataSet dtResult = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
+            lsManager.Attributes.Add("SelectedIndexChanged", "lsManager_SelectedIndexChanged;");
+            
             if (!IsPostBack)
             {
+                //Dictionary<string, string> myDictionary = (Dictionary<string, string>)Session["DateCollections"];
                 BindList();
+                dtResult = managerName.GetAllEmployee();
+                ViewState["AuthorBooks"] = dtResult.Tables[0];
+                DataTable dtCheckValue = ViewState["AuthorBooks"] as DataTable;
+                dtCheckValue.Columns.Add(new DataColumn("Check", typeof(bool)));
+            }
+            else
+            {
+                foreach (ListItem item in lsManager.Items)
+                {
+                    DataTable dtCheckValue1 = ViewState["AuthorBooks"] as DataTable;
+                    int checkUserId = Convert.ToInt32(item.Value);
+                    if (item.Selected)
+                    {
+                        DataRow dr = dtCheckValue1.NewRow();
+                        DataRow[] foundteamMember = dtCheckValue1.Select("UserId = '" + item.Value + "' and Designation<>'Manager'");
+                        DataRow[] filterNext = dtCheckValue1.Select("UserId = '" + item.Value + "' and Check=True");
+                        var rowsToUpdate = dtCheckValue1.AsEnumerable().Where(r => r.Field<int>("UserId") == checkUserId);
+                        foreach (var row in rowsToUpdate)
+                        {
+                            row.SetField("Check", true);
+                        }
+                        if (filterNext.Length == 0)
+                        {
+                            if (foundteamMember.Length != 0)
+                            {
+                                DialogResult dlgResult = MessageBox.Show("" + item + " is user now continue with manager", "Check", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (dlgResult == DialogResult.No)
+                                {
+                                    item.Selected = false;
+                                    //ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "confirm(' is user now continue with manager');", true);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var rowsToUpdate = dtCheckValue1.AsEnumerable().Where(r => r.Field<int>("UserId") == checkUserId);
+                        foreach (var row in rowsToUpdate)
+                        {
+                            row.SetField("Check", "false");
+                        }
+                    }
+
+                }
             }
         }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    DialogResult d;
+        //    d = MessageBox.Show("Welcome to C# Corner", "Learn C#", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        //    if (d == DialogResult.Yes)
+        //    {
+        //        ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "confirm(' is user now continue with manager');", true);
+        //    }
+        //    else
+        //    {
+        //        "NO";
+        //    }
+        //}
+        //[Flags]
+        //public enum Seasons
+        //{
+        //    None = 0,
+        //    Spring = 1 << 0,
+        //    Winter = 1 << 1,
+        //    Autumn = 1 << 2,
+        //    Summer = 1 << 3
+        //}
 
         private void BindList()
         {
@@ -258,5 +329,6 @@ namespace ProjectManagement.Admin
             //ds.Tables[0].Clear();
             //grvViewManager
         }
+       
     }
 }
