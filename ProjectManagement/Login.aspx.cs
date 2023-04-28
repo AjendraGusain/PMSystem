@@ -56,7 +56,7 @@ namespace ProjectManagement
 
         protected void lnkbtnForgetPassword_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ForgotPassword.aspx");
+            Response.Redirect("ForgotPassword.aspx?Email=" + txtUsername.Text.Trim());
         }
     }
 }

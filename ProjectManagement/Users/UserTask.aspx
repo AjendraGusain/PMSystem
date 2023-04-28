@@ -28,13 +28,13 @@
         }
     </script>
 
-    <form runat="server">
+    
         <div class="table-responsive">
             <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <div class="dataTables_wrapper mb-4">
+                            <div class="dataTables_wrapper mb-5">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-3">
                                         <div class="dataTables_filter" id="zero_config_length">
@@ -70,26 +70,27 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-3">
-                                        <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-3">
                                         <div id="zero_config_filter" class="dataTables_filter">
                                             <label>
                                                 Date Range:
                                                
                                                 <%--<input id="start" class="form-control form-control-sm" placeholder="Start Date">--%>
-                                                <asp:TextBox ID="txtSearchStartDate" runat="server" CssClass="form-control form-control-sm" placeholder="Start Date.."></asp:TextBox>
+                                                <asp:TextBox ID="txtSearchStartDate" runat="server" CssClass="form-control form-control-sm" placeholder="Start Date.." type="date"></asp:TextBox>
                                             </label>
                                             <label>
                                                 to
                                                
                                                 <%--<input id="end" class="form-control form-control-sm" placeholder="End Date">--%>
-                                                <asp:TextBox ID="txtSearchEndDate" runat="server" CssClass="form-control form-control-sm" placeholder="End Date.."></asp:TextBox>
+                                                <asp:TextBox ID="txtSearchEndDate" runat="server" CssClass="form-control form-control-sm" placeholder="End Date.." type="date"></asp:TextBox>
                                             </label>
                                             <asp:Button ID="btnSearchStartEnd" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchStartEnd_Click" />
                                             <asp:Button ID="btnCancelStartEnd" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelStartEnd_Click" />
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div id="zero_config_wrapper" class="dataTables_wrapper">
@@ -105,18 +106,22 @@
                                                     <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
                                                     <asp:BoundField DataField="ProjectName" HeaderText="Project Name" />
                                                     <asp:BoundField DataField="TaskNumber" HeaderText="Task#" />
-                                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" />
-                                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" />
+                                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" DataFormatString = "{0:MM/dd/yyyy}" />
+                                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" DataFormatString = "{0:MM/dd/yyyy}"/>
                                                     <asp:TemplateField HeaderText="View">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="btnViewUserTask" CommandName="ViewUserTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("TeamId")+", "+Eval("TeamMemberId")%>' class="badge bg-info"><span class="fa-stack">  <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                            <asp:LinkButton ID="btnViewUserTask" CommandName="ViewUserTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' class="badge bg-info"><span class="fa-stack">  <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                            <%--+", "+Eval("TeamId")+", "+Eval("TeamMemberId")--%>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Assign/Play/Pause">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")+","+Eval("TaskNumber")+","+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("TeamId")+", "+Eval("TeamMemberId")%>'></asp:LinkButton>
-                                                            <asp:LinkButton ID="lnkbtnPlay" runat="server" Text="Play" CommandName="PlayTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("TeamId")+", "+Eval("TeamMemberId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
-                                                            <asp:LinkButton ID="lnkbtnPause" runat="server" Text="Pause" CommandName="PauseTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("TeamId")+", "+Eval("TeamMemberId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-pause fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                            <asp:LinkButton ID="lnkbtnAssign" runat="server" Text="Assign" CssClass="badge bg-success" CommandName="AssignUserTask" CommandArgument='<%#Eval("TaskId")+","+Eval("TaskNumber")+","+Eval("ProjectId")+", "+Eval("ClientId")%>'></asp:LinkButton>
+                                                            <%--+", "+Eval("TeamId")+", "+Eval("TeamMemberId")--%>
+                                                            <asp:LinkButton ID="lnkbtnPlay" runat="server" Text="Play" CommandName="PlayTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                            <%--+", "+Eval("TeamId")+", "+Eval("TeamMemberId")--%>
+                                                            <asp:LinkButton ID="lnkbtnPause" runat="server" Text="Pause" CommandName="PauseTask" CommandArgument='<%#Eval("TaskId")+","+Eval("ProjectId")+", "+Eval("ClientId")%>' CssClass="btn btn-danger badge"><span class="fa-stack">  <i class="fa fa-pause fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                            <%--+", "+Eval("TeamId")+", "+Eval("TeamMemberId")--%>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="StatusName" HeaderText="Status" />
@@ -159,5 +164,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    
 </asp:Content>

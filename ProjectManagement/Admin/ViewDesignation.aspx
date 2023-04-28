@@ -16,7 +16,7 @@
                 
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
-                        <form runat="server">
+                        <%--<form runat="server">--%>
                             <asp:GridView ID="grvDesignation" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="10"
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvDesignation_RowCommand" EnablePaging="true"  
                                 OnPageIndexChanging="grvDesignation_PageIndexChanging">
@@ -45,7 +45,7 @@
                                             </asp:TemplateField>--%>
                                         </Columns>
                                     </asp:GridView>
-                        </form>
+                        <%--</form>--%>
                     </div>
                 </div>
             </div>

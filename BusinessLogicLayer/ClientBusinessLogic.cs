@@ -57,5 +57,13 @@ namespace BusinessLogicLayer
             respone = _clientDataAccess.UpdateClient(clientUpdate, Id);
             return respone;
         }
+
+        public DataSet ClientSearch(ClientBusinessObject Client)
+        {
+            dtResult = _clientDataAccess.ClientSearch(Client);
+            return dtResult;
+        }
+
+
     }
 }

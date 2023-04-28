@@ -17,5 +17,6 @@ namespace BusinessLogicLayer.Interface
         int DeleteClient(int Id);
         int UpdateClient(ClientBusinessObject customer, int Id);
         DataSet GetCountry();
+        DataSet ClientSearch(ClientBusinessObject Client);
     }
 }

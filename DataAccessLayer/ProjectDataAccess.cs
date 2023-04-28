@@ -92,8 +92,9 @@ namespace DataAccessLayer
 
                 if (!string.IsNullOrEmpty(Project.ProjectName))
                 {
-                    query += "WHERE p.ProjectName LIKE '%" + Project.ProjectName + "%'";
+                    query += "WHERE p.ProjectName LIKE '%" + Project.ProjectName + "%' or c.ClientName LIKE '%" + Project.ProjectName + "%'";
                 }
+
                 if (!string.IsNullOrEmpty(Project.StartDate) && !string.IsNullOrEmpty(Project.EndDate))
                 {
                     query += " AND p.StartDate = '" + Project.StartDate + "' AND p.EndDate = '" + Project.EndDate + "'";

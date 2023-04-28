@@ -177,6 +177,19 @@ namespace BusinessLogicLayer
         public DataSet GetChatDetails(TaskBusinessObject Chat)
         {
             taskBO.dsResult = _dataAccess.GetChatDetails(Chat);
+            DataTable dt = taskBO.dsResult.Tables[0];
+            dt.Columns.Add("Abbriviation", typeof(string));
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string abbreviation = new string(
+    dt.Rows[i]["UserName"].ToString().Split()
+          .Where(s => s.Length > 0 && char.IsLetter(s[0]) && char.IsUpper(s[0]))
+          .Take(3)
+          .Select(s => s[0])
+          .ToArray());
+                dt.Rows[i]["Abbriviation"] = abbreviation;
+            }
             return taskBO.dsResult;
         }
 
@@ -215,9 +228,9 @@ namespace BusinessLogicLayer
             taskBO.dsResult = _dataAccess.TaskBugHistory(taskStatus);
             return taskBO.dsResult;
         }
-        
+
         public DataSet UserTaskTime(TaskBusinessObject user)
-        {            
+        {
             taskBO.dsResult = _dataAccess.UserTaskTime(user);
             DataTable dt = taskBO.dsResult.Tables[0];
             dt.Columns.Add("Pause", typeof(DateTime));
@@ -232,7 +245,7 @@ namespace BusinessLogicLayer
                 if (dt.Rows[i]["Description"].ToString() != "")
                 {
                     dt.Rows[i]["Pause"] = Convert.ToDateTime(dt.Rows[i]["EndTime"].ToString());
-                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate&& dt.Rows[i]["UserName"].ToString()== userName)
+                    if (Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString() == startDate && dt.Rows[i]["UserName"].ToString() == userName)
                     {
                         dt.Rows[i]["StartDate"] = DBNull.Value;
                         dt.Rows[i]["StartTime"] = DBNull.Value;
@@ -242,20 +255,20 @@ namespace BusinessLogicLayer
                     {
                         startDate = Convert.ToDateTime(dt.Rows[i]["StartDate"].ToString()).ToShortDateString();
                         startTime = Convert.ToDateTime(dt.Rows[i]["StartTime"].ToString()).ToShortTimeString();
-                        userName= dt.Rows[i]["UserName"].ToString();
+                        userName = dt.Rows[i]["UserName"].ToString();
                     }
                     if (i < (dt.Rows.Count - 1))
                     {
-                        if (startDate == Convert.ToDateTime(dt.Rows[i + 1]["StartDate"].ToString()).ToShortDateString() && userName==dt.Rows[i+1]["UserName"].ToString())
+                        if (startDate == Convert.ToDateTime(dt.Rows[i + 1]["StartDate"].ToString()).ToShortDateString() && userName == dt.Rows[i + 1]["UserName"].ToString())
                         {
                             dt.Rows[i]["Resume"] = Convert.ToDateTime(dt.Rows[i + 1]["StartTime"].ToString());
                             DateTime resume = Convert.ToDateTime(dt.Rows[i]["Resume"].ToString());
                             DateTime pause = Convert.ToDateTime(dt.Rows[i]["Pause"].ToString());
                             TimeSpan diffbreak = resume.Subtract(pause);
-                            int hour= diffbreak.Hours;
+                            int hour = diffbreak.Hours;
                             int minutes = hour * 60;
                             int min = diffbreak.Minutes;
-                            dt.Rows[i]["Break"] = min+minutes;
+                            dt.Rows[i]["Break"] = min + minutes;
                             if (dt.Rows[i]["Status"] != DBNull.Value)
                             {
                                 dt.Rows[i]["Description"] = DBNull.Value;
@@ -270,9 +283,9 @@ namespace BusinessLogicLayer
                             }
                         }
                     }
-                    if(i == (dt.Rows.Count - 1)&& dt.Rows[i]["Status"] != DBNull.Value)
+                    if (i == (dt.Rows.Count - 1) && dt.Rows[i]["Status"] != DBNull.Value)
                     {
-                        dt.Rows[i]["Description"]= DBNull.Value;
+                        dt.Rows[i]["Description"] = DBNull.Value;
                     }
                 }
             }

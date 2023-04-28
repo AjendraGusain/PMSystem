@@ -45,7 +45,7 @@ namespace ProjectManagement.Admin
             txtPhoneNo.Text = dtResult.Tables[0].Rows[0]["PhoneNumber"].ToString();
             txtEmail.Text = dtResult.Tables[0].Rows[0]["Email"].ToString();
             BindEmployeeList();
-            ddlRoleList.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["RoleId"]).ToString();
+            //  ddlRoleList.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["RoleId"]).ToString();
             ddlDesignation.SelectedValue = dtResult.Tables[0].Rows[0]["DesignationId"].ToString();
             chkAdminAuth.Checked = Convert.ToBoolean(dtResult.Tables[0].Rows[0]["IsAdmin"]);
         }
@@ -55,76 +55,115 @@ namespace ProjectManagement.Admin
             addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
             addEmployee.EmployeeEmail = txtEmail.Text.Trim();
             addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
-            if(btnAddEmployee.Text == "Add Employee")
+            string usercode = "";
+            string userEmail = "";
+            string userphone = "";
+            if (btnAddEmployee.Text == "Add Employee")
             {
-                string checkCode = addEmployeeLogic.UserCheck(addEmployee);
-                if (checkCode == "Code")
+                addEmployeeLogic.UserCheck(addEmployee, out usercode, out userEmail, out userphone);
+                if (usercode != "" || userEmail != "" || userphone != "")
                 {
-                    lblCheckCode.Text = "Employee Code Already Exists";
-                }
-                else if (checkCode == "Email")
-                {
-                    lblCheckCode.Text = "Employee Code Already Exists";
-                    lblCheckEmail.Text = "Employee Email Already Exists";
-                }
-                else if (checkCode == "Phone")
-                {
-                    lblCheckCode.Text = "Employee Code Already Exists";
-                    lblCheckEmail.Text = "Employee Email Already Exists";
-                    lblCheckPhone.Text = "Phone Already Exists";
-                }
-            }
-                int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-                addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
-                addEmployee.Role = ddlRoleList.SelectedValue;
-                addEmployee.Designation = ddlDesignation.SelectedValue;
-                addEmployee.IsAdmin = chkAdminAuth.Checked;
-                if (btnAddEmployee.Text == "Add Employee")
-                {
-                    successResult = addEmployeeLogic.InsertAllEmployeeDetails(addEmployee);
-                    DataSet dtResult = addEmployeeLogic.GetAllEmployeeByEmail(addEmployee.EmployeeEmail);
-                    if (dtResult.Tables[0].Rows.Count > 0)
+                    if (usercode == "EmployeeCode")
                     {
-                        if (dtResult.Tables[0].Rows[0]["Email"].ToString() != "" || dtResult.Tables[0].Rows[0]["Email"].ToString() != null)
-                        {
-                            string useremail = dtResult.Tables[0].Rows[0]["Email"].ToString();
-                            string resetToken = Guid.NewGuid().ToString();
-                            successResult = addEmployeeLogic.UpdateToken(resetToken, useremail);
-                            objCon.SendResetPasswordEmail(useremail, resetToken);
-                        }
+                        lblCheckCode.Text = "Employee Code Already Exists";
                     }
-                    if (successResult == 1)
+                    if (userEmail == "EmployeeEmail")
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
+                        lblCheckEmail.Text = "Employee Email Already Exists";
                     }
-                    txtEmployeeCode.Text = "";
-                    txtEmployeeName.Text = "";
-                    txtEmail.Text = "";
-                    txtPhoneNo.Text = "";
-                    ddlRoleList.SelectedValue = "0";
-                    ddlDesignation.SelectedValue = "0";
-                    chkAdminAuth.Checked = false;
+                    if (userphone == "EmployeePhone")
+                    {
+                        lblCheckPhone.Text = "Phone Already Exists";
+                    }
+                    return;
                 }
                 else
                 {
-                    successResult = addEmployeeLogic.UpdateAllEmployee(addEmployee, UserId);
-                    if (successResult == 1)
+                    int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
+                    addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
+                    addEmployee.Designation = ddlDesignation.SelectedValue;
+
+                    addEmployee.IsAdmin = chkAdminAuth.Checked;
+                    if (chkAdminAuth.Checked == true)
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
+                        addEmployee.Role = "1";//Admin
+                    }
+                    else
+                    {
+                        addEmployee.Role = "2";//User
+                    }
+
+                    if (btnAddEmployee.Text == "Add Employee")
+                    {
+                        successResult = addEmployeeLogic.InsertAllEmployeeDetails(addEmployee);
+                        DataSet dtResult = addEmployeeLogic.GetAllEmployeeByEmail(addEmployee.EmployeeEmail);
+                        if (dtResult.Tables[0].Rows.Count > 0)
+                        {
+                            if (dtResult.Tables[0].Rows[0]["Email"].ToString() != "" || dtResult.Tables[0].Rows[0]["Email"].ToString() != null)
+                            {
+                                string useremail = dtResult.Tables[0].Rows[0]["Email"].ToString();
+                                string resetToken = Guid.NewGuid().ToString();
+                                successResult = addEmployeeLogic.UpdateToken(resetToken, useremail);
+                                objCon.SendResetPasswordEmail(useremail, resetToken);
+                            }
+                        }
+                        if (successResult == 1)
+                        {
+                            ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
+                        }
+                        txtEmployeeCode.Text = "";
+                        txtEmployeeName.Text = "";
+                        txtEmail.Text = "";
+                        txtPhoneNo.Text = "";
+                        // ddlRoleList.SelectedValue = "0";
+                        ddlDesignation.SelectedValue = "0";
+                        chkAdminAuth.Checked = false;
                     }
                 }
-                Response.Redirect("ViewAllEmployee.aspx");
-            
+            }
+            else
+            {
+                int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
+                addEmployee.IsAdmin = chkAdminAuth.Checked;
+                if (chkAdminAuth.Checked == true)
+                {
+                    addEmployee.Role = "Admin";
+                }
+                else
+                {
+                    addEmployee.Role = "User";
+                }
+                successResult = addEmployeeLogic.UpdateAllEmployee(addEmployee, UserId);
+                if (successResult == 1)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
+                }
+            }
+            Response.Redirect("AddEmployee.aspx");
+
+        }
+
+        public void ResetAllFields()
+        {
+            txtEmployeeCode.Text = "";
+            txtEmployeeName.Text = "";
+            txtEmail.Text = "";
+            txtPhoneNo.Text = "";
+            ddlDesignation.SelectedItem.Text = "--Select Designation--";
+            chkAdminAuth.Checked = false;
+            lblCheckCode.Text = "";
+            lblCheckEmail.Text = "";
+            lblCheckPhone.Text = "";
         }
 
         protected void BindEmployeeList()
         {
-            ddlRoleList.Items.Clear();
-            ddlRoleList.DataSource = addEmployeeLogic.GetAllRole();
-            ddlRoleList.DataTextField = "Role";
-            ddlRoleList.DataValueField = "RoleId";
-            ddlRoleList.DataBind();
-            ddlRoleList.Items.Insert(0, new ListItem("-- Select Role --", "0"));
+            //ddlRoleList.Items.Clear();
+            //ddlRoleList.DataSource = addEmployeeLogic.GetAllRole();
+            //ddlRoleList.DataTextField = "Role";
+            //ddlRoleList.DataValueField = "RoleId";
+            //ddlRoleList.DataBind();
+            //ddlRoleList.Items.Insert(0, new ListItem("-- Select Role --", "0"));
             ddlDesignation.Items.Clear();
             ddlDesignation.DataSource = addEmployeeLogic.GetAllDesignation();
             ddlDesignation.DataTextField = "Designation";
@@ -135,7 +174,7 @@ namespace ProjectManagement.Admin
 
         protected void txtEmployeeCode_TextChanged(object sender, EventArgs e)
         {
-            
+
             //addEmployee.EmployeeCode = txtEmployeeCode.Text;
             //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
             // if (checkUser == "insert")
@@ -149,12 +188,17 @@ namespace ProjectManagement.Admin
 
         protected void txtEmail_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void txtPhoneNo_TextChanged(object sender, EventArgs e)
         {
-           
+
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetAllFields();
         }
 
 

@@ -159,5 +159,25 @@ namespace DataAccessLayer
             }
             //return dsResult;
         }
+
+        public DataSet ClientSearch(ClientBusinessObject Client)
+        {
+            try
+            {
+                var query = "SELECT c.*,ct.CountryName FROM client c inner join country ct on ct.Id=c.CountryId ";
+
+                if (!string.IsNullOrEmpty(Client.ClientName))
+                {
+                    query += "WHERE c.ClientName LIKE '%" + Client.ClientName + "%' or ct.CountryName LIKE '%" + Client.ClientName + "%'";
+                }
+                dsResult = new Connection().GetDataSetResults(query);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
