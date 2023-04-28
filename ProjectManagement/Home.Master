@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Dashboard</title>
+    
     <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
+       
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
     <!-- Favicon icon -->
@@ -182,8 +184,10 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <form runat="server">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
+                    </form>
                 <%--<div class="row">
                     <div class="card">
                         <div class="card-body">

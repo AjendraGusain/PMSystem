@@ -15,7 +15,7 @@ namespace DataAccessLayer
     public class EmployeeDataAccess
     {
         DataSet dsResult = new DataSet();
-        
+
 
         int insertSuccess = 0;
         MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
@@ -37,7 +37,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@Role", addEmployee.Role));
                 cmd.Parameters.Add(new MySqlParameter("@Designation", addEmployee.Designation));
                 cmd.Parameters.Add(new MySqlParameter("@IsAdmin", addEmployee.IsAdmin));
-                insertSuccess=cmd.ExecuteNonQuery();
+                insertSuccess = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@Role", addEmployee.Role));
                 cmd.Parameters.Add(new MySqlParameter("@Designation", addEmployee.Designation));
                 cmd.Parameters.Add(new MySqlParameter("@IsAdmin", addEmployee.IsAdmin));
-                insertSuccess=cmd.ExecuteNonQuery();
+                insertSuccess = cmd.ExecuteNonQuery();
 
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UD.Email='" + mail+"'");
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UD.Email='" + mail + "'");
                 return dsResult;
             }
             catch (Exception ex)
@@ -155,7 +155,7 @@ namespace DataAccessLayer
         {
             try
             {
-                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UserId='"+UserId+"'");
+                dsResult = new Connection().GetDataSetResults("Select * FROM ProjectManagementNew.user as UD inner join ProjectManagementNew.role As RO on UD.RoleId=RO.RoleId inner join ProjectManagementNew.designation As DS on UD.DesignationId=DS.Id where UserId='" + UserId + "'");
                 return dsResult;
             }
             catch (Exception ex)
@@ -287,7 +287,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "Update  ProjectManagementNew.user Set UID='"+token+"',UIDDate=Now() where Email='"+email+"'";
+                string dsResult = "Update  ProjectManagementNew.user Set UID='" + token + "',UIDDate=Now() where Email='" + email + "'";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 insertSuccess = cmd.ExecuteNonQuery();
             }
@@ -331,5 +331,39 @@ namespace DataAccessLayer
             da.Fill(dsResult);
             return dsResult;
         }
+
+        public DataSet SearchEmployee(EmployeeBusinessObject Project)
+        {
+            try
+            {
+                var query = "SELECT u.*,r.Role,d.Designation FROM ProjectManagementNew.user u inner join role r on r.RoleId=u.RoleId inner join designation d on d.Id=u.designationId ";
+
+                if (!string.IsNullOrEmpty(Project.EmployeeName))
+                {
+                    query += "WHERE u.EmployeeCode LIKE '%" + Project.EmployeeName + "%' or u.UserName LIKE '%" + Project.EmployeeName + "%' or u.PhoneNumber LIKE '%" + Project.EmployeeName + "%' or u.Email LIKE '%" + Project.EmployeeName + "%' or r.Role LIKE '%" + Project.EmployeeName + "%' or d.Designation LIKE '%" + Project.EmployeeName + "%'";
+                }
+                dsResult = new Connection().GetDataSetResults(query);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetAllTeamMember()
+        {
+            try
+            {
+                var query = "select * from team_member where Is_Active!=0;";
+                dsResult = new Connection().GetDataSetResults(query);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+          
     }
 }

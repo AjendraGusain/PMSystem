@@ -10,7 +10,7 @@
                 </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <div class="card">
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);

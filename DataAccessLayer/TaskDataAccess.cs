@@ -781,12 +781,23 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-
-                addTaskBO.dsResult.Reset();
-                string spName = "sp_GetUserTaskTime";
-                Hashtable obj = new Hashtable();
-                obj.Add("@TaskNameID", objUserTask.TaskID);
-                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                if (objUserTask.RoleID == 1)
+                {
+                    addTaskBO.dsResult.Reset();
+                    string spName = "sp_GetUserTaskTime";
+                    Hashtable obj = new Hashtable();
+                    obj.Add("@TaskNameID", objUserTask.TaskID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
+                else
+                {
+                    addTaskBO.dsResult.Reset();
+                    string spName = "sp_GetUserTaskTimeForUser";
+                    Hashtable obj = new Hashtable();
+                    obj.Add("@TaskNameID", objUserTask.TaskID);
+                    obj.Add("@UserIDName", objUserTask.LoginUserID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -901,10 +912,20 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_SearchAllTaskByClientForAdmin";
                 Hashtable obj = new Hashtable();
-                obj.Add("@ClientCheckID", searchResult.ClientID);
-                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                if (searchResult.RoleID == 1)
+                {
+                    string spName = "sp_SearchAllTaskByClientForAdmin";
+                    obj.Add("@ClientCheckID", searchResult.ClientID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
+                else
+                {
+                    string spName = "sp_SearchAllTaskByClientID";
+                    obj.Add("@ClientCheckID", searchResult.ClientID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
+
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -928,10 +949,19 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_SearchAllTaskByProjectForAdmin";
                 Hashtable obj = new Hashtable();
-                obj.Add("@ProjectCheckID", searchResult.ProjectID);
-                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                if (searchResult.RoleID == 1)
+                {
+                    string spName = "sp_SearchAllTaskByProjectForAdmin";
+                    obj.Add("@ProjectCheckID", searchResult.ProjectID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
+                else
+                {
+                    string spName = "sp_SearchAllTaskByProjectID";
+                    obj.Add("@ProjectCheckID", searchResult.ProjectID);
+                    addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                }
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)

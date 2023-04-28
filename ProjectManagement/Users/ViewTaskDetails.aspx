@@ -40,12 +40,12 @@
         }
     </script>
 
-    <form runat="server">
+    <%--<form runat="server">--%>
         <asp:Panel ID="pnlDisplayUserTaskDetails" runat="server">
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dataTables_wrapper container-fluid mb-4">
+                        <%--<div class="dataTables_wrapper container-fluid mb-4">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_filter text-start" id="zero_config_length">
@@ -60,7 +60,7 @@
                                     <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="dataTables_wrapper">
                             <div class="row details mb-5 p-5">
                                 <div class="col-md-6">
@@ -385,61 +385,94 @@
                             </div>
                         </asp:Panel>
                         <br />
+                        <asp:Panel ID="pnlChat" runat="server">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Chat Option</h4>
-                                        <div class="chat-box scrollable">
-                                            <asp:ListView ID="lstViewChatBox" runat="server">
-                                                <LayoutTemplate>
-                                                    <ul style="list-style: none; padding-left: 0" class="chat-list">
-                                                        <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
-                                                    </ul>
-                                                </LayoutTemplate>
-                                                <ItemTemplate>
-                                                    <li class="chat-item">
-                                                        <div class="chat-img">
-                                                        </div>
-                                                        <div class="chat-content">
-                                                            <h6 cssclass="font-medium">
-                                                                <asp:Label ID="lblUser" runat="server" Text='<%#Eval("UserName")%>'></asp:Label>
-                                                            </h6>
+                                        <asp:ScriptManager runat="server" ID="ScriptManager1">
+                                        </asp:ScriptManager>
+                                        <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                            <ContentTemplate>
 
-                                                            <div class="box bg-light-info">
-                                                                <asp:Label ID="lblComment" runat="server" Text='<%#Eval("TaskComment")%>'></asp:Label>
+                                                <h4 class="card-title">Chat Option</h4>
+                                                <%-- <asp:Timer runat="server" ID="Timer1" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>--%>
+                                                <%--<asp:Label runat="server" Text="Page not refreshed yet." ID="Label1"></asp:Label>--%>
+                                                <%--style="height: 475px"--%>
+                                                <div Id="scrollableChatBox" class="chat-box scrollable" style="height: 250px" >
+                                                    <asp:ListView ID="lstViewChatBox" runat="server">
+                                                        <LayoutTemplate>
+                                                            <ul style="list-style: none; padding-left: 0" class="chat-list">
+                                                                <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                                                            </ul>
+                                                        </LayoutTemplate>
+                                                        <ItemTemplate>
+                                                            <li class="chat-item">
+                                                                <div class="chat-img">
+                                                                    <%--<img src="~/1.jpg" alt="user" />--%>
+                                                                    <a class="btn-circle btn-lg btn-cyan float-end text-white" href="javascript:void(0)">
+                                                                        <%--<i class="mdi mdi-send fs-3"></i>--%>
+
+
+
+                                                                        <h5 class="font-medium">
+                                                                            <asp:Label ID="Label2" runat="server" Text='<%#Eval("Abbriviation")%>'></asp:Label>
+                                                                        </h5>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="chat-content">
+                                                                    <h6 class="font-medium">
+                                                                        <asp:Label ID="lblUser" runat="server" Text='<%#Eval("UserName")%>'></asp:Label>
+                                                                    </h6>
+
+                                                                    <div class="box bg-light-info">
+                                                                        <asp:Label ID="lblComment" runat="server" Text='<%#Eval("TaskComment")%>'></asp:Label>
+                                                                    </div>
+                                                                </div>
+                                                                <asp:Label ID="lblCommentTime" CssClass="chat-time" runat="server" Text='<%#Eval("CommentDate")%>'></asp:Label>
+                                                            </li>
+                                                        </ItemTemplate>
+                                                        <EmptyDataTemplate>
+                                                            <p>Nothing here.</p>
+                                                        </EmptyDataTemplate>
+                                                    </asp:ListView>
+
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <div class="card-body border-top">
+                                            <asp:UpdatePanel runat="server" ID="UpdatePanel2">
+                                            <ContentTemplate>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <div class="input-field mt-0 mb-0">
+                                                                <asp:TextBox ID="txtChatDescription" runat="server" class="form-control border-0" TextMode="MultiLine" Placeholder="Type and send"></asp:TextBox>
                                                             </div>
                                                         </div>
-                                                        <asp:Label ID="lblCommentTime" CssClass="chat-time" runat="server" Text='<%#Eval("CommentDate")%>'></asp:Label>
-                                                    </li>
-                                                </ItemTemplate>
-                                                <EmptyDataTemplate>
-                                                    <p>Nothing here.</p>
-                                                </EmptyDataTemplate>
-                                            </asp:ListView>
-                                        </div>
-                                    </div>
-                                    <div class="card-body border-top">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <div class="input-field mt-0 mb-0">
-                                                    <asp:TextBox ID="txtChatDescription" runat="server" class="form-control border-0" TextMode="MultiLine" Placeholder="Type and enter"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <asp:Button ID="btnSendDescription" runat="server" Text="Send" class="btn-lg btn-cyan float-end text-white" OnClick="btnSendDescription_Click" />
-                                                <%--<a class="btn-circle btn-lg btn-cyan float-end text-white" href="javascript:void(0)"><i class="mdi mdi-send fs-3"></i></a>--%>
-                                            </div>
+                                                        <div class="col-1">
+                                                            <asp:Button ID="btnSendDescription" runat="server" Text="Send" CssClass="btn-lg btn-cyan float-end text-white"  OnClick="btnSendDescription_Click" />
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" class="btn-lg btn-cyan float-end text-white" OnClick="btnRefresh_Click" />
+                                                            <%--<a
+                                                        class="btn-circle btn-lg btn-cyan float-end text-white"
+                                                        href="javascript:void(0)"><i class="mdi mdi-send fs-3"></i></a>--%>
+                                                        </div>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </asp:Panel>
                     </div>
                 </div>
             </div>
         </asp:Panel>
-    </form>
+    <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);
