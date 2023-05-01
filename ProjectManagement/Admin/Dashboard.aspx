@@ -6,7 +6,7 @@
     <h4>Dashboard</h4>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <%--<form runat="server">--%>
     <div class="row">
         <!-- Column -->
         <div class="col-md-6 col-lg-3">
@@ -197,5 +197,5 @@
             </div>
         </div>
     </div>
-</form>
+<%--</form>--%>
 </asp:Content>

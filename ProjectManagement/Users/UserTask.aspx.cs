@@ -112,7 +112,7 @@ namespace ProjectManagement.Users
             }
         }
 
-        
+
 
         protected void gvDisplayUserTask_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -302,17 +302,31 @@ namespace ProjectManagement.Users
 
         protected void btnSearchStartEnd_Click(object sender, EventArgs e)
         {
-            if (txtSearchStartDate.Text != "")
+            if (!string.IsNullOrEmpty(txtSearchStartDate.Text))
             {
-                addTaskBusinessObj.StartDate = Convert.ToDateTime(txtSearchStartDate.Text);
+                addTaskBusinessObj.StartDate = DateTime.Parse(txtSearchStartDate.Text);
             }
-            if (txtSearchEndDate.Text != "")
+            if (!string.IsNullOrEmpty(txtSearchEndDate.Text))
             {
                 addTaskBusinessObj.EndDate = Convert.ToDateTime(txtSearchEndDate.Text);
             }
-            addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByDate(addTaskBusinessObj);
-            gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
-            gvDisplayUserTask.DataBind();
+
+
+            //if (txtSearchStartDate.Text != "")
+            //{
+            //    addTaskBusinessObj.StartDate = Convert.ToDateTime(txtSearchStartDate.Text);
+            //}
+            //if (txtSearchEndDate.Text != "")
+            //{
+            //    addTaskBusinessObj.EndDate = Convert.ToDateTime(txtSearchEndDate.Text);
+            //}
+            //addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByDate(addTaskBusinessObj);
+            addTaskBusinessObj.dsResult = assigntaskBLL.SearchTask(addTaskBusinessObj);
+            if (addTaskBusinessObj.dsResult.Tables.Count > 0)
+            {
+                gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
+                gvDisplayUserTask.DataBind();
+            }
         }
 
         protected void btnCancelStartEnd_Click(object sender, EventArgs e)

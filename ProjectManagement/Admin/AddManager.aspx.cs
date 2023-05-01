@@ -99,7 +99,8 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            ddlMProject.DataSource = createTeamBA.GetTeamName();
+            dtResult = createTeamBA.GetTeamName();
+            ddlMProject.DataSource = dtResult.Tables[1];
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();

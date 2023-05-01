@@ -13,7 +13,7 @@
    <div class="card">
         <div class="card-body">
             
-            <form runat="server" class="mt-3">
+            <%--<form runat="server" class="mt-3">--%>
             <div class="dataTables_wrapper">
                 
                 <div class="row">
@@ -76,7 +76,7 @@
                                             </asp:TemplateField>
                                         </Columns>
                                 </asp:GridView>
-                </form>
+                <%--</form>--%>
         </div>
     </div>
     <script language="javascript" type="text/javascript">

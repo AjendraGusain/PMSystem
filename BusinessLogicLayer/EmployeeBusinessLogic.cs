@@ -69,31 +69,28 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
-        public string UserCheck(EmployeeBusinessObject userLogin)
+        public void UserCheck(EmployeeBusinessObject userLogin, out string code, out string email, out string phone)
         {
-            //string sproc = "sp_InsertEmployeeDetails";
+            code = "";
+            email = "";
+            phone = "";
             DataSet dtResult = addEmployeeData.UserCheck(userLogin);
-           bool checkCode =dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("EmployeeCode") == userLogin.EmployeeCode);
-            bool checkEmail = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("Email") == userLogin.EmployeeCode);
-            bool checkPhone = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("PhoneNumber") == userLogin.EmployeeCode);
-            //string checkEmailCode = "";
-            //for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
-            //{
-            //    if (userLogin.EmployeeCode == dtResult.Tables[0].Rows[i]["EmployeeCode"].ToString())
-            //    {
-            //        checkEmailCode="Code";
-            //    }
-            //    if (userLogin.EmployeeEmail == dtResult.Tables[0].Rows[i]["Email"].ToString())
-            //    {
-            //        checkEmailCode= "Email";
-            //    }
-            //    if (userLogin.EmployeePhone == dtResult.Tables[0].Rows[i]["PhoneNumber"].ToString())
-            //    {
-            //        checkEmailCode= "Phone";
-            //    }
-            //}
-            
-            return checkCode+"&"+ checkEmail+"&"+ checkPhone;
+            bool checkCode = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("EmployeeCode") == userLogin.EmployeeCode);
+            bool checkEmail = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("Email") == userLogin.EmployeeEmail);
+            bool checkPhone = dtResult.Tables[0].AsEnumerable().Any(row => row.Field<string>("PhoneNumber") == userLogin.EmployeePhone);
+
+            if (checkCode == true)
+            {
+                code = "EmployeeCode";
+            }
+            if (checkEmail == true)
+            {
+                email = "EmployeeEmail";
+            }
+            if (checkPhone == true)
+            {
+                phone = "EmployeePhone";
+            }
         }
 
         public int UpdateToken(string token, string email)
@@ -112,5 +109,18 @@ namespace BusinessLogicLayer
             dtResultDS = addEmployeeData.GetAllTaskByUserEmployeeTask(ProjectId, UserId);
             return dtResultDS;
         }
+
+        public DataSet SearchEmployee(EmployeeBusinessObject user)
+        {
+            DataSet dtResult = addEmployeeData.SearchEmployee(user);
+            return dtResult;
+        }
+
+        public DataSet GetAllTeamMember()
+        {
+            DataSet dtResult = addEmployeeData.GetAllTeamMember();
+            return dtResult;
+        }
+
     }
 }

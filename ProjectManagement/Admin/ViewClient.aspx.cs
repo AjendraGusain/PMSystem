@@ -18,6 +18,7 @@ namespace ProjectManagement.Admin
     {
         IClientBusinessLogic viewClient = new ClientBusinessLogic(new ClientDataAccess());
         IProjectDataAccess projectRepo = new ProjectDataAccess();
+        ClientBusinessObject addClientObj = new ClientBusinessObject();
         DataSet dsResult = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -72,5 +73,29 @@ namespace ProjectManagement.Admin
             grvClient.PageIndex = e.NewPageIndex;
             BindClientList();
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            addClientObj.ClientName = txtClientNameSearch.Text.Trim();
+            DataSet response = viewClient.ClientSearch(addClientObj);
+            grvClient.DataSource = response.Tables[0];
+            grvClient.DataBind();
+            // txtClientNameSearch_TextChanged(null, EventArgs.Empty);
+        }
+
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+            grvClient.EditIndex = -1;
+            txtClientNameSearch.Text = "";
+            BindClientList();
+        }
+
+        //protected void txtClientNameSearch_TextChanged(object sender, EventArgs e)
+        //{
+        //    addClientObj.ClientName = txtClientNameSearch.Text.Trim();
+        //    DataSet response = viewClient.ClientSearch(addClientObj);
+        //    grvClient.DataSource = response.Tables[0];
+        //    grvClient.DataBind();
+        //}
     }
 }

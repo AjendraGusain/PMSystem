@@ -9,7 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card">
         <div class="card-body wizard-content">
-            <form runat="server">
+            
                 <div class="wizard clearfix">
                    
                     <div class="content clearfix">
@@ -50,14 +50,14 @@
                                     <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" ValidationGroup="ED"/>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <%--<div class="form-group row">
                                 <label for="Role" class="col-sm-3 text-center control-label col-form-label">Role</label>
                                 <div class="col-sm-6">
                                     <asp:DropDownList ID="ddlRoleList" runat="server" class="select2 form-select shadow-none">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rvRoleList" runat="server" ControlToValidate="ddlRoleList" InitialValue="0" ErrorMessage="*" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group row">
                                 <label for="Designation" class="col-sm-3 text-center control-label col-form-label">Designation</label>
                                 <div class="col-sm-6">
@@ -78,10 +78,11 @@
                         </section>
                         <div class="card-body text-center">
                             <asp:Button Text="Add Employee" runat="server" ID="btnAddEmployee" OnClick="btnAddEmployee_Click" CssClass="btn btn-info" ValidationGroup="ED" />
+                            <asp:Button Text="Reset" runat="server" ID="btnReset" OnClick="btnReset_Click" CssClass="btn btn-info" ValidationGroup="ED" />
                         </div>
                     </div>
                 </div>
-            </form>
+            
         </div>
     </div>
     <script language="javascript" type="text/javascript">

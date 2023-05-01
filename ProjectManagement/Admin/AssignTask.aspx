@@ -10,12 +10,12 @@
                     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <div class="card">
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-3">
+                        <%--<div class="col-sm-12 col-md-3">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
                                     Client Name
@@ -32,18 +32,18 @@
                                 </asp:DropDownList>    
                                 </label>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3">
+                        </div>--%>
+                        <div class="col-sm-12 col-md-4">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
                                     Search
                                     <asp:TextBox ID="txtSearchEmp" runat="server" CssClass="form-control form-control-sm" placeholder="Search.."></asp:TextBox>
                                 </label>
                                 <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchEmp_Click" />
-                                <%--<asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />--%>
+                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-3">
+                        <div class="col-sm-12 col-md-8">
                             <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);

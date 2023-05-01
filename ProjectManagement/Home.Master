@@ -5,6 +5,7 @@
     <title>Dashboard</title>
     <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
     <!-- Favicon icon -->
@@ -15,8 +16,6 @@
     <link href="../css/jquery.steps.css" rel="stylesheet" />
     <link href="../css/steps.css" rel="stylesheet" />
     <link href="../css/style.min.css" rel="stylesheet" />
-
-
     <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
     <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
@@ -28,6 +27,18 @@
                 allowClear: true
             });
         });
+        function check() {
+            return true;
+        }
+
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onunload = function () { void (0) }
+
     </script>
 </head>
 <body>
@@ -42,26 +53,27 @@
                     </span></a><a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav float-start me-auto">
-                        <li class="nav-item d-lg-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
-                        <li class="nav-item search-box"><a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-magnify fs-4"></i></a>
-                            <form class="app-search position-absolute">
+                    
+                        <ul class="navbar-nav float-start me-auto">
+                            <li class="nav-item d-lg-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                            <li class="nav-item search-box"><a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-magnify fs-4"></i></a>
+                                <form class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Search" />
                                 <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-                            </form>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav float-end">
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-bell font-24"></i></a></li>
-                        <li class="nav-item dropdown"><a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" />
-                        </a>
-                            <ul class="dropdown-menu dropdown-menu-end user-dd" aria-labelledby="dropdownMenuButton1">
-                                <a class="dropdown-item" href="#"><i class="fa fa-power-off me-1 ms-1"></i>Logout</a>
-                            </ul>
-                        </li>
-                    </ul>
-
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav float-end">
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-bell font-24"></i></a></li>
+                            <li class="nav-item dropdown"><a class=" nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../images/1.jpg" alt="user" class="rounded-circle" width="31" />
+                            </a>
+                                <ul class="dropdown-menu dropdown-menu-end user-dd" aria-labelledby="dropdownMenuButton1">
+                                    <%--<a class="dropdown-item" href="#"><i class="fa fa-power-off me-1 ms-1"></i>Logout</a>--%>
+                                    <a class="dropdown-item" href="../Logout.aspx" onclick='return check()'><i class="fa fa-power-off me-1 ms-1"></i>Logout</a>
+                                </ul>
+                            </li>
+                        </ul>
                 </div>
             </nav>
         </header>
@@ -108,51 +120,35 @@
                                     <li class="sidebar-item"><a href="../Admin/AddTeamName.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Team Name</span></a> </li>
                                     <li class="sidebar-item"><a href="../Admin/AddManager.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Manager</span></a> </li>
                                     <li class="sidebar-item"><a href="../Admin/AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Team Leader</span></a> </li>
-
                                     <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
                                 </ul>
                             </li>
                         </asp:Panel>
-                         <asp:Panel ID="pnlManagerTeamAccess" runat="server">
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="../Admin/AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Team Leader</span></a> </li>
-                                <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
-                            </ul>
-                        </li>
-                        <%--<li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="ViewTeam.aspx" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">All Team</span></a> </li>--%>
-                        
+                        <asp:Panel ID="pnlManagerTeamAccess" runat="server">
+                            <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item"><a href="../Admin/AddTeamLeader.aspx" class="sidebar-link"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">Team Leader</span></a> </li>
+                                    <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
+                                </ul>
+                            </li>
                         </asp:Panel>
-
-                         <asp:Panel ID="pnlTeamLeaderAccess" runat="server">
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
-                            </ul>
-                        </li>
-                        
-                        <%--<li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="../Admin/AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
-                                <li class="sidebar-item"><a href="../Admin/AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
-                                <li class="sidebar-item"><a href="../Admin/ViewAllTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View All Task</span></a> </li>
-                            </ul>
-                        </li>--%>
+                        <asp:Panel ID="pnlTeamLeaderAccess" runat="server">
+                            <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple-plus"></i><span class="hide-menu">Add Team</span></a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item"><a href="../Admin/AddTeamEmployee.aspx" class="sidebar-link"><i class="mdi mdi-account-star"></i><span class="hide-menu">Employee</span></a> </li>
+                                </ul>
+                            </li>
                         </asp:Panel>
-
-                         <asp:Panel ID="pnlAddTask" runat="server">
-                             <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="ViewTeam.aspx" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">All Team</span></a> </li>
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="../Admin/AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
-                                <li class="sidebar-item"><a href="../Admin/AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
-                                <li class="sidebar-item"><a href="../Admin/ViewAllTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View All Task</span></a> </li>
-                            </ul>
-                        </li>
+                        <asp:Panel ID="pnlAddTask" runat="server">
+                            <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="ViewTeam.aspx" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">All Team</span></a> </li>
+                            <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-application"></i><span class="hide-menu">Task</span> </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item"><a href="../Admin/AddTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">Create Task</span></a> </li>
+                                    <li class="sidebar-item"><a href="../Admin/AssignTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assign Task</span></a> </li>
+                                    <li class="sidebar-item"><a href="../Admin/ViewAllTask.aspx" class="sidebar-link"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">View All Task</span></a> </li>
+                                </ul>
+                            </li>
                         </asp:Panel>
-
-                       
-                        
                         <asp:Panel ID="pnlUser" runat="server">
                             <li class="sidebar-item"><a href="../Users/UserTask.aspx" class="sidebar-link"><i class="mdi mdi-pencil-box"></i><span class="hide-menu">My Task</span></a> </li>
                         </asp:Panel>
@@ -163,14 +159,6 @@
         </aside>
         <div class="page-wrapper">
             <div class="page-breadcrumb">
-                <%--<div class="ms-auto text-end">
-                    <button type="button" class="btn btn-warning btn-sm">
-                                    <i class="mdi mdi-chevron-left"></i>Back
-                                </button>
-                    
-                        <asp:Button ID="btnBack" CssClass="mdi mdi-chevron-left" Text="Back" runat="server" />
-                    
-                </div>--%>
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
@@ -182,24 +170,11 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-                <%--<div class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
-                                    <form runat="server">
-                                        
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
+                <form runat="server">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </form>
             </div>
-
-
             <footer class="footer text-center">All Rights Reserved </footer>
         </div>
     </div>

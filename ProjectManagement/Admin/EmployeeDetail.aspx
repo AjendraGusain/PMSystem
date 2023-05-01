@@ -12,7 +12,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form class="mt-3" runat="server">
+    <%--<form class="mt-3" runat="server">--%>
     <div class="card">
         <div class="card-body">
             <div class="dataTables_wrapper">
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-        </form>
+        <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);
