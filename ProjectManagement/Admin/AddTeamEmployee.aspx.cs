@@ -252,7 +252,7 @@ namespace ProjectManagement.Admin
             pnlHideForm.Visible = true;
             createTeam.Manager = teamMemberId;
             DataSet dsResultTeamLeader = new DataSet();
-            dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
+            dtResult = createTeamBA.GetTeamMember(createTeam);
             Session["ViewTeam"] = viewTeam;
 
             if (Global.Role == "Admin" && viewTeam == "")
@@ -361,7 +361,7 @@ namespace ProjectManagement.Admin
                 //createTeam.Role = "2";
                 string parrentTeamMemberId = Session["Manager"].ToString();
                 createTeam.Manager = parrentTeamMemberId;
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
+                dtResult = createTeamBA.GetTeamMember(createTeam);
                 createTeam.ProjectId = ddlMProject.SelectedValue;
                 createTeam.TeamName = ddlMTeamName.SelectedValue;
 

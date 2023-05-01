@@ -158,14 +158,14 @@ namespace DataAccessLayer
             da.Fill(dsResult);
             return dsResult;
         }
-        public DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam)
+        public DataSet GetTeamMember(TeamBusinessObject createTeam)
         {
             dsResult.Reset();
             string spName = "GetTeamMemberById";
             MySqlCommand cmd = new MySqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new MySqlParameter("@ProjectID", ProjectId));
-            cmd.Parameters.Add(new MySqlParameter("@TeamId", TeamId));
+            cmd.Parameters.Add(new MySqlParameter("@ProjectID", Convert.ToInt32(createTeam.ProjectId)));
+            cmd.Parameters.Add(new MySqlParameter("@TeamId", Convert.ToInt32(createTeam.TeamName)));
             cmd.Parameters.Add(new MySqlParameter("@RoleId",  Convert.ToInt32(createTeam.Role)));
             cmd.Parameters.Add(new MySqlParameter("@Manager", Convert.ToInt32(createTeam.Manager)));
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
