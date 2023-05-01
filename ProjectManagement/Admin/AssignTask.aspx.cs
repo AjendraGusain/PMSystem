@@ -209,13 +209,13 @@ namespace ProjectManagement.Admin
         //    grvAssignedTaskDetails.DataBind();
         //}
 
-        //protected void btnCancelSearch_Click(object sender, EventArgs e)
-        //{
-        //    ddlSearchClient.SelectedItem.Text = "Select Client";
-        //    ddlSerachProject.SelectedItem.Text = "Select Project";
-        //    grvAssignedTaskDetails.EditIndex = -1;
-        //    txtSearchEmp.Text = "";
-        //    GetAssignedTask();
-        //}
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+         //   ddlSearchClient.SelectedItem.Text = "Select Client";
+          //  ddlSerachProject.SelectedItem.Text = "Select Project";
+            grvAssignedTaskDetails.EditIndex = -1;
+            txtSearchEmp.Text = "";
+            GetAssignedTask();
+        }
     }
 }

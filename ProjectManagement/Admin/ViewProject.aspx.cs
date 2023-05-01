@@ -127,5 +127,11 @@ namespace ProjectManagement.Admin
             AllProjects.DataSource = response.Tables[0];
             AllProjects.DataBind();
         }
+
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+            AllProjects.EditIndex = -1;
+            BindProjectGrid();
+        }
     }
 }

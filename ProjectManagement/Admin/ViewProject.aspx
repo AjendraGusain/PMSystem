@@ -20,7 +20,8 @@
                             <div id="zero_config_filter" class="dataTables_filter">
                                 <label>
                                     Search:
-                      <asp:TextBox ID="txtProNameSearch" runat="server" placeholder="Search.."></asp:TextBox>
+                                    <asp:TextBox ID="txtProNameSearch" runat="server" placeholder="Search.."></asp:TextBox>
+
                                 </label>
                             </div>
                         </div>
@@ -41,6 +42,7 @@
                             <div class="dataTables_length" id="zero_config_length">
                                 <label>
                                     <asp:Button Text="Search" ID="btnSearch" runat="server" OnClick="btnSearch_Click" />
+                                    <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                                 </label>
                             </div>
                         </div>
