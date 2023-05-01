@@ -119,7 +119,7 @@ namespace ProjectManagement.Admin
                 Session["TeamId"] = TeamId;
                 createTeam.Role = "3";
                 createTeam.Manager = "0";
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
+                dtResult = createTeamBA.GetTeamMember(createTeam);
                 //BindList();
                 ddlMProject.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
                 ddlMTeamName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
@@ -186,7 +186,7 @@ namespace ProjectManagement.Admin
                 int TeamId= Convert.ToInt32( Session["TeamId"]) ;
                 //createTeam.Role = "3";
                 createTeam.Manager = "0";
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
+                dtResult = createTeamBA.GetTeamMember(createTeam);
                 createTeam.ProjectId = ddlMProject.SelectedValue;
                 createTeam.TeamName = ddlMTeamName.SelectedValue;
                 int count = 0;
