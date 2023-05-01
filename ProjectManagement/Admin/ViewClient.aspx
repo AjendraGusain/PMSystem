@@ -15,11 +15,12 @@
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-5">
+                        <div class="col-sm-12 col-md-4">
                             <div id="zero_config_filter" class="dataTables_filter">
                                 <label>
                                     Search:
                       <asp:TextBox ID="txtClientNameSearch" runat="server" placeholder="Search.."></asp:TextBox>
+                                     <%--OnTextChanged="txtClientNameSearch_TextChanged" AutoPostBack="true"--%>
                                 </label>
                             </div>
                         </div>
@@ -36,14 +37,15 @@
 
                             </div>
                         </div>--%>
-                        <div class="col-sm-12 col-md-2">
+                        <div class="col-sm-12 col-md-4">
                             <div class="dataTables_length" id="zero_config_length">
                                 <label>
-                                    <asp:Button Text="Search" ID="btnSearch" runat="server" OnClick="btnSearch_Click" />
+                                    <asp:Button Text="Search" CssClass="form-control form-control-sm" ID="btnSearch" runat="server" OnClick="btnSearch_Click" />
+                                    <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                                 </label>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-2">
+                        <div class="col-sm-12 col-md-4">
                             <div id="zero_config_filter" class="dataTables_filter"><a href="#" class="link-success">Export to Excel <span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-file-excel fa-stack-1x fa-inverse"></i></span></a></div>
                         </div>
                     </div>
