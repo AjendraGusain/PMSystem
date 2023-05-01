@@ -22,7 +22,9 @@ namespace ProjectManagement.Admin
             if (!Page.IsPostBack)
             {
                 GetAllCreatedTask();
-              //  BindClientandProject();
+                //  BindClientandProject();
+                Global.Role = Session["Role"].ToString();
+                Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
             }
         }
         public void GetAllCreatedTask()
@@ -134,7 +136,7 @@ namespace ProjectManagement.Admin
             //string[] formats = {"dd/MM/yyyy", "dd-MMM-yyyy", "yyyy-MM-dd","dd-MM-yyyy", "M/d/yyyy", "dd MMM yyyy"};
             //string convertedStartDate = DateTime.ParseExact(txtTaskStartDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
             //string convertedEndDate = DateTime.ParseExact(txtTaskEndDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
-
+            addTaskBusinessObj.RoleID = Convert.ToInt32(Session["RoleId"].ToString());
             if (!string.IsNullOrEmpty(txtTaskStartDateSearch.Text))
             {
                 addTaskBusinessObj.StartDate = DateTime.Parse(txtTaskStartDateSearch.Text);
@@ -169,9 +171,18 @@ namespace ProjectManagement.Admin
             {
                 grvViewAllTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
                 grvViewAllTask.DataBind();
-                txtTaskStartDateSearch.Text = "";
-                txtTaskEndDateSearch.Text = "";
+                //txtTaskStartDateSearch.Text = "";
+                //txtTaskEndDateSearch.Text = "";
             }
+        }
+
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+            grvViewAllTask.EditIndex = -1;
+            txtSearchEmp.Text = "";
+            txtTaskStartDateSearch.Text = "";
+            txtTaskEndDateSearch.Text = "";
+            GetAllCreatedTask();
         }
 
         //protected void btnCancelSearch_Click(object sender, EventArgs e)

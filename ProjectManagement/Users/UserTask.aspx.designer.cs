@@ -15,31 +15,13 @@ namespace ProjectManagement.Users
     {
 
         /// <summary>
-        /// ddlSearchClient control.
+        /// txtSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSearchClient;
-
-        /// <summary>
-        /// ddlSerachProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSerachProject;
-
-        /// <summary>
-        /// ddlSearchStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSearchStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
         /// txtSearchStartDate control.

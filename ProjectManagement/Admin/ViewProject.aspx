@@ -41,7 +41,7 @@
                         <div class="col-sm-12 col-md-2">
                             <div class="dataTables_length" id="zero_config_length">
                                 <label>
-                                    <asp:Button Text="Search" ID="btnSearch" runat="server" OnClick="btnSearch_Click" />
+                                    <asp:Button Text="Search" ID="btnSearch" runat="server" CssClass="form-control form-control-sm" OnClick="btnSearch_Click" />
                                     <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                                 </label>
                             </div>

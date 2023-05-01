@@ -37,7 +37,7 @@
 
                             </div>
                         </div>--%>
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-2">
                             <div class="dataTables_length" id="zero_config_length">
                                 <label>
                                     <asp:Button Text="Search" CssClass="form-control form-control-sm" ID="btnSearch" runat="server" OnClick="btnSearch_Click" />
