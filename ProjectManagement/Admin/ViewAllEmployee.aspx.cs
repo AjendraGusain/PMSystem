@@ -81,5 +81,12 @@ namespace ProjectManagement.Admin
             grvEmployeeDetails.DataSource = response.Tables[0];
             grvEmployeeDetails.DataBind();
         }
+
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+            grvEmployeeDetails.EditIndex = -1;
+            txtEmpNameSearch.Text = "";
+            BindClientList();
+        }
     }
 }

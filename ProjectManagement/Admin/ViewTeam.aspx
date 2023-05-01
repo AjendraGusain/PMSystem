@@ -23,6 +23,7 @@
                                     <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
                                 </label>
                                 <asp:Button ID="btnSearchTeam" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchTeam_Click" />
+                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3">

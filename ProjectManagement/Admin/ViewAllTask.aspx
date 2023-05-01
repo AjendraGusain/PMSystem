@@ -53,7 +53,7 @@
                         <asp:TextBox ID="txtTaskEndDateSearch" runat="server" class="form-control" placeholder="End Date...." type="date"></asp:TextBox>
                                 </label>
                                 <asp:Button ID="btnSearchEmp" runat="server" Text="Search" CssClass="form-control form-control-sm" OnClick="btnSearchEmp_Click" />
-                                <%--<asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />--%>
+                                <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3">

@@ -1013,22 +1013,46 @@ namespace DataAccessLayer
                 Hashtable hashtable = new Hashtable();
                 if (Task.StartDate.ToString()!="" || Task.EndDate.ToString() != "")
                 {
-                    string spName = "sp_SearchDateWise";
-                    DateTime startdate = Convert.ToDateTime(Task.StartDate.ToString());
+                    string spName = "";
+                    if (Task.RoleID == 1)
+                    {
+                        spName = "sp_SearchDateWise";
+                    }
+                    else
+                    {
+                        spName = "sp_SearchByDateWiseforUser";
+                    }
+                    DateTime startdate = Convert.ToDateTime(Task.StartDate);
                     DateTime enddate = Convert.ToDateTime(Task.EndDate);
                     startTime = startdate.ToString("yyyy-MM-dd");
                     endTime = enddate.ToString("yyyy-MM-dd");
                     hashtable.Add("@StartingTime", startTime);
                     hashtable.Add("@EndingTime", endTime);
                     hashtable.Add("@Stringname", Task.SearchResult);
+                    if (Task.RoleID != 1)
+                    {
+                        hashtable.Add("@UserNameID", Task.EmployeeName);
+                    }
                     Task.dsResult = new Connection().GetData(spName, hashtable);
                 }                
                 else
                 {
-                    string spName = "sp_SearchDateWise";
+                    string spName = "";
+                    if (Task.RoleID == 1)
+                    {
+                        spName = "sp_SearchDateWise";
+                    }
+                    else
+                    {
+                        spName = "sp_SearchByDateWiseforUser";
+                    }
                     hashtable.Add("@StartingTime", startTime);
                     hashtable.Add("@EndingTime", endTime);
                     hashtable.Add("@Stringname", Task.SearchResult);
+                    if (Task.RoleID != 1)
+                    {
+                        hashtable.Add("@UserNameID", Task.EmployeeName);
+                    }
                     Task.dsResult = new Connection().GetData(spName, hashtable);
                 }
                 //if (!string.IsNullOrEmpty(Task.SearchResult))
