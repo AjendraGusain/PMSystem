@@ -26,17 +26,15 @@ namespace BusinessLogicLayer.Interface
         DataSet GetTeamMemberMangerTLUser(TeamBusinessObject createTeam);
         DataSet GetTeamMemberTeamLeader(TeamBusinessObject createTeam);
         DataSet GetViewTeam(TeamBusinessObject createTeam);
-
         DataSet CheckTeamTeamMemberExistTask(TeamBusinessObject createTeam);
         DataSet GetTeamMemberEmployee(TeamBusinessObject createTeam);
         DataSet GetAllEmployeTeamMemberId(TeamBusinessObject createTeam);
-        DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam);
+        DataSet GetTeamMember(TeamBusinessObject createTeam);
         int InsertTeamMember(TeamBusinessObject createTeam);
         int DeleteTeamMember(int Id, TeamBusinessObject createTeam);
         int UpdateTeamMember(TeamBusinessObject createTeam);
         int EditTeam(TeamBusinessObject createTeam, int Id);
         int DeleteTeam(int Id);
-
         DataSet SearchTeam(TeamBusinessObject Team);
     }
 }

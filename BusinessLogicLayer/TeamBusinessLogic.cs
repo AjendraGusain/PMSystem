@@ -129,9 +129,9 @@ namespace BusinessLogicLayer
 
 
 
-        public DataSet GetTeamMember(int ProjectId, int TeamId, TeamBusinessObject createTeam)
+        public DataSet GetTeamMember(TeamBusinessObject createTeam)
         {
-            dtResult = _teamDataAccess.GetTeamMember(ProjectId, TeamId, createTeam);
+            dtResult = _teamDataAccess.GetTeamMember(createTeam);
             return dtResult;
         }
 

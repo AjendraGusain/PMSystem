@@ -25,26 +25,25 @@ namespace ProjectManagement.Admin
             if (!IsPostBack)
             {
                 Global.Role = Session["Role"].ToString();
-                //Global.RoleId = Convert.ToInt32(Session["RoleId"].ToString());
-                int userId = Convert.ToInt32(Session["UserID"].ToString());
+                pnlHideForm.Visible = true;
+                DataTable dtGetTeamMember = (DataTable)ViewState["dtTeamUpdate"];
+                BindList();
+                //if (Global.Role == "User")
+                //{
+                //    TeamLeaderAccess(Global.RoleId, userId);
+                //   // ddlMProject.Enabled = false;
+                //   // ddlMTeamName.Enabled = false;
+                //    //ddlManager.Enabled = false;
+                //    //ddlTeamLeader.Enabled = false;
+                //    //DataBindTeamLeaderViewTeam();
 
-                if (Global.Role == "User")
-                {
-                    TeamLeaderAccess(Global.RoleId, userId);
-                    
-                    ddlMProject.Enabled = false;
-                    ddlMTeamName.Enabled = false;
-                    ddlManager.Enabled = false;
-                    //ddlTeamLeader.Enabled = false;
-                    DataBindTeamLeaderViewTeam();
-
-                }
-                else
-                {
-                    BindList();
-                    pnlHideForm.Visible = true;
-                    //pnlHideGrid.Visible = true;
-                }
+                //}
+                //else
+                //{
+                //    BindList();
+                //    pnlHideForm.Visible = true;
+                //    //pnlHideGrid.Visible = true;
+                //}
             }
         }
 
@@ -52,24 +51,25 @@ namespace ProjectManagement.Admin
 
         private void DataBindTeamLeaderViewTeam()
         {
-            dtResult= createTeamBA.GetTeamName();
-            ddlMProject.DataSource = dtResult.Tables[1];
+            dtResult = createTeamBA.GetTeamLeaderTeam(createTeam);
+            ddlMProject.DataSource = dtResult.Tables[2];
 
             ddlMProject.DataTextField = "ProjectName";
             ddlMProject.DataValueField = "ProjectId";
             ddlMProject.DataBind();
 
 
-            ddlMTeamName.DataSource = dtResult.Tables[0];
+            ddlMTeamName.DataSource = dtResult.Tables[2];
 
             ddlMTeamName.DataTextField = "TeamName";
             ddlMTeamName.DataValueField = "Id";
             ddlMTeamName.DataBind();
 
+            //DataTable filter = dtResult.Tables[1];
 
-            ddlManager.DataSource = managerName.GetAllEmployee();
+            ddlManager.DataSource = dtResult.Tables[2];
 
-            ddlManager.DataTextField = "UserName";
+            ddlManager.DataTextField = "ManagerName";
             ddlManager.DataValueField = "UserId";
             ddlManager.DataBind();
 
@@ -92,9 +92,8 @@ namespace ProjectManagement.Admin
             createTeam.Role = roleID.ToString();
             createTeam.Employee = userId.ToString();
             dtResult = createTeamBA.GetTeamLeaderTeam(createTeam);
-            if (dtResult.Tables[1].Rows.Count == 0)
+            if (dtResult.Tables[1].Rows.Count != 0)
             {
-                
                 if (dtResult.Tables[2].Rows.Count > 0)
                 {
                     pnlHideForm.Visible = true;
@@ -103,7 +102,7 @@ namespace ProjectManagement.Admin
                     ddlMTeamName.SelectedValue = Convert.ToInt32(dtResult.Tables[2].Rows[0]["TeamId"]).ToString();
                     Session["ProjectId"] = Convert.ToInt32(dtResult.Tables[2].Rows[0]["ProjectId"]).ToString();
                     Session["TeamId"] = Convert.ToInt32(dtResult.Tables[2].Rows[0]["TeamId"]).ToString();
-                    Session["Manager"] = Convert.ToInt32(dtResult.Tables[2].Rows[0]["TeamMemberId"]).ToString();
+                    //Session["Manager"] = Convert.ToInt32(dtResult.Tables[2].Rows[0]["TeamMemberId"]).ToString();
                     Session["TLId"] = "0";
                     
                 }
@@ -111,7 +110,6 @@ namespace ProjectManagement.Admin
                 {
                     lblNotFound.Text = "You Haven't any Team";
                 }
-
             }
             else
             {
@@ -122,11 +120,30 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-            dtResult = createTeamBA.GetTeamName();
-            ddlMProject.DataSource = dtResult.Tables[1];
-            ddlMProject.DataTextField = "ProjectName";
-            ddlMProject.DataValueField = "ProjectId";
-            ddlMProject.DataBind();
+            if (Global.Role == "Admin")
+            {
+                //string projectId = Session["ProjectId"].ToString();
+                dtResult = createTeamBA.GetTeamName();
+                ddlMProject.DataSource = dtResult.Tables[1];
+                ddlMProject.DataTextField = "ProjectName";
+                ddlMProject.DataValueField = "ProjectId";
+                ddlMProject.DataBind();
+            }
+            else if(Global.Role == "User")
+            {
+                //string projectId = Session["ProjectId"].ToString();
+                Global.Role = Session["Role"].ToString();
+                int userId = Convert.ToInt32(Session["UserID"].ToString());
+                createTeam.Role = "3";
+                createTeam.Employee = userId.ToString();
+                createTeam.ProjectId = "0";
+                createTeam.TeamName = "0";
+                dtResult = createTeamBA.GetTeamLeaderTeam(createTeam);
+                ddlMProject.DataSource = dtResult.Tables[2];
+                ddlMProject.DataTextField = "ProjectName";
+                ddlMProject.DataValueField = "ProjectId";
+                ddlMProject.DataBind();
+            }
             ddlMProject.Items.Insert(0, new ListItem("-- Select Project Name --", "0"));
             ddlMTeamName.Items.Insert(0, new ListItem("-- Select TeamName --", "0"));
             ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
@@ -138,47 +155,19 @@ namespace ProjectManagement.Admin
             if (e.CommandName == "EditTeamLeader")
             {
                 btnAddTeamLeader.Text = "Update";
-               
-                int userId = 0;
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
-                string ProjectId = commandArgs[0];
-                string TeamId = commandArgs[1];
-                string parrentTeamMemberId = commandArgs[2];
-                string role = Session["Role"].ToString();
-                Session["ProjectId"] = ProjectId;
-                Session["TeamId"] = TeamId;
-                Session["Manager"] = parrentTeamMemberId;
+                createTeam.ProjectId = commandArgs[0];
+                createTeam.TeamName = commandArgs[1];
+                createTeam.ParentTeamId = commandArgs[2];
                 createTeam.Role = "4";
-                createTeam.Manager = parrentTeamMemberId;
-                DataSet dsResultTeamLeader = new DataSet();
-                DataSet dsResultTeamLeaderNew = new DataSet();
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
-
-                if (Global.Role == "Admin")
-                {
-                    dsResultTeamLeader = dtResult;
-                    //dsResultTeamLeader = dtResult;
-                    ddlMProject.SelectedValue = Convert.ToInt32(dsResultTeamLeader.Tables[0].Rows[0]["ProjectId"]).ToString();
-                    ddlMTeamName.SelectedValue = Convert.ToInt32(dsResultTeamLeader.Tables[0].Rows[0]["TeamId"]).ToString();
-                }
-                else if (Global.Role == "User")
-                {
-                    pnlHideForm.Visible = true;
-                    userId = Convert.ToInt32(Session["UserID"].ToString());
-                    createTeam.Employee = userId.ToString();
-                    createTeam.Role = Global.RoleId.ToString();
-                    dsResultTeamLeader = createTeamBA.GetTeamLeaderTeam(createTeam);
-                    ddlManager.SelectedValue = Convert.ToInt32(dsResultTeamLeader.Tables[1].Rows[0]["ManagerID"]).ToString();
-                    ddlMProject.SelectedValue = Convert.ToInt32(dsResultTeamLeader.Tables[1].Rows[0]["ProjectId"]).ToString();
-                    ddlMTeamName.SelectedValue = Convert.ToInt32(dsResultTeamLeader.Tables[1].Rows[0]["TeamId"]).ToString();
-                    Session["TLId"] = "0";
-                    dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
-                    ViewState["GetTeamMember"] = dtResult.Tables[0];
-
-                }
-               
-
-
+                createTeam.Manager = createTeam.ParentTeamId;
+                dtResult = createTeamBA.GetTeamMember(createTeam);
+                DataTable dtupdateTeam = new DataTable();
+                dtupdateTeam = dtResult.Tables[0];
+                ViewState["dtTeamUpdate"] = dtupdateTeam;
+                //BindList();
+                ddlMProject.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
+                ddlMTeamName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
                 List<string> userList = new List<string>();
                 for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
                 {
@@ -198,7 +187,6 @@ namespace ProjectManagement.Admin
                         itm.Selected = true;
                     }
                 }
-                dtResult.Reset();
             }
 
 
@@ -207,13 +195,14 @@ namespace ProjectManagement.Admin
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 createTeam.ProjectId = commandArgs[0];
                 createTeam.TeamName = commandArgs[1];
-                string teamMemberId= commandArgs[3];
+                string teamMmberId= commandArgs[3];
                 string tlUserId = commandArgs[2];
+                string parrentteamMmberId = commandArgs[4];
                 Session["ProjectId"] = createTeam.ProjectId;
                 Session["TeamId"] = createTeam.TeamName;
                 //int ProjectID3 = Convert.ToInt32(e.CommandArgument);
-               dtResult= addTaskDetails.GetTaskDetails();
-                Session["Manager"] = teamMemberId;
+                dtResult= addTaskDetails.GetTaskDetails();
+                Session["Manager"] = parrentteamMmberId;
                 Session["TLId"] = "0";
                 DataRow[] foundteamLeader = dtResult.Tables[0].Select("UserId = '" + tlUserId + "'");
                 if (foundteamLeader.Length != 0)
@@ -223,7 +212,7 @@ namespace ProjectManagement.Admin
                 else
                 {
                     dtResult = createTeamBA.GetTeamDetails(createTeam);
-                    DataRow[] foundteamMember = dtResult.Tables[2].Select("ParrentTeamMemberId = '" + teamMemberId + "'");
+                    DataRow[] foundteamMember = dtResult.Tables[2].Select("ParrentTeamMemberId = '" + teamMmberId + "'");
                     if (foundteamMember.Length != 0)
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please remove team members before removing the team leader.');location.href = 'AddTeamLeader.aspx';", true);
@@ -233,7 +222,7 @@ namespace ProjectManagement.Admin
                         createTeam.Employee = tlUserId;
                         
 
-                        createTeam.ParentTeamId = teamMemberId;
+                        createTeam.ParentTeamId = teamMmberId;
                         createTeam.IsActive = 0;
                         createTeam.Role = "4";
                         int Respone = createTeamBA.UpdateTeamMember(createTeam);
@@ -243,11 +232,6 @@ namespace ProjectManagement.Admin
                         }
                     }
                 }                    
-                //int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
-                //if (Respone > 0)
-                //{
-                //    ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
-                //}
                 gridViewList();
             }
         }
@@ -256,19 +240,16 @@ namespace ProjectManagement.Admin
         {
             if (btnAddTeamLeader.Text == "Update")
             {
-                int ProjectId = Convert.ToInt32(Session["ProjectId"]);
-                int TeamId = Convert.ToInt32(Session["TeamId"]);
-                createTeam.Manager = Session["Manager"].ToString();
-                string role = Session["Role"].ToString();
-                //DataTable dtGetTeamMember = ViewState["GetTeamMember"] as DataTable;
-                dtResult = createTeamBA.GetTeamMember(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
-                createTeam.ProjectId = ddlMProject.SelectedValue;
-                createTeam.TeamName = ddlMTeamName.SelectedValue;
+                //int ProjectId = Convert.ToInt32(Session["ProjectId"]);
+                //int TeamId = Convert.ToInt32(Session["TeamId"]);
+                //createTeam.Manager = Session["Manager"].ToString();
+                //string role = Session["Role"].ToString();
+                DataTable dtGetTeamMember = (DataTable)ViewState["dtTeamUpdate"];
                 List<string> userList = new List<string>();
                 int count = 0;
-                for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < dtGetTeamMember.Rows.Count; i++)
                 {
-                    userList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
+                    userList.Add(dtGetTeamMember.Rows[i]["UserId"].ToString());
                 }
                 lsTeamLeader.DataSource = userList;
                 foreach (var item in userList)
@@ -291,10 +272,7 @@ namespace ProjectManagement.Admin
 
                                 createTeam.ProjectId = ddlMProject.SelectedValue;
                                 createTeam.TeamName = ddlMTeamName.SelectedValue;
-                                if (Global.Role == "User")
-                                    createTeam.ParentTeamId = Session["Manager"].ToString();
-                                else
-                                    createTeam.ParentTeamId = ddlManager.SelectedValue;
+                                createTeam.ParentTeamId = ddlManager.SelectedValue;
                                 createTeam.IsActive = 1;
                                 createTeam.Role = "4";
                                 createTeamBA.InsertTeamMember(createTeam);
@@ -319,11 +297,12 @@ namespace ProjectManagement.Admin
                     }
 
                 }
-                //dtResult.Reset();
+                pnlHideForm.Visible = false;
                 gridViewList();
             }
             if (btnAddTeamLeader.Text == "Add TeamLeader")
             {
+                Session["ProjectId"] = ddlMProject.SelectedValue;
                 //string role = Session["Role"].ToString();
                 foreach (ListItem item in lsTeamLeader.Items)
                 {
@@ -335,9 +314,9 @@ namespace ProjectManagement.Admin
                        
                         createTeam.Manager = item.Value;
 
-                        if (Global.Role=="User")
-                            createTeam.ParentTeamId = Session["Manager"].ToString();
-                        else
+                        //if (Global.Role=="User")
+                        //    createTeam.ParentTeamId = Session["Manager"].ToString();
+                        //else
                         createTeam.ParentTeamId = ddlManager.SelectedValue;
                         createTeam.IsActive = 1;
                         createTeam.Role = "4";
@@ -347,8 +326,9 @@ namespace ProjectManagement.Admin
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "alert('Record Inserted successfully');", true);
                 gridViewList();
+                BindList();
             }
-            BindList();
+            //BindList();
             //ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "alert('Record Inserted successfully');", true);
         }
 
@@ -367,27 +347,65 @@ namespace ProjectManagement.Admin
         protected void ddlMProject_SelectedIndexChanged(object sender, EventArgs e)
         {
             string ChangedId = ddlMProject.SelectedValue;
-            ddlMTeamName.DataSource = createTeamBA.GetTeamNameById(Convert.ToInt32(ChangedId));
-            ddlMTeamName.DataTextField = "TeamName";
-            ddlMTeamName.DataValueField = "Id";
-            ddlMTeamName.DataBind();
-            ddlMTeamName.Items.Insert(0, new ListItem("-- Select TeamName --", "0"));
+            if (Global.Role == "Admin")
+            {
+                dtResult = createTeamBA.GetTeamNameById(Convert.ToInt32(ChangedId));
+                ddlMTeamName.DataSource = dtResult;
+                ddlMTeamName.DataTextField = "TeamName";
+                ddlMTeamName.DataValueField = "Id";
+                ddlMTeamName.DataBind();
+                ddlMTeamName.Items.Insert(0, new ListItem("-- Select TeamName --", "0"));
+            }
+            else if (Global.Role == "User")
+            {
+                //createTeam.ProjectId = ddlMTeamName.SelectedValue;
+                //createTeam.TeamName = ddlMProject.SelectedValue;
+                createTeam.Role = "3";
+                //int userId = Convert.ToInt32(Session["UserID"].ToString());
+                createTeam.Employee = Convert.ToInt32(Session["UserID"].ToString()).ToString();
+                dtResult = createTeamBA.GetTeamLeaderTeam(createTeam);
+                DataTable rowsToUpdate = dtResult.Tables[2].AsEnumerable().Where(r => r.Field<int>("ProjectId") == Convert.ToInt32(ChangedId)).CopyToDataTable();
+                ddlMTeamName.DataSource = rowsToUpdate;
+                ddlMTeamName.DataTextField = "TeamName";
+                ddlMTeamName.DataValueField = "TeamId";
+                ddlMTeamName.DataBind();
+                ddlMTeamName.Items.Insert(0, new ListItem("-- Select TeamName --", "0"));
+            }
+                
         }
 
         protected void ddlMTeamName_SelectedIndexChanged(object sender, EventArgs e)
         {
             string ChangedTeamId = ddlMTeamName.SelectedValue;
             string ChangedId = ddlMProject.SelectedValue;
-            ddlManager.DataSource = createTeamBA.GetManager(Convert.ToInt32(ChangedTeamId), Convert.ToInt32(ChangedId));
-            ddlManager.DataTextField = "UserName";
-            ddlManager.DataValueField = "TeamMemberId";
-            ddlManager.DataBind();
+            if (Global.Role == "Admin")
+            {
+                dtResult = createTeamBA.GetManager(Convert.ToInt32(ChangedTeamId), Convert.ToInt32(ChangedId));
+                ddlManager.DataSource = dtResult.Tables[0];
+                ddlManager.DataTextField = "UserName";
+                ddlManager.DataValueField = "TeamMemberId";
+                ddlManager.DataBind();
+            }
+            else if (Global.Role == "User")
+            {
+                createTeam.ProjectId = ddlMProject.SelectedValue;
+                createTeam.TeamName = ddlMTeamName.SelectedValue;
+                createTeam.Role = "3";
+                //int userId = Convert.ToInt32(Session["UserID"].ToString());
+                createTeam.Employee = Convert.ToInt32(Session["UserID"].ToString()).ToString();
+                dtResult = createTeamBA.GetTeamLeaderTeam(createTeam);
+                ddlManager.DataSource = dtResult.Tables[0];
+                ddlManager.DataTextField = "ManagerName";
+                ddlManager.DataValueField = "TeamMemberId";
+                ddlManager.DataBind();
+            }
+            
             string ProjectId = ddlMProject.SelectedValue;
             string TeamName = ddlMTeamName.SelectedValue;
             string Manager = "0";
             string TLId = "0";
 
-            ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
+            //ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
             Session["ProjectId"] = ProjectId;
             Session["TeamId"] = TeamName;
             Session["Manager"] = Manager;
@@ -413,7 +431,6 @@ namespace ProjectManagement.Admin
 
         private void gridViewList()
         {
-
             createTeam.ProjectId = Session["ProjectId"].ToString();
             createTeam.TeamName = Session["TeamId"].ToString();
             createTeam.Manager = Session["Manager"].ToString();
