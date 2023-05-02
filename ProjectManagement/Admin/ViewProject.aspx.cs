@@ -131,6 +131,9 @@ namespace ProjectManagement.Admin
         protected void btnCancelSearch_Click(object sender, EventArgs e)
         {
             AllProjects.EditIndex = -1;
+            txtProNameSearch.Text = "";
+            txtProStartDateSearch.Text = "";
+            txtProEndDateSearch.Text = "";
             BindProjectGrid();
         }
     }

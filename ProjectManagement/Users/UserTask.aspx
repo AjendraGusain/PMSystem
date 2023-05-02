@@ -34,14 +34,13 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <div class="dataTables_wrapper mb-5">
+                            <div class="dataTables_wrapper mb-9">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-3">
+                                    <%--<div class="col-sm-12 col-md-3">
                                         <div class="dataTables_filter" id="zero_config_length">
                                             <label>
                                                 Client Name
-                                               
-                                                <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
+                                                <input type="search" class="form-control form-control-sm" placeholder="">
                                                 <asp:DropDownList ID="ddlSearchClient" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchClient_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </label>
@@ -51,25 +50,24 @@
                                         <div class="dataTables_filter" id="zero_config_length">
                                             <label>
                                                 Project Name
-                                               
-                                                <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
+                                                <input type="search" class="form-control form-control-sm" placeholder="">
                                                 <asp:DropDownList ID="ddlSerachProject" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSerachProject_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </label>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-3">
+                                    </div>--%>
+                                    <div class="col-sm-12 col-md-2">
                                         <div class="dataTables_filter" id="zero_config_length">
                                             <label>
-                                                Status
-                                               
+                                                Search
+                                               <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control form-control-sm" placeholder="Search.."></asp:TextBox>
                                                 <%--<input type="search" class="form-control form-control-sm" placeholder="">--%>
-                                                <asp:DropDownList ID="ddlSearchStatus" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchStatus_SelectedIndexChanged">
-                                                </asp:DropDownList>
+                                                <%--<asp:DropDownList ID="ddlSearchStatus" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchStatus_SelectedIndexChanged">
+                                                </asp:DropDownList>--%>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-3">
+                                    <div class="col-sm-12 col-md-6">
                                         <div id="zero_config_filter" class="dataTables_filter">
                                             <label>
                                                 Date Range:

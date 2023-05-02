@@ -101,5 +101,12 @@ namespace ProjectManagement.Admin
             grvAllViewTeam.DataSource = dsResult.Tables[0];
             grvAllViewTeam.DataBind();
         }
+
+        protected void btnCancelSearch_Click(object sender, EventArgs e)
+        {
+            grvAllViewTeam.EditIndex = -1;
+            txtSearchTeam.Text = "";
+            BindList();
+        }
     }
 }
