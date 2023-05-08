@@ -195,6 +195,7 @@ namespace ProjectManagement.Admin
             {
                 if (Global.Designation == "Manager")
                 {
+                    //divHide.Visible = false;
                     //string projectId = Session["ProjectId"].ToString();
                     Global.Role = Session["Role"].ToString();
                     int userId = Convert.ToInt32(Session["UserID"].ToString());
@@ -256,7 +257,7 @@ namespace ProjectManagement.Admin
                 Session["TeamId"] = createTeam.TeamName;
 
                 dtResult = addTaskDetails.GetTaskDetails();
-                DataRow[] foundteamLeader = dtResult.Tables[0].Select("UserId = '" + userId + "'");
+                DataRow[] foundteamLeader = dtResult.Tables[0].Select("UserId = '" + userId + "' and ProjectId='" + Convert.ToInt32(createTeam.ProjectId) + "' and TeamId='" + Convert.ToInt32(createTeam.TeamName) + "'");
                 if (foundteamLeader.Length != 0)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please reassing the task before removing the user.');location.href = 'AddTeamEmployee.aspx';", true);
@@ -321,17 +322,8 @@ namespace ProjectManagement.Admin
             }
             lsEmployee.DataSource = userList;
             lsTester.DataSource = testerList;
-            // ddlManager.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0][""]).ToString();
-            //ddlTeamLeader.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
-            lsEmployee.DataSource = managerName.GetAllEmployee();
-            lsEmployee.DataTextField = "UserName";
-            lsEmployee.DataValueField = "UserId";
-            lsEmployee.DataBind();
 
-            lsTester.DataSource = managerName.GetAllEmployee();
-            lsTester.DataTextField = "UserName";
-            lsTester.DataValueField = "UserId";
-            lsTester.DataBind();
+            BindEmployeeList();
 
 
 
@@ -745,10 +737,15 @@ namespace ProjectManagement.Admin
             createTeam.TeamName = Session["TeamId"].ToString();
             createTeam.Manager = Session["Manager"].ToString();
             createTeam.TeamLeader = Session["TLId"].ToString();
-
-            DataSet ds = createTeamBA.GetTeamMemberEmployee(createTeam);
-            grvViewEmployee.DataSource = ds.Tables[2];
+            dtResult = createTeamBA.GetTeamMemberEmployee(createTeam);
+            grvViewEmployee.DataSource = dtResult.Tables[2];
             grvViewEmployee.DataBind();
+
+        }
+
+        private void BindEmployeeList()
+        {
+            createTeam.Employee = "";
             lsEmployee.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsEmployee.DataTextField = "UserName";
             lsEmployee.DataValueField = "UserId";
@@ -758,8 +755,6 @@ namespace ProjectManagement.Admin
             lsTester.DataTextField = "UserName";
             lsTester.DataValueField = "UserId";
             lsTester.DataBind();
-            ds.Tables[0].Clear();
-            //grvViewManager
         }
 
         protected void ddlManager_SelectedIndexChanged(object sender, EventArgs e)
@@ -831,6 +826,7 @@ namespace ProjectManagement.Admin
             Session["TLId"] = TLId;
 
             gridViewList();
+            BindEmployeeList();
         }
 
         protected void grvViewEmployee_RowCreated(object sender, GridViewRowEventArgs e)
