@@ -39,7 +39,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="divHide">
                                                 <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Manager</label>
                                                 <div class="col-sm-6">
                                                     <asp:DropDownList ID="ddlManager" runat="server" class="select2 form-select shadow-none" OnSelectedIndexChanged="ddlManager_SelectedIndexChanged" AutoPostBack="true">

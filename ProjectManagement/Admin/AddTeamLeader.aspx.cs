@@ -174,11 +174,7 @@ namespace ProjectManagement.Admin
                     userList.Add(dtResult.Tables[0].Rows[i]["UserId"].ToString());
                 }
                 lsTeamLeader.DataSource = userList;
-                lsTeamLeader.DataSource = managerName.GetAllEmployee();
-                lsTeamLeader.DataTextField = "UserName";
-                lsTeamLeader.DataValueField = "UserId";
-                lsTeamLeader.DataBind();
-
+                BindEmployeeList();
                 foreach (var listItem in userList)
                 {
                     ListItem itm = lsTeamLeader.Items.FindByValue(listItem);
@@ -187,6 +183,7 @@ namespace ProjectManagement.Admin
                         itm.Selected = true;
                     }
                 }
+                pnlHideForm.Visible = true;
             }
 
 
@@ -220,8 +217,6 @@ namespace ProjectManagement.Admin
                     else
                     {
                         createTeam.Employee = tlUserId;
-                        
-
                         createTeam.ParentTeamId = teamMmberId;
                         createTeam.IsActive = 0;
                         createTeam.Role = "4";
@@ -244,12 +239,14 @@ namespace ProjectManagement.Admin
                 //int TeamId = Convert.ToInt32(Session["TeamId"]);
                 //createTeam.Manager = Session["Manager"].ToString();
                 //string role = Session["Role"].ToString();
-                DataTable dtGetTeamMember = (DataTable)ViewState["dtTeamUpdate"];
+                dtResult = createTeamBA.GetTeamMember(createTeam);
+                DataTable dtupdateTeam = new DataTable();
+                dtupdateTeam = dtResult.Tables[0];
                 List<string> userList = new List<string>();
                 int count = 0;
-                for (int i = 0; i < dtGetTeamMember.Rows.Count; i++)
+                for (int i = 0; i < dtupdateTeam.Rows.Count; i++)
                 {
-                    userList.Add(dtGetTeamMember.Rows[i]["UserId"].ToString());
+                    userList.Add(dtupdateTeam.Rows[i]["UserId"].ToString());
                 }
                 lsTeamLeader.DataSource = userList;
                 foreach (var item in userList)
@@ -411,6 +408,7 @@ namespace ProjectManagement.Admin
             Session["Manager"] = Manager;
             Session["TLId"] = TLId;
             gridViewList();
+            BindEmployeeList();
 
         }
 
@@ -425,6 +423,7 @@ namespace ProjectManagement.Admin
             Session["Manager"] = Manager;
             Session["TLId"] = TLId;
             gridViewList();
+            
         }
 
 
@@ -438,12 +437,15 @@ namespace ProjectManagement.Admin
             dtResult = createTeamBA.GetTeamMemberTeamLeader(createTeam);
             grvViewTeamLeader.DataSource = dtResult.Tables[1];
             grvViewTeamLeader.DataBind();
-            dtResult.Reset();
+            
+        }
+        private void BindEmployeeList()
+        {
+            createTeam.Employee = "TL";
             lsTeamLeader.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsTeamLeader.DataTextField = "UserName";
             lsTeamLeader.DataValueField = "UserId";
             lsTeamLeader.DataBind();
-            //dtResult.Reset();
         }
 
     }

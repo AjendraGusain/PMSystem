@@ -369,6 +369,7 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new MySqlParameter("@ProjectID", Convert.ToInt32(createTeam.ProjectId)));
             cmd.Parameters.Add(new MySqlParameter("@TeamId", Convert.ToInt32(createTeam.TeamName)));
+            cmd.Parameters.Add(new MySqlParameter("@TL", createTeam.Employee));
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             da.Fill(dsResult);
             return dsResult;
