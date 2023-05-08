@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-3">
+                        <div class="col-sm-12 col-md-5">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
                                     Search
@@ -26,15 +26,15 @@
                                 <asp:Button ID="btnCancelSearch" runat="server" Text="Clear Search" CssClass="form-control form-control-sm" OnClick="btnCancelSearch_Click" />
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-3">
+                       <%-- <div class="col-sm-12 col-md-3">
                             <div class="dataTables_filter" id="zero_config_length">
-                                <%--<label>
+                                <label>
                                 Team Name
                      
                                 <input type="search" class="form-control form-control-sm" placeholder="">
-                            </label>--%>
+                            </label>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="col-sm-12 col-md-2">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <%--<label>

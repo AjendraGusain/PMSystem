@@ -21,9 +21,9 @@ namespace BusinessLogicLayer.Interface
         DataSet GetChatDetails(TaskBusinessObject chat);
         DataSet GetAllProject();
         DataSet GetStatusName();
-        DataSet GetAssignedTask();
+        DataSet GetAssignedTask(TaskBusinessObject ObjectName);
         DataSet GetTeamMemberID(TaskBusinessObject teammember);
-        DataSet GetAllCreatedTask();
+        DataSet GetAllCreatedTask(TaskBusinessObject Task);
         DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser);
         int UpdateUserTaskStatus(TaskBusinessObject taskStatus);
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);

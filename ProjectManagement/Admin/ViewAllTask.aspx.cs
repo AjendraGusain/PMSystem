@@ -21,15 +21,21 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-                GetAllCreatedTask();
                 //  BindClientandProject();
+                int userId = Convert.ToInt32(Session["UserID"].ToString());
                 Global.Role = Session["Role"].ToString();
                 Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
+                Global.Designation= Session["Designation"].ToString();
+                GetAllCreatedTask(userId,Global.RoleIdSession, Global.Designation);
+
             }
         }
-        public void GetAllCreatedTask()
+        public void GetAllCreatedTask(int userId,int roleID, string Designation)
         {
-            DataSet ds = assigntaskBLL.GetAllCreatedTask();
+            addTaskBusinessObj.RoleID = Global.RoleIdSession;
+            addTaskBusinessObj.Designation= Global.Designation;
+            addTaskBusinessObj.LoginUserID = userId;
+            DataSet ds = assigntaskBLL.GetAllCreatedTask(addTaskBusinessObj);
             // DataSet ds = assigntaskBLL.GetAssignedTask();
             grvViewAllTask.DataSource = ds.Tables[0];
             grvViewAllTask.DataBind();
@@ -83,7 +89,7 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "fail", "alert('You are already working on this task.');", true);
                 }
-                GetAllCreatedTask();
+                GetAllCreatedTask(Convert.ToInt32(userID), Global.RoleIdSession, Global.Designation);
             }
         }
 
@@ -137,6 +143,8 @@ namespace ProjectManagement.Admin
             //string convertedStartDate = DateTime.ParseExact(txtTaskStartDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
             //string convertedEndDate = DateTime.ParseExact(txtTaskEndDateSearch.Text, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM/dd/yyyy");
             addTaskBusinessObj.RoleID = Convert.ToInt32(Session["RoleId"].ToString());
+            addTaskBusinessObj.EmployeeName= Session["UserID"].ToString();
+            addTaskBusinessObj.Designation= Session["Designation"].ToString();
             if (!string.IsNullOrEmpty(txtTaskStartDateSearch.Text))
             {
                 addTaskBusinessObj.StartDate = DateTime.Parse(txtTaskStartDateSearch.Text);
@@ -178,11 +186,12 @@ namespace ProjectManagement.Admin
 
         protected void btnCancelSearch_Click(object sender, EventArgs e)
         {
+            int userId= Convert.ToInt32(Session["UserID"].ToString());
             grvViewAllTask.EditIndex = -1;
             txtSearchEmp.Text = "";
             txtTaskStartDateSearch.Text = "";
             txtTaskEndDateSearch.Text = "";
-            GetAllCreatedTask();
+            GetAllCreatedTask(userId, Global.RoleIdSession, Global.Designation);
         }
 
         //protected void btnCancelSearch_Click(object sender, EventArgs e)

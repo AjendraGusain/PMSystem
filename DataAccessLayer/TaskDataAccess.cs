@@ -16,7 +16,6 @@ namespace DataAccessLayer
     public class TaskDataAccess : ITaskDataAccess
     {
         TaskBusinessObject addTaskBO = new TaskBusinessObject();
-
         MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
         public int InsertTaskDetails(TaskBusinessObject addTask)
         {
@@ -93,7 +92,7 @@ namespace DataAccessLayer
             }
         }
 
-        public DataSet GetAssignedTask()
+        public DataSet GetAssignedTask(TaskBusinessObject ObjectName)
         {
             try
             {
@@ -101,8 +100,26 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetAllTask";
-                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                string spName = "";
+                Hashtable hashtable = new Hashtable();
+                if (ObjectName.RoleID == 2)
+                {
+                    if (ObjectName.Designation == "Manager")
+                    {
+                        spName = "sp_GetManagerTaskByIDandRole";
+                        hashtable.Add("@UserNames", ObjectName.LoginUserID);
+                    }
+                    else
+                    {
+                        spName = "sp_GetAllTask";
+                    }
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }
+                else
+                {
+                    spName = "sp_GetAllTask";
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }                
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -119,7 +136,7 @@ namespace DataAccessLayer
         }
 
 
-        public DataSet GetAllCreatedTask()
+        public DataSet GetAllCreatedTask(TaskBusinessObject Task)
         {
             addTaskBO.dsResult.Reset();
             try
@@ -128,8 +145,26 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetAllCreatedTask";
-                addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                string spName = "";
+                Hashtable hashtable = new Hashtable();
+                if (Task.RoleID == 1)
+                {
+                    spName = "sp_GetAllCreatedTask";
+                }
+                else
+                {
+                    if (Task.Designation == "Manager")
+                    {
+                        spName = "sp_GetManagerTaskByIDandRole";
+                        hashtable.Add("@UserNames", Task.LoginUserID);
+                    }
+                    else
+                    {
+                        spName = "sp_GetAllCreatedTask";
+                    }
+                }
+                //addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
+                addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -781,21 +816,30 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
+                addTaskBO.dsResult.Reset();
+                Hashtable obj = new Hashtable();
                 if (objUserTask.RoleID == 1)
                 {
-                    addTaskBO.dsResult.Reset();
                     string spName = "sp_GetUserTaskTime";
-                    Hashtable obj = new Hashtable();
                     obj.Add("@TaskNameID", objUserTask.TaskID);
                     addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 }
                 else
                 {
-                    addTaskBO.dsResult.Reset();
-                    string spName = "sp_GetUserTaskTimeForUser";
-                    Hashtable obj = new Hashtable();
-                    obj.Add("@TaskNameID", objUserTask.TaskID);
-                    obj.Add("@UserIDName", objUserTask.LoginUserID);
+                    string spName = "";
+                    if (objUserTask.Designation == "Manager")
+                    {
+                        spName = "sp_GetUserTaskTime";
+                        obj.Add("@TaskNameID", objUserTask.TaskID);
+                    }
+                    else
+                    {
+                        spName = "sp_GetUserTaskTimeForUser";
+                        obj.Add("@TaskNameID", objUserTask.TaskID);
+                        obj.Add("@UserIDName", objUserTask.LoginUserID);
+                    }
+                    //obj.Add("@TaskNameID", objUserTask.TaskID);
+                    //obj.Add("@UserIDName", objUserTask.LoginUserID);
                     addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 }
                 return addTaskBO.dsResult;
@@ -1020,7 +1064,15 @@ namespace DataAccessLayer
                     }
                     else
                     {
-                        spName = "sp_SearchByDateWiseforUser";
+                        if (Task.Designation == "Manager")
+                        {
+                            spName = "sp_SearchinViewTaskByManager";
+                        }
+                        else
+                        {
+                            spName = "sp_SearchByDateWiseforUser";
+                        }
+                        
                     }
                     DateTime startdate = Convert.ToDateTime(Task.StartDate);
                     DateTime enddate = Convert.ToDateTime(Task.EndDate);
@@ -1044,7 +1096,14 @@ namespace DataAccessLayer
                     }
                     else
                     {
-                        spName = "sp_SearchByDateWiseforUser";
+                        if (Task.Designation == "Manager")
+                        {
+                            spName = "sp_SearchinViewTaskByManager";
+                        }
+                        else
+                        {
+                            spName = "sp_SearchByDateWiseforUser";
+                        }
                     }
                     hashtable.Add("@StartingTime", startTime);
                     hashtable.Add("@EndingTime", endTime);
@@ -1055,24 +1114,6 @@ namespace DataAccessLayer
                     }
                     Task.dsResult = new Connection().GetData(spName, hashtable);
                 }
-                //if (!string.IsNullOrEmpty(Task.SearchResult))
-                //{
-                //    query += " AND (p.ProjectName like '%" + Task.SearchResult + "%' or t.TaskNumber like '%" + Task.SearchResult + "%' or t.TaskName like '%" 
-                //        + Task.SearchResult + "%' or t.StartTime like '%" + Task.SearchResult + "%' or t.EndTime like '%" 
-                //        + Task.SearchResult + "%' or u.UserName like '%" + Task.SearchResult + "%' or s.StatusName like '%" + Task.SearchResult + "%'); ";
-                //}
-                //if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()) && !string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
-                //{
-                //    query += " AND t.StartTime = '" + Task.StartDate + "' AND t.EndTime = '" + Task.EndDate + "'";
-                //}
-                //else if (!string.IsNullOrEmpty(Task.StartDate.ToShortTimeString()))
-                //{
-                //    query += " AND t.StartTime = '" + Task.StartDate + "'";
-                //}
-                //else if (!string.IsNullOrEmpty(Task.EndDate.ToShortTimeString()))
-                //{
-                //    query += " AND t.EndTime = '" + Task.EndDate + "'";
-                //}
                 return Task.dsResult;
             }
             catch (Exception ex)
