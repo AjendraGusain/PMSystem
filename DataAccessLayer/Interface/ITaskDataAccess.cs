@@ -21,8 +21,8 @@ namespace DataAccessLayer.Interface
         DataSet GetTeamMemberID(TaskBusinessObject teamMember);
         DataSet GetProject();
         DataSet GetStatusName();
-        DataSet GetAssignedTask();
-        DataSet GetAllCreatedTask();
+        DataSet GetAssignedTask(TaskBusinessObject taskByUser);
+        DataSet GetAllCreatedTask(TaskBusinessObject Task);
         DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser);
         int UpdateUserTaskStatus(TaskBusinessObject taskStatus);
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);

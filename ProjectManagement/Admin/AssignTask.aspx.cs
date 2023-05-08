@@ -22,14 +22,16 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-                int roleID = Convert.ToInt32(Session["RoleId"].ToString());
+                Global.Role = Session["Role"].ToString();
+                Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
                 int userId = Convert.ToInt32(Session["UserID"].ToString());
+                Global.Designation = Session["Designation"].ToString();
                 //if (roleID == 4)
                 //{
                 //    TeamLeaderAccess(roleID, userId);
                     
                 //}
-                GetAssignedTask();
+                GetAssignedTask(Global.RoleIdSession, Global.Designation, userId);
                 //BindClientandProject();
             }
         }
@@ -115,9 +117,13 @@ namespace ProjectManagement.Admin
             }
         }
 
-        protected void GetAssignedTask()
+        protected void GetAssignedTask(int roleId, string designation, int userId)
         {
-            DataSet ds = assigntaskBLL.GetAssignedTask();
+            addTaskBusinessObj.Designation = designation;
+            addTaskBusinessObj.RoleID = roleId;
+            addTaskBusinessObj.LoginUserID = userId;
+            DataSet ds = assigntaskBLL.GetAssignedTask(addTaskBusinessObj);
+            //DataSet ds = assigntaskBLL.GetAllCreatedTask(addTaskBusinessObj);
             pnlDisplayAssignTask.Visible = true;
             pnlDisplayTaskDetails.Visible = false;
             grvAssignedTaskDetails.DataSource = ds.Tables[0];
@@ -150,8 +156,9 @@ namespace ProjectManagement.Admin
 
         protected void grvAssignedTaskDetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            int userId = Convert.ToInt32(Session["UserID"].ToString());
             grvAssignedTaskDetails.PageIndex = e.NewPageIndex;
-            GetAssignedTask();
+            GetAssignedTask(Global.RoleIdSession, Global.Designation, userId);
         }
 
         protected void btnSearchEmp_Click(object sender, EventArgs e)
@@ -211,11 +218,12 @@ namespace ProjectManagement.Admin
 
         protected void btnCancelSearch_Click(object sender, EventArgs e)
         {
-         //   ddlSearchClient.SelectedItem.Text = "Select Client";
-          //  ddlSerachProject.SelectedItem.Text = "Select Project";
+            int userId = Convert.ToInt32(Session["UserID"].ToString());
+            //   ddlSearchClient.SelectedItem.Text = "Select Client";
+            //  ddlSerachProject.SelectedItem.Text = "Select Project";
             grvAssignedTaskDetails.EditIndex = -1;
             txtSearchEmp.Text = "";
-            GetAssignedTask();
+            GetAssignedTask(Global.RoleIdSession, Global.Designation, userId);
         }
     }
 }

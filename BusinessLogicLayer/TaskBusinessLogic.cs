@@ -64,16 +64,16 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
-        public DataSet GetAssignedTask()
+        public DataSet GetAssignedTask(TaskBusinessObject ObjectName)
         {
-            taskBO.dsResult = _dataAccess.GetAssignedTask();
+            taskBO.dsResult = _dataAccess.GetAssignedTask(ObjectName);
             return taskBO.dsResult;
         }
 
 
-        public DataSet GetAllCreatedTask()
+        public DataSet GetAllCreatedTask(TaskBusinessObject Task)
         {
-            taskBO.dsResult = _dataAccess.GetAllCreatedTask();
+            taskBO.dsResult = _dataAccess.GetAllCreatedTask(Task);
             return taskBO.dsResult;
         }
 

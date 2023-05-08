@@ -17,6 +17,7 @@ namespace ProjectManagement.Admin
     {
         IProjectDataAccess _projectRepo = new ProjectDataAccess();
         ProjectBusinessObject _projectBO = new ProjectBusinessObject(); // Business Object or Model
+        TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
         ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
         private readonly IProjectBusinessLogic _projectBL;
         public ViewProject()
@@ -33,6 +34,10 @@ namespace ProjectManagement.Admin
             {
                 BindProjectGrid();
                 // AddHeaders();
+                int userId=Convert.ToInt32(Session["UserID"].ToString());
+                Global.Role = Session["Role"].ToString();
+                Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
+                Global.Designation = Session["Designation"].ToString();
             }
 
         }
@@ -79,7 +84,7 @@ namespace ProjectManagement.Admin
         protected void AllProjects_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int Id = Convert.ToInt32(e.CommandArgument);
-
+            int userId = Convert.ToInt32(Session["UserID"].ToString());
             if (e.CommandName == "ProjectDetail")
             {
                 Response.Redirect("ProjectDetail.aspx?ProjectId=" + Id);
@@ -90,7 +95,10 @@ namespace ProjectManagement.Admin
             }
             else if (e.CommandName == "DeleteProject")
             {
-                DataSet dtResult = addTaskDetails.GetAllCreatedTask();
+                addTaskBusinessObj.RoleID = Global.RoleIdSession;
+                addTaskBusinessObj.Designation= Global.Designation;
+                addTaskBusinessObj.LoginUserID = userId;
+                DataSet dtResult = addTaskDetails.GetAllCreatedTask(addTaskBusinessObj);
                 DataRow[] foundProject = dtResult.Tables[0].Select("ProjectId = '" + Id + "'");
                 if (foundProject.Length != 0)
                 {
