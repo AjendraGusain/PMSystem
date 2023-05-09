@@ -26,8 +26,15 @@
                             <div class="form-group row">
                                 <label for="Pname" class="col-sm-3 text-center control-label col-form-label">Project Name</label>
                                 <div class="col-sm-6">
-                                    <asp:DropDownList ID="ddlProjectName" runat="server" CssClass="select2 form-select shadow-none"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProjectName" runat="server" CssClass="select2 form-select shadow-none" OnSelectedIndexChanged="ddlProjectName_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvProjectName" ErrorMessage="Required" ControlToValidate="ddlProjectName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Tname" class="col-sm-3 text-center control-label col-form-label">Team Name</label>
+                                <div class="col-sm-6">
+                                    <asp:DropDownList ID="ddlTeamName" runat="server" CssClass="select2 form-select shadow-none"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvTeamName" ErrorMessage="Required" ControlToValidate="ddlTeamName" InitialValue="0" runat="server" ValidationGroup="val" ForeColor="Red" />
                                 </div>
                             </div>
                             <div class="form-group row">

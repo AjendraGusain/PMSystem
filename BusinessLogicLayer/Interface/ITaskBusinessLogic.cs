@@ -16,10 +16,13 @@ namespace BusinessLogicLayer.Interface
         int DeleteTaskDetails(TaskBusinessObject addTask);
         int UpdateTaskDetails(TaskBusinessObject addTask);
         int InsertChatDetails(TaskBusinessObject Chat);
-        DataSet GetAllClients();
+        DataSet GetAllClients(TaskBusinessObject Client);
         DataSet GetAllUsers(TaskBusinessObject objProjectUsers);
         DataSet GetChatDetails(TaskBusinessObject chat);
         DataSet GetAllProject();
+        DataSet GetAllTeam();
+
+        DataSet GetAllTeamByClient(TaskBusinessObject Team);
         DataSet GetStatusName();
         DataSet GetAssignedTask(TaskBusinessObject ObjectName);
         DataSet GetTeamMemberID(TaskBusinessObject teammember);
@@ -29,9 +32,10 @@ namespace BusinessLogicLayer.Interface
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);
         DataSet GetTaskDetails();
         DataSet GetTaskDetailsByTask(TaskBusinessObject Task);
-        DataSet GetProjectByClient(int objClientID);
-        DataSet ReAssignTask(int taskID);
-        DataSet AssignTask(int taskID);
+        //DataSet GetProjectByClient(int objClientID);
+        DataSet GetProjectByClient(TaskBusinessObject objClientID);
+        DataSet ReAssignTask(TaskBusinessObject task);
+        DataSet AssignTask(TaskBusinessObject task);
         DataSet SearchResult(TaskBusinessObject projectID);
         DataSet SearchResultByClient(TaskBusinessObject ClientID);
         DataSet SearchResultByProject(TaskBusinessObject ProjectID);

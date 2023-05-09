@@ -34,6 +34,7 @@ namespace DataAccessLayer
                 cmd.Parameters.Add(new MySqlParameter("@TaskNumber", addTask.TaskNumber));
                 cmd.Parameters.Add(new MySqlParameter("@TaskName", addTask.TaskName));
                 cmd.Parameters.Add(new MySqlParameter("@TaskDescription", addTask.TaskDescription));
+                cmd.Parameters.Add(new MySqlParameter("@TeamId", addTask.TeamId));
                 addTask.response = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -54,8 +55,49 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("select distinct p.* from task t inner join client c  " +
-                    "on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;");//Modified from project table
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT c.*,p.* from client c inner join project p on p.ClientId=c.ClientId;");//Modified from project table select distinct p.* from task t inner join client c  " on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+
+        public DataSet GetTeamName()
+        {
+            try
+            {
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT c.*,p.*,t.* from client c inner join project p on p.ClientId=c.ClientId inner join team t on t.ProjectId=p.ProjectId");
+                return addTaskBO.dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+
+        public DataSet GetTeamNameByClient(TaskBusinessObject Team)
+        {
+            try
+            {
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT c.*,p.*,t.* from client c inner join project p on p.ClientId=c.ClientId inner join team t on t.ProjectId=p.ProjectId where p.ProjectId="+ Team.ProjectID);
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -109,6 +151,11 @@ namespace DataAccessLayer
                         spName = "sp_GetManagerTaskByIDandRole";
                         hashtable.Add("@UserNames", ObjectName.LoginUserID);
                     }
+                    else if(ObjectName.Designation == "TeamLeader")
+                    {
+                        spName = "sp_GetTLTaskByIDandRole";
+                        hashtable.Add("@UserNames", ObjectName.LoginUserID);
+                    }
                     else
                     {
                         spName = "sp_GetAllTask";
@@ -158,6 +205,11 @@ namespace DataAccessLayer
                         spName = "sp_GetManagerTaskByIDandRole";
                         hashtable.Add("@UserNames", Task.LoginUserID);
                     }
+                    else if (Task.Designation == "TeamLeader")
+                    {
+                        spName = "sp_GetTLTaskByIDandRole";
+                        hashtable.Add("@UserNames", Task.LoginUserID);
+                    }
                     else
                     {
                         spName = "sp_GetAllCreatedTask";
@@ -205,12 +257,29 @@ namespace DataAccessLayer
             }
         }
 
-        public DataSet GetClients()
+        public DataSet GetClients(TaskBusinessObject Client)
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("select distinct c.* from task t inner join client c " +
-                    "on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0; ");//Modified from client table
+                if (Client.RoleID == 1)
+                {
+                    addTaskBO.dsResult = new Connection().GetDataSetResults("select * from client;");//Modified from client table-- select distinct c.* from task t inner join client c " on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;
+                }
+                else
+                {
+                    if (Client.Designation == "Manager")
+                    {
+                        addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT distinct c.*,p.* FROM team_member tm inner join client c on tm.ClientId=c.ClientId inner join project p on p.ProjectId=tm.ProjectId where tm.RoleId=3 and tm.UserId=" + Client.LoginUserID);//Modified from client table-- select distinct c.* from task t inner join client c " on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;
+                    }
+                    else if(Client.Designation == "TeamLeader")
+                    {
+                        addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT distinct c.*, p.* FROM team_member tm inner join client c on tm.ClientId = c.ClientId inner join project p on p.ProjectId = tm.ProjectId where tm.RoleId = 4 and tm.UserId = " + Client.LoginUserID);//Modified from client table-- select distinct c.* from task t inner join client c " on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;
+                    }
+                    else
+                    {
+                        addTaskBO.dsResult = new Connection().GetDataSetResults("select * from client;");//Modified from client table-- select distinct c.* from task t inner join client c " on t.ClientId = c.ClientId inner join project p on p.ProjectId = t.ProjectId where t.IsActive != 0;
+                    }
+                }
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -226,7 +295,32 @@ namespace DataAccessLayer
             }
         }
 
-        public DataSet GetProjectByClient(int objClientID)
+        //public DataSet GetProjectByClient(int objClientID)
+        //{
+        //    try
+        //    {
+        //        if (conn.State == ConnectionState.Closed)
+        //        {
+        //            conn.Open();
+        //        }
+        //        string spName = "GetProjectByClient";
+        //        addTaskBO.dsResult = new Connection().ExecuteSP(spName, objClientID);
+        //        return addTaskBO.dsResult;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        if (conn.State == ConnectionState.Open)
+        //        {
+        //            conn.Close();
+        //        }
+        //    }
+        //}
+
+        public DataSet GetProjectByClient(TaskBusinessObject objClientID)
         {
             try
             {
@@ -235,7 +329,9 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "GetProjectByClient";
-                addTaskBO.dsResult = new Connection().ExecuteSP(spName, objClientID);
+                Hashtable table = new Hashtable();
+                table.Add("@ClientId", objClientID.ClientID);
+                addTaskBO.dsResult = new Connection().GetData(spName, table);
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -251,7 +347,7 @@ namespace DataAccessLayer
             }
         }
 
-        public DataSet ReAssignTask(int taskID)
+        public DataSet ReAssignTask(TaskBusinessObject task)
         {
             try
             {
@@ -260,10 +356,14 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "sp_ReAssignTaskByID";
-                MySqlCommand cmd = new MySqlCommand(spName, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, taskID);
+                Hashtable objhashtable = new Hashtable();
+                objhashtable.Add("@TaskIdName", task.TaskID);
+                addTaskBO.dsResult = new Connection().GetData(spName, objhashtable);
                 return addTaskBO.dsResult;
+                //MySqlCommand cmd = new MySqlCommand(spName, conn);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, taskID);
+                //return addTaskBO.dsResult;
             }
             catch (Exception ex)
             {
@@ -279,7 +379,7 @@ namespace DataAccessLayer
         }
 
 
-        public DataSet AssignTask(int taskID)
+        public DataSet AssignTask(TaskBusinessObject task)
         {
             try
             {
@@ -288,9 +388,12 @@ namespace DataAccessLayer
                     conn.Open();
                 }
                 string spName = "sp_AssignTaskByID";
-                MySqlCommand cmd = new MySqlCommand(spName, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, taskID);
+                Hashtable objhashtable = new Hashtable();
+                objhashtable.Add("@TaskIdName",task.TaskID);
+                //MySqlCommand cmd = new MySqlCommand(spName, conn);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //addTaskBO.dsResult = new Connection().ExecuteSPByTaskID(spName, task);
+                addTaskBO.dsResult = new Connection().GetData(spName, objhashtable);
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -575,6 +678,7 @@ namespace DataAccessLayer
                 string spName = "sp_GetTeamByProjectID";
                 Hashtable obj = new Hashtable();
                 obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                obj.Add("@TeamIDName", objProjectuser.TeamId);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }
@@ -1068,6 +1172,10 @@ namespace DataAccessLayer
                         {
                             spName = "sp_SearchinViewTaskByManager";
                         }
+                        else if (Task.Designation == "TeamLeader")
+                        {
+                            spName = "sp_SearchinAllTaskByTL";
+                        }
                         else
                         {
                             spName = "sp_SearchByDateWiseforUser";
@@ -1099,6 +1207,10 @@ namespace DataAccessLayer
                         if (Task.Designation == "Manager")
                         {
                             spName = "sp_SearchinViewTaskByManager";
+                        }
+                        else if (Task.Designation == "TeamLeader")
+                        {
+                            spName = "sp_SearchinAllTaskByTL";
                         }
                         else
                         {

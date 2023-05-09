@@ -61,7 +61,7 @@ namespace ProjectManagement.Users
         private void GetTaskDetailsByTaskID()
         {
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
+            DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj);
             DataTable dt = dtResult.Tables[0];
             dt.TableName = "AssignTask";
             ViewState["AssignTask"] = dt;

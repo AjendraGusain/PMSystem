@@ -62,12 +62,12 @@
                                         <PagerSettings Mode="NumericFirstLast" PageButtonCount="2" FirstPageText="First" LastPageText="Last" />
                                         <Columns>
 
-                                            <%--<asp:TemplateField HeaderText="Team Name">
+                                            <asp:TemplateField HeaderText="Team Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblTeamName" runat="server" Text='<%#Eval("TeamName") %>'></asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left" />
-                                            </asp:TemplateField>--%>
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Client Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblClientName" runat="server" Text='<%#Eval("ClientName") %>'></asp:Label>
