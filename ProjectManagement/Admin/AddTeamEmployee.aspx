@@ -69,7 +69,7 @@
                                                 <label for="Mname" class="col-sm-3 text-center control-label col-form-label">Tester</label>
                                                 <div class="col-sm-6">
                                                     <asp:ListBox ID="lsTester" runat="server" data-live-search="true" SelectionMode="Multiple" CssClass="form-control js-example-placeholder-single"></asp:ListBox>
-                                                    <asp:RequiredFieldValidator ID="rvTester" runat="server" ControlToValidate="lsTester" ErrorMessage="Enter Tester" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
+                                                    <%--<asp:RequiredFieldValidator ID="rvTester" runat="server" ControlToValidate="lsTester" ErrorMessage="Enter Tester" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>--%>
                                                 </div>
                                             </div>
                                         </section>

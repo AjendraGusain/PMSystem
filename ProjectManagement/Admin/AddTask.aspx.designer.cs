@@ -51,6 +51,24 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProjectName;
 
         /// <summary>
+        /// ddlTeamName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTeamName;
+
+        /// <summary>
+        /// rfvTeamName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTeamName;
+
+        /// <summary>
         /// txtTaskNumber control.
         /// </summary>
         /// <remarks>
