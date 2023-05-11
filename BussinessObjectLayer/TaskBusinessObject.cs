@@ -29,5 +29,6 @@ namespace BussinessObjectLayer
         public string PauseReason { get; set; }
         public string PauseReasonStatus { get; set; }
         public string TeamId { get; set; }
+        public string Designation { get; set; }
     }
 }

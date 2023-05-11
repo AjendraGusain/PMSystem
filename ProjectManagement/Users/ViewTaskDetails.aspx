@@ -316,7 +316,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Date">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblStartTime" runat="server" Text='<%#Eval("Date") %>'></asp:Label>
+                                                            <asp:Label ID="lblStartTime" runat="server" Text='<%#Eval("Date", "{0:d}") %>'></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:TemplateField>

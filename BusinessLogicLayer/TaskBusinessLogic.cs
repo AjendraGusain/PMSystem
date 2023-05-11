@@ -46,9 +46,9 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
-        public DataSet GetAllClients()
+        public DataSet GetAllClients(TaskBusinessObject Client)
         {
-            taskBO.dsResult = _dataAccess.GetClients();
+            taskBO.dsResult = _dataAccess.GetClients(Client);
             return taskBO.dsResult;
         }
 
@@ -58,22 +58,31 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
+
+        public DataSet GetAllTeam()
+        {
+            taskBO.dsResult = _dataAccess.GetTeamName();
+            return taskBO.dsResult;
+        }
+
+       
+
         public DataSet GetStatusName()
         {
             taskBO.dsResult = _dataAccess.GetStatusName();
             return taskBO.dsResult;
         }
 
-        public DataSet GetAssignedTask()
+        public DataSet GetAssignedTask(TaskBusinessObject ObjectName)
         {
-            taskBO.dsResult = _dataAccess.GetAssignedTask();
+            taskBO.dsResult = _dataAccess.GetAssignedTask(ObjectName);
             return taskBO.dsResult;
         }
 
 
-        public DataSet GetAllCreatedTask()
+        public DataSet GetAllCreatedTask(TaskBusinessObject Task)
         {
-            taskBO.dsResult = _dataAccess.GetAllCreatedTask();
+            taskBO.dsResult = _dataAccess.GetAllCreatedTask(Task);
             return taskBO.dsResult;
         }
 
@@ -83,15 +92,21 @@ namespace BusinessLogicLayer
             return taskBO.dsResult;
         }
 
-        public DataSet GetProjectByClient(int clientID)
+        //public DataSet GetProjectByClient(int clientID)
+        //{
+        //    taskBO.dsResult = _dataAccess.GetProjectByClient(clientID);
+        //    return taskBO.dsResult;
+        //}
+
+        public DataSet GetProjectByClient(TaskBusinessObject clientID)
         {
             taskBO.dsResult = _dataAccess.GetProjectByClient(clientID);
             return taskBO.dsResult;
         }
 
-        public DataSet ReAssignTask(int taskID)
+        public DataSet ReAssignTask(TaskBusinessObject task)
         {
-            taskBO.dsResult = _dataAccess.ReAssignTask(taskID);
+            taskBO.dsResult = _dataAccess.ReAssignTask(task);
             return taskBO.dsResult;
         }
 
@@ -101,9 +116,9 @@ namespace BusinessLogicLayer
             return taskBO.response;
         }
 
-        public DataSet AssignTask(int taskID)
+        public DataSet AssignTask(TaskBusinessObject task)
         {
-            taskBO.dsResult = _dataAccess.AssignTask(taskID);
+            taskBO.dsResult = _dataAccess.AssignTask(task);
             return taskBO.dsResult;
         }
 
@@ -309,5 +324,11 @@ namespace BusinessLogicLayer
             taskBO.dsResult = _dataAccess.SearchTask(Task);
             return taskBO.dsResult;
         }
-    }
+
+        public DataSet GetAllTeamByClient(TaskBusinessObject Team)
+        {
+            taskBO.dsResult = _dataAccess.GetTeamNameByClient(Team);
+            return taskBO.dsResult;
+        }
+     }
 }

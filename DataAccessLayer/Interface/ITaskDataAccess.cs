@@ -16,22 +16,27 @@ namespace DataAccessLayer.Interface
         int DeleteTaskDetails(TaskBusinessObject task);
         int UpdateTaskDetails(TaskBusinessObject task);
         int InsertChatDetails(TaskBusinessObject Chat);
-        DataSet GetClients();
+        DataSet GetClients(TaskBusinessObject Client);
         DataSet GetTaskDetailsByTask(TaskBusinessObject Task);
         DataSet GetTeamMemberID(TaskBusinessObject teamMember);
         DataSet GetProject();
+        DataSet GetTeamName();
+
+        DataSet GetTeamNameByClient(TaskBusinessObject Team);
         DataSet GetStatusName();
-        DataSet GetAssignedTask();
-        DataSet GetAllCreatedTask();
+        DataSet GetAssignedTask(TaskBusinessObject taskByUser);
+        DataSet GetAllCreatedTask(TaskBusinessObject Task);
         DataSet GetAllCreatedTaskByUser(TaskBusinessObject taskByUser);
         int UpdateUserTaskStatus(TaskBusinessObject taskStatus);
         int UpdateUserTaskStatusPause(TaskBusinessObject taskStatus);
         DataSet GetTaskDetails();
-        DataSet GetProjectByClient(int objClientID);
+        // DataSet GetProjectByClient(int objClientID);
+
+        DataSet GetProjectByClient(TaskBusinessObject objClientID);
         DataSet GetAllUsers(TaskBusinessObject objProjectuser);
         DataSet GetChatDetails(TaskBusinessObject Chat);
-        DataSet ReAssignTask(int taskID);
-        DataSet AssignTask(int taskID);
+        DataSet ReAssignTask(TaskBusinessObject task);
+        DataSet AssignTask(TaskBusinessObject task);
         DataSet SearchResult(TaskBusinessObject searchResult);
         DataSet SearchResultByClient(TaskBusinessObject searchResult);
         DataSet SearchResultByProject(TaskBusinessObject searchResult);

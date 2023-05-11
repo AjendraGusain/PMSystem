@@ -28,6 +28,7 @@ namespace ProjectManagement.Admin
                 GetChatHistory();
                 Global.Role = Session["Role"].ToString();
                 Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
+                Global.Designation = Session["Designation"].ToString();
             }
         }
 
@@ -42,7 +43,8 @@ namespace ProjectManagement.Admin
             // addTaskBusinessObj.LoginUserID = loginUserID;
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            addTaskBusinessObj.RoleID= Convert.ToInt32(Session["RoleId"].ToString());
+            addTaskBusinessObj.RoleID= Global.RoleIdSession;
+            addTaskBusinessObj.Designation = Global.Designation;
             DataSet dtResult = addTaskDetails.UserTaskTime(addTaskBusinessObj);
             DataTable table = dtResult.Tables[0];
             object sumObject;
@@ -58,7 +60,7 @@ namespace ProjectManagement.Admin
         private void GetTaskDetailsByTaskID()
         {
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
+            DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj);
             DataTable dt = dtResult.Tables[0];
             dt.TableName = "AssignTask";
             ViewState["AssignTask"] = dt;
