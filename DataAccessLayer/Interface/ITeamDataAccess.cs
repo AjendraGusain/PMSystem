@@ -36,5 +36,6 @@ namespace DataAccessLayer.Interface
         int DeleteTeam(int Id);
 
         DataSet SearchTeam(TeamBusinessObject Team);
+        DataSet GetRolesInTeam(TeamBusinessObject createTeam);
     }
 }

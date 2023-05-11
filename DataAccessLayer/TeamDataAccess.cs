@@ -409,5 +409,35 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+
+        public DataSet GetRolesInTeam(TeamBusinessObject createTeam)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                dsResult.Reset();
+                string spName = "sp_GetRolesInTeam";
+                MySqlCommand cmd = new MySqlCommand(spName, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@UserId", Convert.ToInt32(createTeam.Employee)));
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dsResult);
+                return dsResult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }

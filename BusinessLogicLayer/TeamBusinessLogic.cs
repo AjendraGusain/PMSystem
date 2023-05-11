@@ -319,5 +319,11 @@ namespace BusinessLogicLayer
             dtResult = _teamDataAccess.SearchTeam(Team);
             return dtResult;
         }
+
+        public DataSet GetRolesInTeam(TeamBusinessObject createTeam)
+        {
+            dtResult = _teamDataAccess.GetRolesInTeam(createTeam);
+            return dtResult;
+        }
     }
 }

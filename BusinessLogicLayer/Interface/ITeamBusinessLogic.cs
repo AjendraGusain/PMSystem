@@ -22,6 +22,8 @@ namespace BusinessLogicLayer.Interface
         DataSet GetTeamName();
         DataSet GetTeamDetails(TeamBusinessObject createTeam);
         DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam);
+        DataSet GetRolesInTeam(TeamBusinessObject createTeam);
+        //GetRolesInTeam
         DataSet GetTeamNameById(int Id);
         DataSet GetTeamMemberMangerTLUser(TeamBusinessObject createTeam);
         DataSet GetTeamMemberTeamLeader(TeamBusinessObject createTeam);
