@@ -284,6 +284,7 @@ namespace ProjectManagement.Admin
         private void GetTeamDetailInForm(string ProjectId, string TeamId, string teamMemberId, string viewTeam)
         {
             //string viewTeam = Convert.ToInt32(Request.QueryString["ViewTeam"]).ToString();
+            BindEmployeeList();
             int userId = 0;
             btnAddEmployee.Text = "Update";
             pnlHideForm.Visible = true;
@@ -323,7 +324,7 @@ namespace ProjectManagement.Admin
             lsEmployee.DataSource = userList;
             lsTester.DataSource = testerList;
 
-            BindEmployeeList();
+            
 
 
 
@@ -672,6 +673,7 @@ namespace ProjectManagement.Admin
                     ddlMTeamName.DataValueField = "TeamId";
                     ddlMTeamName.DataBind();
                     ddlMTeamName.Items.Insert(0, new ListItem("-- Select TeamName --", "0"));
+
                 }
             }
         }
@@ -783,6 +785,7 @@ namespace ProjectManagement.Admin
                     ddlTeamLeader.DataTextField = "TLName";
                     ddlTeamLeader.DataValueField = "TeamMemberId";
                     ddlTeamLeader.DataBind();
+                    ddlTeamLeader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
                 }
                 if (Global.Designation == "TeamLeader")
                 {
@@ -798,9 +801,11 @@ namespace ProjectManagement.Admin
                     ddlTeamLeader.DataTextField = "ManagerName";
                     ddlTeamLeader.DataValueField = "TeamMemberId";
                     ddlTeamLeader.DataBind();
+                    ddlTeamLeader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
+                   
                 }
+                BindEmployeeList();
 
-                ddlTeamLeader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
             }
             //Session["ProjectId"] = ddlManager.SelectedValue;
             string ProjectId = ddlMProject.SelectedValue;
@@ -826,7 +831,7 @@ namespace ProjectManagement.Admin
             Session["TLId"] = TLId;
 
             gridViewList();
-            BindEmployeeList();
+            
         }
 
         protected void grvViewEmployee_RowCreated(object sender, GridViewRowEventArgs e)
