@@ -18,21 +18,43 @@ namespace ProjectManagement.Admin
         EmployeeBusinessLogic managerName = new EmployeeBusinessLogic();
         ITeamBusinessLogic createTeamBA = new TeamBusinessLogic(new TeamDataAccess());
         TeamBusinessObject createTeam = new TeamBusinessObject();
+        DataSet dtResult = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Global.Role = Session["Role"].ToString();
+                Global.Designation = Session["Designation"].ToString();
+                Global.UserId = Convert.ToInt32(Session["UserID"].ToString());
                 BindList();
             }
         }
 
         private void BindList()
         {
+
             createTeam.ProjectId = "0";
             createTeam.TeamName = "0";
-            DataSet ds = createTeamBA.GetViewTeam(createTeam);
-            grvAllViewTeam.DataSource = ds.Tables[0];
+            dtResult = createTeamBA.GetViewTeam(createTeam);
+            
+            if (Global.Designation == "Manager")
+            {
+                DataRow[] filterNext = dtResult.Tables[0].Select("ManagerId = '" + Global.UserId + "'");
+                
+                if(filterNext.Length>0)
+                {
+                    var rowsToUpdate = dtResult.Tables[0].AsEnumerable().Where(r => r.Field<int>("ManagerId") == Global.UserId).CopyToDataTable(); ;
+                    grvAllViewTeam.DataSource = rowsToUpdate;
+                }
+                else
+                grvAllViewTeam.DataSource = filterNext;
+            }
+            else
+            {
+                grvAllViewTeam.DataSource = dtResult.Tables[0];
+            }
+
+
             grvAllViewTeam.DataBind();
         }
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -82,16 +104,16 @@ namespace ProjectManagement.Admin
 
         protected void grvAllViewTeam_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                if (Global.Role == "User")
-                {
-                    LinkButton lnkBtn = (LinkButton)e.Row.FindControl("btnEditEmployee");
-                    lnkBtn.Visible = false;
-                    LinkButton lnkBtn1 = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
-                    lnkBtn1.Visible = false;
-                }
-            }
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    if (Global.Role == "User")
+            //    {
+            //        LinkButton lnkBtn = (LinkButton)e.Row.FindControl("btnEditEmployee");
+            //        lnkBtn.Visible = false;
+            //        LinkButton lnkBtn1 = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+            //        lnkBtn1.Visible = false;
+            //    }
+            //}
         }
 
         protected void btnSearchTeam_Click(object sender, EventArgs e)
