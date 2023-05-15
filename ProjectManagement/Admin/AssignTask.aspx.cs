@@ -112,6 +112,9 @@ namespace ProjectManagement.Admin
 
         protected void btnSearchEmp_Click(object sender, EventArgs e)
         {
+            addTaskBusinessObj.LoginUserID = Convert.ToInt32(Session["UserID"].ToString());
+            addTaskBusinessObj.RoleID = Global.RoleIdSession;
+            addTaskBusinessObj.Designation = Global.Designation;
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
             addTaskBusinessObj.SearchResult = txtSearchEmp.Text;
             addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByUser(addTaskBusinessObj);

@@ -196,7 +196,7 @@ namespace DataAccessLayer
                 Hashtable hashtable = new Hashtable();
                 if (Task.RoleID == 1)
                 {
-                    spName = "sp_GetAllCreatedTask";
+                    spName = "sp_GetAllTask";//sp_GetAllCreatedTask
                 }
                 else
                 {
@@ -212,7 +212,7 @@ namespace DataAccessLayer
                     }
                     else
                     {
-                        spName = "sp_GetAllCreatedTask";
+                        spName = "sp_GetAllTask";//sp_GetAllCreatedTask
                     }
                 }
                 //addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
@@ -609,11 +609,40 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_SearchAllTaskByUser";
-                Hashtable obj = new Hashtable();
-                obj.Add("@name", searchResult.SearchResult);
-                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                //string spName = "sp_SearchAllTaskByUser";
+                //Hashtable obj = new Hashtable();
+                //obj.Add("@name", searchResult.SearchResult);
+                //addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                //return addTaskBO.dsResult;
+                string spName = "";
+                Hashtable hashtable = new Hashtable();
+                if (searchResult.RoleID == 2)
+                {
+                    if (searchResult.Designation == "Manager")
+                    {
+                        spName = "sp_SearchManagerTaskByIDandRole";
+                        hashtable.Add("@UserNameID", searchResult.LoginUserID);
+                        hashtable.Add("@name", searchResult.SearchResult);
+                    }
+                    else if (searchResult.Designation == "TeamLeader")
+                    {
+                        spName = "sp_SearchTLTaskByIDandRole";
+                        hashtable.Add("@UserNameID", searchResult.LoginUserID);
+                        hashtable.Add("@name", searchResult.SearchResult);
+                    }
+                    else
+                    {
+                        spName = "sp_SearchAllTaskByUser";
+                    }
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }
+                else
+                {
+                    spName = "sp_SearchAllTaskByUser";
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }
                 return addTaskBO.dsResult;
+
             }
             catch (Exception ex)
             {
@@ -757,7 +786,7 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and (RoleId=2 or RoleId=4) and ParrentTeamMemberId!=0");
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and ParrentTeamMemberId!=0 and Is_Active!=0");//and (RoleId=2 or RoleId=4) 
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
