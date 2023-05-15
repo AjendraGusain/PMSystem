@@ -61,6 +61,13 @@
         function HidePopupApprovalUser() {
             $('#hideUser').hide();
         }
+
+        function ShowhideSwitchUser() {
+            $('#hideUser').show();
+        }
+        function HidePopuphideSwitchUser() {
+            $('#hideSwitchUser').hide();
+        }
     </script>
 </head>
 <body>
@@ -94,7 +101,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end user-dd" aria-labelledby="dropdownMenuButton1">
                                     
 <%--<a class="dropdown-item" href="#"><i class="fa fa-power-off me-1 ms-1"></i>Logout</a>--%>
-   <div class="text-primary">Switch User</div>
+   <div class="text-primary" id="hideSwitchUser">Switch User</div>
 <li><a class="dropdown-item" id="hideManager" href="../Admin/Dashboard.aspx?User=Manager" onclick='return check()'><i class="mdi mdi-account me-1 ms-1"></i>Manager</a></li>
 <li><a class="dropdown-item" id="hideTl"  href="../Admin/Dashboard.aspx?User=TeamLeader" onclick='return check()'><i class="mdi mdi-account me-1 ms-1"></i>Team Leader</a></li>
 <li><a class="dropdown-item" id="hideUser"  href="../Admin/Dashboard.aspx?User=User" onclick='return checkUser()'><i class="mdi mdi-account me-1 ms-1"></i>User</a></li>

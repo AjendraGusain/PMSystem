@@ -396,19 +396,19 @@ namespace ProjectManagement.Admin
                 ddlManager.DataValueField = "TeamMemberId";
                 ddlManager.DataBind();
             }
-            
+            BindEmployeeList();
             string ProjectId = ddlMProject.SelectedValue;
             string TeamName = ddlMTeamName.SelectedValue;
             string Manager = "0";
             string TLId = "0";
 
-            //ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
+            ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
             Session["ProjectId"] = ProjectId;
             Session["TeamId"] = TeamName;
             Session["Manager"] = Manager;
             Session["TLId"] = TLId;
             gridViewList();
-            BindEmployeeList();
+            
 
         }
 
