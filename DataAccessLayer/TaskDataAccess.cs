@@ -867,8 +867,16 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetSelfAssignedUnassignedTaskByUser";
+                string spName = "";
                 Hashtable obj = new Hashtable();
+                if (taskByUser.Designation == "TeamLeader")
+                {
+                    spName = "sp_GetTLAssignedUnassignedTask";
+                }
+                else
+                {
+                    spName = "sp_GetSelfAssignedUnassignedTaskByUser";
+                }
                 obj.Add("@UserNameID", taskByUser.EmployeeName);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;

@@ -29,6 +29,8 @@ namespace ProjectManagement.Users
 
         protected void GetUserTaskDetails()
         {
+            addTaskBusinessObj.RoleID = Global.RoleId;
+            addTaskBusinessObj.Designation = Global.Designation;
             addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
             DataSet ds = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
             DataTable dt = ds.Tables[0];
