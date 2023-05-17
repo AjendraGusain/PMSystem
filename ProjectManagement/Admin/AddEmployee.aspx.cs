@@ -55,6 +55,8 @@ namespace ProjectManagement.Admin
             addEmployee.EmployeeCode = txtEmployeeCode.Text.Trim();
             addEmployee.EmployeeEmail = txtEmail.Text.Trim();
             addEmployee.EmployeePhone = txtPhoneNo.Text.Trim();
+            addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
+            addEmployee.Designation = ddlDesignation.SelectedValue;
             string usercode = "";
             string userEmail = "";
             string userphone = "";
@@ -127,20 +129,19 @@ namespace ProjectManagement.Admin
                 addEmployee.IsAdmin = chkAdminAuth.Checked;
                 if (chkAdminAuth.Checked == true)
                 {
-                    addEmployee.Role = "Admin";
+                    addEmployee.Role = "1";//Admin
                 }
                 else
                 {
-                    addEmployee.Role = "User";
+                    addEmployee.Role = "2";//User
                 }
                 successResult = addEmployeeLogic.UpdateAllEmployee(addEmployee, UserId);
                 if (successResult == 1)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
                 }
+                Response.Redirect("ViewAllEmployee.aspx");
             }
-            Response.Redirect("AddEmployee.aspx");
-
         }
 
         public void ResetAllFields()

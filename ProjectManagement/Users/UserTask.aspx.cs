@@ -29,6 +29,8 @@ namespace ProjectManagement.Users
 
         protected void GetUserTaskDetails()
         {
+            addTaskBusinessObj.RoleID = Global.RoleId;
+            addTaskBusinessObj.Designation = Global.Designation;
             addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
             DataSet ds = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
             DataTable dt = ds.Tables[0];
@@ -128,25 +130,25 @@ namespace ProjectManagement.Users
                 LinkButton lbAssign = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnAssign");
                 LinkButton lbPlay = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPlay");
                 LinkButton lbPause = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPause");
-                if (e.Row.Cells[9].Text.ToString() == "Unassigned")
+                if (e.Row.Cells[10].Text.ToString() == "Unassigned")
                 {
                     lbAssign.Visible = true;
                     lbPlay.Visible = false;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "Assigned")
+                else if (e.Row.Cells[10].Text.ToString() == "Assigned")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "In Process")
+                else if (e.Row.Cells[10].Text.ToString() == "In Process")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = false;
                     lbPause.Visible = true;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "Pause")
+                else if (e.Row.Cells[10].Text.ToString() == "Pause")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
