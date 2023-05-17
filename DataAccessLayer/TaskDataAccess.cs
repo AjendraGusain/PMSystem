@@ -328,6 +328,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
+                addTaskBO.dsResult.Reset();
                 string spName = "GetProjectByClient";
                 Hashtable table = new Hashtable();
                 table.Add("@ClientId", objClientID.ClientID);
@@ -704,10 +705,34 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetTeamByProjectID";
+                addTaskBO.dsResult.Reset();
+                string spName = "";
                 Hashtable obj = new Hashtable();
-                obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
-                obj.Add("@TeamIDName", objProjectuser.TeamId);
+                if (objProjectuser.RoleID == 1)
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
+                else if(objProjectuser.Designation == "Manager")
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
+                else if(objProjectuser.Designation == "TeamLeader")
+                {
+                    spName = "sp_GetTeamByProjectIDForTL";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                    obj.Add("@UserNameId", objProjectuser.LoginUserID);
+                }
+                else
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }

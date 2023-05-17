@@ -104,6 +104,7 @@
                                                     <asp:BoundField DataField="ClientName" HeaderText="Client Name" />
                                                     <asp:BoundField DataField="ProjectName" HeaderText="Project Name" />
                                                     <asp:BoundField DataField="TaskNumber" HeaderText="Task#" />
+                                                    <asp:BoundField DataField="TaskName" HeaderText="Task Name" />
                                                     <asp:BoundField DataField="StartDate" HeaderText="Start Date" DataFormatString = "{0:MM/dd/yyyy}" />
                                                     <asp:BoundField DataField="EndDate" HeaderText="End Date" DataFormatString = "{0:MM/dd/yyyy}"/>
                                                     <asp:TemplateField HeaderText="View">

@@ -287,7 +287,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string dsResult = "Update  ProjectManagementNew.user Set UID='" + token + "',UIDDate=Now() where Email='" + email + "'";
+                string dsResult = "Update  ProjectManagementNew.user Set IsActive=1, UID='" + token + "',UIDDate=CONVERT_TZ(Now(),'+00:00','+12:30') where Email='" + email + "'";
                 MySqlCommand cmd = new MySqlCommand(dsResult, conn);
                 insertSuccess = cmd.ExecuteNonQuery();
             }

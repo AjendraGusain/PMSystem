@@ -76,6 +76,8 @@ namespace ProjectManagement.Admin
             {
                 btnAddTask.Text = "Assign";
                 addTaskBusinessObj.TaskID = TaskId;
+                //addTaskBusinessObj.RoleID = Global.RoleId;
+                //addTaskBusinessObj.Designation = Global.Designation;
                 addTaskBusinessObj.dsResult = addTaskDetails.AssignTask(addTaskBusinessObj);
                 DataTable dtAssign = addTaskBusinessObj.dsResult.Tables[0];
                 dtAssign.TableName = "AssignTask";
@@ -391,15 +393,22 @@ namespace ProjectManagement.Admin
                         ScriptManager.RegisterStartupScript(this, GetType(), "fail", "alert('Record not inserted.');", true);
                     }
                 }
-                ResetAllFields();
+               ResetAllFields();
+           //     BindClientandProject(Global.RoleId, Global.Designation);
             }
         }
 
         public void ResetAllFields()
         {
-            ddlClientName.SelectedItem.Text = "--Select Client--";
-            ddlProjectName.SelectedItem.Text = "--Select Project--";
-            ddlTeamName.SelectedItem.Text = "--Select Team--";
+            //ddlClientName.Items.Clear();
+            //ddlProjectName.Items.Clear();
+            //ddlTeamName.Items.Clear();
+            ddlClientName.Items.Insert(0, new ListItem("-- Select Client --", "0"));
+            ddlProjectName.Items.Insert(0, new ListItem("-- Select Project --", "0"));
+            ddlTeamName.Items.Insert(0, new ListItem("-- Select Team --", "0"));
+            //ddlClientName.SelectedItem.Text = "--Select Client--";
+            //ddlProjectName.SelectedItem.Text = "--Select Project--";
+            //ddlTeamName.SelectedItem.Text = "--Select Team--";
             txtTaskNumber.Text = "";
             txtTaskName.Text = "";
             txtTaskDescription.Text = "";
@@ -417,6 +426,8 @@ namespace ProjectManagement.Admin
             ddlClientName.DataValueField = "ClientID";
             ddlClientName.DataBind();
             ddlClientName.Items.Insert(0, new ListItem("-- Select Client --", "0"));
+
+
             ddlProjectName.Items.Clear();
             ddlProjectName.DataSource = addTaskDetails.GetAllProject();
             ddlProjectName.DataTextField = "ProjectName";
@@ -429,6 +440,7 @@ namespace ProjectManagement.Admin
             ddlTeamName.DataValueField = "Id";
             ddlTeamName.DataBind();
             ddlTeamName.Items.Insert(0, new ListItem("-- Select Team --", "0"));
+
         }
 
         protected void ddlClientName_SelectedIndexChanged(object sender, EventArgs e)
@@ -440,11 +452,12 @@ namespace ProjectManagement.Admin
             ddlProjectName.DataTextField = "ProjectName";
             ddlProjectName.DataValueField = "ProjectID";
             ddlProjectName.DataBind();
-            addTaskBusinessObj.ProjectID = ddlProjectName.SelectedValue;
-            ddlTeamName.DataSource = addTaskDetails.GetAllTeamByClient(addTaskBusinessObj);
-            ddlTeamName.DataTextField = "TeamName";
-            ddlTeamName.DataValueField = "Id";
-            ddlTeamName.DataBind();
+            //ddlProjectName.Items.Insert(0, new ListItem("-- Select Project --", "0"));
+            //addTaskBusinessObj.ProjectID = ddlProjectName.SelectedValue;
+            //ddlTeamName.DataSource = addTaskDetails.GetAllTeamByClient(addTaskBusinessObj);
+            //ddlTeamName.DataTextField = "TeamName";
+            //ddlTeamName.DataValueField = "Id";
+            //ddlTeamName.DataBind();
         }
 
         protected void btnResetField_Click(object sender, EventArgs e)
@@ -476,10 +489,19 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.ProjectID = ddlProjectName.SelectedValue;
             //string clientID = ddlClientName.SelectedValue;
             //ddlProjectName.DataSource = addTaskDetails.GetProjectByClient(Convert.ToInt32(clientID));
-            ddlTeamName.DataSource = addTaskDetails.GetProjectByClient(addTaskBusinessObj);
+            //ddlTeamName.DataSource = addTaskDetails.GetProjectByClient(addTaskBusinessObj);
+            //ddlTeamName.DataTextField = "TeamName";
+            //ddlTeamName.DataValueField = "Id";
+            //ddlTeamName.DataBind();
+
+            //addTaskBusinessObj.ProjectID = ddlProjectName.SelectedValue;
+            ddlTeamName.DataSource = addTaskDetails.GetAllTeamByClient(addTaskBusinessObj);
             ddlTeamName.DataTextField = "TeamName";
             ddlTeamName.DataValueField = "Id";
             ddlTeamName.DataBind();
+            //ddlClientName.Items.Insert(0, new ListItem("-- Select Client --", "0"));
+            //ddlProjectName.Items.Insert(0, new ListItem("-- Select Project --", "0"));
+          //  ddlTeamName.Items.Insert(0, new ListItem("-- Select Team --", "0"));
         }
     }
 }
