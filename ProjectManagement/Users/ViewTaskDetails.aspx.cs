@@ -237,7 +237,7 @@ namespace ProjectManagement.Users
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
             //DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
             DataTable dt = (DataTable)ViewState["AssignTask"];
-            if (dt.Rows[0]["StatusId"].ToString() == "3")
+            if (dt.Rows[0]["StatusId"].ToString() == "3" && addTaskBusinessObj.PauseReason!=null)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Already working on this task.');", true);
                 return;

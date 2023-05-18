@@ -17,6 +17,7 @@ namespace ProjectManagement.Admin
     {
         ITaskBusinessLogic assigntaskBLL = new TaskBusinessLogic(new TaskDataAccess());
         TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
+        bool tskCmp = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -36,11 +37,80 @@ namespace ProjectManagement.Admin
             addTaskBusinessObj.Designation= Global.Designation;
             addTaskBusinessObj.LoginUserID = userId;
             DataSet ds = assigntaskBLL.GetAllCreatedTask(addTaskBusinessObj);
+
+            DataTable dt = ds.Tables[0];
+            dt.TableName = "ViewAllTask";
+            ViewState["ViewAllTask"] = dt;
+
             // DataSet ds = assigntaskBLL.GetAssignedTask();
-            grvViewAllTask.DataSource = ds.Tables[0];
+            grvViewAllTask.DataSource = dt;
+
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    if (dt.Rows[i]["StatusName"].ToString() == "Completed")
+            //    {
+            //        //LinkButton lnkBtnEdit = (LinkButton)e.Row.FindControl("btnEditTeam");
+            //        //lnkBtnEdit.Visible = false;
+            //    }
+            //}
             grvViewAllTask.DataBind();
         }
 
+
+        //protected void grvViewAllTask_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    DataTable dt = (DataTable)ViewState["ViewAllTask"];
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        //for(int i = 0; i < dt.Rows.Count; i++)
+        //        //{
+        //        //    if (dt.Rows[i]["StatusName"].ToString()=="Completed")
+        //        //    {
+        //        //        LinkButton lnkBtnEdit = (LinkButton)e.Row.FindControl("btnEditTeam");
+        //        //        lnkBtnEdit.Visible = false;
+        //        //        LinkButton lnkBtnDel = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+        //        //        lnkBtnDel.Visible = false;
+        //        //        LinkButton lnkBtnView = (LinkButton)e.Row.FindControl("btnViewAssignedTask");
+        //        //        lnkBtnView.Visible = true;
+        //        //    }
+        //        //    else
+        //        //    {
+        //        //        LinkButton lnkBtnEdit = (LinkButton)e.Row.FindControl("btnEditTeam");
+        //        //        lnkBtnEdit.Visible = true;
+        //        //        LinkButton lnkBtnDel = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+        //        //        lnkBtnDel.Visible = true;
+        //        //        LinkButton lnkBtnView = (LinkButton)e.Row.FindControl("btnViewAssignedTask");
+        //        //        lnkBtnView.Visible = false;
+        //        //    }
+        //        //}
+        //        //foreach (GridViewRow row in grvViewAllTask.Rows)
+        //        //{
+        //            for (int i = 0; i < grvViewAllTask.Rows.Count; i++)
+        //            {
+        //            // String header = grvViewAllTask.Columns[i].HeaderText;
+        //                GridViewRow gridViewRow1 = (GridViewRow)e.Row.FindControl("btnViewAssignedTask");
+        //            if (gridViewRow1.ToString() == "Completed")
+        //                {
+        //                    LinkButton lnkBtnEdit = (LinkButton)e.Row.FindControl("btnEditTeam");
+        //                    lnkBtnEdit.Visible = false;
+        //                    LinkButton lnkBtnDel = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+        //                    lnkBtnDel.Visible = false;
+        //                    LinkButton lnkBtnView = (LinkButton)e.Row.FindControl("btnViewAssignedTask");
+        //                    lnkBtnView.Visible = true;
+        //                }
+        //                //else
+        //                //{
+        //                //    LinkButton lnkBtnEdit = (LinkButton)e.Row.FindControl("btnEditTeam");
+        //                //    lnkBtnEdit.Visible = true;
+        //                //    LinkButton lnkBtnDel = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
+        //                //    lnkBtnDel.Visible = true;
+        //                //    LinkButton lnkBtnView = (LinkButton)e.Row.FindControl("btnViewAssignedTask");
+        //                //    lnkBtnView.Visible = false;
+        //                //}
+        //            }
+        //       // }
+        //    }
+        //}
 
         //protected void BindClientandProject()
         //{
@@ -90,6 +160,16 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "fail", "alert('You are already working on this task.');", true);
                 }
                 GetAllCreatedTask(Convert.ToInt32(userID), Global.RoleIdSession, Global.Designation);
+            }
+            if (e.CommandName == "ViewAssignedTask")
+            {
+                string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
+                string taskID = commandArgs[0];
+                string userID = commandArgs[1];
+                string projectID = commandArgs[2];
+                string clientID = commandArgs[3];
+                string statusID = commandArgs[4];
+                Response.Redirect("TaskDetails.aspx?TaskId=" + taskID.Trim() + "&ProjectId=" + projectID.Trim() + "&ClientId=" + clientID.Trim() + "&StatusId=" + statusID.Trim());
             }
         }
 
