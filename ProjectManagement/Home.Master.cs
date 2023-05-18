@@ -80,6 +80,18 @@ namespace ProjectManagement
                     pnlTeamLeaderAccess.Visible = false;
                     pnlManagerTeamAccess.Visible = false;
                     pnlAddTask.Visible = true;
+
+                    builder.Append("<script language=JavaScript> HidePopuphideSwitchUser(); </script>\n");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopuphideSwitchUser", builder.ToString());
+
+                    builder.Append("<script language=JavaScript> HidePopupApproval(); </script>\n");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
+
+                    builder.Append("<script language=JavaScript> HidePopupApprovalTL(); </script>\n");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalTL", builder.ToString());
+
+                    builder.Append("<script language=JavaScript> HidePopupApprovalUser(); </script>\n");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalUser", builder.ToString());
                 }
                 else if (Global.Role == "User")//For User 
                 {

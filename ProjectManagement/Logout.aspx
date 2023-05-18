@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:Label ID="Label1" Text="Loggin Out Please Wait" runat="server" />
+    <asp:Label ID="Label1" Text="Login Out.. Please Wait" runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div>

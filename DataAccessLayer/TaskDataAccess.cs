@@ -196,18 +196,18 @@ namespace DataAccessLayer
                 Hashtable hashtable = new Hashtable();
                 if (Task.RoleID == 1)
                 {
-                    spName = "sp_GetAllTask";//sp_GetAllCreatedTask
+                    spName = "sp_ViewCompletedandUnCompletedTask";//sp_GetAllCreatedTask
                 }
                 else
                 {
                     if (Task.Designation == "Manager")
                     {
-                        spName = "sp_GetManagerTaskByIDandRole";
+                        spName = "sp_ViewCompleteandAllTaskByManager";
                         hashtable.Add("@UserNames", Task.LoginUserID);
                     }
                     else if (Task.Designation == "TeamLeader")
                     {
-                        spName = "sp_GetTLTaskByIDandRole";
+                        spName = "sp_ViewCompletedandAllTaskByTL";
                         hashtable.Add("@UserNames", Task.LoginUserID);
                     }
                     else
@@ -388,8 +388,17 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_AssignTaskByID";
+                addTaskBO.dsResult.Reset();
+                string spName = "";
                 Hashtable objhashtable = new Hashtable();
+                if (task.StatusID == "5")
+                {
+                    spName = "sp_GetCompletedTask";
+                }
+                else
+                {
+                    spName = "sp_AssignTaskByID";
+                }
                 objhashtable.Add("@TaskIdName",task.TaskID);
                 //MySqlCommand cmd = new MySqlCommand(spName, conn);
                 //cmd.CommandType = CommandType.StoredProcedure;
@@ -994,6 +1003,11 @@ namespace DataAccessLayer
                 {
                     string spName = "";
                     if (objUserTask.Designation == "Manager")
+                    {
+                        spName = "sp_GetUserTaskTime";
+                        obj.Add("@TaskNameID", objUserTask.TaskID);
+                    }
+                    else if (objUserTask.Designation == "TeamLeader")
                     {
                         spName = "sp_GetUserTaskTime";
                         obj.Add("@TaskNameID", objUserTask.TaskID);
