@@ -40,8 +40,6 @@ namespace ProjectManagement.Admin
 
         private void DisplayTaskDetails()
         {
-            // int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
-            // addTaskBusinessObj.LoginUserID = loginUserID;
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.RoleID= Global.RoleIdSession;
@@ -66,7 +64,6 @@ namespace ProjectManagement.Admin
             DataTable dt = dtResult.Tables[0];
             dt.TableName = "AssignTask";
             ViewState["AssignTask"] = dt;
-            
             lblClientName.Text = dtResult.Tables[0].Rows[0]["ClientName"].ToString();
             lblProjectName.Text = dtResult.Tables[0].Rows[0]["ProjectName"].ToString();
             lblTaskName.Text = dtResult.Tables[0].Rows[0]["TaskName"].ToString();
@@ -85,15 +82,12 @@ namespace ProjectManagement.Admin
                         lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
                     if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "" && dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
                         lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
-
-                    //DateTime currentTime = TimeZoneInfo.ConvertTime(Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()), TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
                     int totalTime = 0;
                     int breakTime = 0;
                     if (dtResult.Tables[0].Rows[0]["TotalTime"].ToString() != "")
                         totalTime += Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
                     if (Session["BreakTime"].ToString() != "")
                         breakTime += Convert.ToInt32(Session["BreakTime"].ToString());
-
                     int actualTime = totalTime - breakTime;
                     if (actualTime != 0)
                     {
@@ -132,11 +126,6 @@ namespace ProjectManagement.Admin
             txtChatDescription.Text = "";
         }
 
-
-        //protected void Timer1_Tick(object sender, EventArgs e)
-        //{
-        //    GetChatHistory();            
-        //}
         protected void GetChatHistory()
         {
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
@@ -148,13 +137,10 @@ namespace ProjectManagement.Admin
         {
             txtHistoryStatus.Text = ddlStatus.SelectedItem.Text;
             string pauseReasonStatus = txtHistoryStatus.Text;
-            // int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
-            //DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
-            //DataSet dtResult = (DataSet)ViewState["AssignTask"];
             DataTable dt = (DataTable)ViewState["AssignTask"];
             if (dt.Rows[0]["StatusId"].ToString() == "3" && addTaskBusinessObj.PauseReason != null)
             {
@@ -162,7 +148,6 @@ namespace ProjectManagement.Admin
                 return;
             }
             addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
-            //ddlStatus.SelectedItem.Text = "Select";
             if (pauseReasonStatus == "Reassign")
             {
                 Response.Redirect("AddTask.aspx?TaskId=" + addTaskBusinessObj.TaskID + "&UserId=" + addTaskBusinessObj.EmployeeName + "&ProjectId=" + addTaskBusinessObj.ProjectID + "&checkIf=" + true);
@@ -198,7 +183,6 @@ namespace ProjectManagement.Admin
                 return;
             }
             addTaskBusinessObj.PauseReason = reason.Trim();
-            //  int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.AssignedDate = DateTime.Now;
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
@@ -208,7 +192,6 @@ namespace ProjectManagement.Admin
             DisplayTaskDetails();
             btnPlayTask.Visible = true;
             btnPauseTask.Visible = false;
-            //ddlReason.SelectedItem.Text = "--Select Reason--";
             GetTaskDetailsByTaskID();
         }
 
@@ -221,12 +204,10 @@ namespace ProjectManagement.Admin
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
 
         protected void btnPlayTask_Click(object sender, EventArgs e)
         {
-            //int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.AssignedDate = DateTime.Now;
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
@@ -251,16 +232,7 @@ namespace ProjectManagement.Admin
 
         public void DisplayPlayPause()
         {
-            // int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
-            //addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
-            //addTaskBusinessObj.AssignedDate = DateTime.Now;
-            //addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            //addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
-            //addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
-
             DataTable dt = (DataTable)ViewState["AssignTask"];
-            // DataSet dtResult = (DataSet)ViewState["AssignTask"];
-            //addTaskBusinessObj.dsResult = addTaskDetails.GetTaskDetailsByTask(addTaskBusinessObj);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["StatusId"].ToString() == "3")
@@ -286,7 +258,6 @@ namespace ProjectManagement.Admin
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
-            //Response.Redirect(Request.RawUrl);
             GetChatHistory();
             ScriptManager.RegisterStartupScript(this, GetType(), "scrollDown", "setTimeout(function() { window.scrollTo(0,document.body.scrollHeight); }, 25);", true);
         }

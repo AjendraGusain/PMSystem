@@ -21,7 +21,6 @@ namespace ProjectManagement.Users
             if (!Page.IsPostBack)
             {
                 GetUserTaskDetails();
-                //   BindClientandProject();
                 Global.Role = Session["Role"].ToString();
                 Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
             }
@@ -60,33 +59,23 @@ namespace ProjectManagement.Users
                     string taskNumber = commandArgs[1];
                     string projectID = commandArgs[2];
                     string clientID = commandArgs[3];
-                    //string teamID = commandArgs[4];
-                    //string teamMemberID = commandArgs[5];
                     Session["TaskID"] = taskID;
-                    //addTaskBusinessObj.TeamId = teamID;
-                    //addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
                     addTaskBusinessObj.TaskID = Convert.ToInt32(Session["TaskID"].ToString());
                     addTaskBusinessObj.AssignedDate = DateTime.Now;
                     addTaskBusinessObj.ProjectID = projectID;
                     addTaskBusinessObj.TaskNumber = taskNumber;
                     addTaskBusinessObj.ClientID = clientID;
-                    //addTaskBusinessObj.dsResult = assigntaskBLL.AssignTask(addTaskBusinessObj.TaskID);
-                    //addTaskBusinessObj.ProjectID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ProjectId"].ToString();
-                    //addTaskBusinessObj.TaskNumber = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["TaskNumber"].ToString();
                     addTaskBusinessObj.LoginUserID = loginUserID;
                     addTaskBusinessObj.EmployeeName = loginUserID.ToString();
-                    //addTaskBusinessObj.ClientID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ClientId"].ToString();
-                    //addTaskBusinessObj.RoleID = 4;
                     DataSet ds = assigntaskBLL.GetTeamMemberID(addTaskBusinessObj);
                     addTaskBusinessObj.TeamMemberID = Convert.ToInt32(ds.Tables[0].Rows[0]["TeamMemberId"].ToString());
-                    addTaskBusinessObj.TeamId= ds.Tables[0].Rows[0]["TeamId"].ToString();
+                    addTaskBusinessObj.TeamId = ds.Tables[0].Rows[0]["TeamId"].ToString();
                     addTaskBusinessObj.response = assigntaskBLL.InsertAssignedTaskDetails(addTaskBusinessObj);
                 }
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
                 }
-
                 if (addTaskBusinessObj.response > 0)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "sucess", "alert('Task assigned sucessfully.');", true);
@@ -120,8 +109,6 @@ namespace ProjectManagement.Users
                 Display(null, null);
             }
         }
-
-
 
         protected void gvDisplayUserTask_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -165,7 +152,6 @@ namespace ProjectManagement.Users
             addTaskBusinessObj.TaskID = Convert.ToInt32(Session["TaskID"].ToString());
             addTaskBusinessObj.ProjectID = Session["ProjectID"].ToString();
             addTaskBusinessObj.ClientID = Session["ClientID"].ToString();
-            //addTaskBusinessObj.dsResult = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
             DataTable dt = (DataTable)ViewState["AllTask"];
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -217,8 +203,8 @@ namespace ProjectManagement.Users
 
         protected void btnSearchStartEnd_Click(object sender, EventArgs e)
         {
-            addTaskBusinessObj.RoleID= Convert.ToInt32(Session["RoleId"].ToString());
-            addTaskBusinessObj.EmployeeName= Session["UserID"].ToString();
+            addTaskBusinessObj.RoleID = Convert.ToInt32(Session["RoleId"].ToString());
+            addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
             if (!string.IsNullOrEmpty(txtSearchStartDate.Text))
             {
                 addTaskBusinessObj.StartDate = DateTime.Parse(txtSearchStartDate.Text);
@@ -227,7 +213,7 @@ namespace ProjectManagement.Users
             {
                 addTaskBusinessObj.EndDate = Convert.ToDateTime(txtSearchEndDate.Text);
             }
-            
+
             if (!string.IsNullOrEmpty(txtSearch.Text))
             {
                 addTaskBusinessObj.SearchResult = txtSearch.Text;
@@ -236,7 +222,6 @@ namespace ProjectManagement.Users
             {
                 addTaskBusinessObj.SearchResult = "0";
             }
-            //addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByDate(addTaskBusinessObj);
             addTaskBusinessObj.dsResult = assigntaskBLL.SearchTask(addTaskBusinessObj);
             if (addTaskBusinessObj.dsResult.Tables.Count > 0)
             {

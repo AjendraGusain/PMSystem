@@ -27,23 +27,19 @@
                                 <img src="images/login-logo.png" alt="logo" class="img-fluid" />
                             </div>
                             <form id="form2" runat="server">
-
                                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
-
                                 <div class="form-outline mb-5">
                                     <label class="form-label sr-only" for="form2Example18">Email address</label>
-
                                     <asp:TextBox ID="txtUsername" runat="server" onkeypress="setFocus(event)" class="form-control form-control-lg" placeholder="Username"></asp:TextBox>
                                     <asp:Label ID="lblUserName" CssClass="errorMesg" runat="server" ForeColor="Red"></asp:Label>
                                     <asp:RequiredFieldValidator ID="rfvUserName" ControlToValidate="txtUsername" runat="server"
                                         ErrorMessage="User name required!" Display="Dynamic" ValidationGroup="logingroup" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="rgvEmail" runat="server" ControlToValidate="txtUsername"
-                            ErrorMessage="Incorrect Email"
-                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+                                        ErrorMessage="Incorrect Email"
+                                        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </div>
                                 <div class="form-outline mb-5">
                                     <label class="form-label sr-only" for="form2Example28">Password</label>
-
                                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" onkeypress="setFocus(event)" class="form-control form-control-lg" placeholder="Password"></asp:TextBox>
                                     <asp:Label ID="lblError" CssClass="errorMesg" runat="server" ForeColor="Red"></asp:Label>
                                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword"
@@ -53,8 +49,7 @@
                                     <asp:LinkButton runat="server" ID="cmdLogin" class="btn btn-lg btn-success text-white" CommandName="Login" OnClick="cmdLogin_Click" Style="margin-bottom: 15px;" ValidationGroup="logingroup">Submit</asp:LinkButton>
                                 </div>
                                 <p class="text-center">
-                                    <%--<a href="#">Forgot Password?</a>--%>
-                                    <asp:LinkButton ID="lnkbtnForgetPassword" runat="server" Text="Forgot Password" ValidationGroup="logingroup"  OnClick="lnkbtnForgetPassword_Click"></asp:LinkButton>
+                                    <asp:LinkButton ID="lnkbtnForgetPassword" runat="server" Text="Forgot Password" ValidationGroup="logingroup" OnClick="lnkbtnForgetPassword_Click"></asp:LinkButton>
                                 </p>
                             </form>
                         </div>
@@ -63,6 +58,5 @@
             </div>
         </div>
     </section>
-    
 </body>
 </html>

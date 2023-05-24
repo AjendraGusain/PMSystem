@@ -10,29 +10,10 @@
                     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%--<form runat="server">--%>
         <div class="card">
             <div class="card-body">
                 <div class="dataTables_wrapper container-fluid mb-4">
                     <div class="row">
-                        <%--<div class="col-sm-12 col-md-3">
-                            <div class="dataTables_filter" id="zero_config_length">
-                                <label>
-                                    Client Name
-                               <asp:DropDownList ID="ddlSearchClient" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSearchClient_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3">
-                            <div class="dataTables_filter" id="zero_config_length">
-                                <label>
-                                    Project Name
-                                <asp:DropDownList ID="ddlSerachProject" runat="server" CssClass="form-control js-example-placeholder-single" AutoPostBack="true" OnSelectedIndexChanged="ddlSerachProject_SelectedIndexChanged">
-                                </asp:DropDownList>    
-                                </label>
-                            </div>
-                        </div>--%>
                         <div class="col-sm-12 col-md-4">
                             <div class="dataTables_filter" id="zero_config_length">
                                 <label>
@@ -48,20 +29,17 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
                                 <asp:Panel ID="pnlDisplayAssignTask" runat="server">
-
                                     <asp:GridView ID="grvAssignedTaskDetails" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="15"
                                         ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found"
                                         OnRowCommand="grvAssignedTaskDetails_RowCommand" OnPageIndexChanging="grvAssignedTaskDetails_PageIndexChanging">
                                         <PagerStyle CssClass="" HorizontalAlign="Right" />
                                         <PagerSettings Mode="NumericFirstLast" PageButtonCount="2" FirstPageText="First" LastPageText="Last" />
                                         <Columns>
-
                                             <asp:TemplateField HeaderText="Team Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblTeamName" runat="server" Text='<%#Eval("TeamName") %>'></asp:Label>
@@ -108,7 +86,6 @@
                                             </asp:TemplateField>
                                         </Columns>
                                     </asp:GridView>
-
                                 </asp:Panel>
                             </div>
                         </div>
@@ -150,7 +127,6 @@
                                             </asp:TemplateField>
                                         </Columns>
                                     </asp:GridView>
-
                                 </asp:Panel>
                             </div>
                         </div>
@@ -163,7 +139,6 @@
                 </div>
             </div>
         </div>
-    <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);

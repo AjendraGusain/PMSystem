@@ -26,7 +26,7 @@ namespace ProjectManagement.Admin
             EmployeeBusinessLogic addEmployeeLogic = new EmployeeBusinessLogic();
             DataSet ds = addEmployeeLogic.GetAllEmployee();
             grvEmployeeDetails.DataSource = ds.Tables[0];
-            grvEmployeeDetails.DataBind(); 
+            grvEmployeeDetails.DataBind();
         }
 
         protected void grvEmployeeDetails_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -43,21 +43,19 @@ namespace ProjectManagement.Admin
                 Session["EmployeeUserId"] = Id;
                 Response.Redirect("AddEmployee.aspx?UserId=" + Id);
             }
-
             else if (e.CommandName == "DeleteEmployee")
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
                 Session["Id"] = Id;
-
-               DataSet dsResult = viewEmployee.GetAllTeamMember();
+                DataSet dsResult = viewEmployee.GetAllTeamMember();
                 DataRow[] foundClient = dsResult.Tables[0].Select("UserId = '" + Id + "'");
                 if (foundClient.Length != 0)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('A team is assigned to this user. Please remove the team before deleting the user.');", true);//location.href = 'AddTeamEmployee.aspx';
                 }
                 else
-                { 
-                int dataout = viewEmployee.DeleteEmployee(Id);
+                {
+                    int dataout = viewEmployee.DeleteEmployee(Id);
                     if (dataout > 0)
                     {
                         grvEmployeeDetails.EditIndex = -1;

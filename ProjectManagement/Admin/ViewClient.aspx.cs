@@ -30,11 +30,11 @@ namespace ProjectManagement.Admin
             }
         }
         private void BindClientList()
-            {
-                dsResult = viewClient.GetClients();
-                grvClient.DataSource = dsResult.Tables[0];
-                grvClient.DataBind();
-            }
+        {
+            dsResult = viewClient.GetClients();
+            grvClient.DataSource = dsResult.Tables[0];
+            grvClient.DataBind();
+        }
 
         protected void grvClient_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -44,7 +44,6 @@ namespace ProjectManagement.Admin
                 Session["EmployeeUserId"] = Id;
                 Response.Redirect("AddClient.aspx?UserId=" + Id);
             }
-
             if (e.CommandName == "DeleteClient")
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
@@ -80,7 +79,6 @@ namespace ProjectManagement.Admin
             DataSet response = viewClient.ClientSearch(addClientObj);
             grvClient.DataSource = response.Tables[0];
             grvClient.DataBind();
-            // txtClientNameSearch_TextChanged(null, EventArgs.Empty);
         }
 
         protected void btnCancelSearch_Click(object sender, EventArgs e)
@@ -89,13 +87,5 @@ namespace ProjectManagement.Admin
             txtClientNameSearch.Text = "";
             BindClientList();
         }
-
-        //protected void txtClientNameSearch_TextChanged(object sender, EventArgs e)
-        //{
-        //    addClientObj.ClientName = txtClientNameSearch.Text.Trim();
-        //    DataSet response = viewClient.ClientSearch(addClientObj);
-        //    grvClient.DataSource = response.Tables[0];
-        //    grvClient.DataBind();
-        //}
     }
 }

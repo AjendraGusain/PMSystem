@@ -10,7 +10,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%--<form runat="server">--%>
     <div class="row">
         <div class="card">
             <div class="card-body">
@@ -21,7 +20,6 @@
                                 <label>
                                     Search:
                                     <asp:TextBox ID="txtProNameSearch" runat="server" placeholder="Search.."></asp:TextBox>
-
                                 </label>
                             </div>
                         </div>
@@ -35,7 +33,6 @@
                                     to
                         <asp:TextBox ID="txtProEndDateSearch" runat="server" class="form-control" placeholder="Start Date...." type="date"></asp:TextBox>
                                 </label>
-
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-2">
@@ -54,39 +51,31 @@
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
                         <div class="row">
-                            <%--    <div class="col-sm-12 d-flex">--%>
-
                             <asp:Panel ID="Panel1" runat="server">
                                 <asp:GridView ID="AllProjects" runat="server" AutoGenerateColumns="false" OnRowCommand="AllProjects_RowCommand" class="table table-striped table-bordered" EmptyDataText="No Record Found" AllowPaging="true" PageSize="10" OnPageIndexChanging="AllProjects_PageIndexChanging">
-
                                     <PagerStyle CssClass="" HorizontalAlign="Right" />
                                     <PagerSettings PageButtonCount="5" FirstPageText="Previous" PreviousPageText="1" NextPageText="2" LastPageText="Next" Mode="Numeric" />
                                     <Columns>
-
                                         <asp:TemplateField HeaderText="Project Name">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField HeaderText="Client Name">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblClientName" runat="server" Text='<%# Eval("ClientName") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField HeaderText="Start Date">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("StartDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField HeaderText="End Date">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblEndDate" runat="server" Text='<%# Eval("EndDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnProjectDetail" Class="link-info" CommandName="ProjectDetail" runat="server" CommandArgument='<%# Eval("ProjectId") %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-eye fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
@@ -94,21 +83,15 @@
                                                 <asp:LinkButton ID="btnDeleteProject" class="link-danger" CommandName="DeleteProject" runat="server" CommandArgument='<%# Eval("ProjectId") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
-
                                     </Columns>
                                 </asp:GridView>
                             </asp:Panel>
-
-                            <%-- </div>--%>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <%--</form>--%>
     <script language="javascript" type="text/javascript">
         function Back() {
             history.go(-1);
