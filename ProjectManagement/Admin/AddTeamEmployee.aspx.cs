@@ -33,8 +33,8 @@ namespace ProjectManagement.Admin
                 
                 if (projectID != 0 && teamId != 0)
                 {
-                    // string viewTeam = Request.QueryString["ViewTeam"].ToString();
-                    var viewTeam = Request.QueryString["ViewTeam"] ?? string.Empty;
+
+                    string viewTeam = Request.QueryString["ViewTeam"] ?? string.Empty;
                     if (viewTeam == "ViewTeam")
                     {
                         int UserId = 0;
@@ -672,22 +672,8 @@ namespace ProjectManagement.Admin
         private void BindEmployeeList()
         {
             createTeam.Employee = "";
-            //createTeam.ProjectId = Session["ProjectId"].ToString();
-            //createTeam.TeamName = Session["TeamId"].ToString();
-            int projectID = Convert.ToInt32(Request.QueryString["ProjectId"]);
-            int teamId = Convert.ToInt32(Request.QueryString["TeamId"]);
-            //string viewTeam = Request.QueryString["ViewTeam"].ToString();
-            var viewTeam = Request.QueryString["ViewTeam"] ?? string.Empty;
-            if (viewTeam == "ViewTeam")
-            {
-                createTeam.ProjectId = projectID.ToString();
-                createTeam.TeamName = teamId.ToString();
-            }
-            else
-            {
-                createTeam.ProjectId = Session["ProjectId"].ToString();
-                createTeam.TeamName = Session["TeamId"].ToString();
-            }
+            createTeam.ProjectId = Session["ProjectId"].ToString();
+            createTeam.TeamName = Session["TeamId"].ToString();
             dtResult = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsEmployee.DataSource = dtResult;
             lsEmployee.DataTextField = "UserName";

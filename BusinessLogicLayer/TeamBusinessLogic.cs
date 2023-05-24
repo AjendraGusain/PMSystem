@@ -162,6 +162,42 @@ namespace BusinessLogicLayer
         public DataSet GetViewTeam(TeamBusinessObject createTeam)
         {
             dtResult = _teamDataAccess.GetViewTeam(createTeam);
+            string TeamName = "";
+            string ProjectName = "";
+            string ManagerName = "";
+            for (int i = 0; i < dtResult.Tables[0].Rows.Count; i++)
+            {
+                if (dtResult.Tables[0].Rows[i]["TeamName"].ToString() == TeamName && dtResult.Tables[0].Rows[i]["ProjectName"].ToString() == ProjectName
+                    && dtResult.Tables[0].Rows[i]["ManagerName"].ToString() == ManagerName)
+                {
+                    dtResult.Tables[0].Rows[i]["TeamName"] = "";
+                    dtResult.Tables[0].Rows[i]["ProjectName"] = "";
+                    dtResult.Tables[0].Rows[i]["ManagerName"] = "";
+
+                    if (TeamName == "" && ProjectName == "")
+                    {
+                        TeamName = dtResult.Tables[0].Rows[i - 1]["TeamName"].ToString();
+                        ProjectName = dtResult.Tables[0].Rows[i - 1]["ProjectName"].ToString();
+                        ManagerName = dtResult.Tables[0].Rows[i - 1]["ManagerName"].ToString();
+                    }
+                }
+
+                else
+                {
+                    TeamName = dtResult.Tables[0].Rows[i]["TeamName"].ToString();
+                    ProjectName = dtResult.Tables[0].Rows[i]["ProjectName"].ToString();
+                    ManagerName = dtResult.Tables[0].Rows[i]["ManagerName"].ToString();
+                }
+            }
+
+            //for (int i = dtResult.Tables[0].Rows.Count - 1; i >= 0; i--)
+            //{
+            //    DataRow dr = dtResult.Tables[1].Rows[i];
+            //    if (dr["TeamName"] == "" && dr["ProjectName"] == "" && dr["ManagerName"]=="" && dr["TLName"]=="")
+            //    {
+            //        dr.Delete();
+            //    }
+            //}
             return dtResult;
         }
         public DataSet GetTeamLeaderTeam(TeamBusinessObject createTeam)
@@ -172,7 +208,7 @@ namespace BusinessLogicLayer
 
         public DataSet GetTeamMemberTeamLeader(TeamBusinessObject createTeam)
         {
-            dtResult = _teamDataAccess.GetTeamMemberMangerTLUser(createTeam); ;
+            dtResult = _teamDataAccess.GetTeamMemberMangerTLUser(createTeam);
             string TeamName = "";
             string ProjectName = "";
             string ManagerName = "";
