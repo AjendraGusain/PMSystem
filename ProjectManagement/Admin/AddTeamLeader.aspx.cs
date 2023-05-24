@@ -328,7 +328,7 @@ namespace ProjectManagement.Admin
                 ddlManager.DataValueField = "TeamMemberId";
                 ddlManager.DataBind();
             }
-            BindEmployeeList();
+            
             string ProjectId = ddlMProject.SelectedValue;
             string TeamName = ddlMTeamName.SelectedValue;
             string Manager = "0";
@@ -338,6 +338,7 @@ namespace ProjectManagement.Admin
             Session["TeamId"] = TeamName;
             Session["Manager"] = Manager;
             Session["TLId"] = TLId;
+            BindEmployeeList();
             gridViewList();
         }
 
@@ -369,6 +370,8 @@ namespace ProjectManagement.Admin
         private void BindEmployeeList()
         {
             createTeam.Employee = "TL";
+            createTeam.ProjectId = Session["ProjectId"].ToString();
+            createTeam.TeamName = Session["TeamId"].ToString();
             lsTeamLeader.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
             lsTeamLeader.DataTextField = "UserName";
             lsTeamLeader.DataValueField = "UserId";
