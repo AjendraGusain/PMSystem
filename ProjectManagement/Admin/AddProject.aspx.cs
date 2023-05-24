@@ -17,17 +17,12 @@ namespace ProjectManagement.Admin
 {
     public partial class AddProject : System.Web.UI.Page
     {
-
         private readonly IProjectBusinessLogic _projectBL;
         private readonly IClientBusinessLogic _clientBL;
-
         ProjectBusinessObject _projectBO = new ProjectBusinessObject(); // Business Object or Model
         IProjectDataAccess _projectDA = new ProjectDataAccess();      // Repository interface 
         IClientDataAccess _clientDA = new ClientDataAccess();
-
         DataSet dsResult = new DataSet();
-        // MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
-
         public AddProject()
         {
             _projectBL = new ProjectBusinessLogic(_projectDA);            // Service interface 
@@ -48,7 +43,6 @@ namespace ProjectManagement.Admin
                     BindDropdown();
                     GetProjectById(ProjectId);
                     btnAddProject.Text = "Update Project";
-
                 }
             }
         }
@@ -64,7 +58,6 @@ namespace ProjectManagement.Admin
                     txtProjectName.Text = dt.Rows[0]["ProjectName"].ToString();
                     txtProjectStartDate.Text = Convert.ToDateTime(dt.Rows[0]["StartDate"].ToString()).ToString("yyyy-MM-dd");
                     ddlClient.SelectedValue = dt.Rows[0]["ClientId"].ToString();
-
                 }
             }
         }
@@ -81,14 +74,11 @@ namespace ProjectManagement.Admin
         protected void btnAddProject_Click(object sender, EventArgs e)
         {
             int ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-
             _projectBO.ProjectName = txtProjectName.Text.Trim();
             _projectBO.ClientId = ddlClient.SelectedValue;//.Text.Trim();
             _projectBO.StartDate = txtProjectStartDate.Text.Trim();
-
             if (btnAddProject.Text == "Add Project")
             {
-
                 DataSet checkNameds = _projectBL.GetProjectByName(_projectBO.ProjectName);
                 if (checkNameds != null)
                 {
@@ -100,10 +90,8 @@ namespace ProjectManagement.Admin
                             ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert(' ProjectName already exists.');", true);
                             return;
                         }
-
                     }
                 }
-
                 var response = _projectBL.InsertProject(_projectBO);
                 if (response == 1)
                 {
@@ -111,11 +99,9 @@ namespace ProjectManagement.Admin
                     reset_form();
                     Response.Redirect("~/Admin/ViewProject.aspx");
                 }
-
             }
             else
             {
-
                 DataSet checkNameds = _projectBL.GetProjectByName(_projectBO.ProjectName);
                 if (checkNameds != null)
                 {
@@ -127,10 +113,8 @@ namespace ProjectManagement.Admin
                             ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert(' ProjectName already exists.');", true);
                             return;
                         }
-
                     }
                 }
-
                 var response = _projectBL.UpdateProject(_projectBO, ProjectId);
                 if (response == 1)
                 {

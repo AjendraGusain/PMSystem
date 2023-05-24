@@ -20,14 +20,12 @@ namespace ProjectManagement.Admin
             if (!Page.IsPostBack)
             {
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-                
                 GetEmployee(UserId);
                 gridViewList(UserId);
             }
         }
         private void gridViewList(int UserId)
         {
-
             dtResult = addEmployeeLogic.GetProjectCurrent(UserId, 1);
             grvCurrentProject.DataSource = dtResult.Tables[0];
             grvCurrentProject.DataBind();
@@ -36,8 +34,6 @@ namespace ProjectManagement.Admin
             grvPreviousProject.DataSource = dtResult.Tables[0];
             grvPreviousProject.DataBind();
             dtResult.Reset();
-            //ds.Tables[0].Clear();
-            //grvViewManager
         }
 
         private void GetEmployee(int UserId)
@@ -57,7 +53,6 @@ namespace ProjectManagement.Admin
         {
             if (e.CommandName == "ViewProject")
             {
-               
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string projectId = commandArgs[0];
                 string clientId = commandArgs[1];
@@ -66,7 +61,6 @@ namespace ProjectManagement.Admin
                 Session["ClientId"] = clientId;
                 Session["UserId"] = userId;
                 Response.Redirect("EmployeeTask.aspx");
-                //dtResult = addEmployeeLogic.GetAllTaskByUserEmployeeTask(Convert.ToInt32(ProjectId), Convert.ToInt32(TeamId), createTeam);
             }
         }
     }

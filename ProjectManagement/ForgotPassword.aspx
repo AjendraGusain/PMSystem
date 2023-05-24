@@ -44,8 +44,6 @@
               	<h4 class="text-white">Lost Password</h4>
                 <div class="col-12">
                   <div class="input-group mb-3">
-                    <%--<input type="email" class="form-control form-control-lg" placeholder="Type Your Email-ID.." aria-describedby="basic-addon1"
-                      required=""/>--%>
                       <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control form-control-lg" placeholder="Type Your Email-ID.."></asp:TextBox>
                       <asp:RegularExpressionValidator ID="rgvEmail" runat="server" ControlToValidate="txtEmail"
                             ErrorMessage="Incorrect Email"
@@ -57,9 +55,6 @@
                 <div class="col-12">
                   <div class="form-group">
                     <div class="pt-3 text-center">
-                      <%--<button class="btn btn-info text-white" type="submit">
-                        Lost Password
-                      </button>--%>
                         <asp:Button ID="btnForgotPassword" runat="server" Text="Lost Password" ValidationGroup="forgotPass" OnClick="btnForgotPassword_Click" />
                     </div>
                   </div>

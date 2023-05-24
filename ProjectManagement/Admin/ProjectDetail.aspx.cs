@@ -18,17 +18,12 @@ namespace ProjectManagement.Admin
 {
     public partial class ProjectDetail : System.Web.UI.Page
     {
-
         private readonly IProjectBusinessLogic _projectBL;
         private readonly IClientBusinessLogic _clientBL;
-
         ProjectBusinessObject _projectBO = new ProjectBusinessObject(); // Business Object or Model
         IProjectDataAccess _projectDA = new ProjectDataAccess();      // Repository interface 
         IClientDataAccess _clientDA = new ClientDataAccess();
-
         DataSet dsResult = new DataSet();
-        //MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["PMSConnectionString"].ConnectionString);
-
         public ProjectDetail()
         {
             _projectBL = new ProjectBusinessLogic(_projectDA);            // Service interface 
@@ -43,9 +38,7 @@ namespace ProjectManagement.Admin
                 GetCurrentEmployeeByProjectId(ProjectId);
                 GetPastEmployeeByProjectId(ProjectId);
             }
-
         }
-
 
         public void GetProjectById(int ProjectId)
         {
@@ -55,8 +48,6 @@ namespace ProjectManagement.Admin
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count > 0)
                 {
-
-
                     lblProjectName.Text = dt.Rows[0]["ProjectName"].ToString();
                     lblClientName.Text = dt.Rows[0]["ClientName"].ToString();
                     lblStartDate.Text = Convert.ToDateTime(dt.Rows[0]["StartDate"].ToString()).ToString("yyyy-MM-dd");
@@ -71,7 +62,6 @@ namespace ProjectManagement.Admin
                 }
             }
         }
-
 
         public void GetCurrentEmployeeByProjectId(int ProjectId)
         {
@@ -99,7 +89,6 @@ namespace ProjectManagement.Admin
             if (e.CommandName == "ViewEmployeeInfo")
             {
                 Response.Redirect("~/Admin/EmployeeDetail?UserId=" + e.CommandArgument.ToString());
-
             }
         }
     }

@@ -11,21 +11,10 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type='text/javascript'>
-
-        //var objDiv = document.getElementById("scrollableChatBox");
-        //objDiv.scrollTop = objDiv.scrollHeight;
-
         function scrollChatBox() {
             var objDiv = document.getElementById("scrollableChatBox");
             objDiv.scrollTop = objDiv.scrollHeight;
         }
-
-        /*function scrollChatBox() {*/
-        //    var objDiv = document.getElementById("scrollableChatBox");
-         //   objDiv.scrollTop = objDiv.scrollHeight;
-        /*}*/
-        
-
         function OpenConfirmationBox() {
             document.getElementById('divShowConfirmwindow').style.display = "block";
             $('#<%=pnlConfirmwindow.ClientID %>').show();
@@ -55,20 +44,11 @@
             history.go(-1);
             return false;
         }
-        //let idle = setInterval("reloadPage()", 10000);
-        //function reloadPage() {
-        //    location.reload();
-       // }
-        
     </script>
-    <%--    <script runat="server" type="text/c#">
-    </script>--%>
-    <%--<asp:Label runat="server" Text="Label" ID="Label2"></asp:Label>--%>
     <asp:Panel ID="pnlDisplayTaskDetails" runat="server">
         <div class="row">
             <div class="card">
                 <div class="card-body">
-
                     <div class="dataTables_wrapper">
                         <div class="row details mb-5 p-5">
                             <div class="col-md-6">
@@ -80,7 +60,6 @@
                                         <asp:Label ID="lblClientName" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -99,12 +78,9 @@
                                         <asp:Label ID="lblStartDate" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-
                                         <p class="mb-0">Estimated Time:</p>
                                     </div>
                                     <div class="col-sm-9">
@@ -120,7 +96,6 @@
                                         <asp:Label ID="lblPause" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -130,7 +105,6 @@
                                         <asp:Label ID="lblTaskCreatedBy" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -140,8 +114,6 @@
                                         <asp:Label ID="lblTaskAssigedTo" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
-
                                 <hr>
                             </div>
                             <div class="col-md-6">
@@ -162,7 +134,6 @@
                                         <asp:Label ID="lblTaskName" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -190,7 +161,6 @@
                                         <asp:Label ID="lblEstimatedError" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -200,7 +170,6 @@
                                         <asp:Label ID="lblTaskCreatedDate" runat="server" class="text-muted mb-0"></asp:Label>
                                     </div>
                                 </div>
-
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -218,33 +187,25 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-sm-12 mt-3 text-center">
-                                <%--<p><a href=""><span class="btn btn-danger">Play / Pause</span></a></p>--%>
                                 <asp:Button ID="btnPlayTask" CssClass="btn btn-danger" Text="Play" runat="server" OnClick="btnPlayTask_Click" />
                                 <asp:Button ID="btnPauseTask" CssClass="btn btn-danger" Text="Pause" Visible="false" runat="server" OnClick="btnPauseTask_Click" />
                             </div>
-
                             <div>
                                 <br />
                             </div>
                             <hr>
-
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <%--<p class="mb-0">Task Details:</p>--%>
                                     <p>Task Details:</p>
                                 </div>
                                 <div class="col-sm-9">
                                     <asp:Label ID="lblTaskDetails" runat="server"></asp:Label>
-                                    <%--<asp:Label ID="lblTaskDetails" runat="server" class="text-muted mb-0"></asp:Label>--%>
                                 </div>
-
                                 <hr>
                             </div>
                         </div>
                     </div>
-
                     <div class="table-responsive">
                         <div id="zero_config_wrapper" class="dataTables_wrapper">
                             <h4>Play/Pause History</h4>
@@ -310,7 +271,6 @@
                             </div>
                         </div>
                     </div>
-
                     <br />
                     <div class="table-responsive">
                         <div id="zero_config_wrapper" class="dataTables_wrapper">
@@ -347,7 +307,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div id="divShowConfirmwindow" style="display: none; opacity: 0.5;" class="modal-backdrop">
                     </div>
                     <asp:Panel ID="pnlConfirmwindow" runat="server" BackColor="#ddd" CssClass="modal" Style="background: transparent!important;">
@@ -375,8 +334,6 @@
                             </div>
                         </div>
                     </asp:Panel>
-
-
                     <div id="divShowConfirmwindowHistoryStatus" style="display: none; opacity: 0.5;" class="modal-backdrop">
                     </div>
                     <asp:Panel ID="pnlConfirmwindowHistoryStatus" runat="server" BackColor="#ddd" CssClass="modal" Style="background: transparent!important;">
@@ -407,12 +364,8 @@
                                         </asp:ScriptManager>
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel1">
                                             <ContentTemplate>
-
                                                 <h4 class="card-title">Chat Option</h4>
-                                                <%-- <asp:Timer runat="server" ID="Timer1" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>--%>
-                                                <%--<asp:Label runat="server" Text="Page not refreshed yet." ID="Label1"></asp:Label>--%>
-                                                <%--style="height: 475px"--%>
-                                                <div Id="scrollableChatBox" class="chat-box scrollable" style="height: 250px" >
+                                                <div id="scrollableChatBox" class="chat-box scrollable" style="height: 250px">
                                                     <asp:ListView ID="lstViewChatBox" runat="server">
                                                         <LayoutTemplate>
                                                             <ul style="list-style: none; padding-left: 0" class="chat-list">
@@ -422,12 +375,7 @@
                                                         <ItemTemplate>
                                                             <li class="chat-item">
                                                                 <div class="chat-img">
-                                                                    <%--<img src="~/1.jpg" alt="user" />--%>
                                                                     <a class="btn-circle btn-lg btn-cyan float-end text-white" href="javascript:void(0)">
-                                                                        <%--<i class="mdi mdi-send fs-3"></i>--%>
-
-
-
                                                                         <h5 class="font-medium">
                                                                             <asp:Label ID="Label2" runat="server" Text='<%#Eval("Abbriviation")%>'></asp:Label>
                                                                         </h5>
@@ -437,7 +385,6 @@
                                                                     <h6 class="font-medium">
                                                                         <asp:Label ID="lblUser" runat="server" Text='<%#Eval("UserName")%>'></asp:Label>
                                                                     </h6>
-
                                                                     <div class="box bg-light-info">
                                                                         <asp:Label ID="lblComment" runat="server" Text='<%#Eval("TaskComment")%>'></asp:Label>
                                                                     </div>
@@ -449,13 +396,12 @@
                                                             <p>Nothing here.</p>
                                                         </EmptyDataTemplate>
                                                     </asp:ListView>
-
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                         <div class="card-body border-top">
                                             <asp:UpdatePanel runat="server" ID="UpdatePanel2">
-                                            <ContentTemplate>
+                                                <ContentTemplate>
                                                     <div class="row">
                                                         <div class="col-8">
                                                             <div class="input-field mt-0 mb-0">
@@ -463,18 +409,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-1">
-                                                            <asp:Button ID="btnSendDescription" runat="server" Text="Send" CssClass="btn-lg btn-cyan float-end text-white"  OnClick="btnSendDescription_Click" />
+                                                            <asp:Button ID="btnSendDescription" runat="server" Text="Send" CssClass="btn-lg btn-cyan float-end text-white" OnClick="btnSendDescription_Click" />
                                                         </div>
                                                         <div class="col-1">
                                                             <asp:Button ID="btnRefresh" runat="server" Text="Refresh" class="btn-lg btn-cyan float-end text-white" OnClick="btnRefresh_Click" />
-                                                            <%--<a
-                                                        class="btn-circle btn-lg btn-cyan float-end text-white"
-                                                        href="javascript:void(0)"><i class="mdi mdi-send fs-3"></i></a>--%>
                                                         </div>
                                                     </div>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-
                                         </div>
                                     </div>
                                 </div>

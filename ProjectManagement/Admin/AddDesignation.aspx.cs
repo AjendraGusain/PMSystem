@@ -19,11 +19,9 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                 if (UserId == 0)
                 {
-
                 }
                 else
                 {
@@ -55,7 +53,6 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record already exists.');location.href = 'ViewDesignation.aspx';", true);
                 }
                 txtDesignation.Text = "";
-              //  Response.Redirect("ViewDesignation.aspx");
             }
             else
             { 

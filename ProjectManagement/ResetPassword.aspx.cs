@@ -19,7 +19,6 @@ namespace ProjectManagement
         
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
@@ -34,7 +33,6 @@ namespace ProjectManagement
             userBusinessObject.Email = ds.Tables[0].Rows[0]["Email"].ToString();
             userBusinessObject.ResetPassword = txtresetPassword.Text;
             userBusinessObject.ConfirmPassword = txtConfirmPassword.Text;
-            //if (diffinHour > 24)
             if(diffinMin > 5)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "mail", "alert('Link expired.');", true);
@@ -52,14 +50,12 @@ namespace ProjectManagement
                 }
                 if (response > 0)
                 {
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "pass2", "alert('Password Reset successfully.');", true);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Password Reset successfully.');location.href = 'Login.aspx';", true);
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "pass3", "alert('Password not Reset.');", true);
                 }
-                //Response.Redirect("Login.aspx");
             }
         }
     }

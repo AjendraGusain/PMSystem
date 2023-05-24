@@ -33,6 +33,15 @@ namespace ProjectManagement
         protected global::System.Web.UI.WebControls.Label lblSelectedDesignation;
 
         /// <summary>
+        /// lblUserLogged control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserLogged;
+
+        /// <summary>
         /// pnlAdmin control.
         /// </summary>
         /// <remarks>

@@ -23,12 +23,7 @@ namespace ProjectManagement
         TeamBusinessObject createTeam = new TeamBusinessObject();
         DataSet dtResult = new DataSet();
         StringBuilder builder = new StringBuilder();
-        //protected void Page_Init(object sender, EventArgs e)
-        //{
-        //    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //    Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
-        //    Response.Cache.SetNoStore();
-        //}
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -37,33 +32,24 @@ namespace ProjectManagement
             }
             else
             {
+                lblUserLogged.Text= "Welcome " + Session["User"].ToString();
                 var selectedRole = Request.QueryString["User"] ?? string.Empty;
-                //if (!string.IsNullOrEmpty(Session["SelectedRole"] as string))
-                //{
-                //    selectedRole = Session["SelectedRole"].ToString() ?? string.Empty;
-                //}
-                
                 Global.Role = Session["Role"].ToString();
                 Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
                 string Designation = Session["Designation"].ToString();
-                //string SelectedDesignation = "";
                 if (selectedRole == "")
                 {
                     if (Global.RoleIdSession == 4)
                         Designation = "Manager";
-                    //SelectedDesignation=""
                     else if (Global.RoleIdSession == 3)
                         Designation = "TeamLeader";
                     else if (Global.RoleIdSession == 1)
                         Designation = "Admin";
-                    //else if (Global.RoleIdSession == 2)
-                    //    Designation = "User";
                 }
                 else
                 {
                     if (selectedRole == "User")
                         Designation = "User";
-                    //Session["Designation"] = Designation;
                     else if (selectedRole == "Manager")
                         Designation = "Manager";
                     else if (selectedRole == "TeamLeader")
@@ -72,7 +58,6 @@ namespace ProjectManagement
                     Session["SelectedRole"] = selectedRole;
                 }
                 lblSelectedDesignation.Text = Designation;
-               // Response.Redirect("HTMLPage1.htm?username=" + Designation);
                 if (Global.Role == "Admin")//For Admin 
                 {
                     pnlAdmin.Visible = true;
@@ -80,16 +65,12 @@ namespace ProjectManagement
                     pnlTeamLeaderAccess.Visible = false;
                     pnlManagerTeamAccess.Visible = false;
                     pnlAddTask.Visible = true;
-
                     builder.Append("<script language=JavaScript> HidePopuphideSwitchUser(); </script>\n");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopuphideSwitchUser", builder.ToString());
-
                     builder.Append("<script language=JavaScript> HidePopupApproval(); </script>\n");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
-
                     builder.Append("<script language=JavaScript> HidePopupApprovalTL(); </script>\n");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalTL", builder.ToString());
-
                     builder.Append("<script language=JavaScript> HidePopupApprovalUser(); </script>\n");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalUser", builder.ToString());
                 }
@@ -103,22 +84,7 @@ namespace ProjectManagement
                         pnlUser.Visible = true;
                         pnlAddTask.Visible = true;
                         pnlUser.Visible = false;
-                        
-
-                        //var RoleId= dtResult.Table[2][]["RoleId"]
-                        //.Select new
-                        // {
-                        //     stgId = r.Field<int>("stgId"),
-                        //     fromdate = r.Field<DateTime>("fromdate"),
-                        //     todate = r.Field<DateTime>("todate"),
-                        //     colorCode = r.Field<int>("colorCode")
-                        // }).CopyToDataTable();
-                        //var rowsToUpdate = dtResult.Tables[2];
-                        //DataTable dataTable2=new DataTable();
-                        //dataTable2.Columns.Add(new DataColumn("CheckRoleId", typeof(int)));
-                        //var ToUpdate = rowsToUpdate.AsEnumerable().Where(r => r.Field<int>("UserId") == userId);
                         CheckSwitchUser(selectedRole, Designation);
-
                     }
                     else if (Designation == "TeamLeader")
                     {
@@ -147,18 +113,12 @@ namespace ProjectManagement
         private void CheckSwitchUser(string selectedRole, string Designation)
         {
             int userId = Convert.ToInt32(Session["UserID"].ToString());
-            //Global.RoleId = 3;
-            //createTeam.Role = "3";
             createTeam.Employee = userId.ToString();
-
             dtResult = createTeamBA.GetRolesInTeam(createTeam);
-
             builder.Append("<script language=JavaScript> HidePopupApproval(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
-
             builder.Append("<script language=JavaScript> HidePopupApprovalTL(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
-
             builder.Append("<script language=JavaScript> HidePopupApprovalUser(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
             if (dtResult.Tables[0].Rows.Count > 1)
@@ -169,7 +129,6 @@ namespace ProjectManagement
                     {
                         if (Convert.ToInt32(dtResult.Tables[0].Rows[i]["RoleId"]) == 2)
                         {
-
                             if (selectedRole == "User")
                             {
                                 builder.Append("<script language=JavaScript> HidePopupApprovalUser(); </script>\n");
@@ -198,7 +157,6 @@ namespace ProjectManagement
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalTL(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalTL", builder.ToString());
                                 }
-
                             }
                         }
                         else if (Convert.ToInt32(dtResult.Tables[0].Rows[i]["RoleId"]) == 3)
@@ -232,7 +190,6 @@ namespace ProjectManagement
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalTL", builder.ToString());
                                 }
                             }
-                            //StringBuilder builder = new StringBuilder();
                         }
                         else if (Convert.ToInt32(dtResult.Tables[0].Rows[i]["RoleId"]) == 4)
                         {
@@ -264,10 +221,7 @@ namespace ProjectManagement
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalTL(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalTL", builder.ToString());
                                 }
-
                             }
-                            //StringBuilder builder = new StringBuilder();
-
                         }
                     }
                     else if (dtResult.Tables[0].Rows.Count == 2)
@@ -318,7 +272,6 @@ namespace ProjectManagement
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalUser(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalUser", builder.ToString());
                                 }
-
                             }
                             else
                             {
@@ -348,7 +301,6 @@ namespace ProjectManagement
                                         }
                                     }
                                 }
-
                             }
                         }
                         else if (Convert.ToInt32(dtResult.Tables[0].Rows[i]["RoleId"]) == 3)
@@ -357,13 +309,11 @@ namespace ProjectManagement
                             {
                                 builder.Append("<script language=JavaScript> HidePopupApproval(); </script>\n");
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
-
                                 if (Convert.ToInt32(dtResult.Tables[0].Rows[i + 1]["RoleId"]) == 4)
                                 {
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalTL(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalTL", builder.ToString());
                                 }
-
                                 else
                                 {
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalUser(); </script>\n");
@@ -374,20 +324,17 @@ namespace ProjectManagement
                             {
                                 builder.Append("<script language=JavaScript> HidePopupApprovalTL(); </script>\n");
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalTL", builder.ToString());
-
                                 if (Convert.ToInt32(dtResult.Tables[0].Rows[i + 1]["RoleId"]) == 4)
                                 {
                                     builder.Append("<script language=JavaScript> ShowPopupApproval(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApproval", builder.ToString());
                                 }
-
                                 else
                                 {
                                     builder.Append("<script language=JavaScript> ShowPopupApprovalUser(); </script>\n");
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalUser", builder.ToString());
                                 }
                             }
-
                             else
                             {
                                 if (selectedRole == "")
@@ -409,13 +356,7 @@ namespace ProjectManagement
                                         }
                                     }
                                 }
-                                //else
-                                //{
-                                //    builder.Append("<script language=JavaScript> ShowPopupApprovalUser(); </script>\n");
-                                //    Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApprovalUser", builder.ToString());
-                                //}
                             }
-                            //StringBuilder builder = new StringBuilder();
                         }
                         else
                         {
@@ -430,11 +371,9 @@ namespace ProjectManagement
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPopupApproval", builder.ToString());
                             }
                         }
-
                     }
                     else
                     {
-
                     }
                 }
             }
@@ -442,24 +381,13 @@ namespace ProjectManagement
             {
                 builder.Append("<script language=JavaScript> HidePopuphideSwitchUser(); </script>\n");
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopuphideSwitchUser", builder.ToString());
-
                 builder.Append("<script language=JavaScript> HidePopupApproval(); </script>\n");
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApproval", builder.ToString());
-
                 builder.Append("<script language=JavaScript> HidePopupApprovalTL(); </script>\n");
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalTL", builder.ToString());
-
                 builder.Append("<script language=JavaScript> HidePopupApprovalUser(); </script>\n");
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePopupApprovalUser", builder.ToString());
             }
-            //if (selectedRole == "User")
-            //{
-            //    Global.Role = 2
-            //}
-            //else if (selectedRole == "Manager")
-            //{
-
-            //}
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
@@ -471,8 +399,6 @@ namespace ProjectManagement
         protected void btnlogin_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            //Session.Remove("UserID");
-            //Session.Remove("password");
             Response.Redirect("~/Login.aspx");
         }
     }

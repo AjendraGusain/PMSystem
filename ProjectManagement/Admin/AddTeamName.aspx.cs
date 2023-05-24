@@ -15,7 +15,6 @@ namespace ProjectManagement.Admin
 {
     public partial class AddTeam : System.Web.UI.Page
     {
-
         ITeamBusinessLogic createTeamBA = new TeamBusinessLogic(new TeamDataAccess());
         TeamBusinessObject createTeam = new TeamBusinessObject();
         int respone = 0;
@@ -30,24 +29,10 @@ namespace ProjectManagement.Admin
 
         private void BindEmployeeList()
         {
-            
             BindProject();
             DataSet ds = createTeamBA.GetUser();
             grvViewTeam.DataSource = ds.Tables[0];
             grvViewTeam.DataBind();
-            // ddlProject.Items.Clear();
-
-            //ddlManager.DataSource = createTeamBA.GetManager();
-            //ddlManager.DataTextField = "UserName";
-            //ddlManager.DataValueField = "UserId";
-            //ddlManager.DataBind();
-            //ddlManager.Items.Insert(0, new ListItem("-- Select Manager --", "0"));
-            //ddlTeamleader.Items.Clear();
-            //ddlTeamleader.DataSource = createTeamBA.GetTeamLeader();
-            //ddlTeamleader.DataTextField = "UserName";
-            //ddlTeamleader.DataValueField = "UserId";
-            //ddlTeamleader.DataBind();
-            //ddlTeamleader.Items.Insert(0, new ListItem("-- Select Team Leader --", "0"));
         }
 
         private void BindProject()
@@ -62,25 +47,6 @@ namespace ProjectManagement.Admin
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            //string ls = "";
-            //createTeam.TeamName = txtTeamName.Text;
-            //createTeam.Manager = ddlManager.SelectedValue;
-            //createTeam.TeamLeader = ddlTeamleader.SelectedValue;
-            //foreach (ListItem item in ddlEmployeeName.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        ls += item.Value;
-            //        ls += ",";
-            //    }
-            //}
-            //ls.TrimEnd(',');
-            //createTeam.Employee = ls;
-            //respone= createTeamBA.InsertTeam(createTeam);
-            //if(respone==1)
-            //{
-            //    ScriptManager.RegisterStartupScript(this, GetType(), "Key3da", "alert('Record Inserted successfully.');", true);
-            //}
         }
 
         protected void btnAddTeamName_Click(object sender, EventArgs e)
@@ -111,7 +77,6 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "Update", "alert('Record Updated successfully');", true);
                 }
                 txtTeamName.Text = "";
-
             }
             BindEmployeeList();
             btnAddTeamName.Text = "Add Team";
@@ -119,7 +84,6 @@ namespace ProjectManagement.Admin
 
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             if (e.CommandName == "Edit")
             {
                 btnAddTeamName.Text = "Update";
@@ -130,9 +94,7 @@ namespace ProjectManagement.Admin
                 BindProject();
                 ddlProject.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
                 BindEmployeeList();
-                //  Response.Redirect("AddEmployee.aspx?UserId=" + Id);
             }
-
             else if (e.CommandName == "Delete")
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
@@ -150,12 +112,10 @@ namespace ProjectManagement.Admin
 
         protected void grvViewTeam_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
         }
 
         protected void grvViewTeam_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
         }
     }
 }

@@ -45,7 +45,6 @@ namespace ProjectManagement.Admin
             txtPhoneNo.Text = dtResult.Tables[0].Rows[0]["PhoneNumber"].ToString();
             txtEmail.Text = dtResult.Tables[0].Rows[0]["Email"].ToString();
             BindEmployeeList();
-            //  ddlRoleList.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["RoleId"]).ToString();
             ddlDesignation.SelectedValue = dtResult.Tables[0].Rows[0]["DesignationId"].ToString();
             chkAdminAuth.Checked = Convert.ToBoolean(dtResult.Tables[0].Rows[0]["IsAdmin"]);
         }
@@ -84,7 +83,6 @@ namespace ProjectManagement.Admin
                     int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                     addEmployee.EmployeeName = txtEmployeeName.Text.Trim();
                     addEmployee.Designation = ddlDesignation.SelectedValue;
-
                     addEmployee.IsAdmin = chkAdminAuth.Checked;
                     if (chkAdminAuth.Checked == true)
                     {
@@ -94,7 +92,6 @@ namespace ProjectManagement.Admin
                     {
                         addEmployee.Role = "2";//User
                     }
-
                     if (btnAddEmployee.Text == "Add Employee")
                     {
                         successResult = addEmployeeLogic.InsertAllEmployeeDetails(addEmployee);
@@ -117,7 +114,6 @@ namespace ProjectManagement.Admin
                         txtEmployeeName.Text = "";
                         txtEmail.Text = "";
                         txtPhoneNo.Text = "";
-                        // ddlRoleList.SelectedValue = "0";
                         ddlDesignation.SelectedValue = "0";
                         chkAdminAuth.Checked = false;
                     }
@@ -159,12 +155,6 @@ namespace ProjectManagement.Admin
 
         protected void BindEmployeeList()
         {
-            //ddlRoleList.Items.Clear();
-            //ddlRoleList.DataSource = addEmployeeLogic.GetAllRole();
-            //ddlRoleList.DataTextField = "Role";
-            //ddlRoleList.DataValueField = "RoleId";
-            //ddlRoleList.DataBind();
-            //ddlRoleList.Items.Insert(0, new ListItem("-- Select Role --", "0"));
             ddlDesignation.Items.Clear();
             ddlDesignation.DataSource = addEmployeeLogic.GetAllDesignation();
             ddlDesignation.DataTextField = "Designation";
@@ -175,15 +165,6 @@ namespace ProjectManagement.Admin
 
         protected void txtEmployeeCode_TextChanged(object sender, EventArgs e)
         {
-
-            //addEmployee.EmployeeCode = txtEmployeeCode.Text;
-            //string checkUser= addEmployeeLogic.UserCheck(addEmployee);
-            // if (checkUser == "insert")
-            // {
-            //     lblCheckCode.Text = "";
-            // }
-            // else
-            //     lblCheckCode.Text = checkUser;
 
         }
 
@@ -201,36 +182,6 @@ namespace ProjectManagement.Admin
         {
             ResetAllFields();
         }
-
-
-        //protected void SendResetPasswordEmail(string tomail, string UniqueID)
-        //{
-        //    string from = "deepak.dhiman1988@gmail.com";
-        //    MailMessage mailMsg = new MailMessage(from, tomail);
-        //    StringBuilder stringBuilder = new StringBuilder();
-        //    stringBuilder.Append("Dear " + tomail + ",<br/><br/>");
-        //    stringBuilder.Append("Please click on the below link to reset your password");
-        //    stringBuilder.Append("<br/>");
-        //    stringBuilder.Append("https://localhost:44399/ResetPassword.aspx?UID="+UniqueID);
-        //    stringBuilder.Append("<br/><br/>");
-
-        //    mailMsg.IsBodyHtml = true;
-        //    mailMsg.Body = stringBuilder.ToString();
-        //    mailMsg.Subject = "Reset Your Password";
-        //    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-        //    NetworkCredential NetworkCred = new NetworkCredential(from, "zqgfvyigriszjcej");
-        //    smtp.UseDefaultCredentials = true;
-        //    smtp.Credentials = NetworkCred;
-        //    smtp.EnableSsl = true;
-        //    try
-        //    {
-        //        smtp.Send(mailMsg);
-        //        ScriptManager.RegisterStartupScript(this, GetType(), "mail", "alert('Mail sent successfully.');", true);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //}
+        
     }
 }

@@ -12,7 +12,6 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card">
         <div class="card-body wizard-content">
-            <%--<form class="mt-3" runat="server">--%>
                 <div class="wizard clearfix">
                     <div class="content clearfix">
                         <section class="body current">
@@ -129,7 +128,6 @@
                         </div>
                     </div>
                 </div>
-            <%--</form>--%>
         </div>
     </div>
     <script language="javascript" type="text/javascript">

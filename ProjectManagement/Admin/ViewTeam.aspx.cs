@@ -32,36 +32,30 @@ namespace ProjectManagement.Admin
 
         private void BindList()
         {
-
             createTeam.ProjectId = "0";
             createTeam.TeamName = "0";
             dtResult = createTeamBA.GetViewTeam(createTeam);
-            
             if (Global.Designation == "Manager")
             {
                 DataRow[] filterNext = dtResult.Tables[0].Select("ManagerId = '" + Global.UserId + "'");
-                
-                if(filterNext.Length>0)
+                if (filterNext.Length > 0)
                 {
                     var rowsToUpdate = dtResult.Tables[0].AsEnumerable().Where(r => r.Field<int>("ManagerId") == Global.UserId).CopyToDataTable(); ;
                     grvAllViewTeam.DataSource = rowsToUpdate;
                 }
                 else
-                grvAllViewTeam.DataSource = filterNext;
+                    grvAllViewTeam.DataSource = filterNext;
             }
             else
             {
                 grvAllViewTeam.DataSource = dtResult.Tables[0];
             }
-
-
             grvAllViewTeam.DataBind();
         }
         protected void grvViewTeam_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "ViewTeam")
             {
-
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string ProjectId = commandArgs[0];
                 string TeamId = commandArgs[1];
@@ -79,9 +73,6 @@ namespace ProjectManagement.Admin
                 string ParrentTeamMemberId = commandArgs[3];
                 string ViewTeam = "ViewTeam";
                 string Role = "3";
-                //Session["ProjectId"] = ProjectId;
-                //Session["TeamId"] = TeamId;
-                //Session["parrentTeamMemberId"] = parrentTeamMemberId;
                 createTeam.Role = "1";
                 Response.Redirect("AddTeamEmployee.aspx?ProjectId=" + ProjectId.Trim() + "&TeamId=" + TeamId + "&TLUserId=" + TLUserId.Trim() + "&ParrentTeamMemberId=" + ParrentTeamMemberId.Trim() + "&ViewTeam=" + ViewTeam.Trim());
             }
@@ -90,13 +81,9 @@ namespace ProjectManagement.Admin
                 string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ',' });
                 string ProjectId = commandArgs[0];
                 string TeamId = commandArgs[1];
-                //string TLUserId = commandArgs[2];
                 string ParrentTeamMemberId = commandArgs[2];
                 string ViewTeam = "DeleteTeam";
                 string Role = "3";
-                //Session["ProjectId"] = ProjectId;
-                //Session["TeamId"] = TeamId;
-                //Session["parrentTeamMemberId"] = parrentTeamMemberId;
                 createTeam.Role = "1";
                 Response.Redirect("AddTeamEmployee.aspx?ProjectId=" + ProjectId.Trim() + "&TeamId=" + TeamId + "&ParrentTeamMemberId=" + ParrentTeamMemberId.Trim() + "&ViewTeam=" + ViewTeam.Trim());
             }
@@ -104,16 +91,6 @@ namespace ProjectManagement.Admin
 
         protected void grvAllViewTeam_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //if (e.Row.RowType == DataControlRowType.DataRow)
-            //{
-            //    if (Global.Role == "User")
-            //    {
-            //        LinkButton lnkBtn = (LinkButton)e.Row.FindControl("btnEditEmployee");
-            //        lnkBtn.Visible = false;
-            //        LinkButton lnkBtn1 = (LinkButton)e.Row.FindControl("btnDeleteEmployee");
-            //        lnkBtn1.Visible = false;
-            //    }
-            //}
         }
 
         protected void btnSearchTeam_Click(object sender, EventArgs e)
