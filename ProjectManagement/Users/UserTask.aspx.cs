@@ -29,6 +29,8 @@ namespace ProjectManagement.Users
 
         protected void GetUserTaskDetails()
         {
+            addTaskBusinessObj.RoleID = Global.RoleId;
+            addTaskBusinessObj.Designation = Global.Designation;
             addTaskBusinessObj.EmployeeName = Session["UserID"].ToString();
             DataSet ds = assigntaskBLL.GetAllCreatedTaskByUser(addTaskBusinessObj);
             DataTable dt = ds.Tables[0];
@@ -58,11 +60,11 @@ namespace ProjectManagement.Users
                     string taskNumber = commandArgs[1];
                     string projectID = commandArgs[2];
                     string clientID = commandArgs[3];
-                    string teamID = commandArgs[4];
-                    string teamMemberID = commandArgs[5];
+                    //string teamID = commandArgs[4];
+                    //string teamMemberID = commandArgs[5];
                     Session["TaskID"] = taskID;
-                    addTaskBusinessObj.TeamId = teamID;
-                    addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
+                    //addTaskBusinessObj.TeamId = teamID;
+                    //addTaskBusinessObj.TeamMemberID = Convert.ToInt32(teamMemberID);
                     addTaskBusinessObj.TaskID = Convert.ToInt32(Session["TaskID"].ToString());
                     addTaskBusinessObj.AssignedDate = DateTime.Now;
                     addTaskBusinessObj.ProjectID = projectID;
@@ -74,8 +76,10 @@ namespace ProjectManagement.Users
                     addTaskBusinessObj.LoginUserID = loginUserID;
                     addTaskBusinessObj.EmployeeName = loginUserID.ToString();
                     //addTaskBusinessObj.ClientID = addTaskBusinessObj.dsResult.Tables[0].Rows[0]["ClientId"].ToString();
-                    //DataSet ds = assigntaskBLL.GetTeamMemberID(addTaskBusinessObj);
-                    //addTaskBusinessObj.TeamMemberID = Convert.ToInt32(ds.Tables[0].Rows[0]["TeamMemberId"].ToString());
+                    //addTaskBusinessObj.RoleID = 4;
+                    DataSet ds = assigntaskBLL.GetTeamMemberID(addTaskBusinessObj);
+                    addTaskBusinessObj.TeamMemberID = Convert.ToInt32(ds.Tables[0].Rows[0]["TeamMemberId"].ToString());
+                    addTaskBusinessObj.TeamId= ds.Tables[0].Rows[0]["TeamId"].ToString();
                     addTaskBusinessObj.response = assigntaskBLL.InsertAssignedTaskDetails(addTaskBusinessObj);
                 }
                 catch (Exception ex)
@@ -126,25 +130,25 @@ namespace ProjectManagement.Users
                 LinkButton lbAssign = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnAssign");
                 LinkButton lbPlay = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPlay");
                 LinkButton lbPause = (LinkButton)e.Row.Cells[6].FindControl("lnkbtnPause");
-                if (e.Row.Cells[9].Text.ToString() == "Unassigned")
+                if (e.Row.Cells[10].Text.ToString() == "Unassigned")
                 {
                     lbAssign.Visible = true;
                     lbPlay.Visible = false;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "Assigned")
+                else if (e.Row.Cells[10].Text.ToString() == "Assigned")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
                     lbPause.Visible = false;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "In Process")
+                else if (e.Row.Cells[10].Text.ToString() == "In Process")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = false;
                     lbPause.Visible = true;
                 }
-                else if (e.Row.Cells[9].Text.ToString() == "Pause")
+                else if (e.Row.Cells[10].Text.ToString() == "Pause")
                 {
                     lbAssign.Visible = false;
                     lbPlay.Visible = true;
@@ -210,101 +214,6 @@ namespace ProjectManagement.Users
             pnlConfirmwindow.Visible = false;
         }
 
-        //protected void BindClientandProject()
-        //{
-        //    //ddlSearchClient.Items.Clear();
-        //    //ddlSearchClient.DataSource = assigntaskBLL.GetAllClients();
-        //    //ddlSearchClient.DataTextField = "ClientName";
-        //    //ddlSearchClient.DataValueField = "ClientID";
-        //    //ddlSearchClient.DataBind();
-        //    //ddlSearchClient.Items.Insert(0, new ListItem("Select Client", "0"));
-        //    //ddlSerachProject.Items.Clear();
-        //    //ddlSerachProject.DataSource = assigntaskBLL.GetAllProject();
-        //    //ddlSerachProject.DataTextField = "ProjectName";
-        //    //ddlSerachProject.DataValueField = "ProjectID";
-        //    //ddlSerachProject.DataBind();
-        //    //ddlSerachProject.Items.Insert(0, new ListItem("Select Project", "0"));
-        //    ddlSearchStatus.Items.Clear();
-        //    ddlSearchStatus.DataSource = assigntaskBLL.GetStatusName();
-        //    ddlSearchStatus.DataTextField = "StatusName";
-        //    ddlSearchStatus.DataValueField = "StatusID";
-        //    ddlSearchStatus.DataBind();
-        //    ddlSearchStatus.Items.Insert(0, new ListItem("Select Status", "0"));
-        //}
-        //protected void ddlSearchClient_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    GetUserTaskDetails();
-        //    GetTaskByClient();
-        //    if (ddlSearchClient.SelectedItem.Text == "Select Client")
-        //    {
-        //        gvDisplayUserTask.EditIndex = -1;
-        //        txtSearchStartDate.Text = "";
-        //        txtSearchEndDate.Text = "";
-        //        ddlSerachProject.SelectedItem.Text = "Select Project";
-        //        ddlSearchStatus.SelectedItem.Text = "Select Status";
-        //        GetUserTaskDetails();
-        //    }
-        //}
-
-        //protected void ddlSerachProject_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    GetUserTaskDetails();
-        //    GetTaskByProject();
-        //    if (ddlSerachProject.SelectedItem.Text == "Select Project")
-        //    {
-        //        gvDisplayUserTask.EditIndex = -1;
-        //        txtSearchStartDate.Text = "";
-        //        txtSearchEndDate.Text = "";
-        //        ddlSearchClient.SelectedItem.Text = "Select Client";
-        //        ddlSearchStatus.SelectedItem.Text = "Select Status";
-        //        GetUserTaskDetails();
-        //    }
-        //}
-
-        //protected void ddlSearchStatus_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    GetUserTaskDetails();
-        //    GetTaskByStatus();
-        //    if (ddlSearchStatus.SelectedItem.Text == "Select Status")
-        //    {
-        //        gvDisplayUserTask.EditIndex = -1;
-        //        txtSearchStartDate.Text = "";
-        //        txtSearchEndDate.Text = "";
-        //     //   ddlSearchClient.SelectedItem.Text = "Select Client";
-        //      //  ddlSerachProject.SelectedItem.Text = "Select Project";
-        //        GetUserTaskDetails();
-        //    }
-        //}
-
-        //protected void GetTaskByClient()
-        //{
-        //  //  addTaskBusinessObj.ClientID = ddlSearchClient.SelectedValue;
-        //    addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByClientID(addTaskBusinessObj);
-        //    pnlDisplayUserTask.Visible = true;
-        //    gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
-        //    gvDisplayUserTask.DataBind();
-        //}
-
-        //protected void GetTaskByStatus()
-        //{
-        //    int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
-        //    int roleId = Convert.ToInt32(Session["RoleId"].ToString());
-        //    addTaskBusinessObj.LoginUserID = loginUserID;
-        //    addTaskBusinessObj.RoleID = roleId;
-        //    addTaskBusinessObj.StatusID = ddlSearchStatus.SelectedValue;
-        //    addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByStatus(addTaskBusinessObj);
-        //    pnlDisplayUserTask.Visible = true;
-        //    gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
-        //    gvDisplayUserTask.DataBind();
-        //}
-        //protected void GetTaskByProject()
-        //{
-        //  //  addTaskBusinessObj.ProjectID = ddlSerachProject.SelectedValue;
-        //    addTaskBusinessObj.dsResult = assigntaskBLL.SearchResultByProjectID(addTaskBusinessObj);
-        //    pnlDisplayUserTask.Visible = true;
-        //    gvDisplayUserTask.DataSource = addTaskBusinessObj.dsResult.Tables[0];
-        //    gvDisplayUserTask.DataBind();
-        //}
 
         protected void btnSearchStartEnd_Click(object sender, EventArgs e)
         {
@@ -338,8 +247,6 @@ namespace ProjectManagement.Users
 
         protected void btnCancelStartEnd_Click(object sender, EventArgs e)
         {
-           // ddlSearchClient.SelectedItem.Text = "Select Client";
-           // ddlSerachProject.SelectedItem.Text = "Select Project";
             gvDisplayUserTask.EditIndex = -1;
             txtSearchEndDate.Text = "";
             txtSearchStartDate.Text = "";

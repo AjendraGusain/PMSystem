@@ -196,23 +196,23 @@ namespace DataAccessLayer
                 Hashtable hashtable = new Hashtable();
                 if (Task.RoleID == 1)
                 {
-                    spName = "sp_GetAllCreatedTask";
+                    spName = "sp_ViewCompletedandUnCompletedTask";//sp_GetAllCreatedTask
                 }
                 else
                 {
                     if (Task.Designation == "Manager")
                     {
-                        spName = "sp_GetManagerTaskByIDandRole";
+                        spName = "sp_ViewCompleteandAllTaskByManager";
                         hashtable.Add("@UserNames", Task.LoginUserID);
                     }
                     else if (Task.Designation == "TeamLeader")
                     {
-                        spName = "sp_GetTLTaskByIDandRole";
+                        spName = "sp_ViewCompletedandAllTaskByTL";
                         hashtable.Add("@UserNames", Task.LoginUserID);
                     }
                     else
                     {
-                        spName = "sp_GetAllCreatedTask";
+                        spName = "sp_GetAllTask";//sp_GetAllCreatedTask
                     }
                 }
                 //addTaskBO.dsResult = new Connection().ExecuteSPWithoutID(spName);
@@ -328,6 +328,7 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
+                addTaskBO.dsResult.Reset();
                 string spName = "GetProjectByClient";
                 Hashtable table = new Hashtable();
                 table.Add("@ClientId", objClientID.ClientID);
@@ -387,8 +388,17 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_AssignTaskByID";
+                addTaskBO.dsResult.Reset();
+                string spName = "";
                 Hashtable objhashtable = new Hashtable();
+                if (task.StatusID == "5")
+                {
+                    spName = "sp_GetCompletedTask";
+                }
+                else
+                {
+                    spName = "sp_AssignTaskByID";
+                }
                 objhashtable.Add("@TaskIdName",task.TaskID);
                 //MySqlCommand cmd = new MySqlCommand(spName, conn);
                 //cmd.CommandType = CommandType.StoredProcedure;
@@ -609,11 +619,40 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_SearchAllTaskByUser";
-                Hashtable obj = new Hashtable();
-                obj.Add("@name", searchResult.SearchResult);
-                addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                //string spName = "sp_SearchAllTaskByUser";
+                //Hashtable obj = new Hashtable();
+                //obj.Add("@name", searchResult.SearchResult);
+                //addTaskBO.dsResult = new Connection().GetData(spName, obj);
+                //return addTaskBO.dsResult;
+                string spName = "";
+                Hashtable hashtable = new Hashtable();
+                if (searchResult.RoleID == 2)
+                {
+                    if (searchResult.Designation == "Manager")
+                    {
+                        spName = "sp_SearchManagerTaskByIDandRole";
+                        hashtable.Add("@UserNameID", searchResult.LoginUserID);
+                        hashtable.Add("@name", searchResult.SearchResult);
+                    }
+                    else if (searchResult.Designation == "TeamLeader")
+                    {
+                        spName = "sp_SearchTLTaskByIDandRole";
+                        hashtable.Add("@UserNameID", searchResult.LoginUserID);
+                        hashtable.Add("@name", searchResult.SearchResult);
+                    }
+                    else
+                    {
+                        spName = "sp_SearchAllTaskByUser";
+                    }
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }
+                else
+                {
+                    spName = "sp_SearchAllTaskByUser";
+                    addTaskBO.dsResult = new Connection().GetData(spName, hashtable);
+                }
                 return addTaskBO.dsResult;
+
             }
             catch (Exception ex)
             {
@@ -675,10 +714,34 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetTeamByProjectID";
+                addTaskBO.dsResult.Reset();
+                string spName = "";
                 Hashtable obj = new Hashtable();
-                obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
-                obj.Add("@TeamIDName", objProjectuser.TeamId);
+                if (objProjectuser.RoleID == 1)
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
+                else if(objProjectuser.Designation == "Manager")
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
+                else if(objProjectuser.Designation == "TeamLeader")
+                {
+                    spName = "sp_GetTeamByProjectIDForTL";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                    obj.Add("@UserNameId", objProjectuser.LoginUserID);
+                }
+                else
+                {
+                    spName = "sp_GetTeamByProjectID";
+                    obj.Add("@ProjectCheckID", objProjectuser.ProjectID);
+                    obj.Add("@TeamIDName", objProjectuser.TeamId);
+                }
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
             }
@@ -757,7 +820,7 @@ namespace DataAccessLayer
         {
             try
             {
-                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and (RoleId=2 or RoleId=4) and ParrentTeamMemberId!=0");
+                addTaskBO.dsResult = new Connection().GetDataSetResults("SELECT * FROM ProjectManagementNew.team_member where UserId = " + teamMember.LoginUserID + " and ProjectId = " + teamMember.ProjectID + " and ClientId = " + teamMember.ClientID + " and ParrentTeamMemberId!=0 and Is_Active!=0");//and (RoleId=2 or RoleId=4) 
                 return addTaskBO.dsResult;
             }
             catch (Exception ex)
@@ -813,8 +876,16 @@ namespace DataAccessLayer
                 {
                     conn.Open();
                 }
-                string spName = "sp_GetSelfAssignedUnassignedTaskByUser";
+                string spName = "";
                 Hashtable obj = new Hashtable();
+                if (taskByUser.Designation == "TeamLeader")
+                {
+                    spName = "sp_GetTLAssignedUnassignedTask";
+                }
+                else
+                {
+                    spName = "sp_GetSelfAssignedUnassignedTaskByUser";
+                }
                 obj.Add("@UserNameID", taskByUser.EmployeeName);
                 addTaskBO.dsResult = new Connection().GetData(spName, obj);
                 return addTaskBO.dsResult;
@@ -932,6 +1003,11 @@ namespace DataAccessLayer
                 {
                     string spName = "";
                     if (objUserTask.Designation == "Manager")
+                    {
+                        spName = "sp_GetUserTaskTime";
+                        obj.Add("@TaskNameID", objUserTask.TaskID);
+                    }
+                    else if (objUserTask.Designation == "TeamLeader")
                     {
                         spName = "sp_GetUserTaskTime";
                         obj.Add("@TaskNameID", objUserTask.TaskID);

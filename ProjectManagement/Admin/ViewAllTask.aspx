@@ -69,7 +69,8 @@
                                 <asp:Panel ID="pnlDisplayAssignTask" runat="server">
 
                                     <asp:GridView ID="grvViewAllTask" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="15"
-                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found" OnRowCommand="grvViewAllTask_RowCommand">
+                                        ShowHeader="true" AutoGenerateColumns="False" EnablePaging="true" EmptyDataText="No Record Found" OnRowCommand="grvViewAllTask_RowCommand"
+                                        >
                                         <PagerStyle CssClass="" HorizontalAlign="Right" />
                                         <PagerSettings Mode="NumericFirstLast" PageButtonCount="2" FirstPageText="First" LastPageText="Last" />
                                         <Columns>
@@ -128,8 +129,9 @@
 
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="EditTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")%>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewAssignedTask" CommandName="ViewAssignedTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")+", "+Eval("StatusId")%>' Visible='<%# Eval("StatusName").ToString() == "Completed" ? true : false %>' class="badge bg-info" Text="View"></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnEditTeam" class="link-success" CommandName="EditTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>' Visible='<%# Eval("StatusName").ToString() == "Completed" ? false : true %>'><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDeleteEmployee" class="link-danger" CommandName="DeleteTask" runat="server" CommandArgument='<%#Eval("TaskId")+","+ Eval("UserId")+", "+Eval("ProjectId")+", "+Eval("ClientId")%>' Visible='<%# Eval("StatusName").ToString() == "Completed" ? false : true %>' OnClientClick="return confirm('Are you sure you want to delete this record?');"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="right" CssClass="page-link"></ItemStyle>
                                             </asp:TemplateField>
