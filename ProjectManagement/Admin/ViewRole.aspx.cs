@@ -20,14 +20,12 @@ namespace ProjectManagement.Admin
                 BindClientList();
             }
         }
-
         private void BindClientList()
         {
             dsResult = viewRole.GetRole();
             grvRole.DataSource = dsResult.Tables[0];
             grvRole.DataBind();
         }
-
         protected void grvRole_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditRole")
@@ -36,7 +34,6 @@ namespace ProjectManagement.Admin
                 Session["Id"] = Id;
                 Response.Redirect("AddRole.aspx?UserId=" + Id);
             }
-
             if (e.CommandName == "DeleteRole")
             {
                 int Id = Convert.ToInt32(e.CommandArgument);
@@ -47,7 +44,7 @@ namespace ProjectManagement.Admin
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Role is currently in use.');", true);
                 }
-                else if(dataout>0)
+                else if (dataout > 0)
                 {
                     grvRole.EditIndex = -1;
                     ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
@@ -55,7 +52,6 @@ namespace ProjectManagement.Admin
                 }
             }
         }
-
         protected void grvRole_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvRole.PageIndex = e.NewPageIndex;

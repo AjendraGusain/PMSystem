@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="ProjectManagement.ResetPassword" %>
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,25 +14,15 @@
     <!-- Custom CSS -->
     <link href="css/style.min.css" rel="stylesheet" />
 </head>
-
 <body>
     <form id="resetform" runat="server">
         <div class="main-wrapper">
-            <!-- ============================================================== -->
-            <!-- Preloader - style you can find in spinners.css -->
-            <!-- ============================================================== -->
             <div class="preloader">
                 <div class="lds-ripple">
                     <div class="lds-pos"></div>
                     <div class="lds-pos"></div>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- Preloader - style you can find in spinners.css -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Login box.scss -->
-            <!-- ============================================================== -->
             <div class="d-flex justify-content-center align-items-center bg-cyan px-5" style="height: 100vh;">
                 <div id="loginform" class="row">
                     <div class="col-12 text-center pt-3 pb-3">
@@ -46,17 +35,13 @@
                             <h4 class="text-white">Reset Password</h4>
                             <div class="col-12">
                                 <div class="input-group mb-3">
-                                    <%--<input type="password" class="form-control form-control-lg" placeholder="New Password.." aria-describedby="basic-addon1"
-                      required=""/>--%>
                                     <asp:TextBox ID="txtresetPassword" runat="server" TextMode="Password" CssClass="form-control form-control-lg" placeholder="New Password.." aria-describedby="basic-addon1"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvResetPass" runat="server" ControlToValidate="txtresetPassword" ErrorMessage="Please enter New password" ValidationGroup="resetPass" Display="Dynamic" ForeColor="White"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="rexResetPass" runat="server" ControlToValidate="txtresetPassword"
-                           ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ErrorMessage="Enter min 8 and max 15 character, including one upper and special character." ForeColor="White" ValidationGroup="resetPass" ></asp:RegularExpressionValidator>
+                                        ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" ErrorMessage="Enter min 8 and max 15 character, including one upper and special character." ForeColor="White" ValidationGroup="resetPass"></asp:RegularExpressionValidator>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <%--<input type="password" class="form-control form-control-lg" placeholder="Confirm Password.." aria-describedby="basic-addon1"
-                      required=""/>--%>
-                                    <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password"  CssClass="form-control form-control-lg" placeholder="Confirm Password.." aria-describedby="basic-addon1"></asp:TextBox>
+                                    <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control form-control-lg" placeholder="Confirm Password.." aria-describedby="basic-addon1"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvConfiPass" runat="server" ControlToValidate="txtConfirmPassword" ErrorMessage="Please enter Confirm  password" ValidationGroup="resetPass" Display="Dynamic" ForeColor="White"></asp:RequiredFieldValidator>
                                     <asp:CompareValidator ID="cmpResetPass" runat="server" ControlToCompare="txtresetPassword" ControlToValidate="txtConfirmPassword" ErrorMessage="Password Mismatch" Display="Dynamic" ValidationGroup="resetPass" ForeColor="White"></asp:CompareValidator>
                                 </div>
@@ -66,9 +51,6 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="pt-3 text-center">
-                                        <%--<button class="btn btn-info text-white" type="submit">
-                        Reset Password
-                      </button>--%>
                                         <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" CssClass="btn btn-info text-white" ValidationGroup="resetPass" OnClick="btnResetPassword_Click" />
                                     </div>
                                 </div>
@@ -77,31 +59,12 @@
                     </form>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- Login box.scss -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Page wrapper scss in scafholding.scss -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Page wrapper scss in scafholding.scss -->
-            <!-- ============================================================== -->
         </div>
     </form>
-    <!-- ============================================================== -->
-    <!-- All Required js -->
-    <!-- ============================================================== -->
     <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugin js -->
-    <!-- ============================================================== -->
     <script>
         $(".preloader").fadeOut();
-        // ==============================================================
-        // Login and Recover Password
-        // ==============================================================
         $("#to-recover").on("click", function () {
             $("#loginform").slideUp();
             $("#recoverform").fadeIn();

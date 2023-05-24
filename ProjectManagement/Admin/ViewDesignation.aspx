@@ -13,10 +13,8 @@
     <div class="row">
         <div class="card">
             <div class="card-body">   
-                
                 <div class="table-responsive">
                     <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
-                        <%--<form runat="server">--%>
                             <asp:GridView ID="grvDesignation" DataKeyNames="" runat="server" class="table table-striped table-bordered" AllowPaging="true" PageSize="10"
                                         ShowHeader="true" AutoGenerateColumns="False" EmptyDataText="No Record Found" OnRowCommand="grvDesignation_RowCommand" EnablePaging="true"  
                                 OnPageIndexChanging="grvDesignation_PageIndexChanging">
@@ -29,7 +27,6 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-
                                             <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnEditDesignation" class="link-info" Text="Edit" CommandName="EditDesignation" runat="server" CommandArgument='<%# Eval("Id") %>' CssClass="link-success"><span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span></asp:LinkButton>
@@ -37,15 +34,8 @@
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                             </asp:TemplateField>
-                                            <%--<asp:TemplateField HeaderText="Action">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnDeleteDesignation" class="link-info" CommandName="DeleteDesignation" runat="server" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');">Delete</asp:LinkButton>
-                                                </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                                            </asp:TemplateField>--%>
                                         </Columns>
                                     </asp:GridView>
-                        <%--</form>--%>
                     </div>
                 </div>
             </div>

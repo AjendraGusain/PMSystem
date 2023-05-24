@@ -24,13 +24,11 @@ namespace ProjectManagement
             try
             {
                 Session.Abandon();
-                //FormsAuthentication.SignOut();
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
                 Response.Buffer = true;
                 Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
                 Response.Expires = -1000;
                 Response.CacheControl = "no-cache";
-                //Response.Redirect("login.aspx", true);
             }
             catch (Exception ex)
             {

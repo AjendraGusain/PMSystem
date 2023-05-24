@@ -15,10 +15,7 @@ namespace ProjectManagement.Users
     public partial class ViewTaskDetails : System.Web.UI.Page
     {
         ITaskBusinessLogic addTaskDetails = new TaskBusinessLogic(new TaskDataAccess());
-
         TaskBusinessObject addTaskBusinessObj = new TaskBusinessObject();
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -71,28 +68,23 @@ namespace ProjectManagement.Users
             lblTaskNumber.Text = dtResult.Tables[0].Rows[0]["TaskNumber"].ToString();
             lblTaskDetails.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
             lblTaskCreatedBy.Text = dtResult.Tables[0].Rows[0]["CreatedByUser"].ToString();
-            //lblTaskAssigedTo.Text = dtResult.Tables[0].Rows[0]["AssignedTo"].ToString();
             lblTaskCreatedDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["TaskCreatedDate"].ToString()).ToShortDateString();
             string estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
             int estimatedMin = Int32.Parse(estimatedTime) * 60;
             TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
             lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
-
             if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
             {
                 if (dtResult.Tables[0].Rows[0]["StartDate"].ToString() != "")
                     lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
                 if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "" && dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
                     lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
-
-                //DateTime currentTime = TimeZoneInfo.ConvertTime(Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()), TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
                 int totalTime = 0;
                 int breakTime = 0;
                 if (dtResult.Tables[0].Rows[0]["TotalTime"].ToString() != "")
                     totalTime += Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
                 if (Session["BreakTime"].ToString() != "")
                     breakTime += Convert.ToInt32(Session["BreakTime"].ToString());
-
                 int actualTime = totalTime - breakTime;
                 if (actualTime != 0)
                 {
@@ -116,32 +108,14 @@ namespace ProjectManagement.Users
 
         protected void grvDisplayUserTaskDetails_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
 
 
         public void DisplayPlayPause()
         {
-            //int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
-            //addTaskBusinessObj.EmployeeName = loginUserID.ToString();
-            //addTaskBusinessObj.AssignedDate = DateTime.Now;
-            //addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            //addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
-            //addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
-            //addTaskBusinessObj.dsResult = addTaskDetails.GetAllCreatedTaskByUser(addTaskBusinessObj);
             DataTable dt = (DataTable)ViewState["AssignTask"];
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                //if (dt.Rows[i]["StatusName"].ToString() == "In Process")
-                //{
-                //    btnPlayTask.Visible = false;
-                //    btnPauseTask.Visible = true;
-                //}
-                //else if (addTaskBusinessObj.dsResult.Tables[0].Rows[i]["StatusName"].ToString() == "Pause")
-                //{
-                //    btnPlayTask.Visible = true;
-                //    btnPauseTask.Visible = false;
-                //}
                 if (dt.Rows[i]["StatusId"].ToString() == "3")
                 {
                     btnPlayTask.Visible = false;
@@ -175,7 +149,6 @@ namespace ProjectManagement.Users
             DisplayUserTaskDetails();
             btnPlayTask.Visible = false;
             btnPauseTask.Visible = true;
-            //ddlStatus.SelectedItem.Text = "Select";
         }
 
         protected void btnPauseTask_Click(object sender, EventArgs e)
@@ -185,7 +158,6 @@ namespace ProjectManagement.Users
 
         protected void gvDisplayBugHistory_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
 
         protected void Display(object sender, EventArgs e)
@@ -235,7 +207,6 @@ namespace ProjectManagement.Users
             addTaskBusinessObj.EmployeeName = loginUserID.ToString();
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
-            //DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj.TaskID);
             DataTable dt = (DataTable)ViewState["AssignTask"];
             if (dt.Rows[0]["StatusId"].ToString() == "3" && addTaskBusinessObj.PauseReason!=null)
             {
@@ -244,7 +215,6 @@ namespace ProjectManagement.Users
             }
             addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatusPause(addTaskBusinessObj);
             DisplayUserTaskDetails();
-            //ddlReason.SelectedItem.Text = "Select";
             txtHistoryStatus.Text = "";
             if (pauseReasonStatus == "Completed")
             {
@@ -281,7 +251,6 @@ namespace ProjectManagement.Users
         }
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
-            //Response.Redirect(Request.RawUrl);
             GetChatHistory();
             ScriptManager.RegisterStartupScript(this, GetType(), "scrollDown", "setTimeout(function() { window.scrollTo(0,document.body.scrollHeight); }, 25);", true);
         }

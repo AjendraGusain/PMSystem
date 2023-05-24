@@ -23,7 +23,6 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                 if (UserId == 0)
                 {
@@ -48,11 +47,8 @@ namespace ProjectManagement.Admin
         protected void btnAddClient_Click(object sender, EventArgs e)
         {
             int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-            //txtClient.Text = "";
-            //ddlClientCountry.SelectedValue= "0";
             addClientObj.ClientName = txtClient.Text.Trim();
             addClientObj.Country = ddlClientCountry.SelectedValue;
-
             if (btnAddClient.Text == "Add Client")
             {
                 response = addClient.InsertClient(addClientObj);

@@ -19,11 +19,9 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-
                 int UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                 if (UserId == 0)
                 {
-                    
                 }
                 else
                 {
@@ -64,7 +62,6 @@ namespace ProjectManagement.Admin
                     ScriptManager.RegisterStartupScript(this, GetType(), "Key3uda", "alert('Record updated successfully.');", true);
                 }
             }
-
         }
     }
 }

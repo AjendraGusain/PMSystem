@@ -27,13 +27,11 @@ namespace ProjectManagement.Admin
                 dtResult = addEmployeeLogic.GetAllTaskByUserEmployeeTask(projectId, userId);
                 grvReassign.DataSource = dtResult.Tables[1];
                 grvReassign.DataBind();
-
             }
         }
 
         protected void grvEmployeeTask_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
     }
 }

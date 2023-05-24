@@ -9,9 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card">
         <div class="card-body wizard-content">
-            
                 <div class="wizard clearfix">
-                   
                     <div class="content clearfix">
                         <section class="body current">
                             <div class="form-group row">
@@ -50,14 +48,6 @@
                                     <asp:RegularExpressionValidator ID="rvEmailExp" runat="server" ControlToValidate="txtPhoneNo" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{10}$" Display="Dynamic" ValidationGroup="ED"/>
                                 </div>
                             </div>
-                            <%--<div class="form-group row">
-                                <label for="Role" class="col-sm-3 text-center control-label col-form-label">Role</label>
-                                <div class="col-sm-6">
-                                    <asp:DropDownList ID="ddlRoleList" runat="server" class="select2 form-select shadow-none">
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rvRoleList" runat="server" ControlToValidate="ddlRoleList" InitialValue="0" ErrorMessage="*" ValidationGroup="ED" ForeColor="Red"></asp:RequiredFieldValidator>
-                                </div>
-                            </div>--%>
                             <div class="form-group row">
                                 <label for="Designation" class="col-sm-3 text-center control-label col-form-label">Designation</label>
                                 <div class="col-sm-6">
@@ -82,7 +72,6 @@
                         </div>
                     </div>
                 </div>
-            
         </div>
     </div>
     <script language="javascript" type="text/javascript">

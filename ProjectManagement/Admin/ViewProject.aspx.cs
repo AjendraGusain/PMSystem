@@ -25,39 +25,23 @@ namespace ProjectManagement.Admin
             _projectBL = new ProjectBusinessLogic(_projectRepo);
         }
 
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 BindProjectGrid();
-                // AddHeaders();
-                int userId=Convert.ToInt32(Session["UserID"].ToString());
+                int userId = Convert.ToInt32(Session["UserID"].ToString());
                 Global.Role = Session["Role"].ToString();
                 Global.RoleIdSession = Convert.ToInt32(Session["RoleId"].ToString());
                 Global.Designation = Session["Designation"].ToString();
             }
 
         }
-        //protected void AddHeaders()
-        //{
-        //    if (AllProjects.Rows.Count > 0)
-        //    {
-        //        //This replaces <td> with <th>    
-        //        AllProjects.UseAccessibleHeader = true;
-        //        //This will add the <thead> and <tbody> elements    
-        //        AllProjects.HeaderRow.TableSection = TableRowSection.TableHeader;
-        //        //This adds the <tfoot> element. Remove if you don't have a footer row    
-        //        AllProjects.FooterRow.TableSection = TableRowSection.TableFooter;
-        //    }
-        //}
+
         private void BindProjectGrid()
         {
             DataSet response = _projectBL.GetAllProject();
             DataTable table = response.Tables[0];
-
             foreach (DataRow row in table.Rows)
             {
                 if (row["StartDate"] != DBNull.Value)
@@ -66,7 +50,6 @@ namespace ProjectManagement.Admin
                     DateTime startDateValue = startDateTimeValue.Date;
                     row["StartDate"] = startDateValue;
                 }
-
                 if (row["EndDate"] != DBNull.Value)
                 {
                     DateTime endDateTimeValue = (DateTime)row["EndDate"];
@@ -74,10 +57,8 @@ namespace ProjectManagement.Admin
                     row["EndDate"] = endDateValue;
                 }
             }
-
             AllProjects.DataSource = table;
             AllProjects.DataBind();
-
         }
 
 
@@ -96,7 +77,7 @@ namespace ProjectManagement.Admin
             else if (e.CommandName == "DeleteProject")
             {
                 addTaskBusinessObj.RoleID = Global.RoleIdSession;
-                addTaskBusinessObj.Designation= Global.Designation;
+                addTaskBusinessObj.Designation = Global.Designation;
                 addTaskBusinessObj.LoginUserID = userId;
                 DataSet dtResult = addTaskDetails.GetAllCreatedTask(addTaskBusinessObj);
                 DataRow[] foundProject = dtResult.Tables[0].Select("ProjectId = '" + Id + "'");
@@ -111,12 +92,9 @@ namespace ProjectManagement.Admin
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Record deleted successfully');", true);
                         BindProjectGrid();
-
                     }
                 }
-                
             }
-
         }
 
         protected void AllProjects_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -130,7 +108,6 @@ namespace ProjectManagement.Admin
             _projectBO.ProjectName = txtProNameSearch.Text.Trim();
             _projectBO.StartDate = txtProStartDateSearch.Text.Trim();
             _projectBO.EndDate = txtProEndDateSearch.Text.Trim();
-
             DataSet response = _projectBL.ProjectSearch(_projectBO);
             AllProjects.DataSource = response.Tables[0];
             AllProjects.DataBind();

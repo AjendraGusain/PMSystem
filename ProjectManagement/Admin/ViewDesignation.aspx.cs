@@ -36,7 +36,6 @@ namespace ProjectManagement.Admin
                 Session["EmployeeUserId"] = Id;
                 Response.Redirect("AddDesignation.aspx?UserId=" + Id);
             }
-
             if (e.CommandName == "DeleteDesignation")
             {
                 int Id = Convert.ToInt32(e.CommandArgument);

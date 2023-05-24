@@ -25,7 +25,6 @@ namespace ProjectManagement.Admin
             
             if (!IsPostBack)
             {
-                //Dictionary<string, string> myDictionary = (Dictionary<string, string>)Session["DateCollections"];
                 BindList();
                 dtResult = managerName.GetAllEmployee();
                 ViewState["AuthorBooks"] = dtResult.Tables[0];
@@ -56,7 +55,6 @@ namespace ProjectManagement.Admin
                                 if (dlgResult == DialogResult.No)
                                 {
                                     item.Selected = false;
-                                    //ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "confirm(' is user now continue with manager');", true);
                                 }
                             }
                         }
@@ -69,33 +67,9 @@ namespace ProjectManagement.Admin
                             row.SetField("Check", "false");
                         }
                     }
-
                 }
             }
         }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    DialogResult d;
-        //    d = MessageBox.Show("Welcome to C# Corner", "Learn C#", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-        //    if (d == DialogResult.Yes)
-        //    {
-        //        ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "confirm(' is user now continue with manager');", true);
-        //    }
-        //    else
-        //    {
-        //        "NO";
-        //    }
-        //}
-        //[Flags]
-        //public enum Seasons
-        //{
-        //    None = 0,
-        //    Spring = 1 << 0,
-        //    Winter = 1 << 1,
-        //    Autumn = 1 << 2,
-        //    Summer = 1 << 3
-        //}
 
         private void BindList()
         {
@@ -107,7 +81,6 @@ namespace ProjectManagement.Admin
             ddlMProject.Items.Insert(0, new ListItem("-- Select Project Name --", "0"));
             
         }
-
         protected void grvViewManager_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditManager")
@@ -121,7 +94,6 @@ namespace ProjectManagement.Admin
                 createTeam.Role = "3";
                 createTeam.Manager = "0";
                 dtResult = createTeamBA.GetTeamMember(createTeam);
-                //BindList();
                 ddlMProject.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["ProjectId"]).ToString();
                 ddlMTeamName.SelectedValue = Convert.ToInt32(dtResult.Tables[0].Rows[0]["TeamId"]).ToString();
                 lsManager.DataSource = managerName.GetAllEmployee();
@@ -143,7 +115,6 @@ namespace ProjectManagement.Admin
                     }
                 }
                 dtResult.Reset();
-                
             }
             else if (e.CommandName == "DeleteManager")
             {
@@ -154,8 +125,6 @@ namespace ProjectManagement.Admin
                 string teamMemberId = commandArgs[3];
                 Session["ProjectId"] = createTeam.ProjectId;
                 Session["TeamId"] = createTeam.TeamName;
-                //int ProjectID3 = Convert.ToInt32(e.CommandArgument);
-
                 dtResult = createTeamBA.GetTeamDetails(createTeam);
                 DataRow[] foundteamMember = dtResult.Tables[1].Select("ParrentTeamMemberId = '" + teamMemberId + "'");
                 if (foundteamMember.Length != 0)
@@ -169,7 +138,6 @@ namespace ProjectManagement.Admin
                     createTeam.IsActive = 0;
                     createTeam.Role = "4";
                     int Respone = createTeamBA.UpdateTeamMember(createTeam);
-                    //int Respone = createTeamBA.DeleteTeamMember(Convert.ToInt32(userId), createTeam);
                     if (Respone > 0)
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "Delete", "alert('Manager deleted successfully');", true);
@@ -185,7 +153,6 @@ namespace ProjectManagement.Admin
             {
                 int ProjectId = Convert.ToInt32(Session["ProjectId"]);
                 int TeamId= Convert.ToInt32( Session["TeamId"]) ;
-                //createTeam.Role = "3";
                 createTeam.Manager = "0";
                 dtResult = createTeamBA.GetTeamMember(createTeam);
                 createTeam.ProjectId = ddlMProject.SelectedValue;
@@ -234,12 +201,9 @@ namespace ProjectManagement.Admin
                         createTeam.Role = "3";
                         createTeamBA.UpdateTeamMember(createTeam);
                     }
-
                 }
-                
                 dtResult.Reset();
                 gridViewList();
-                
             }
             if (btnAddTeamName.Text == "Add Manager")
             {
@@ -260,15 +224,12 @@ namespace ProjectManagement.Admin
                         }
                     }
                 }
-
                 ScriptManager.RegisterStartupScript(this, GetType(), "Edit", "alert('Record Inserted successfully');", true);
                 gridViewList();
             }
             BindList();
             btnAddTeamName.Text = "Add Manager";
         }
-
-
 
         protected void ddlMProject_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -278,18 +239,14 @@ namespace ProjectManagement.Admin
             ddlMTeamName.DataValueField = "Id";
             ddlMTeamName.DataBind();
             ddlMTeamName.Items.Insert(0, new ListItem("-- Select Team Name --", "0"));
-
-
         }
 
         protected void grvViewManager_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
         }
 
         protected void grvViewManager_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
         }
 
         
@@ -304,9 +261,7 @@ namespace ProjectManagement.Admin
             Session["TeamId"] = TeamName;
             Session["Manager"] = Manager;
             Session["TLId"] = TLId;
-            
             gridViewList();
-            
         }
 
         private void gridViewList()
@@ -318,18 +273,10 @@ namespace ProjectManagement.Admin
             dtResult = createTeamBA.GetTeamMemberMangerTLUser(createTeam);
             grvViewManager.DataSource = dtResult.Tables[0];
             grvViewManager.DataBind();
-            //lsManager.DataSource = createTeamBA.GetAllEmployeTeamMemberId(createTeam);
-            //lsManager.DataTextField = "UserName";
-            //lsManager.DataValueField = "UserId";
-            //lsManager.DataBind();
             lsManager.DataSource = managerName.GetAllEmployee();
             lsManager.DataTextField = "UserName";
             lsManager.DataValueField = "UserId";
             lsManager.DataBind();
-            //dtResult.Reset();
-            //ds.Tables[0].Clear();
-            //grvViewManager
         }
-       
     }
 }
