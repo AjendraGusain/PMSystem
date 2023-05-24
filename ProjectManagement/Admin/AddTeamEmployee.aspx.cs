@@ -31,6 +31,7 @@ namespace ProjectManagement.Admin
                 int parrentTeamMemberId = Convert.ToInt32(Request.QueryString["ParrentTeamMemberId"]);
                 if (projectID != 0 && teamId != 0)
                 {
+                    // string viewTeam = Request.QueryString["ViewTeam"].ToString();
                     var viewTeam = Request.QueryString["ViewTeam"] ?? string.Empty;
                     if (viewTeam == "ViewTeam")
                     {
