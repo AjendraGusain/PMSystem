@@ -51,13 +51,31 @@ namespace ProjectManagement.Admin
         protected global::System.Web.UI.WebControls.Label lblStartDate;
 
         /// <summary>
-        /// lblTimeEstimate control.
+        /// txtEstimatedTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeEstimate;
+        protected global::System.Web.UI.WebControls.TextBox txtEstimatedTime;
+
+        /// <summary>
+        /// btnEditEstimate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditEstimate;
+
+        /// <summary>
+        /// btnUpdateEstimate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateEstimate;
 
         /// <summary>
         /// lblPause control.

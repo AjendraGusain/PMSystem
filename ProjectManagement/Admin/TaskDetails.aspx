@@ -84,8 +84,13 @@
                                         <p class="mb-0">Estimated Time:</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <asp:Label ID="lblTimeEstimate" runat="server" class="text-muted mb-0"></asp:Label>
+                                        <%--<asp:Label ID="lblTimeEstimate" runat="server" class="text-muted mb-0"></asp:Label>--%>
+                                        <asp:TextBox ID="txtEstimatedTime" runat="server" CssClass="text-muted mb-0" Enabled="false"></asp:TextBox>
+                                        <asp:Button ID="btnEditEstimate"  Text="Edit" runat="server" CssClass="text-primary" OnClick="btnEditEstimate_Click"/>
+                                        <asp:Button ID="btnUpdateEstimate"  Text="Update" runat="server" CssClass="text-primary" OnClick="btnUpdateEstimate_Click" Visible="false"/>
+                                        <%--<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-pencil-alt fa-stack-1x fa-inverse"></i> </span>--%>
                                     </div>
+
                                 </div>
                                 <hr>
                                 <div class="row">

@@ -30,8 +30,8 @@ namespace ProjectManagement.Users
         }
 
         private void DisplayUserTaskDetails()
-        {         
-            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());            
+        {
+            int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.LoginUserID = loginUserID;
             if (Session["Role"].ToString() == "Admin")
             {
@@ -69,12 +69,28 @@ namespace ProjectManagement.Users
             lblTaskDetails.Text = dtResult.Tables[0].Rows[0]["TaskDescription"].ToString();
             lblTaskCreatedBy.Text = dtResult.Tables[0].Rows[0]["CreatedByUser"].ToString();
             lblTaskCreatedDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["TaskCreatedDate"].ToString()).ToShortDateString();
-            string estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
-            int estimatedMin = Int32.Parse(estimatedTime) * 60;
-            TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
-            lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
             if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
             {
+                string estimatedTime = "";
+                if (dtResult.Tables[0].Rows[0]["RevisedEstimateTime"].ToString() == "")
+                {
+                    estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
+                }
+                else
+                {
+                    estimatedTime = dtResult.Tables[0].Rows[0]["RevisedEstimateTime"].ToString();
+                }
+                int estimatedMin = 0;
+                if (estimatedTime != "")
+                {
+                    string[] estimatedTimeSplit = estimatedTime.Split(':');
+                    int estimatedhours = Convert.ToInt32(estimatedTimeSplit[0]) * 60;
+                    int estimatedminutes = Convert.ToInt32(estimatedTimeSplit[1]);
+                    estimatedMin = (estimatedhours + estimatedminutes);
+                }
+                TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
+                lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
+
                 if (dtResult.Tables[0].Rows[0]["StartDate"].ToString() != "")
                     lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
                 if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "" && dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
@@ -208,7 +224,7 @@ namespace ProjectManagement.Users
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             addTaskBusinessObj.PauseReasonStatus = pauseReasonStatus;
             DataTable dt = (DataTable)ViewState["AssignTask"];
-            if (dt.Rows[0]["StatusId"].ToString() == "3" && addTaskBusinessObj.PauseReason!=null)
+            if (dt.Rows[0]["StatusId"].ToString() == "3" && addTaskBusinessObj.PauseReason != null)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Already working on this task.');", true);
                 return;

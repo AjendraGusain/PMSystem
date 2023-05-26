@@ -25,6 +25,8 @@ namespace BussinessObjectLayer
         public DateTime? AssignedDate { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public string EstimateTime { get; set; }
+        public string RevisedEstimateTime { get; set; }
         public string SearchResult { get; set; }
         public string PauseReason { get; set; }
         public string PauseReasonStatus { get; set; }
