@@ -905,14 +905,29 @@ namespace DataAccessLayer
 
         public int UpdateUserTaskStatus(TaskBusinessObject taskStatus)
         {
+            
             try
             {
-                string spName = "sp_InitialStartJob";
+                string spName = "";
                 Hashtable obj = new Hashtable();
-                obj.Add("@UserCheckId", taskStatus.EmployeeName);
-                obj.Add("@TaskCheckID", taskStatus.TaskID);
-                obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
-                obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                if (taskStatus.RevisedEstimateTime == null)
+                {
+                    spName = "sp_InitialStartJob";
+                    obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                    obj.Add("@TaskCheckID", taskStatus.TaskID);
+                    obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
+                    obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                    obj.Add("@EstimatedTime", taskStatus.EstimateTime);
+                }
+                else
+                {
+                    spName = "sp_ReviseEstimatedTime";
+                    obj.Add("@UserCheckId", taskStatus.EmployeeName);
+                    obj.Add("@TaskCheckID", taskStatus.TaskID);
+                    obj.Add("@ProjectCheckID", Convert.ToInt32(taskStatus.ProjectID));
+                    obj.Add("@ClientCheckID", Convert.ToInt32(taskStatus.ClientID));
+                    obj.Add("@RevisedEstimatedTime", taskStatus.RevisedEstimateTime);
+                }
                 addTaskBO.response = new Connection().InsertEntry(spName, false, obj);
                 return addTaskBO.response;
             }

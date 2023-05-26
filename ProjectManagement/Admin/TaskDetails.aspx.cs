@@ -21,7 +21,7 @@ namespace ProjectManagement.Admin
         {
             if (!Page.IsPostBack)
             {
-                string statusId= Request.QueryString["StatusId"];
+                string statusId = Request.QueryString["StatusId"];
                 pnlDisplayTaskDetails.Visible = true;
                 DisplayTaskDetails();
                 GetTaskDetailsByTaskID();
@@ -42,7 +42,7 @@ namespace ProjectManagement.Admin
         {
             addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
-            addTaskBusinessObj.RoleID= Global.RoleIdSession;
+            addTaskBusinessObj.RoleID = Global.RoleIdSession;
             addTaskBusinessObj.Designation = Global.Designation;
             DataSet dtResult = addTaskDetails.UserTaskTime(addTaskBusinessObj);
             DataTable table = dtResult.Tables[0];
@@ -58,7 +58,7 @@ namespace ProjectManagement.Admin
         }
         private void GetTaskDetailsByTaskID()
         {
-            addTaskBusinessObj.StatusID= Request.QueryString["StatusId"];
+            addTaskBusinessObj.StatusID = Request.QueryString["StatusId"];
             addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
             DataSet dtResult = addTaskDetails.AssignTask(addTaskBusinessObj);
             DataTable dt = dtResult.Tables[0];
@@ -72,41 +72,58 @@ namespace ProjectManagement.Admin
             lblTaskCreatedBy.Text = dtResult.Tables[0].Rows[0]["CreatedByUser"].ToString();
             lblTaskAssigedTo.Text = dtResult.Tables[0].Rows[0]["AssignedTo"].ToString();
             lblTaskCreatedDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["TaskCreatedDate"].ToString()).ToShortDateString();
-            string estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
-            int estimatedMin = Int32.Parse(estimatedTime) * 60;
-            TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
-            lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
-                if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
+            if (dtResult.Tables[0].Rows[0]["UserId"].ToString() != "")
+            {
+                string estimatedTime = "";
+                if (dtResult.Tables[0].Rows[0]["RevisedEstimateTime"].ToString() == "")
                 {
-                    if (dtResult.Tables[0].Rows[0]["StartDate"].ToString() != "")
-                        lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
-                    if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "" && dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
-                        lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
-                    int totalTime = 0;
-                    int breakTime = 0;
-                    if (dtResult.Tables[0].Rows[0]["TotalTime"].ToString() != "")
-                        totalTime += Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
-                    if (Session["BreakTime"].ToString() != "")
-                        breakTime += Convert.ToInt32(Session["BreakTime"].ToString());
-                    int actualTime = totalTime - breakTime;
-                    if (actualTime != 0)
-                    {
-                        TimeSpan finalActualTime = TimeSpan.FromMinutes(actualTime);
-                        lblActualTime.Text = finalActualTime.ToString("hh':'mm");
-                        int estimatedError = actualTime - estimatedMin;
-                        TimeSpan finalEstimatedError = TimeSpan.FromMinutes(estimatedError);
-                        if (finalEstimatedError.Ticks < 0)
-                        {
-                            lblEstimatedError.Text = "-" + finalEstimatedError.ToString("hh':'mm");
-                        }
-                        else
-                        {
-                            lblEstimatedError.Text = finalEstimatedError.ToString("hh':'mm");
-                        }
-                        TimeSpan finalPauseDuration = TimeSpan.FromMinutes(breakTime);
-                        lblPause.Text = finalPauseDuration.ToString("hh':'mm");
-                    }
+                    estimatedTime = dtResult.Tables[0].Rows[0]["EstimateTime"].ToString();
                 }
+                else
+                {
+                    estimatedTime = dtResult.Tables[0].Rows[0]["RevisedEstimateTime"].ToString();
+                }
+                int estimatedMin = 0;
+                if (estimatedTime != "")
+                {
+                    string[] estimatedTimeSplit = estimatedTime.Split(':');
+                    int estimatedhours = Convert.ToInt32(estimatedTimeSplit[0]) * 60;
+                    int estimatedminutes = Convert.ToInt32(estimatedTimeSplit[1]);
+                    estimatedMin = (estimatedhours + estimatedminutes);
+                }
+                TimeSpan finalestimatedTime = TimeSpan.FromMinutes(estimatedMin);
+                //lblTimeEstimate.Text = finalestimatedTime.ToString("hh':'mm");
+                txtEstimatedTime.Text = finalestimatedTime.ToString("hh':'mm");
+
+                if (dtResult.Tables[0].Rows[0]["StartDate"].ToString() != "")
+                    lblStartDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["StartDate"].ToString()).ToShortDateString();
+                if (dtResult.Tables[0].Rows[0]["EndDate"].ToString() != "" && dtResult.Tables[0].Rows[0]["StatusId"].ToString() == "5")
+                    lblEndDate.Text = Convert.ToDateTime(dtResult.Tables[0].Rows[0]["EndDate"].ToString()).ToShortDateString();
+                int totalTime = 0;
+                int breakTime = 0;
+                if (dtResult.Tables[0].Rows[0]["TotalTime"].ToString() != "")
+                    totalTime += Convert.ToInt32(dtResult.Tables[0].Rows[0]["TotalTime"].ToString());
+                if (Session["BreakTime"].ToString() != "")
+                    breakTime += Convert.ToInt32(Session["BreakTime"].ToString());
+                int actualTime = totalTime - breakTime;
+                if (actualTime != 0)
+                {
+                    TimeSpan finalActualTime = TimeSpan.FromMinutes(actualTime);
+                    lblActualTime.Text = finalActualTime.ToString("hh':'mm");
+                    int estimatedError = actualTime - estimatedMin;
+                    TimeSpan finalEstimatedError = TimeSpan.FromMinutes(estimatedError);
+                    if (finalEstimatedError.Ticks < 0)
+                    {
+                        lblEstimatedError.Text = "-" + finalEstimatedError.ToString("hh':'mm");
+                    }
+                    else
+                    {
+                        lblEstimatedError.Text = finalEstimatedError.ToString("hh':'mm");
+                    }
+                    TimeSpan finalPauseDuration = TimeSpan.FromMinutes(breakTime);
+                    lblPause.Text = finalPauseDuration.ToString("hh':'mm");
+                }
+            }
         }
 
         protected void btnSendDescription_Click(object sender, EventArgs e)
@@ -252,7 +269,11 @@ namespace ProjectManagement.Admin
                     btnPlayTask.Visible = false;
                     btnPauseTask.Visible = false;
                     ddlStatus.Enabled = false;
+                    txtEstimatedTime.Visible = false;
+                    btnEditEstimate.Visible = false;
+                    btnUpdateEstimate.Visible = false;
                 }
+
             }
         }
 
@@ -260,6 +281,27 @@ namespace ProjectManagement.Admin
         {
             GetChatHistory();
             ScriptManager.RegisterStartupScript(this, GetType(), "scrollDown", "setTimeout(function() { window.scrollTo(0,document.body.scrollHeight); }, 25);", true);
+        }
+
+        protected void btnEditEstimate_Click(object sender, EventArgs e)
+        {
+            btnUpdateEstimate.Visible = true;
+            btnEditEstimate.Visible = false;
+            txtEstimatedTime.Enabled = true;
+        }
+
+        protected void btnUpdateEstimate_Click(object sender, EventArgs e)
+        {
+            btnUpdateEstimate.Visible = false;
+            btnEditEstimate.Visible = true;
+            txtEstimatedTime.Enabled = false;
+            addTaskBusinessObj.RevisedEstimateTime = txtEstimatedTime.Text.Trim();
+            addTaskBusinessObj.EmployeeName = Request.QueryString["UserId"];
+            addTaskBusinessObj.AssignedDate = DateTime.Now;
+            addTaskBusinessObj.TaskID = Convert.ToInt32(Request.QueryString["TaskId"]);
+            addTaskBusinessObj.ProjectID = Request.QueryString["ProjectId"];
+            addTaskBusinessObj.ClientID = Request.QueryString["ClientId"];
+            addTaskBusinessObj.response = addTaskDetails.UpdateUserTaskStatus(addTaskBusinessObj);
         }
     }
 }

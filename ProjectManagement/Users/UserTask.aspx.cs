@@ -95,7 +95,8 @@ namespace ProjectManagement.Users
                 Session["ProjectID"] = projectID;
                 string clientID = commandArgs[2];
                 Session["ClientID"] = clientID;
-                lnkbtnPlay_Click(null, null);
+                // DisplayEstimate(null, null);
+                lnkbtnPlay_Click(taskID, null);
             }
             if (e.CommandName == "PauseTask")
             {
@@ -110,6 +111,12 @@ namespace ProjectManagement.Users
             }
         }
 
+        public void DisplayEstimate(object sender, EventArgs e)
+        {
+            pnlEstimatedTime.Visible = true;
+            ScriptManager.RegisterStartupScript(this, GetType(), "PopEstimate", "OpenConfirmationBoxEstimateTime();", true);
+            //lnkbtnPlay_Click(null, null);
+        }
         protected void gvDisplayUserTask_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -146,13 +153,35 @@ namespace ProjectManagement.Users
 
         protected void lnkbtnPlay_Click(object sender, EventArgs e)
         {
+            DataTable dt = (DataTable)ViewState["AllTask"];
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["TaskId"].ToString()==(sender).ToString())
+                {
+                    if (dt.Rows[i]["EstimateTime"].ToString() == "")
+                    {
+                        DisplayEstimate(null, null);
+                        return;
+                    }
+                }
+            }
+            if (addTaskBusinessObj.EstimateTime == null)
+            {
+                addTaskBusinessObj.EstimateTime="0";
+            }
+            else
+            {
+                addTaskBusinessObj.EstimateTime = (sender).ToString();
+            }
+            //addTaskBusinessObj.EstimateTime = (sender).ToString();// ViewState["EstimatedTime"].ToString();
             int loginUserID = Convert.ToInt32(Session["UserID"].ToString());
             addTaskBusinessObj.EmployeeName = loginUserID.ToString();
             addTaskBusinessObj.AssignedDate = DateTime.Now;
             addTaskBusinessObj.TaskID = Convert.ToInt32(Session["TaskID"].ToString());
             addTaskBusinessObj.ProjectID = Session["ProjectID"].ToString();
             addTaskBusinessObj.ClientID = Session["ClientID"].ToString();
-            DataTable dt = (DataTable)ViewState["AllTask"];
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["StatusName"].ToString() == "In Process")
@@ -237,6 +266,23 @@ namespace ProjectManagement.Users
             txtSearchStartDate.Text = "";
             txtSearch.Text = "";
             GetUserTaskDetails();
+        }
+
+        protected void btnCloseEstimateTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSaveEstimateTime_Click(object sender, EventArgs e)
+        {
+            string reason = txtEstimateTime.Text.Trim();
+            if (reason == "")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "message", "alert('Please enter reason.');", true);
+                return;
+            }
+            addTaskBusinessObj.EstimateTime = reason;
+            lnkbtnPlay_Click(reason, null);
         }
     }
 }

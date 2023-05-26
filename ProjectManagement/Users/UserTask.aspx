@@ -11,7 +11,6 @@
             document.getElementById('divShowConfirmwindow').style.display = "block";
             $('#<%=pnlConfirmwindow.ClientID %>').show();
             $("body").addClass("modal-open");
-
         }
         function HideConfirmWindow() {
             $("#<%=hdnPause.ClientID %>").val("Yes");
@@ -20,6 +19,21 @@
             $("body").removeClass("modal-open");
             $("#btnSaveReason").click();
         }
+
+        function OpenConfirmationBoxEstimateTime() {
+            document.getElementById('divShowConfirmwindowEstimateTime').style.display = "block";
+            $('#<%=pnlEstimatedTime.ClientID %>').show();
+            $("body").addClass("modal-open");
+        }
+        function HideConfirmWindowEstimateTime() {
+            $("#<%=hdnPause.ClientID %>").val("Yes");
+            document.getElementById('divShowConfirmwindowEstimateTime').style.display = "none";
+            $('#<%=pnlEstimatedTime.ClientID %>').hide();
+            $("body").removeClass("modal-open");
+            $("#btnSaveEstimateTime").click();
+        }
+
+
     </script>
     <div class="table-responsive">
         <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid">
@@ -117,6 +131,32 @@
                                 </div>
                             </div>
                         </asp:Panel>
+
+
+                        <div id="divShowConfirmwindowEstimateTime" style="display: none; opacity: 0.5;" class="modal-backdrop">
+                        </div>
+                        <asp:Panel ID="pnlEstimatedTime" runat="server" BackColor="#ddd" CssClass="modal" Style="background: transparent!important;">
+                            <div class="modal-dialog modal-sm" style="margin-top: 8%; min-width: 40%;">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <asp:Label ID="lblEstimateTime" runat="server" Text="Enter Estimated Time"></asp:Label>
+                                            <asp:TextBox ID="txtEstimateTime" runat="server" CssClass="form-control"
+                                                placeholder="Enter Estimated Time"></asp:TextBox>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-center">
+                                                <asp:Button Style="" runat="server" Text="Submit" class="btn btn-info" ID="btnSaveEstimateTime" OnClientClick="HideConfirmWindow();return false; " ClientIDMode="Static" OnClick="btnSaveEstimateTime_Click" />
+                                                <asp:Button Style="" runat="server" Text="Close" class="btn btn-danger" ID="btnCloseEstimateTime" OnClientClick="HideConfirmWindow1();return false; " ClientIDMode="Static" OnClick="btnCloseEstimateTime_Click" />
+                                                <asp:HiddenField ID="HiddenField1" ClientIDMode="Static" runat="server"></asp:HiddenField>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </asp:Panel>
+
+
                     </div>
                 </div>
             </div>
